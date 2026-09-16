@@ -1,0 +1,103 @@
+{
+  "_how_to_run": [
+    "set GEMINI_KEY in the environment (never hard-code it)",
+    "PYTHONUTF8=1 python <skill>/scripts/build/gen_scenes.py <bundle>/assets/Images --manifest <bundle>/_handoff/ART_BRIEF.json   # scenes[] — run sc_mela_01 FIRST, it anchors the rest",
+    "PYTHONUTF8=1 python <skill>/scripts/build/gen_objects.py <bundle>/assets/Images --manifest <objects-only file>   # then keep_largest.py, then EYEBALL every png"
+  ],
+  "scenes": [
+    {
+      "name": "sc_mela_01",
+      "prompt": "A simple village fair (मेला) in a jungle clearing: two or three striped cloth stalls on the left, one small ferris wheel far behind, a single line of triangular bunting overhead, a few flat green trees at the back. Wide empty grass and dirt ground across the whole foreground, nothing standing in it. FLAT 2D children's book illustration, simple cartoon vector style. Clean even dark-brown outlines of uniform thickness, FLAT colour fills in a SOFT MUTED palette with only one gentle shadow tone, NO gradients, NO texture, NO painterly brushwork, NO 3D rendering, NO photorealism, NO depth-of-field blur. SIMPLE AND UNCLUTTERED: few objects, large plain shapes, generous empty space. Soft warm daylight, friendly rounded character design with big simple eyes. Made for a 6-year-old to read at a glance. Absolutely NO text, NO words, NO letters or numbers anywhere in the image. Wide 16:9, everything fully inside frame."
+    },
+    {
+      "name": "sc_mela_02",
+      "prompt": "Use the attached image as the STYLE and WORLD reference: keep exactly the same flat 2D cartoon art style, the same line weight, the same colour palette, and the same jungle fair (same striped cloth stalls, same triangular bunting, same ferris wheel, same flat green trees). You MAY show a different part of that same fair, or move the camera, so this moment reads clearly — it does not have to be the same framing as the reference. Scene: a male LION (शेर) with a big full mane and a LIONESS (शेरनी) with NO mane, walking in through the fair entrance together side by side, both smiling. Place them entering from the LEFT, walking towards the right, LARGE in the near foreground and filling about half the frame height. Deck: \"मेले में शेर और शेरनी दिखाने हैं\". SOFT, MUTED, gentle colours — a warm natural palette, NOT bright, NOT neon, NOT oversaturated; think a calm printed picture book, not a screen. Separate the animals from the background with clear outlines and darker tone, never with stronger saturation: keep the background paler and simpler than the animals. Keep the background simple and uncluttered. FLAT 2D children's book illustration, flat colour fills, no gradients, no 3D, no painterly shading. Absolutely NO text, NO words, NO letters anywhere. Wide 16:9, every animal fully inside frame, nothing cropped.",
+      "refs": [
+        "sc_mela_01.webp"
+      ]
+    },
+    {
+      "name": "sc_mela_03",
+      "prompt": "Use the attached image as the STYLE and WORLD reference: keep exactly the same flat 2D cartoon art style, the same line weight, the same colour palette, and the same jungle fair (same striped cloth stalls, same triangular bunting, same ferris wheel, same flat green trees). You MAY show a different part of that same fair, or move the camera, so this moment reads clearly — it does not have to be the same framing as the reference. Scene: a PEACOCK (मोर) with his tail fanned wide open in full colour and a PEAHEN (मोरनी) with a small plain crest and no fan, both DANCING together — bodies leaning, one foot lifted mid-step, wings out, clearly in motion. Place them CENTRED in the near foreground, filling about half the frame height, with a few small motion swooshes around their feet. Deck: \"मोर-मोरनी को मेले में नाचते हुए दिखाना है\". SOFT, MUTED, gentle colours — a warm natural palette, NOT bright, NOT neon, NOT oversaturated; think a calm printed picture book, not a screen. Separate the animals from the background with clear outlines and darker tone, never with stronger saturation: keep the background paler and simpler than the animals. Keep the background simple and uncluttered. FLAT 2D children's book illustration, flat colour fills, no gradients, no 3D, no painterly shading. Absolutely NO text, NO words, NO letters anywhere. Wide 16:9, every animal fully inside frame, nothing cropped.",
+      "refs": [
+        "sc_mela_01.webp"
+      ]
+    },
+    {
+      "name": "sc_mela_04",
+      "prompt": "Use the attached image as the STYLE and WORLD reference: keep exactly the same flat 2D cartoon art style, the same line weight, the same colour palette, and the same jungle fair (same striped cloth stalls, same triangular bunting, same ferris wheel, same flat green trees). You MAY show a different part of that same fair, or move the camera, so this moment reads clearly — it does not have to be the same framing as the reference. Scene: a HORSE (घोड़ा) galloping in at full speed kicking up a cloud of dust, with a MARE (घोड़ी) galloping close behind him, both legs off the ground mid-stride. Place them charging in from the RIGHT side towards the left, LARGE and slightly diagonal so the run reads as fast, with a dust trail behind them. Deck: \"घोडा-घोड़ी को मेले में भागकर आते हुए दिखाना है\". SOFT, MUTED, gentle colours — a warm natural palette, NOT bright, NOT neon, NOT oversaturated; think a calm printed picture book, not a screen. Separate the animals from the background with clear outlines and darker tone, never with stronger saturation: keep the background paler and simpler than the animals. Keep the background simple and uncluttered. FLAT 2D children's book illustration, flat colour fills, no gradients, no 3D, no painterly shading. Absolutely NO text, NO words, NO letters anywhere. Wide 16:9, every animal fully inside frame, nothing cropped.",
+      "refs": [
+        "sc_mela_01.webp"
+      ]
+    },
+    {
+      "name": "sc_mela_05",
+      "prompt": "Use the attached image as the STYLE and WORLD reference: keep exactly the same flat 2D cartoon art style, the same line weight, the same colour palette, and the same jungle fair (same striped cloth stalls, same triangular bunting, same ferris wheel, same flat green trees). You MAY show a different part of that same fair, or move the camera, so this moment reads clearly — it does not have to be the same framing as the reference. Scene: a male GOAT (बकरा) with a beard and curved horns and a female GOAT (बकरी) with no beard, walking INTO the fair together towards the stalls, the बकरा bleating with his mouth open and the बकरी turning to look at him. Add two EMPTY speech bubbles above them, one over each goat, drawn completely blank with nothing inside. Place them in the LOWER LEFT of the frame walking away towards the stalls, seen from slightly behind and to the side, filling about half the frame height. Deck: \"बकरा-बकरी को मेले में जाते हुए दिखाना है । Dialogue box में\". SOFT, MUTED, gentle colours — a warm natural palette, NOT bright, NOT neon, NOT oversaturated; think a calm printed picture book, not a screen. Separate the animals from the background with clear outlines and darker tone, never with stronger saturation: keep the background paler and simpler than the animals. Keep the background simple and uncluttered. FLAT 2D children's book illustration, flat colour fills, no gradients, no 3D, no painterly shading. Absolutely NO text, NO words, NO letters anywhere. Wide 16:9, every animal fully inside frame, nothing cropped.",
+      "refs": [
+        "sc_mela_01.webp"
+      ]
+    },
+    {
+      "name": "sc_mela_06",
+      "prompt": "Use the attached image as the STYLE and WORLD reference: keep exactly the same flat 2D cartoon art style, the same line weight, the same colour palette, and the same jungle fair (same striped cloth stalls, same triangular bunting, same ferris wheel, same flat green trees). You MAY show a different part of that same fair, or move the camera, so this moment reads clearly — it does not have to be the same framing as the reference. Scene: a male MONKEY (बंदर) holding a RED BALLOON on a string in one raised hand, next to a female MONKEY (बंदरिया) carrying her BABY clinging to her chest, the बंदरिया looking up at the balloon. Behind them add one BEAR standing at a stall selling a big bunch of colourful balloons. Place the two monkeys CENTRE-RIGHT in the near foreground filling about half the frame height, and the balloon-selling bear smaller behind them on the left. Deck: \"बंदर के हाथ में लाल गुब्बारा… बंदरिया को उसके बच्चे के साथ… पीछे भालू गुब्बारे बेचते हुए\". SOFT, MUTED, gentle colours — a warm natural palette, NOT bright, NOT neon, NOT oversaturated; think a calm printed picture book, not a screen. Separate the animals from the background with clear outlines and darker tone, never with stronger saturation: keep the background paler and simpler than the animals. Keep the background simple and uncluttered. FLAT 2D children's book illustration, flat colour fills, no gradients, no 3D, no painterly shading. Absolutely NO text, NO words, NO letters anywhere. Wide 16:9, every animal fully inside frame, nothing cropped.",
+      "refs": [
+        "sc_mela_01.webp"
+      ]
+    },
+    {
+      "name": "sc_mela_07",
+      "prompt": "Use the attached image as the STYLE and WORLD reference: keep exactly the same flat 2D cartoon art style, the same line weight, the same colour palette, and the same jungle fair (same striped cloth stalls, same triangular bunting, same ferris wheel, same flat green trees). You MAY show a different part of that same fair, or move the camera, so this moment reads clearly — it does not have to be the same framing as the reference. Scene: a ROOSTER (मुर्गा) with a tall red comb crowing with his beak wide open, and a HEN (मुर्गी) with a small comb beside him looking at the food, both standing right next to the FOOD STALLS. Place them on the LEFT of the frame close beside the striped food stalls, not in the middle of the open ground, filling about a third of the frame height. Deck: \"मुर्गा-मुर्गी को खाने की दुकानों के पास दिखाना है\". SOFT, MUTED, gentle colours — a warm natural palette, NOT bright, NOT neon, NOT oversaturated; think a calm printed picture book, not a screen. Separate the animals from the background with clear outlines and darker tone, never with stronger saturation: keep the background paler and simpler than the animals. Keep the background simple and uncluttered. FLAT 2D children's book illustration, flat colour fills, no gradients, no 3D, no painterly shading. Absolutely NO text, NO words, NO letters anywhere. Wide 16:9, every animal fully inside frame, nothing cropped.",
+      "refs": [
+        "sc_mela_01.webp"
+      ]
+    },
+    {
+      "name": "sc_mela_08",
+      "prompt": "Use the attached image as the STYLE and WORLD reference: keep exactly the same flat 2D cartoon art style, the same line weight, the same colour palette, and the same jungle fair (same striped cloth stalls, same triangular bunting, same ferris wheel, same flat green trees). You MAY show a different part of that same fair, or move the camera, so this moment reads clearly — it does not have to be the same framing as the reference. Scene: an OX / BULL (बैल) with a hump and curved horns playing a big dhol drum strapped around his neck, both front hooves striking the drum, and a COW (गाय) DANCING beside him with one leg lifted and her head tilted happily. Place the बैल CENTRE-LEFT and the गाय CENTRE-RIGHT facing each other, LARGE in the near foreground filling about half the frame height, with small music notes drawn as simple shapes (not letters) around the drum. Deck: \"ढोल बजाते हुए… नाचते हुए\". SOFT, MUTED, gentle colours — a warm natural palette, NOT bright, NOT neon, NOT oversaturated; think a calm printed picture book, not a screen. Separate the animals from the background with clear outlines and darker tone, never with stronger saturation: keep the background paler and simpler than the animals. Keep the background simple and uncluttered. FLAT 2D children's book illustration, flat colour fills, no gradients, no 3D, no painterly shading. Absolutely NO text, NO words, NO letters anywhere. Wide 16:9, every animal fully inside frame, nothing cropped.",
+      "refs": [
+        "sc_mela_01.webp"
+      ]
+    },
+    {
+      "name": "sc_mela_09",
+      "prompt": "Use the attached image as the style reference: same flat 2D cartoon style, same soft muted palette, same jungle fair. Evening at the fair, the sun low and orange behind the ferris wheel.\n\nPlace exactly four animal pairs at FOUR DIFFERENT DEPTHS, so the picture has near, middle and far - do not put them on one line:\n- BOTTOM-LEFT, closest to the viewer and largest: a LION with a full mane and a LIONESS with no mane, resting on the grass facing each other.\n- CENTRE-RIGHT, mid-distance and a little smaller: an OX with horns carrying a dhol drum, walking beside a COW.\n- FAR LEFT, small, up near the stalls: a PEACOCK with his tail open and a PEAHEN.\n- FAR RIGHT, small, near the ferris wheel: two MONKEYS, one holding a red balloon, the other carrying a baby on her chest.\n\nSoft muted storybook colours, not bright. Flat 2D, clean outlines, flat fills, no gradients, no 3D. No text or letters anywhere. Wide 16:9.",
+      "refs": [
+        "sc_mela_01.webp"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "name": "pic_bail",
+      "prompt": "An OX / BULL (बैल) with a hump and horns, standing in profile. FLAT 2D children's book illustration, simple cartoon vector style — clean even dark-brown outlines of uniform thickness, flat colour fills with one soft shadow tone, no gradients, no 3D, no painterly shading. SOFT MUTED natural colours, not bright or neon. Friendly rounded design with big simple eyes. ONE animal only, full body, side-on or three-quarter view, whole body inside the frame with a small margin, on a plain flat magenta #FF00FF background for keying. No scenery, no ground, no shadow on the background, no text, no words, no letters. ORIGINAL character design: do NOT imitate any existing cartoon, film or franchise character - draw a plain generic storybook animal, small friendly eyes, no distinctive markings or hairstyle."
+    },
+    {
+      "name": "pic_bail_alone",
+      "prompt": "A single OX / BULL (बैल, with a hump and curved horns) standing ALONE, looking around for someone. FLAT 2D children's book illustration, simple cartoon vector style — clean even dark-brown outlines of uniform thickness, flat colour fills with one soft shadow tone, no gradients, no 3D, no painterly shading. SOFT MUTED natural colours, not bright or neon. Friendly rounded design with big simple eyes. ONE animal only, full body, side-on or three-quarter view, whole body inside the frame with a small margin, on a plain flat magenta #FF00FF background for keying. No scenery, no ground, no shadow on the background, no text, no words, no letters. ORIGINAL character design: do NOT imitate any existing cartoon, film or franchise character - draw a plain generic storybook animal, small friendly eyes, no distinctive markings or hairstyle."
+    },
+    {
+      "name": "pic_bakra_grass",
+      "prompt": "A male GOAT (बकरा, with a beard and curved horns) standing and EATING GREEN GRASS, head lowered to a tuft. FLAT 2D children's book illustration, simple cartoon vector style — clean even dark-brown outlines of uniform thickness, flat colour fills with one soft shadow tone, no gradients, no 3D, no painterly shading. SOFT MUTED natural colours, not bright or neon. Friendly rounded design with big simple eyes. ONE animal only, full body, side-on or three-quarter view, whole body inside the frame with a small margin, on a plain flat magenta #FF00FF background for keying. No scenery, no ground, no shadow on the background, no text, no words, no letters. ORIGINAL character design: do NOT imitate any existing cartoon, film or franchise character - draw a plain generic storybook animal, small friendly eyes, no distinctive markings or hairstyle."
+    },
+    {
+      "name": "pic_bandar",
+      "prompt": "A male MONKEY (बंदर) sitting and smiling, holding a red balloon. FLAT 2D children's book illustration, simple cartoon vector style — clean even dark-brown outlines of uniform thickness, flat colour fills with one soft shadow tone, no gradients, no 3D, no painterly shading. SOFT MUTED natural colours, not bright or neon. Friendly rounded design with big simple eyes. ONE animal only, full body, side-on or three-quarter view, whole body inside the frame with a small margin, on a plain flat magenta #FF00FF background for keying. No scenery, no ground, no shadow on the background, no text, no words, no letters. ORIGINAL character design: do NOT imitate any existing cartoon, film or franchise character - draw a plain generic storybook animal, small friendly eyes, no distinctive markings or hairstyle."
+    },
+    {
+      "name": "pic_bandariya",
+      "prompt": "A female MONKEY (बंदरिया) with her BABY clinging to her chest. FLAT 2D children's book illustration, simple cartoon vector style — clean even dark-brown outlines of uniform thickness, flat colour fills with one soft shadow tone, no gradients, no 3D, no painterly shading. SOFT MUTED natural colours, not bright or neon. Friendly rounded design with big simple eyes. ONE animal only, full body, side-on or three-quarter view, whole body inside the frame with a small margin, on a plain flat magenta #FF00FF background for keying. No scenery, no ground, no shadow on the background, no text, no words, no letters. ORIGINAL character design: do NOT imitate any existing cartoon, film or franchise character - draw a plain generic storybook animal, small friendly eyes, no distinctive markings or hairstyle."
+    },
+    {
+      "name": "pic_gaay",
+      "prompt": "A COW (गाय) with a gentle face and no hump, standing in profile. FLAT 2D children's book illustration, simple cartoon vector style — clean even dark-brown outlines of uniform thickness, flat colour fills with one soft shadow tone, no gradients, no 3D, no painterly shading. SOFT MUTED natural colours, not bright or neon. Friendly rounded design with big simple eyes. ONE animal only, full body, side-on or three-quarter view, whole body inside the frame with a small margin, on a plain flat magenta #FF00FF background for keying. No scenery, no ground, no shadow on the background, no text, no words, no letters. ORIGINAL character design: do NOT imitate any existing cartoon, film or franchise character - draw a plain generic storybook animal, small friendly eyes, no distinctive markings or hairstyle."
+    },
+    {
+      "name": "pic_mor_alone",
+      "prompt": "A single PEACOCK (मोर, tail fanned open) standing ALONE, looking around for someone. FLAT 2D children's book illustration, simple cartoon vector style — clean even dark-brown outlines of uniform thickness, flat colour fills with one soft shadow tone, no gradients, no 3D, no painterly shading. SOFT MUTED natural colours, not bright or neon. Friendly rounded design with big simple eyes. ONE animal only, full body, side-on or three-quarter view, whole body inside the frame with a small margin, on a plain flat magenta #FF00FF background for keying. No scenery, no ground, no shadow on the background, no text, no words, no letters. ORIGINAL character design: do NOT imitate any existing cartoon, film or franchise character - draw a plain generic storybook animal, small friendly eyes, no distinctive markings or hairstyle."
+    },
+    {
+      "name": "pic_sherni_alone",
+      "prompt": "A single LIONESS (शेरनी, no mane) standing ALONE, looking around for someone, a little lost and hopeful. FLAT 2D children's book illustration, simple cartoon vector style — clean even dark-brown outlines of uniform thickness, flat colour fills with one soft shadow tone, no gradients, no 3D, no painterly shading. SOFT MUTED natural colours, not bright or neon. Friendly rounded design with big simple eyes. ONE animal only, full body, side-on or three-quarter view, whole body inside the frame with a small margin, on a plain flat magenta #FF00FF background for keying. No scenery, no ground, no shadow on the background, no text, no words, no letters. ORIGINAL character design: do NOT imitate any existing cartoon, film or franchise character - draw a plain generic storybook animal, small friendly eyes, no distinctive markings or hairstyle."
+    }
+  ]
+}

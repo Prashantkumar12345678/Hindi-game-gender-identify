@@ -1,0 +1,12 @@
+# Local safety copies taken before each change. Useful on this machine, never shipped.
+*.bak-*
+*.bak-prelayout
+
+# Pre-encode masters and superseded art: original 1080p video, raw PNG uploads, replaced webp.
+# ~71 MB that the game never loads - assets/ holds the encoded versions it actually uses.
+_source_art/
+
+# Office lock files and OS noise
+~$*
+.DS_Store
+Thumbs.db

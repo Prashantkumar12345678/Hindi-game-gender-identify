@@ -1,0 +1,1101 @@
+{
+ "schema": "fln.vo.manifest/1",
+ "skill_code": "HI02H11_L03_S02",
+ "title": "आइए जोड़ी मिलाएं",
+ "generated": "2026-09-16",
+ "source_of_truth": {
+  "text": "card.json assets.audio_text",
+  "reviewed_against": "HI02H11_L03_S02_SME_review (20-page deck)",
+  "audio_dir": "assets/Audio"
+ },
+ "rules": {
+  "format": "ogg",
+  "human_vo_only": true,
+  "gates": [
+   "human_vo_check.py",
+   "no_tts_standard.py"
+  ],
+  "register": "Hindi, warm and unhurried, polite aap",
+  "missing_clip_behaviour": "silent beat - the game plays without it"
+ },
+ "counts": {
+  "total": 76,
+  "to_generate": 65,
+  "present": 10,
+  "skip": 1,
+  "text_corrected_vs_deck": 6
+ },
+ "entries": [
+  {
+   "id": "vo_bridge_lost",
+   "output": "assets/Audio/vo_bridge_lost.ogg",
+   "text": "क्या आपको कविता सुनकर मज़ा आया? मेले में भीड़ की वजह से सभी जोड़ियाँ बिछड़ गईं। क्या आप सही जोड़ियाँ ढूँढने में मेरी मदद करेंगे? आइए साथ मिलकर ढूँढ़ते हैं।",
+   "slides": [],
+   "deck_page": [],
+   "status": "skip",
+   "priority": null,
+   "note": "Deck p13 asked for this bridge slide (T10); the slide was removed. No slide plays it."
+  },
+  {
+   "id": "vo_c_sentence",
+   "output": "assets/Audio/vo_c_sentence.ogg",
+   "text": "शाबाश! सही वाक्य है— बकरा घास खा रहा है।",
+   "slides": [
+    "P2"
+   ],
+   "deck_page": [
+    23
+   ],
+   "status": "to_generate",
+   "priority": 4
+  },
+  {
+   "id": "vo_correct_pair",
+   "output": "assets/Audio/vo_correct_pair.ogg",
+   "text": "शाबाश! आपने सही जोड़ी मिला दी।",
+   "slides": [
+    "G1",
+    "G2",
+    "G3",
+    "G4",
+    "P1"
+   ],
+   "deck_page": [
+    14,
+    15,
+    16,
+    17,
+    22
+   ],
+   "status": "to_generate",
+   "priority": 4
+  },
+  {
+   "id": "vo_correct_pairs",
+   "output": "assets/Audio/vo_correct_pairs.ogg",
+   "text": "शाबाश! आपने सभी सही जोड़ियाँ मिला दीं।",
+   "slides": [
+    "G6",
+    "P3"
+   ],
+   "deck_page": [
+    18,
+    25
+   ],
+   "status": "to_generate",
+   "priority": 4
+  },
+  {
+   "id": "vo_gate_done",
+   "output": "assets/Audio/vo_gate_done.ogg",
+   "text": "शाबाश! आपने सभी जानवर सही गेट से मेले में भेज दिए।",
+   "slides": [
+    "P4"
+   ],
+   "deck_page": [
+    26
+   ],
+   "status": "to_generate",
+   "priority": 4
+  },
+  {
+   "id": "vo_gate_h1",
+   "output": "assets/Audio/vo_gate_h1.ogg",
+   "text": "सोचिए इस जानवर के नाम से वाक्य बनाने पर गया आता है या गई?",
+   "slides": [
+    "P4"
+   ],
+   "deck_page": [
+    26
+   ],
+   "status": "to_generate",
+   "priority": 3
+  },
+  {
+   "id": "vo_gate_rule",
+   "output": "assets/Audio/vo_gate_rule.ogg",
+   "text": "यहाँ दो गेट हैं, एक पर गया लिखा है और दूसरे पर गई लिखा है। हर जानवर के नाम से वाक्य बनाकर देखिए — जिनके अंत में गया आता है उन्हें गया वाले गेट से और जिनके अंत में गई आता है उन्हें गई वाले गेट से मेले में भेजिए। जैसे— मुर्गा मेले में गया। इसे गया वाले गेट से भेजिए। अब आप खुद करिए।",
+   "slides": [
+    "P4"
+   ],
+   "deck_page": [
+    26
+   ],
+   "status": "to_generate",
+   "priority": 3
+  },
+  {
+   "id": "vo_h1_bail",
+   "output": "assets/Audio/vo_h1_bail.ogg",
+   "text": "सोचिए बैल मेले में किसके साथ आया था?",
+   "slides": [
+    "P1"
+   ],
+   "deck_page": [
+    22
+   ],
+   "status": "to_generate",
+   "priority": 4
+  },
+  {
+   "id": "vo_h1_mor",
+   "output": "assets/Audio/vo_h1_mor.ogg",
+   "text": "सोचिए मोर मेले में किसके साथ आया था?",
+   "slides": [
+    "G2"
+   ],
+   "deck_page": [
+    15
+   ],
+   "status": "to_generate",
+   "priority": 4
+  },
+  {
+   "id": "vo_h1_pair",
+   "output": "assets/Audio/vo_h1_pair.ogg",
+   "text": "फिर से कोशिश कीजिए, सही जोड़ी पहचानिए।",
+   "slides": [
+    "G6",
+    "P3"
+   ],
+   "deck_page": [
+    18,
+    25
+   ],
+   "status": "to_generate",
+   "priority": 4
+  },
+  {
+   "id": "vo_h1_sentence",
+   "output": "assets/Audio/vo_h1_sentence.ogg",
+   "text": "हम वाक्य में बोलते हैं— बकरा घास खा रहा है। रहा है पर टैप कीजिए और वाक्य पूरा कीजिए।",
+   "slides": [
+    "P2"
+   ],
+   "deck_page": [
+    23
+   ],
+   "status": "to_generate",
+   "priority": 4
+  },
+  {
+   "id": "vo_h1_sherni",
+   "output": "assets/Audio/vo_h1_sherni.ogg",
+   "text": "सोचिए शेरनी मेले में किसके साथ आई थी?",
+   "slides": [
+    "G1"
+   ],
+   "deck_page": [
+    14
+   ],
+   "status": "to_generate",
+   "priority": 4
+  },
+  {
+   "id": "vo_h1_word",
+   "output": "assets/Audio/vo_h1_word.ogg",
+   "text": "फिर से कोशिश कीजिए, सही शब्द पहचानिए।",
+   "slides": [
+    "G3",
+    "G4"
+   ],
+   "deck_page": [
+    16,
+    17
+   ],
+   "status": "to_generate",
+   "priority": 4
+  },
+  {
+   "id": "vo_h2_bail",
+   "output": "assets/Audio/vo_h2_bail.ogg",
+   "text": "यह गाय है, इसे बैल से मिलाएंगे। बैल की तसवीर पर टैप कीजिए।",
+   "slides": [
+    "G6"
+   ],
+   "deck_page": [
+    18
+   ],
+   "status": "to_generate",
+   "priority": 4,
+   "text_superseded": "यह बैल है, इसे गाय से मिलाएंगे। गाय की तसवीर पर टैप कीजिए।",
+   "note": "Deck p18/p25 wording is REVERSED for the current build: the child now drags the feminine card onto the masculine target, so the line must name the masculine one. `text` is corrected; `text_superseded` is what the deck and card.json still say."
+  },
+  {
+   "id": "vo_h2_bail_gaay",
+   "output": "assets/Audio/vo_h2_bail_gaay.ogg",
+   "text": "बैल मेले में गाय के साथ आया था। गाय की तस्वीर पर टैप कीजिए।",
+   "slides": [
+    "P1"
+   ],
+   "deck_page": [
+    22
+   ],
+   "status": "to_generate",
+   "priority": 4
+  },
+  {
+   "id": "vo_h2_bail_jata",
+   "output": "assets/Audio/vo_h2_bail_jata.ogg",
+   "text": "यह बैल है, बैल जाता है। इसे जाता है वाले डब्बे में रखेंगे।",
+   "slides": [
+    "G5"
+   ],
+   "deck_page": [
+    19
+   ],
+   "status": "to_generate",
+   "priority": 4
+  },
+  {
+   "id": "vo_h2_bakra",
+   "output": "assets/Audio/vo_h2_bakra.ogg",
+   "text": "यह बकरी है, इसे बकरा से मिलाएंगे। बकरा की तसवीर पर टैप कीजिए।",
+   "slides": [
+    "P3"
+   ],
+   "deck_page": [
+    25
+   ],
+   "status": "to_generate",
+   "priority": 4,
+   "text_superseded": "यह बकरा है, इसे बकरी से मिलाएंगे। बकरी की तसवीर पर टैप कीजिए।",
+   "note": "Deck p18/p25 wording is REVERSED for the current build: the child now drags the feminine card onto the masculine target, so the line must name the masculine one. `text` is corrected; `text_superseded` is what the deck and card.json still say."
+  },
+  {
+   "id": "vo_h2_bakri",
+   "output": "assets/Audio/vo_h2_bakri.ogg",
+   "text": "यह बकरा है, बकरी-बकरे के साथ मेले में आई थी, इसपर टैप कीजिए।",
+   "slides": [
+    "G3"
+   ],
+   "deck_page": [
+    16
+   ],
+   "status": "to_generate",
+   "priority": 4
+  },
+  {
+   "id": "vo_h2_bandar",
+   "output": "assets/Audio/vo_h2_bandar.ogg",
+   "text": "यह बंदरिया है, इसे बंदर से मिलाएंगे। बंदर की तसवीर पर टैप कीजिए।",
+   "slides": [
+    "G6"
+   ],
+   "deck_page": [
+    18
+   ],
+   "status": "to_generate",
+   "priority": 4,
+   "text_superseded": "यह बंदर है, इसे बंदरिया से मिलाएंगे। बंदरिया की तसवीर पर टैप कीजिए।",
+   "note": "Deck p18/p25 wording is REVERSED for the current build: the child now drags the feminine card onto the masculine target, so the line must name the masculine one. `text` is corrected; `text_superseded` is what the deck and card.json still say."
+  },
+  {
+   "id": "vo_h2_bandar_gaya",
+   "output": "assets/Audio/vo_h2_bandar_gaya.ogg",
+   "text": "यह बंदर है, बंदर मेले में गया। इसे गया वाले गेट से अंदर भेजेंगे।",
+   "slides": [
+    "P4"
+   ],
+   "deck_page": [
+    26
+   ],
+   "status": "to_generate",
+   "priority": 4
+  },
+  {
+   "id": "vo_h2_bandariya_gai",
+   "output": "assets/Audio/vo_h2_bandariya_gai.ogg",
+   "text": "यह बंदरिया है, बंदरिया मेले में गई। इसे गई वाले गेट से अंदर भेजेंगे।",
+   "slides": [
+    "P4"
+   ],
+   "deck_page": [
+    26
+   ],
+   "status": "to_generate",
+   "priority": 4
+  },
+  {
+   "id": "vo_h2_gaay_jati",
+   "output": "assets/Audio/vo_h2_gaay_jati.ogg",
+   "text": "यह गाय है, गाय जाती है। इसे जाती है वाले डब्बे में रखेंगे।",
+   "slides": [
+    "G5"
+   ],
+   "deck_page": [
+    19
+   ],
+   "status": "to_generate",
+   "priority": 4
+  },
+  {
+   "id": "vo_h2_ghoda",
+   "output": "assets/Audio/vo_h2_ghoda.ogg",
+   "text": "यह घोड़ी है, घोड़ा-घोड़ी के साथ मेले में आया था, इसपर टैप कीजिए।",
+   "slides": [
+    "G4"
+   ],
+   "deck_page": [
+    17
+   ],
+   "status": "to_generate",
+   "priority": 4
+  },
+  {
+   "id": "vo_h2_ghoda_p",
+   "output": "assets/Audio/vo_h2_ghoda_p.ogg",
+   "text": "यह घोड़ी है, इसे घोड़ा से मिलाएंगे। घोड़ा की तसवीर पर टैप कीजिए।",
+   "slides": [
+    "P3"
+   ],
+   "deck_page": [
+    25
+   ],
+   "status": "to_generate",
+   "priority": 4,
+   "text_superseded": "यह घोड़ा है, इसे घोड़ी से मिलाएंगे। घोड़ी की तसवीर पर टैप कीजिए।",
+   "note": "Deck p18/p25 wording is REVERSED for the current build: the child now drags the feminine card onto the masculine target, so the line must name the masculine one. `text` is corrected; `text_superseded` is what the deck and card.json still say."
+  },
+  {
+   "id": "vo_h2_mor",
+   "output": "assets/Audio/vo_h2_mor.ogg",
+   "text": "मोर मेले में मोरनी के साथ आया था। मोरनी की तस्वीर पर टैप कीजिए।",
+   "slides": [
+    "G2"
+   ],
+   "deck_page": [
+    15
+   ],
+   "status": "to_generate",
+   "priority": 4
+  },
+  {
+   "id": "vo_h2_mor_p",
+   "output": "assets/Audio/vo_h2_mor_p.ogg",
+   "text": "यह मोरनी है, इसे मोर से मिलाएंगे। मोर की तसवीर पर टैप कीजिए।",
+   "slides": [
+    "P3"
+   ],
+   "deck_page": [
+    25
+   ],
+   "status": "to_generate",
+   "priority": 4,
+   "text_superseded": "यह मोर है, इसे मोरनी से मिलाएंगे। मोरनी की तसवीर पर टैप कीजिए।",
+   "note": "Deck p18/p25 wording is REVERSED for the current build: the child now drags the feminine card onto the masculine target, so the line must name the masculine one. `text` is corrected; `text_superseded` is what the deck and card.json still say."
+  },
+  {
+   "id": "vo_h2_murga",
+   "output": "assets/Audio/vo_h2_murga.ogg",
+   "text": "यह मुर्गी है, इसे मुर्गा से मिलाएंगे। मुर्गा की तसवीर पर टैप कीजिए।",
+   "slides": [
+    "G6"
+   ],
+   "deck_page": [
+    18
+   ],
+   "status": "to_generate",
+   "priority": 4,
+   "text_superseded": "यह मुर्गा है, इसे मुर्गी से मिलाएंगे। मुर्गी की तसवीर पर टैप कीजिए।",
+   "note": "Deck p18/p25 wording is REVERSED for the current build: the child now drags the feminine card onto the masculine target, so the line must name the masculine one. `text` is corrected; `text_superseded` is what the deck and card.json still say."
+  },
+  {
+   "id": "vo_h2_murga_gaya",
+   "output": "assets/Audio/vo_h2_murga_gaya.ogg",
+   "text": "यह मुर्गा है, मुर्गा मेले में गया। इसे गया वाले गेट से अंदर भेजेंगे।",
+   "slides": [
+    "P4"
+   ],
+   "deck_page": [
+    26
+   ],
+   "status": "to_generate",
+   "priority": 4
+  },
+  {
+   "id": "vo_h2_murga_jata",
+   "output": "assets/Audio/vo_h2_murga_jata.ogg",
+   "text": "यह मुर्गा है, मुर्गा जाता है। इसे जाता है वाले डब्बे में रखेंगे।",
+   "slides": [
+    "G5"
+   ],
+   "deck_page": [
+    19
+   ],
+   "status": "to_generate",
+   "priority": 4
+  },
+  {
+   "id": "vo_h2_murgi_gai",
+   "output": "assets/Audio/vo_h2_murgi_gai.ogg",
+   "text": "यह मुर्गी है, मुर्गी मेले में गई। इसे गई वाले गेट से अंदर भेजेंगे।",
+   "slides": [
+    "P4"
+   ],
+   "deck_page": [
+    26
+   ],
+   "status": "to_generate",
+   "priority": 4
+  },
+  {
+   "id": "vo_h2_murgi_jati",
+   "output": "assets/Audio/vo_h2_murgi_jati.ogg",
+   "text": "यह मुर्गी है, मुर्गी जाती है। इसे जाती है वाले डब्बे में रखेंगे।",
+   "slides": [
+    "G5"
+   ],
+   "deck_page": [
+    19
+   ],
+   "status": "to_generate",
+   "priority": 4
+  },
+  {
+   "id": "vo_h2_sher_jata",
+   "output": "assets/Audio/vo_h2_sher_jata.ogg",
+   "text": "यह शेर है, शेर जाता है। इसे जाता है वाले डब्बे में रखेंगे।",
+   "slides": [
+    "G5"
+   ],
+   "deck_page": [
+    19
+   ],
+   "status": "to_generate",
+   "priority": 4
+  },
+  {
+   "id": "vo_h2_sherni",
+   "output": "assets/Audio/vo_h2_sherni.ogg",
+   "text": "शेरनी मेले में शेर के साथ आई थी। शेर की तस्वीर पर टैप कीजिए।",
+   "slides": [
+    "G1"
+   ],
+   "deck_page": [
+    14
+   ],
+   "status": "to_generate",
+   "priority": 4
+  },
+  {
+   "id": "vo_h2_sherni_jati",
+   "output": "assets/Audio/vo_h2_sherni_jati.ogg",
+   "text": "यह शेरनी है, शेरनी जाती है। इसे जाती है वाले डब्बे में रखेंगे।",
+   "slides": [
+    "G5"
+   ],
+   "deck_page": [
+    19
+   ],
+   "status": "to_generate",
+   "priority": 4
+  },
+  {
+   "id": "vo_landing",
+   "output": "assets/Audio/vo_landing.ogg",
+   "text": "नमस्ते दोस्त! मैं हूँ स्विफ्टी। आइए आज हम शब्दों की जोड़ियाँ बनाते हैं। जैसे— मोर-मोरनी।",
+   "slides": [],
+   "deck_page": [
+    3
+   ],
+   "status": "present",
+   "priority": null
+  },
+  {
+   "id": "vo_match_pairs",
+   "output": "assets/Audio/vo_match_pairs.ogg",
+   "text": "सही जोड़ियाँ मिलाइए।",
+   "slides": [
+    "G6",
+    "P3"
+   ],
+   "deck_page": [
+    18,
+    25
+   ],
+   "status": "to_generate",
+   "priority": 4
+  },
+  {
+   "id": "vo_name_bail",
+   "output": "assets/Audio/vo_name_bail.ogg",
+   "text": "बैल",
+   "slides": [
+    "G1",
+    "G3",
+    "G5",
+    "G6"
+   ],
+   "deck_page": [
+    14,
+    16,
+    18,
+    19
+   ],
+   "status": "to_generate",
+   "priority": 4
+  },
+  {
+   "id": "vo_name_bakra",
+   "output": "assets/Audio/vo_name_bakra.ogg",
+   "text": "बकरा",
+   "slides": [
+    "G3",
+    "P2",
+    "P3"
+   ],
+   "deck_page": [
+    16,
+    23,
+    25
+   ],
+   "status": "to_generate",
+   "priority": 4
+  },
+  {
+   "id": "vo_name_bakri",
+   "output": "assets/Audio/vo_name_bakri.ogg",
+   "text": "बकरी",
+   "slides": [
+    "P3"
+   ],
+   "deck_page": [
+    25
+   ],
+   "status": "present",
+   "priority": null
+  },
+  {
+   "id": "vo_name_bandar",
+   "output": "assets/Audio/vo_name_bandar.ogg",
+   "text": "बंदर",
+   "slides": [
+    "G6",
+    "P4"
+   ],
+   "deck_page": [
+    18,
+    26
+   ],
+   "status": "to_generate",
+   "priority": 4
+  },
+  {
+   "id": "vo_name_bandariya",
+   "output": "assets/Audio/vo_name_bandariya.ogg",
+   "text": "बंदरिया",
+   "slides": [
+    "G2",
+    "G6",
+    "P4"
+   ],
+   "deck_page": [
+    15,
+    18,
+    26
+   ],
+   "status": "to_generate",
+   "priority": 4
+  },
+  {
+   "id": "vo_name_gaay",
+   "output": "assets/Audio/vo_name_gaay.ogg",
+   "text": "गाय",
+   "slides": [
+    "G4",
+    "G5",
+    "G6",
+    "P1"
+   ],
+   "deck_page": [
+    17,
+    18,
+    19,
+    22
+   ],
+   "status": "to_generate",
+   "priority": 4
+  },
+  {
+   "id": "vo_name_ghoda",
+   "output": "assets/Audio/vo_name_ghoda.ogg",
+   "text": "घोड़ा",
+   "slides": [
+    "G1",
+    "P3"
+   ],
+   "deck_page": [
+    14,
+    25
+   ],
+   "status": "to_generate",
+   "priority": 4
+  },
+  {
+   "id": "vo_name_ghodi",
+   "output": "assets/Audio/vo_name_ghodi.ogg",
+   "text": "घोड़ी",
+   "slides": [
+    "G4",
+    "P3"
+   ],
+   "deck_page": [
+    17,
+    25
+   ],
+   "status": "present",
+   "priority": null
+  },
+  {
+   "id": "vo_name_mor",
+   "output": "assets/Audio/vo_name_mor.ogg",
+   "text": "मोर",
+   "slides": [
+    "P3"
+   ],
+   "deck_page": [
+    25
+   ],
+   "status": "to_generate",
+   "priority": 4
+  },
+  {
+   "id": "vo_name_morni",
+   "output": "assets/Audio/vo_name_morni.ogg",
+   "text": "मोरनी",
+   "slides": [
+    "G2",
+    "P1",
+    "P3"
+   ],
+   "deck_page": [
+    15,
+    22,
+    25
+   ],
+   "status": "present",
+   "priority": null
+  },
+  {
+   "id": "vo_name_murga",
+   "output": "assets/Audio/vo_name_murga.ogg",
+   "text": "मुर्गा",
+   "slides": [
+    "G5",
+    "G6",
+    "P4"
+   ],
+   "deck_page": [
+    18,
+    19,
+    26
+   ],
+   "status": "present",
+   "priority": null
+  },
+  {
+   "id": "vo_name_murgi",
+   "output": "assets/Audio/vo_name_murgi.ogg",
+   "text": "मुर्गी",
+   "slides": [
+    "G2",
+    "G4",
+    "G5",
+    "G6",
+    "P4"
+   ],
+   "deck_page": [
+    15,
+    17,
+    18,
+    19,
+    26
+   ],
+   "status": "present",
+   "priority": null
+  },
+  {
+   "id": "vo_name_sher",
+   "output": "assets/Audio/vo_name_sher.ogg",
+   "text": "शेर",
+   "slides": [
+    "G1",
+    "G5"
+   ],
+   "deck_page": [
+    14,
+    19
+   ],
+   "status": "present",
+   "priority": null
+  },
+  {
+   "id": "vo_name_sherni",
+   "output": "assets/Audio/vo_name_sherni.ogg",
+   "text": "शेरनी",
+   "slides": [
+    "G3",
+    "G5",
+    "P1"
+   ],
+   "deck_page": [
+    16,
+    19,
+    22
+   ],
+   "status": "present",
+   "priority": null
+  },
+  {
+   "id": "vo_poem_01",
+   "output": "assets/Audio/vo_poem_01.ogg",
+   "text": "आइए आज हम एक कविता सुनते हैं— जंगल का मेला। जंगल में एक मेला आया, रंग-बिरंगा खूब सजाया।",
+   "slides": [
+    "T1"
+   ],
+   "deck_page": [
+    4
+   ],
+   "status": "to_generate",
+   "priority": 1
+  },
+  {
+   "id": "vo_poem_02",
+   "output": "assets/Audio/vo_poem_02.ogg",
+   "text": "शेर आया, शेरनी आई, दोनों ने मिलकर धूम मचाई।",
+   "slides": [
+    "T2"
+   ],
+   "deck_page": [
+    5
+   ],
+   "status": "to_generate",
+   "priority": 1
+  },
+  {
+   "id": "vo_poem_03",
+   "output": "assets/Audio/vo_poem_03.ogg",
+   "text": "मोर पंख रंगीन फैलाए, मोरनी संग ठुमके लगाए।",
+   "slides": [
+    "T3"
+   ],
+   "deck_page": [
+    6
+   ],
+   "status": "to_generate",
+   "priority": 1
+  },
+  {
+   "id": "vo_poem_04",
+   "output": "assets/Audio/vo_poem_04.ogg",
+   "text": "घोड़ा आया धूल उड़ाए, घोड़ी पीछे दौड़ी आए।",
+   "slides": [
+    "T4"
+   ],
+   "deck_page": [
+    7
+   ],
+   "status": "to_generate",
+   "priority": 1
+  },
+  {
+   "id": "vo_poem_05",
+   "output": "assets/Audio/vo_poem_05.ogg",
+   "text": "बकरा बोला— “में-में-में!” बकरी बोली— “साथ चलें!”",
+   "slides": [
+    "T5"
+   ],
+   "deck_page": [
+    8
+   ],
+   "status": "to_generate",
+   "priority": 1
+  },
+  {
+   "id": "vo_poem_06",
+   "output": "assets/Audio/vo_poem_06.ogg",
+   "text": "बंदर लाया लाल गुब्बारा, बंदरिया बोली कितना प्यारा!",
+   "slides": [
+    "T6"
+   ],
+   "deck_page": [
+    9
+   ],
+   "status": "to_generate",
+   "priority": 1
+  },
+  {
+   "id": "vo_poem_07",
+   "output": "assets/Audio/vo_poem_07.ogg",
+   "text": "मुर्गा बोला— “कुकड़ू-कूँ!” मुर्गी बोली— “क्या खाऊँ!”",
+   "slides": [
+    "T7"
+   ],
+   "deck_page": [
+    10
+   ],
+   "status": "to_generate",
+   "priority": 1
+  },
+  {
+   "id": "vo_poem_08",
+   "output": "assets/Audio/vo_poem_08.ogg",
+   "text": "बैल ने जब ढोल बजाया, गाय ने भी नाच दिखाया।",
+   "slides": [
+    "T8"
+   ],
+   "deck_page": [
+    11
+   ],
+   "status": "to_generate",
+   "priority": 1
+  },
+  {
+   "id": "vo_poem_09",
+   "output": "assets/Audio/vo_poem_09.ogg",
+   "text": "सूरज ढलते शाम हुई, मेले भर में धूम हुई।",
+   "slides": [
+    "T9"
+   ],
+   "deck_page": [
+    12
+   ],
+   "status": "to_generate",
+   "priority": 1
+  },
+  {
+   "id": "vo_pt_guided",
+   "output": "assets/Audio/vo_pt_guided.ogg",
+   "text": "बहुत बढ़िया! अब हम साथ मिलकर शुरू करते हैं। चलिए, साथ में करें!",
+   "slides": [],
+   "deck_page": [
+    3
+   ],
+   "status": "to_generate",
+   "priority": 2
+  },
+  {
+   "id": "vo_pt_practice",
+   "output": "assets/Audio/vo_pt_practice.ogg",
+   "text": "वाह! अब आपकी बारी।",
+   "slides": [],
+   "deck_page": [
+    3
+   ],
+   "status": "to_generate",
+   "priority": 2
+  },
+  {
+   "id": "vo_pt_tutorial",
+   "output": "assets/Audio/vo_pt_tutorial.ogg",
+   "text": "ध्यान से देखिए और मेरे साथ जानिए। चलिए, शुरू करें!",
+   "slides": [],
+   "deck_page": [
+    3
+   ],
+   "status": "to_generate",
+   "priority": 2
+  },
+  {
+   "id": "vo_q_bail",
+   "output": "assets/Audio/vo_q_bail.ogg",
+   "text": "यह बैल है, इसे इसकी सही जोड़ी से मिलाइए।",
+   "slides": [
+    "P1"
+   ],
+   "deck_page": [
+    22
+   ],
+   "status": "to_generate",
+   "priority": 4
+  },
+  {
+   "id": "vo_q_bakri",
+   "output": "assets/Audio/vo_q_bakri.ogg",
+   "text": "यह किसके साथ मेले में आई थी?",
+   "slides": [
+    "G3"
+   ],
+   "deck_page": [
+    16
+   ],
+   "status": "to_generate",
+   "priority": 4
+  },
+  {
+   "id": "vo_q_ghoda",
+   "output": "assets/Audio/vo_q_ghoda.ogg",
+   "text": "यह किसके साथ मेले में आया था?",
+   "slides": [
+    "G4"
+   ],
+   "deck_page": [
+    17
+   ],
+   "status": "to_generate",
+   "priority": 4
+  },
+  {
+   "id": "vo_q_mor",
+   "output": "assets/Audio/vo_q_mor.ogg",
+   "text": "यह मोर है, इसे इसकी सही जोड़ी से मिलाइए।",
+   "slides": [
+    "G2"
+   ],
+   "deck_page": [
+    15
+   ],
+   "status": "to_generate",
+   "priority": 4
+  },
+  {
+   "id": "vo_q_sentence",
+   "output": "assets/Audio/vo_q_sentence.ogg",
+   "text": "सही शब्द चुनकर वाक्य पूरा कीजिए। बकरा घास खा… रहा है या रही है?",
+   "slides": [
+    "P2"
+   ],
+   "deck_page": [
+    23
+   ],
+   "status": "to_generate",
+   "priority": 4
+  },
+  {
+   "id": "vo_q_sherni",
+   "output": "assets/Audio/vo_q_sherni.ogg",
+   "text": "यह शेरनी है, इसे इसकी सही जोड़ी से मिलाइए।",
+   "slides": [
+    "G1"
+   ],
+   "deck_page": [
+    14
+   ],
+   "status": "to_generate",
+   "priority": 4
+  },
+  {
+   "id": "vo_sort_jata_demo",
+   "output": "assets/Audio/vo_sort_jata_demo.ogg",
+   "text": "बैल मेले में जाता है। गाय मेले में जाती है।",
+   "slides": [
+    "G5"
+   ],
+   "deck_page": [
+    19
+   ],
+   "status": "to_generate",
+   "priority": 3
+  },
+  {
+   "id": "vo_sort_jata_done",
+   "output": "assets/Audio/vo_sort_jata_done.ogg",
+   "text": "शाबाश! आपने सभी जानवर सही डब्बे में रख दिए।",
+   "slides": [
+    "G5"
+   ],
+   "deck_page": [
+    19
+   ],
+   "status": "to_generate",
+   "priority": 4
+  },
+  {
+   "id": "vo_sort_jata_h1",
+   "output": "assets/Audio/vo_sort_jata_h1.ogg",
+   "text": "वाक्य बनाकर देखिए, यह जानवर जाता है या जाती है।",
+   "slides": [
+    "G5"
+   ],
+   "deck_page": [
+    19
+   ],
+   "status": "to_generate",
+   "priority": 4
+  },
+  {
+   "id": "vo_sort_jata_rule",
+   "output": "assets/Audio/vo_sort_jata_rule.ogg",
+   "text": "इसी तरह हर जानवर के शब्द का वाक्य बनाकर देखिए। जिन वाक्यों के अंत में जाता है आता है उन्हें जाता है वाले डब्बे में, और जिन वाक्यों के अंत में जाती है आता है उन्हें जाती है वाले डब्बे में रखिए।",
+   "slides": [
+    "G5"
+   ],
+   "deck_page": [
+    19
+   ],
+   "status": "to_generate",
+   "priority": 3
+  },
+  {
+   "id": "vo_try_again",
+   "output": "assets/Audio/vo_try_again.ogg",
+   "text": "फिर से कोशिश कीजिए।",
+   "slides": [
+    "G1",
+    "G2",
+    "G3",
+    "G4",
+    "G5",
+    "G6",
+    "P1",
+    "P2",
+    "P3",
+    "P4"
+   ],
+   "deck_page": [
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    22,
+    23,
+    25,
+    26
+   ],
+   "status": "present",
+   "priority": null
+  },
+  {
+   "id": "vo_well_done",
+   "output": "assets/Audio/vo_well_done.ogg",
+   "text": "शाबाश! आपने सभी सही जोड़ियाँ पहचान लीं।",
+   "slides": [
+    "CEL"
+   ],
+   "deck_page": [
+    27
+   ],
+   "status": "present",
+   "priority": null
+  },
+  {
+   "id": "vo_word_raha_hai",
+   "output": "assets/Audio/vo_word_raha_hai.ogg",
+   "text": "रहा है",
+   "slides": [
+    "P2"
+   ],
+   "deck_page": [
+    23
+   ],
+   "status": "to_generate",
+   "priority": 4
+  },
+  {
+   "id": "vo_word_rahi_hai",
+   "output": "assets/Audio/vo_word_rahi_hai.ogg",
+   "text": "रही है",
+   "slides": [
+    "P2"
+   ],
+   "deck_page": [
+    23
+   ],
+   "status": "to_generate",
+   "priority": 4
+  }
+ ]
+}

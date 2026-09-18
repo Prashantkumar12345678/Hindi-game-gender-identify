@@ -1,0 +1,55 @@
+<!doctype html><meta charset="utf-8">
+<title>VO check</title>
+<style>
+:root{--ink:#16233a;--line:#dde3ec;--bad:#c62828;--ok:#1b7a3d}
+body{margin:0;background:#f4f7fb;color:var(--ink);font:15px/1.5 system-ui,"Segoe UI",sans-serif}
+header{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--line);padding:14px 20px;z-index:5}
+h1{margin:0 0 4px;font-size:19px}
+.sub{color:#5a6a82;font-size:13px}
+#out{margin-top:10px;font:13px ui-monospace,Menlo,monospace;background:#fff8e1;border:1px solid #f0d78a;
+     padding:8px 10px;border-radius:6px;white-space:pre-wrap;display:none}
+main{padding:14px 20px 60px;max-width:1000px}
+.row{display:grid;grid-template-columns:34px 190px 1fr 120px;gap:12px;align-items:start;
+     padding:10px;border-bottom:1px solid var(--line);background:#fff;border-radius:6px;margin-bottom:6px}
+.row.bad{background:#fdeaea}
+button.p{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:#fff;cursor:pointer;font-size:14px}
+button.p:hover{background:#eef3fa}
+code{font:12px ui-monospace,Menlo,monospace;color:#33507a}
+.line{font-size:16px}
+.where{font-size:11px;color:#6b7a91}
+label.flag{font-size:12px;color:var(--bad);cursor:pointer;user-select:none;white-space:nowrap}
+</style>
+<header>
+  <h1>VO check &mdash; 67 clips</h1>
+  <div class="sub">Play each clip and read the line beside it. Tick the ones that do not match.
+    Untick nothing &mdash; the list below updates as you go.</div>
+  <div id="out"></div>
+</header>
+<main id="list"></main>
+<script>
+const ROWS = [{"id": "vo_c_sentence", "text": "शाबाश! सही वाक्य है— बकरा घास खा रहा है।", "used": ["P2·correct"]}, {"id": "vo_correct_pair", "text": "शाबाश! आपने सही जोड़ी मिला दी।", "used": ["G1·correct", "G2·correct", "G3·correct", "G4·correct", "P1·correct"]}, {"id": "vo_correct_pairs", "text": "शाबाश! आपने सभी सही जोड़ियाँ मिला दीं।", "used": ["G6·correct", "P3·correct"]}, {"id": "vo_gate_h1", "text": "सोचिए इस जानवर के नाम से वाक्य बनाने पर गया आता है या गई?", "used": ["P4·hint1"]}, {"id": "vo_gate_rule", "text": "यहाँ दो गेट हैं, एक पर गया लिखा है और दूसरे पर गई लिखा है। हर जानवर के नाम से वाक्य बनाकर देखिए — जिनके अंत में गया आता है उन्हें गया वाले गेट से और जिनके अंत में गई आता है उन्हें गई वाले गेट से मेले में भेजिए। जैसे— मुर्गा मेले में गया। इसे गया वाले गेट से भेजिए। अब आप खुद करिए।", "used": ["P4·prompt"]}, {"id": "vo_h1_bail", "text": "सोचिए बैल मेले में किसके साथ आया था?", "used": ["P1·hint1"]}, {"id": "vo_h1_mor", "text": "सोचिए मोर मेले में किसके साथ आया था?", "used": ["G2·hint1"]}, {"id": "vo_h1_pair", "text": "फिर से कोशिश कीजिए, सही जोड़ी पहचानिए।", "used": ["G6·hint1", "P3·hint1"]}, {"id": "vo_h1_sentence", "text": "हम वाक्य में बोलते हैं— बकरा घास खा रहा है। रहा है पर टैप कीजिए और वाक्य पूरा कीजिए।", "used": ["P2·hint1", "P2·hint2", "P2·hint", "P2·reveal"]}, {"id": "vo_h1_sherni", "text": "सोचिए शेरनी मेले में किसके साथ आई थी?", "used": ["G1·hint1"]}, {"id": "vo_h1_word", "text": "फिर से कोशिश कीजिए, सही शब्द पहचानिए।", "used": ["G3·hint1", "G4·hint1"]}, {"id": "vo_h2_bail", "text": "यह बैल है, इसे गाय से मिलाएंगे। गाय की तसवीर पर टैप कीजिए।", "used": ["G6·bail hint2"]}, {"id": "vo_h2_bail_gaay", "text": "बैल मेले में गाय के साथ आया था। गाय की तस्वीर पर टैप कीजिए।", "used": ["P1·hint2", "P1·hint", "P1·reveal"]}, {"id": "vo_h2_bakra", "text": "यह बकरा है, इसे बकरी से मिलाएंगे। बकरी की तसवीर पर टैप कीजिए।", "used": ["P3·bakra hint2"]}, {"id": "vo_h2_bakri", "text": "यह बकरा है, बकरी-बकरे के साथ मेले में आई थी, इसपर टैप कीजिए।", "used": ["G3·hint2", "G3·hint", "G3·reveal"]}, {"id": "vo_h2_bandar", "text": "यह बंदर है, इसे बंदरिया से मिलाएंगे। बंदरिया की तसवीर पर टैप कीजिए।", "used": ["G6·bandar hint2"]}, {"id": "vo_h2_bandar_gaya", "text": "यह बंदर है, बंदर मेले में गया। इसे गया वाले गेट से अंदर भेजेंगे।", "used": ["P4·बंदर hint2"]}, {"id": "vo_h2_bandariya_gai", "text": "यह बंदरिया है, बंदरिया मेले में गई। इसे गई वाले गेट से अंदर भेजेंगे।", "used": ["P4·बंदरिया hint2"]}, {"id": "vo_h2_ghoda", "text": "यह घोड़ी है, घोड़ा-घोड़ी के साथ मेले में आया था, इसपर टैप कीजिए।", "used": ["G4·hint2", "G4·hint", "G4·reveal"]}, {"id": "vo_h2_ghoda_p", "text": "यह घोड़ा है, इसे घोड़ी से मिलाएंगे। घोड़ी की तसवीर पर टैप कीजिए।", "used": ["P3·ghoda hint2"]}, {"id": "vo_h2_mor", "text": "मोर मेले में मोरनी के साथ आया था। मोरनी की तस्वीर पर टैप कीजिए।", "used": ["G2·hint2", "G2·hint", "G2·reveal"]}, {"id": "vo_h2_mor_p", "text": "यह मोर है, इसे मोरनी से मिलाएंगे। मोरनी की तसवीर पर टैप कीजिए।", "used": ["P3·mor hint2"]}, {"id": "vo_h2_murga", "text": "यह मुर्गा है, इसे मुर्गी से मिलाएंगे। मुर्गी की तसवीर पर टैप कीजिए।", "used": ["G6·murga hint2"]}, {"id": "vo_h2_murga_gaya", "text": "यह मुर्गा है, मुर्गा मेले में गया। इसे गया वाले गेट से अंदर भेजेंगे।", "used": ["P4·मुर्गा hint2"]}, {"id": "vo_h2_murga_jata", "text": "यह मुर्गा है, मुर्गा जाता है। इसे जाता है वाले डब्बे में रखेंगे।", "used": ["G5·मुर्गा hint2"]}, {"id": "vo_h2_murgi_gai", "text": "यह मुर्गी है, मुर्गी मेले में गई। इसे गई वाले गेट से अंदर भेजेंगे।", "used": ["P4·मुर्गी hint2"]}, {"id": "vo_h2_murgi_jati", "text": "यह मुर्गी है, मुर्गी जाती है। इसे जाती है वाले डब्बे में रखेंगे।", "used": ["G5·मुर्गी hint2"]}, {"id": "vo_h2_sher_jata", "text": "यह शेर है, शेर जाता है। इसे जाता है वाले डब्बे में रखेंगे।", "used": ["G5·शेर hint2"]}, {"id": "vo_h2_sherni", "text": "शेरनी मेले में शेर के साथ आई थी। शेर की तस्वीर पर टैप कीजिए।", "used": ["G1·hint2", "G1·hint", "G1·reveal"]}, {"id": "vo_h2_sherni_jati", "text": "यह शेरनी है, शेरनी जाती है। इसे जाती है वाले डब्बे में रखेंगे।", "used": ["G5·शेरनी hint2"]}, {"id": "vo_landing", "text": "नमस्ते दोस्त! मैं हूँ swiftee, आइए आज हम शब्दों की जोड़ियाँ बनाते हैं। जैसे- मोर-मोरनी", "used": []}, {"id": "vo_name_bail", "text": "बैल", "used": ["G5·बैल", "G6·बैल"]}, {"id": "vo_name_bakra", "text": "बकरा", "used": ["P2·word_name", "P3·बकरा"]}, {"id": "vo_name_bakri", "text": "बकरी", "used": ["P3·बकरी"]}, {"id": "vo_name_bandar", "text": "बंदर", "used": ["G6·बंदर", "P4·बंदर"]}, {"id": "vo_name_bandariya", "text": "बंदरिया", "used": ["G6·बंदरिया", "P4·बंदरिया"]}, {"id": "vo_name_gaay", "text": "गाय", "used": ["G5·गाय", "G6·गाय"]}, {"id": "vo_name_ghoda", "text": "घोड़ा", "used": ["P3·घोड़ा"]}, {"id": "vo_name_ghodi", "text": "घोड़ी", "used": ["P3·घोड़ी"]}, {"id": "vo_name_mor", "text": "मोर", "used": ["P3·मोर"]}, {"id": "vo_name_morni", "text": "मोरनी", "used": ["P3·मोरनी"]}, {"id": "vo_name_murga", "text": "मुर्गा", "used": ["G5·मुर्गा", "G6·मुर्गा", "P4·मुर्गा"]}, {"id": "vo_name_murgi", "text": "मुर्गी", "used": ["G5·मुर्गी", "G6·मुर्गी", "P4·मुर्गी"]}, {"id": "vo_name_sher", "text": "शेर", "used": ["G5·शेर"]}, {"id": "vo_name_sherni", "text": "शेरनी", "used": ["G5·शेरनी"]}, {"id": "vo_poem_01", "text": "आइए आज हम एक कविता सुनते हैं— जंगल का मेला। जंगल में एक मेला आया, रंग-बिरंगा खूब सजाया।", "used": ["T1·narration"]}, {"id": "vo_poem_02", "text": "शेर आया, शेरनी आई, दोनों ने मिलकर धूम मचाई।", "used": ["T2·narration"]}, {"id": "vo_poem_03", "text": "मोर पंख रंगीन फैलाए, मोरनी संग ठुमके लगाए।", "used": ["T3·narration"]}, {"id": "vo_poem_04", "text": "घोड़ा आया धूल उड़ाए, घोड़ी पीछे दौड़ी आए।", "used": ["T4·narration"]}, {"id": "vo_poem_05", "text": "बकरा बोला— “में-में-में!” बकरी बोली— “साथ चलें!”", "used": ["T5·narration"]}, {"id": "vo_poem_06", "text": "बंदर लाया लाल गुब्बारा, बंदरिया बोली कितना प्यारा!", "used": ["T6·narration"]}, {"id": "vo_poem_07", "text": "मुर्गा बोला— “कुकड़ू-कूँ!” मुर्गी बोली— “क्या खाऊँ!”", "used": ["T7·narration"]}, {"id": "vo_poem_08", "text": "बैल ने जब ढोल बजाया, गाय ने भी नाच दिखाया।", "used": ["T8·narration"]}, {"id": "vo_poem_09", "text": "सूरज ढलते शाम हुई, मेले भर में धूम हुई।", "used": ["T9·narration"]}, {"id": "vo_pt_guided", "text": "बहुत बढ़िया! अब हम साथ मिलकर शुरू करते हैं। चलिए, साथ में करें!", "used": []}, {"id": "vo_pt_practice", "text": "वाह! अब आपकी बारी।", "used": []}, {"id": "vo_pt_tutorial", "text": "ध्यान से देखिए और मेरे साथ जानिए। चलिए, शुरू करें!", "used": []}, {"id": "vo_q_bail", "text": "यह बैल है, इसे इसकी सही जोड़ी से मिलाइए।", "used": ["P1·prompt"]}, {"id": "vo_q_bakri", "text": "यह किसके साथ मेले में आई थी?", "used": ["G3·prompt"]}, {"id": "vo_q_ghoda", "text": "यह किसके साथ मेले में आया था?", "used": ["G4·prompt"]}, {"id": "vo_q_mor", "text": "यह मोर है, इसे इसकी सही जोड़ी से मिलाइए।", "used": ["G2·prompt"]}, {"id": "vo_q_sentence", "text": "सही शब्द चुनकर वाक्य पूरा कीजिए। बकरा घास खा… रहा है या रही है?", "used": ["P2·prompt"]}, {"id": "vo_q_sherni", "text": "यह शेरनी है, इसे इसकी सही जोड़ी से मिलाइए।", "used": ["G1·prompt"]}, {"id": "vo_sort_jata_demo", "text": "बैल मेले में जाता है। गाय मेले में जाती है।", "used": ["G5·prompt"]}, {"id": "vo_sort_jata_h1", "text": "वाक्य बनाकर देखिए, यह जानवर जाता है या जाती है।", "used": ["G5·hint1"]}, {"id": "vo_sort_jata_rule", "text": "इसी तरह हर जानवर के शब्द का वाक्य बनाकर देखिए। जिन वाक्यों के अंत में जाता है आता है उन्हें जाता है वाले डब्बे में, और जिन वाक्यों के अंत में जाती है आता है उन्हें जाती है वाले डब्बे में रखिए।", "used": ["G5·instruction"]}, {"id": "vo_well_done", "text": "शाबाश! आपने सभी सही जोड़ियाँ पहचान लीं।", "used": ["CEL·prompt"]}];
+const list = document.getElementById('list'), out = document.getElementById('out');
+let cur = null;
+ROWS.forEach(r=>{
+  const el = document.createElement('div'); el.className='row';
+  el.innerHTML = '<button class="p" title="play">&#9654;</button>'
+    + '<div><code>'+r.id+'</code><div class="where">'+(r.used.join(' &middot; ')||'not used')+'</div></div>'
+    + '<div class="line">'+(r.text||'<i style="color:#98a5b8">no line in the card</i>')+'</div>'
+    + '<div><label class="flag"><input type="checkbox"> wrong clip</label></div>';
+  el.querySelector('button').onclick=()=>{
+    if(cur){ cur.pause(); }
+    cur = new Audio('../assets/VO/'+r.id+'.ogg'); cur.play();
+  };
+  el.querySelector('input').onchange=e=>{
+    el.classList.toggle('bad', e.target.checked); render();
+  };
+  el.dataset.id=r.id; list.appendChild(el);
+});
+function render(){
+  const bad=[...list.querySelectorAll('.row.bad')].map(e=>e.dataset.id);
+  out.style.display = bad.length ? 'block' : 'none';
+  out.textContent = bad.length ? (bad.length+' clip(s) to re-record:
+'+bad.join('
+')) : '';
+}
+</script>

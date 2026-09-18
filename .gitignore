@@ -10,3 +10,8 @@ _source_art/
 ~$*
 .DS_Store
 Thumbs.db
+_backup/
+
+# An older duplicate of the game. Vercel serves HI02H11_L03_S02 (see vercel.json),
+# so this copy was only adding 13 MB to every clone and deploy. Kept on disk, out of git.
+_server_HI02H11_L03_S02/

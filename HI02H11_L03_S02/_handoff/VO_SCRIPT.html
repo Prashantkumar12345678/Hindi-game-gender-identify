@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>html{-webkit-text-size-adjust:100%}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>जंगल का मेला स्क्रिप्ट</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Tiro+Devanagari+Hindi&display=swap">
+
+</head>
+<body>
+<style>
+  :root{
+    --paper:#F2F4F0;
+    --card:#FFFFFF;
+    --ink:#1C231E;
+    --ink-soft:#5A665C;
+    --ink-faint:#8B968C;
+    --rule:#D8DED6;
+    --rule-soft:#E7EBE5;
+    --marigold:#B8730F;
+    --marigold-bg:#FBF0DC;
+    --leaf:#2E6B4F;
+    --leaf-bg:#E3EFE8;
+    --shadow:0 1px 2px rgba(28,35,30,.05);
+
+    --hi:"Tiro Devanagari Hindi","Noto Serif Devanagari",Georgia,serif;
+    /* Latin from the system sans, Devanagari from the platform's own face
+       (Windows: Nirmala UI · macOS/iOS: Kohinoor · Android: Noto Sans Devanagari) */
+    --ui:-apple-system,BlinkMacSystemFont,"Segoe UI","Nirmala UI","Kohinoor Devanagari","Noto Sans Devanagari",sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --paper:#141815;
+      --card:#1B211D;
+      --ink:#E8EDE7;
+      --ink-soft:#9AA69B;
+      --ink-faint:#6C776D;
+      --rule:#2C342E;
+      --rule-soft:#232A25;
+      --marigold:#E8A83F;
+      --marigold-bg:#2E2413;
+      --leaf:#6FBF94;
+      --leaf-bg:#152A20;
+      --shadow:0 1px 2px rgba(0,0,0,.3);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#141815;
+    --card:#1B211D;
+    --ink:#E8EDE7;
+    --ink-soft:#9AA69B;
+    --ink-faint:#6C776D;
+    --rule:#2C342E;
+    --rule-soft:#232A25;
+    --marigold:#E8A83F;
+    --marigold-bg:#2E2413;
+    --leaf:#6FBF94;
+    --leaf-bg:#152A20;
+    --shadow:0 1px 2px rgba(0,0,0,.3);
+  }
+
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--ui);
+    font-size:15px;
+    line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:720px;margin:0 auto;padding-inline:20px;padding-block:0}
+  @media (max-width:430px){ .wrap{padding-inline:16px} }
+
+  /* ---------- masthead ---------- */
+  .mast{padding-block:40px 26px}
+  .eyebrow{
+    font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--marigold);margin:0 0 14px;
+  }
+  .mast h1{
+    font-family:var(--hi);font-weight:400;
+    font-size:clamp(2rem,1.5rem + 2.4vw,2.9rem);
+    line-height:1.3;margin:0 0 6px;text-wrap:balance;letter-spacing:.01em;
+  }
+  .mast .sub{font-size:14px;color:var(--ink-soft);margin:0}
+  .mast .sub b{font-weight:600;color:var(--ink)}
+
+  /* ---------- brief ---------- */
+  .brief{
+    background:var(--card);border:1px solid var(--rule);border-radius:4px;
+    padding:20px 22px;margin-bottom:8px;box-shadow:var(--shadow);
+  }
+  .brief h2{
+    font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--ink-faint);margin:0 0 14px;font-weight:500;
+  }
+  .brief dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:9px 18px;align-items:baseline}
+  .brief dt{font-size:13px;color:var(--ink-soft);white-space:nowrap}
+  .brief dd{margin:0;font-size:14px}
+  .brief dd .big{font-family:var(--hi);font-size:1.05em}
+  @media (max-width:430px){
+    .brief dl{grid-template-columns:1fr;gap:2px 0}
+    .brief dt{margin-top:9px;font-size:12px}
+  }
+  .flag{
+    margin-top:18px;padding:11px 14px;border-radius:3px;
+    background:var(--marigold-bg);border-left:3px solid var(--marigold);
+    font-size:13.5px;line-height:1.5;
+  }
+  .flag b{color:var(--marigold);font-weight:600}
+
+  /* ---------- sticky progress ---------- */
+  .bar{
+    position:sticky;top:env(safe-area-inset-top,0px);z-index:20;
+    background:color-mix(in srgb,var(--paper) 90%,transparent);
+    backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--rule);
+    margin-bottom:34px;
+  }
+  .bar-in{
+    max-width:720px;margin:0 auto;padding:11px 20px;
+    display:flex;align-items:center;gap:14px;
+  }
+  @media (max-width:430px){ .bar-in{padding:10px 16px;gap:10px} }
+  .count{
+    font-family:var(--mono);font-size:13px;font-variant-numeric:tabular-nums;
+    color:var(--ink);white-space:nowrap;font-weight:500;
+  }
+  .count span{color:var(--ink-faint);font-weight:400}
+  .track{flex:1;height:3px;background:var(--rule);border-radius:2px;overflow:hidden;min-width:40px}
+  .fill{height:100%;width:0;background:var(--leaf);transition:width .35s cubic-bezier(.4,0,.2,1)}
+  .togg{
+    font-family:var(--ui);font-size:12.5px;color:var(--ink-soft);
+    background:none;border:1px solid var(--rule);border-radius:3px;
+    padding:5px 11px;cursor:pointer;white-space:nowrap;
+  }
+  .togg:hover{border-color:var(--ink-faint);color:var(--ink)}
+  .togg[aria-pressed="true"]{background:var(--leaf-bg);border-color:var(--leaf);color:var(--leaf)}
+  .togg:focus-visible,.tick:focus-visible{outline:2px solid var(--marigold);outline-offset:2px}
+
+  /* ---------- sections ---------- */
+  .sec{margin-bottom:46px}
+  .sec-head{
+    display:flex;align-items:baseline;gap:12px;
+    padding-bottom:9px;border-bottom:1px solid var(--ink);margin-bottom:8px;
+  }
+  .sec-head h2{font-family:var(--hi);font-weight:400;font-size:1.5rem;margin:0;line-height:1.35}
+  .sec-head .rng{
+    font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);
+    margin-left:auto;font-variant-numeric:tabular-nums;white-space:nowrap;
+  }
+  .sec-note{
+    font-size:13.5px;color:var(--ink-soft);margin:0 0 20px;line-height:1.6;
+  }
+  .sec-note b{color:var(--ink);font-weight:600}
+
+  /* ---------- take ---------- */
+  .take{
+    display:grid;grid-template-columns:26px 1fr;gap:0 14px;
+    padding:16px 0;border-bottom:1px solid var(--rule-soft);
+  }
+  .take:last-child{border-bottom:none}
+  .tick{
+    grid-row:1/span 3;align-self:start;margin-top:3px;
+    width:22px;height:22px;border-radius:50%;
+    border:1.5px solid var(--rule);background:var(--card);
+    cursor:pointer;padding:0;display:grid;place-items:center;
+    transition:border-color .15s,background .15s;
+  }
+  .tick:hover{border-color:var(--leaf)}
+  .tick svg{width:12px;height:12px;opacity:0;transition:opacity .15s}
+  .tick[aria-pressed="true"]{background:var(--leaf);border-color:var(--leaf)}
+  .tick[aria-pressed="true"] svg{opacity:1}
+  .slate{
+    font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);
+    display:flex;gap:9px;align-items:baseline;flex-wrap:wrap;margin-bottom:7px;
+  }
+  .slate .no{color:var(--marigold);font-weight:500;font-variant-numeric:tabular-nums}
+  .slate .fn{color:var(--ink-soft)}
+  .line{
+    font-family:var(--hi);font-weight:400;
+    font-size:clamp(1.28rem,1.1rem + .8vw,1.6rem);
+    line-height:1.85;margin:0;color:var(--ink);
+    letter-spacing:.005em;
+  }
+  .tone{
+    font-size:12.5px;color:var(--ink-soft);margin:9px 0 0;
+    display:flex;gap:7px;align-items:baseline;
+  }
+  .tone::before{content:"◦";color:var(--marigold);flex:none}
+  .cue{
+    font-size:12.5px;color:var(--marigold);margin:7px 0 0;
+    padding-left:15px;border-left:2px solid var(--marigold);line-height:1.5;
+  }
+  .take.done .line,.take.done .slate,.take.done .tone{opacity:.38}
+  .take.done .cue{opacity:.45}
+
+  /* the poem: one continuous run, not discrete takes */
+  .verse{position:relative}
+  .verse .slate .fn::after{content:""}
+  .run{
+    position:relative;
+    padding-left:17px;
+    margin-left:3px;
+    border-left:2px solid var(--marigold);
+  }
+  .run .take{grid-template-columns:26px 1fr}
+  .run-cap{
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;
+    color:var(--marigold);padding:14px 0 4px 20px;
+  }
+  .run-end{
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;
+    color:var(--ink-faint);padding:6px 0 16px 20px;
+  }
+
+  .hidden-done .take.done{display:none}
+  .hidden-done .sec.all-done{display:none}
+
+  /* ---------- foot ---------- */
+  .foot{
+    border-top:1px solid var(--rule);padding-block:24px 48px;
+    font-size:13px;color:var(--ink-soft);line-height:1.65;
+  }
+  .foot h2{
+    font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--ink-faint);margin:0 0 12px;font-weight:500;
+  }
+  .foot ul{margin:0;padding-left:18px}
+  .foot li{margin-bottom:8px}
+  .foot b{color:var(--ink);font-weight:600}
+  .foot .hi{font-family:var(--hi)}
+  .src{margin-top:20px;font-family:var(--mono);font-size:11px;color:var(--ink-faint);line-height:1.7}
+
+  @media (prefers-reduced-motion:reduce){
+    *{transition:none!important;animation:none!important}
+  }
+
+  /* ---------- print / PDF ---------- */
+  @page{ size:A4; margin:15mm 15mm 16mm; }
+  @media print{
+    :root{
+      --paper:#FFFFFF; --card:#FFFFFF; --ink:#161C18; --ink-soft:#4E594F;
+      --ink-faint:#7C867D; --rule:#C9D1C8; --rule-soft:#E3E8E1;
+      --marigold:#9C6008; --marigold-bg:#FAF1DE; --leaf:#24573F; --leaf-bg:#E6F0EA;
+      --shadow:none;
+    }
+    *{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+    body{ background:#fff; font-size:10.5pt; }
+    .wrap{ max-width:100%; padding-inline:0; }
+    .bar{ display:none !important; }
+    .mast{ padding-block:0 18px; }
+    .mast h1{ font-size:30pt; }
+    .brief{ box-shadow:none; break-inside:avoid; }
+    .tick{ border-color:#AEB8AF; background:#fff; }
+    .tick svg{ display:none; }
+    .take{ break-inside:avoid; page-break-inside:avoid; }
+    .take.done .line, .take.done .slate, .take.done .tone, .take.done .cue{ opacity:1; }
+    .sec-head{ break-after:avoid; page-break-after:avoid; }
+    .sec-note{ break-after:avoid; }
+    .run-cap{ break-after:avoid; }
+    .sec{ margin-bottom:30px; }
+    .line{ font-size:14.5pt; line-height:1.8; }
+    .foot{ break-before:page; page-break-before:always; }
+  }
+</style>
+
+<div class="wrap">
+  <header class="mast">
+    <p class="eyebrow">Recording script · 55 lines</p>
+    <h1>जंगल का मेला</h1>
+    <p class="sub">लड़का या लड़की? — लिंग पहचानो · <b>कक्षा 2 हिंदी</b> · HI02H11_L03_S02</p>
+  </header>
+
+  <section class="brief">
+    <h2>रिकॉर्डिंग से पहले</h2>
+    <dl>
+      <dt>सुनने वाला</dt>
+      <dd>6–7 साल का बच्चा, अकेले टैबलेट पर</dd>
+      <dt>लहजा</dt>
+      <dd>गर्मजोशी भरा, आराम से — जल्दबाज़ी बिल्कुल नहीं</dd>
+      <dt>सम्बोधन</dt>
+      <dd><span class="big">आप</span> — पूरी स्क्रिप्ट में, कहीं भी <span class="big">तुम</span> नहीं</dd>
+      <dt>फ़ाइल</dt>
+      <dd><code style="font-family:var(--mono);font-size:13px">&lt;id&gt;.ogg</code> — नाम हूबहू वही, जो हर पंक्ति के ऊपर लिखा है</dd>
+      <dt>अलग-अलग</dt>
+      <dd>हर पंक्ति की अपनी फ़ाइल — जोड़कर एक फ़ाइल नहीं</dd>
+    </dl>
+    <p class="flag"><b>असली आवाज़ ही चाहिए।</b> पिछले build में TTS इस्तेमाल हुई थी और वो रिजेक्ट हो गई — QA में एक जाँच लगी है जो मशीनी आवाज़ पकड़ लेती है।</p>
+  </section>
+</div>
+
+<div class="bar">
+  <div class="bar-in">
+    <span class="count" id="count">0 <span>/ 55</span></span>
+    <span class="track"><span class="fill" id="fill"></span></span>
+    <button class="togg" id="togg" type="button" aria-pressed="false">बाकी दिखाएँ</button>
+  </div>
+</div>
+
+<div class="wrap" id="body"></div>
+
+<div class="wrap">
+  <footer class="foot">
+    <h2>स्क्रिप्ट पढ़ते वक़्त</h2>
+    <ul>
+      <li><b>कविता एक ही बैठक में।</b> नौ छंद लगातार, एक ही आवाज़ और एक ही लय में रिकॉर्ड कीजिए — बच्चा इन्हें एक के बाद एक सुनेगा। बीच में आवाज़ बदली तो पकड़ में आ जाएगी।</li>
+      <li><b>Hint 2 वाली पंक्तियाँ सबसे अहम हैं।</b> ये तब बजती हैं जब बच्चा दो बार ग़लत कर चुका है। इनमें झुँझलाहट नहीं, सिर्फ़ साफ़ रास्ता दिखाना है — <span class="hi">टैप कीजिए</span> पर हल्का ज़ोर।</li>
+      <li><b>लम्बी नियम-वाली पंक्तियाँ धीरे।</b> take 34 और take 49 में शर्तें हैं — हर शर्त के बाद साँस भर का ठहराव रखिए, वरना बच्चा खो जाएगा।</li>
+      <li><b>जहाँ जानवर बोलते हैं</b> — <span class="hi">में-में-में</span>, <span class="hi">कुकड़ू-कूँ</span> — वहाँ थोड़ा खेल लीजिए। बाक़ी कविता सीधी लय में।</li>
+    </ul>
+    <p class="src">स्रोत — SME review deck, pages 3–27<br>सभी 55 पंक्तियाँ deck से हूबहू ली गई हैं</p>
+  </footer>
+</div>
+
+<script>
+const T_Q     = "पूछने का लहजा, अंत में हल्का ऊपर";
+const T_H1    = "हौसला देते हुए — सोचने का वक़्त दे रहे हैं";
+const T_H2    = "साफ़ निर्देश, धैर्य के साथ · “टैप कीजिए” पर हल्का ज़ोर";
+const T_H2G   = "साफ़ निर्देश, धैर्य के साथ · गेट की ओर इशारा करते हुए";
+const T_OK    = "खुशी — पर चिल्लाना नहीं";
+const T_VERSE = "लय में, तुक अंत पर टिके";
+
+const SECTIONS = [
+  {
+    t:"शुरुआत", rng:"p3 · takes 1–4",
+    note:"स्विफ्टी खेल का दोस्त है — यही आवाज़ पूरे खेल में लौट-लौटकर आती है। पहली चार पंक्तियाँ उसकी पहचान बनाती हैं, इसलिए इन्हें सबसे पहले रिकॉर्ड कीजिए और बाक़ी स्क्रिप्ट उसी सुर में रखिए।",
+    takes:[
+      {id:"vo_landing",    hi:"नमस्ते दोस्त! मैं हूँ स्विफ्टी, आइए आज हम शब्दों की जोड़ियाँ बनाते हैं। जैसे— मोर-मोरनी।", tone:"पहली मुलाक़ात — खुलकर, मुस्कुराते हुए"},
+      {id:"vo_pt_tutorial",hi:"ध्यान से देखिए और मेरे साथ जानिए। चलिए, शुरू करें!", tone:"आगे बढ़ने का न्योता, हल्का उत्साह"},
+      {id:"vo_pt_guided",  hi:"बहुत बढ़िया! अब हम साथ मिलकर शुरू करते हैं। चलिए, साथ में करें!", tone:"शाबाशी से शुरू, फिर साथ चलने का भाव"},
+      {id:"vo_pt_practice",hi:"वाह! अब आपकी बारी।", tone:"छोटी और चहकती हुई — बच्चे को आगे कर रहे हैं"}
+    ]
+  },
+  {
+    t:"कविता", rng:"p4–p13 · takes 5–15",
+    note:"बीच के नौ छंद <b>एक ही लगातार रिकॉर्डिंग</b> हैं — डेक में यही माँगा गया है। पहली और आख़िरी पंक्ति स्विफ्टी की बात है, कविता नहीं, इसलिए उन्हें सामान्य लहजे में पढ़िए।",
+    takes:[
+      {id:"vo_poem_intro", hi:"आइए आज हम एक कविता सुनते हैं— जंगल का मेला।", tone:"स्विफ्टी बोल रहा है — कविता का लहजा अभी नहीं", cue:"डेक में ये छंद 1 से अलग लिखी है। अलग फ़ाइल चाहिए।"},
+      {run:"कविता शुरू — यहाँ से एक ही लय, एक ही आवाज़", takes:[
+        {id:"vo_poem_01",hi:"जंगल में एक मेला आया,\nरंग-बिरंगा खूब सजाया।", tone:T_VERSE},
+        {id:"vo_poem_02",hi:"शेर आया, शेरनी आई,\nदोनों ने मिलकर धूम मचाई।", tone:T_VERSE},
+        {id:"vo_poem_03",hi:"मोर पंख रंगीन फैलाए,\nमोरनी संग ठुमके लगाए।", tone:T_VERSE},
+        {id:"vo_poem_04",hi:"घोड़ा आया धूल उड़ाए,\nघोड़ी पीछे दौड़ी आए।", tone:T_VERSE},
+        {id:"vo_poem_05",hi:"बकरा बोला— “में-में-में!”\nबकरी बोली— “साथ चलें!”", tone:"दोनों बोलियों में हल्का खेल — पर लय न टूटे"},
+        {id:"vo_poem_06",hi:"बंदर लाया लाल गुब्बारा,\nबंदरिया बोली कितना प्यारा!", tone:"दूसरी पंक्ति में हैरानी का भाव"},
+        {id:"vo_poem_07",hi:"मुर्गा बोला— “कुकड़ू-कूँ!”\nमुर्गी बोली— “क्या खाऊँ!”", tone:"दोनों बोलियों में हल्का खेल — पर लय न टूटे"},
+        {id:"vo_poem_08",hi:"बैल ने जब ढोल बजाया,\nगाय ने भी नाच दिखाया।", tone:T_VERSE},
+        {id:"vo_poem_09",hi:"सूरज ढलते शाम हुई,\nमेले भर में धूम हुई।", tone:"कविता का अंत — आख़िरी पंक्ति धीरे ठहरे"}
+      ], end:"कविता ख़त्म"},
+      {id:"vo_bridge_lost",hi:"क्या आपको कविता सुनकर मज़ा आया? मेले में भीड़ की वजह से सभी जोड़ियाँ बिछड़ गईं। क्या आप सही जोड़ियाँ ढूँढने में मेरी मदद करेंगे? आइए साथ मिलकर ढूँढ़ते हैं।", tone:"स्विफ्टी फिर से — सवाल पर रुकिए, फिर मदद माँगिए", cue:"यहीं से खेल शुरू होता है। आख़िरी वाक्य में न्योते का भाव चाहिए।"}
+    ]
+  },
+  {
+    t:"गाइडेड", rng:"p14–p19 · takes 16–39",
+    note:"यहाँ बच्चा स्विफ्टी के साथ मिलकर करता है। हर सवाल के दो संकेत हैं — <b>Hint 1</b> तब बजता है जब पहली बार ग़लत हो, <b>Hint 2</b> दूसरी बार। इसलिए Hint 2 में जवाब खुलकर बता दिया जाता है।",
+    takes:[
+      {id:"vo_q_sherni",  hi:"यह शेरनी है, इसे इसकी सही जोड़ी से मिलाइए।", tone:T_Q},
+      {id:"vo_h1_sherni", hi:"सोचिए शेरनी मेले में किसके साथ आई थी?", tone:T_H1},
+      {id:"vo_h2_sherni", hi:"शेरनी मेले में शेर के साथ आई थी। शेर की तस्वीर पर टैप कीजिए।", tone:T_H2},
+      {id:"vo_correct_pair",hi:"शाबाश! आपने सही जोड़ी मिला दी।", tone:T_OK, cue:"ये कई स्क्रीन पर बजती है — एक ही बार रिकॉर्ड होगी। इसलिए किसी एक जानवर की तरफ़ झुका लहजा न हो।"},
+      {id:"vo_q_mor",     hi:"यह मोर है, इसे इसकी सही जोड़ी से मिलाइए।", tone:T_Q},
+      {id:"vo_h1_mor",    hi:"सोचिए मोर मेले में किसके साथ आया था?", tone:T_H1},
+      {id:"vo_h2_mor",    hi:"मोर मेले में मोरनी के साथ आया था। मोरनी की तस्वीर पर टैप कीजिए।", tone:T_H2},
+      {id:"vo_q_bakri",   hi:"यह किसके साथ मेले में आई थी? बकरी", tone:"सवाल पूछिए, फिर ठहरकर शब्द — जैसे कोई चीज़ दिखा रहे हों", cue:"“बकरी” अलग से बोला जाता है, वाक्य का हिस्सा नहीं। बीच में साफ़ ठहराव रखिए।"},
+      {id:"vo_h1_word",   hi:"फिर से कोशिश कीजिए, सही शब्द पहचानिए।", tone:T_H1},
+      {id:"vo_h2_bakri",  hi:"यह बकरा है, बकरी-बकरे के साथ मेले में आई थी, इसपर टैप कीजिए।", tone:T_H2},
+      {id:"vo_q_ghoda",   hi:"यह किसके साथ मेले में आया था? घोड़ा", tone:"सवाल पूछिए, फिर ठहरकर शब्द", cue:"ऊपर वाली पंक्ति की तरह — “घोड़ा” अलग से।"},
+      {id:"vo_h2_ghoda",  hi:"यह घोड़ी है, घोड़ा-घोड़ी के साथ मेले में आया था, इसपर टैप कीजिए।", tone:T_H2},
+      {id:"vo_h1_pair",   hi:"फिर से कोशिश कीजिए, सही जोड़ी पहचानिए।", tone:T_H1},
+      {id:"vo_h2_bandar", hi:"यह बंदर है, इसे बंदरिया से मिलाएंगे। बंदरिया की तसवीर पर टैप कीजिए।", tone:T_H2},
+      {id:"vo_h2_murga",  hi:"यह मुर्गा है, इसे मुर्गी से मिलाएंगे। मुर्गी की तसवीर पर टैप कीजिए।", tone:T_H2},
+      {id:"vo_h2_bail",   hi:"यह बैल है, इसे गाय से मिलाएंगे। गाय की तसवीर पर टैप कीजिए।", tone:T_H2},
+      {id:"vo_correct_pairs",hi:"शाबाश! आपने सभी सही जोड़ियाँ मिला दीं।", tone:"पूरा काम ख़त्म होने की खुशी — पिछली शाबाशी से थोड़ी बड़ी"},
+      {id:"vo_sort_jata_demo",hi:"बैल मेले में जाता है। गाय मेले में जाती है।", tone:"दिखाकर समझाने वाला लहजा", cue:"इस पंक्ति के साथ-साथ स्क्रीन पर चित्र अपने डब्बे में जाते हैं। दोनों वाक्यों के बीच पूरा ठहराव चाहिए — आपकी रफ़्तार ही animation की रफ़्तार तय करेगी।"},
+      {id:"vo_sort_jata_rule",hi:"इसी तरह हर जानवर के शब्द का वाक्य बनाकर देखिए, जिन वाक्यों के अंत में जाता है आता है उन्हें जाता है वाले डब्बे में और जिन वाक्यों के अंत में जाती है आता है उन्हें जाती है वाले डब्बे में रखिए।", tone:"धीरे और साफ़ — यह पूरा नियम है", cue:"लम्बी पंक्ति। दोनों शर्तों के बीच साँस भर रुकिए, वरना बच्चा पकड़ नहीं पाएगा।"},
+      {id:"vo_sort_jata_h1",hi:"वाक्य बनाकर देखिए, यह जानवर जाता है या जाती है।", tone:T_H1},
+      {id:"vo_h2_sher_jata",  hi:"यह शेर है, शेर जाता है। इसे जाता है वाले डब्बे में रखेंगे।", tone:T_H2},
+      {id:"vo_h2_sherni_jati",hi:"यह शेरनी है, शेरनी जाती है। इसे जाती है वाले डब्बे में रखेंगे।", tone:T_H2},
+      {id:"vo_h2_murga_jata", hi:"यह मुर्गा है, मुर्गा जाता है। इसे जाता है वाले डब्बे में रखेंगे।", tone:T_H2},
+      {id:"vo_h2_murgi_jati", hi:"यह मुर्गी है, मुर्गी जाती है। इसे जाती है वाले डब्बे में रखेंगे।", tone:T_H2}
+    ]
+  },
+  {
+    t:"प्रैक्टिस", rng:"p22–p26 · takes 40–54",
+    note:"अब बच्चा अकेले करता है। लहजा वही रहे, पर थोड़ा और भरोसा देने वाला — जैसे पास खड़े होकर देख रहे हों, बता नहीं रहे हों।",
+    takes:[
+      {id:"vo_q_bail",   hi:"यह बैल है, इसे इसकी सही जोड़ी से मिलाइए।", tone:T_Q},
+      {id:"vo_h1_bail",  hi:"सोचिए बैल मेले में किसके साथ आया था?", tone:T_H1},
+      {id:"vo_h2_bail_gaay",hi:"बैल मेले में गाय के साथ आया था। गाय की तस्वीर पर टैप कीजिए।", tone:T_H2},
+      {id:"vo_q_sentence",hi:"सही शब्द चुनकर वाक्य पूरा कीजिए। बकरा घास खा… रहा है या रही है?", tone:"अधूरा वाक्य छोड़िए, फिर दो विकल्प — दोनों बराबर वज़न से", cue:"“खा…” के बाद साफ़ ठहराव — वाक्य जानबूझकर अधूरा है। दोनों विकल्पों में से किसी एक की तरफ़ झुकाव न आए, वरना जवाब खुल जाएगा।"},
+      {id:"vo_h1_sentence",hi:"हम वाक्य में बोलते हैं— बकरा घास खा रहा है। रहा है पर टैप कीजिए और वाक्य पूरा कीजिए।", tone:T_H2},
+      {id:"vo_c_sentence",hi:"शाबाश! सही वाक्य है— बकरा घास खा रहा है।", tone:"शाबाशी, फिर पूरा वाक्य साफ़ दोहराइए"},
+      {id:"vo_h2_bakra",  hi:"यह बकरा है, इसे बकरी से मिलाएंगे। बकरी की तसवीर पर टैप कीजिए।", tone:T_H2},
+      {id:"vo_h2_mor_p",  hi:"यह मोर है, इसे मोरनी से मिलाएंगे। मोरनी की तसवीर पर टैप कीजिए।", tone:T_H2},
+      {id:"vo_h2_ghoda_p",hi:"यह घोड़ा है, इसे घोड़ी से मिलाएंगे। घोड़ी की तसवीर पर टैप कीजिए।", tone:T_H2},
+      {id:"vo_gate_rule", hi:"यहाँ दो गेट हैं, एक पर गया लिखा है और दूसरे पर गई लिखा है। हर जानवर के नाम से वाक्य बनाकर देखिए — जिनके अंत में गया आता है उन्हें गया वाले गेट से और जिनके अंत में गई आता है उन्हें गई वाले गेट से मेले में भेजिए। जैसे— मुर्गा मेले में गया। इसे गया वाले गेट से भेजिए। अब आप खुद करिए।", tone:"सबसे लम्बी पंक्ति — बिल्कुल आराम से", cue:"चार हिस्से हैं: गेट बताना, नियम, उदाहरण, और बच्चे को बारी देना। हर हिस्से के बाद साफ़ ठहराव। आख़िरी वाक्य “अब आप खुद करिए” गर्मजोशी से।"},
+      {id:"vo_gate_h1",   hi:"सोचिए इस जानवर के नाम से वाक्य बनाने पर गया आता है या गई?", tone:T_H1},
+      {id:"vo_h2_bandar_gaya",  hi:"यह बंदर है, बंदर मेले में गया। इसे गया वाले गेट से अंदर भेजेंगे।", tone:T_H2G},
+      {id:"vo_h2_bandariya_gai",hi:"यह बंदरिया है, बंदरिया मेले में गई। इसे गई वाले गेट से अंदर भेजेंगे।", tone:T_H2G},
+      {id:"vo_h2_murga_gaya",   hi:"यह मुर्गा है, मुर्गा मेले में गया। इसे गया वाले गेट से अंदर भेजेंगे।", tone:T_H2G},
+      {id:"vo_h2_murgi_gai",    hi:"यह मुर्गी है, मुर्गी मेले में गई। इसे गई वाले गेट से अंदर भेजेंगे।", tone:T_H2G}
+    ]
+  },
+  {
+    t:"समापन", rng:"p27 · take 55",
+    note:"पूरा खेल ख़त्म। यही आख़िरी चीज़ है जो बच्चा सुनता है।",
+    takes:[
+      {id:"vo_well_done",hi:"शाबाश! आपने सभी सही जोड़ियाँ पहचान लीं।", tone:"सबसे बड़ी शाबाशी — पर फिर भी चिल्लाना नहीं"}
+    ]
+  }
+];
+
+const CHECK = '<svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6.2 4.6 8.8 10 3.4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+let done = new Set();
+try{ const s = localStorage.getItem("jkm-vo-done"); if(s) done = new Set(JSON.parse(s)); }catch(e){}
+function save(){ try{ localStorage.setItem("jkm-vo-done", JSON.stringify([...done])); }catch(e){} }
+
+const esc = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+const lineHtml = s => esc(s).replace(/\n/g,"<br>");
+
+let n = 0;
+function takeHtml(tk){
+  n++;
+  const isDone = done.has(tk.id);
+  return `<article class="take${isDone?" done":""}" data-id="${tk.id}">
+    <button class="tick" type="button" aria-pressed="${isDone}" aria-label="Take ${n} रिकॉर्ड हो गई">${CHECK}</button>
+    <p class="slate"><span class="no">${String(n).padStart(2,"0")}</span><span class="fn">${tk.id}.ogg</span></p>
+    <p class="line">${lineHtml(tk.hi)}</p>
+    ${tk.tone?`<p class="tone">${esc(tk.tone)}</p>`:""}
+    ${tk.cue?`<p class="cue">${esc(tk.cue)}</p>`:""}
+  </article>`;
+}
+
+document.getElementById("body").innerHTML = SECTIONS.map(sec=>{
+  const inner = sec.takes.map(item=>{
+    if(item.run){
+      return `<p class="run-cap">${esc(item.run)}</p>
+        <div class="run">${item.takes.map(takeHtml).join("")}</div>
+        <p class="run-end">${esc(item.end)}</p>`;
+    }
+    return takeHtml(item);
+  }).join("");
+  return `<section class="sec">
+    <div class="sec-head"><h2>${esc(sec.t)}</h2><span class="rng">${esc(sec.rng)}</span></div>
+    <p class="sec-note">${sec.note}</p>
+    ${inner}
+  </section>`;
+}).join("");
+
+const countEl = document.getElementById("count");
+const fillEl  = document.getElementById("fill");
+function refresh(){
+  const c = done.size;
+  countEl.innerHTML = `${c} <span>/ 55</span>`;
+  fillEl.style.width = (c/55*100) + "%";
+  document.querySelectorAll(".sec").forEach(sec=>{
+    const takes = [...sec.querySelectorAll(".take")];
+    sec.classList.toggle("all-done", takes.length>0 && takes.every(t=>t.classList.contains("done")));
+  });
+}
+
+document.getElementById("body").addEventListener("click", e=>{
+  const btn = e.target.closest(".tick");
+  if(!btn) return;
+  const art = btn.closest(".take");
+  const id = art.dataset.id;
+  if(done.has(id)) done.delete(id); else done.add(id);
+  const on = done.has(id);
+  btn.setAttribute("aria-pressed", on);
+  art.classList.toggle("done", on);
+  save(); refresh();
+});
+
+const togg = document.getElementById("togg");
+togg.addEventListener("click", ()=>{
+  const on = togg.getAttribute("aria-pressed") === "true";
+  togg.setAttribute("aria-pressed", !on);
+  togg.textContent = !on ? "सब दिखाएँ" : "बाकी दिखाएँ";
+  document.body.classList.toggle("hidden-done", !on);
+});
+
+refresh();
+</script>
+
+</body>
+</html>

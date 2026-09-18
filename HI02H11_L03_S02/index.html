@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"><!-- [24a N9] pinch-zoom lock: a child two-finger-zooms the game off-centre in any real browser without it -->
-<title>SwiftPAL · HI01H01_L03_S01 · अच्छे व्यवहार के शब्द</title>
+<title>GameBus · HI02H11_L03_S02 · आइए जोड़ी मिलाएं</title>
 <!-- OFFLINE BUILD — factory.py replaces the marker below with a <style>@font-face…</style>.
      Baloo 2 (Devanagari) is ALSO embedded in the inlined style.css below; by CSS order the
      inlined (correct) font wins. NOT 'Baloo Bhai 2' (Gujarati, no Devanagari glyphs). -->
@@ -955,6 +955,19 @@ body.loaded .sg-acell{animation-play-state:running;}
 .sort-bin{width:360px;height:250px;}
 .sort-bins{gap:24px;}
 .sort-item{width:136px;height:136px;}
+/* [H11-20] ONCE IT IS IN THE BOX IT IS NOT A DRAGGABLE ANY MORE, SO IT DROPS THE OUTLINE.
+   .sort-item carries a 3px #8BBFFF border to read as "pick me up"; .sort-item.snapped
+   already drops the shadow and the grab cursor but kept that border, so a placed tile still
+   looked liftable inside the bin. transparent rather than border:0 on purpose - removing the
+   width would shrink the box by 6px and shift every tile already sitting in the bin. */
+.sort-item.snapped{border-color:transparent;}
+/* [H11-24] THE CARD KEEPS ITS FACE WHILE IT IS BEING CARRIED.
+   The base rule blanks the background AND the border the moment a drag starts, so the tile
+   the child is holding turns into a bare floating picture. The outline is what should mark
+   the END of the journey, not the middle of it - it goes when the tile lands (.snapped,
+   above), not while it is in the air. The lift shadow and the grabbing cursor stay, so the
+   tile still reads as picked up. */
+.sort-item.dragging{background:#fff !important;border-color:#8BBFFF !important;}
 .sort-tray{gap:22px;}
 /* the hand: the engine's own [28f] note says it was COVERING the option label. 96x96 is that
    bug; the spec says 56x70. */
@@ -1803,7 +1816,10 @@ body.tut-page{background:#FFFFFF;}
 /* [reveal_seq port 2026-08-27] The hide-class was scoped to .sort-item, so setting it on a
    .pat-cell did NOTHING and MEET_PATTERN's opt-in reveal was invisible. Same declarations, so
    the two paths cannot drift. */
-.pat-cell.sort-seq-hidden{opacity:0 !important;pointer-events:none !important;transition:opacity .3s;}   /* [20a SORT-01] one-by-one tray reveal */
+.pat-cell.sort-seq-hidden{opacity:0 !important;pointer-events:none !important;transition:opacity .3s;}
+/* [H11-49] the same hide-class, reaching the match cards. Scoped per element type, not written
+   as a bare .sort-seq-hidden, because these carry their own opacity rules. */
+.dd-zone.sort-seq-hidden,.dd-tile.sort-seq-hidden{opacity:0 !important;pointer-events:none !important;transition:opacity .3s;}   /* [20a SORT-01] one-by-one tray reveal */
 /* DEV NAV (?dev=1 / ?nav=1 only — never shown to children) */
 .dev-nav{position:fixed;bottom:8px;right:8px;z-index:99999;display:flex;align-items:center;gap:5px;background:rgba(18,26,44,.9);border-radius:11px;padding:5px 8px;box-shadow:0 6px 22px rgba(0,0,0,.35);font-family:system-ui,Arial,sans-serif;opacity:.9;}
 .dev-nav:hover{opacity:1;}
@@ -2572,9 +2588,47 @@ body.is-start .phase-gate{
 .slide-stage{padding:6px 150px 90px !important;}           /* src */
 .stage.tut .slide-stage{padding:96px 100px 92px !important;}
 .slide-host{gap:18px !important;}
-.nav-btn{bottom:16px !important;padding:12px 36px !important;min-width:170px !important;
-         height:62px !important;font-size:26px !important;gap:12px !important;
+/* [H11-22] A ROUND ARROW BUTTON, NOT A WIDE PILL.
+   The label was dropped, so the 170px min-width and the 36px side padding were sizing the
+   button for text that is no longer there - it read as a long empty lozenge with a small
+   glyph adrift in it. Square box + border-radius:50% makes a true circle, and the arrow
+   grows 28 -> 40px to become the thing the child actually sees.
+   72px is the largest that still clears the stage: the button sits at bottom:16px and
+   .slide-stage reserves 90px underneath, so 16 + 72 leaves 2px rather than overlapping the
+   content above it. min-width has to be zeroed explicitly - the base rule at [25c] sets
+   170px and width alone would not beat it. */
+.nav-btn{bottom:16px !important;padding:0 !important;min-width:0 !important;
+         width:86px !important;height:62px !important;gap:0 !important;
          border-width:3px !important;border-radius:9999px !important;}
+/* [H11-32] A ROUNDED RECTANGLE, NOT A DISC. 62px is the pill's ORIGINAL height, kept so the
+   button sits exactly where it always did; only its LENGTH changed, 170 -> 106, which is what
+   dropping the word freed up. It was a 62px circle first - the reference is a landscape box at
+   roughly 1.7:1 with a soft corner, so 106x62 with a 16px radius. bottom:16px is untouched.
+   The arrow grows with it: the reference arrow runs about 62% of the box width, 68px here, and
+   its viewBox stretches to 64x28 so the SHAFT lengthens instead of the whole glyph scaling up
+   and thickening with it. */
+/* [H11-30] THE ARROW IS A DRAWN SHAPE, NOT A TEXT GLYPH.
+   content:"→" rendered whatever the loaded font happened to have: a thin, narrow stroke with
+   flat ends, and a different one on every platform. The reference is a thick shaft with a
+   two-stroke chevron and round caps, which is a stroked path, so that is what it is now.
+   stroke:currentColor keeps the existing colour logic intact - grey #C2C2C2 while the button is
+   disabled, navy once .active lands - with no second rule to keep in step.
+   content:none on ::after is REQUIRED, not tidiness: the base rule at [25c] still sets the
+   glyph, and without this the old arrow would sit next to the new one. */
+.nav-btn::after{content:none !important;}
+/* [H11-35] LIGHTER AND SMALLER - [H11-34] had gone heavy and industrial.
+   The 8.8px stroke and the 106px box read as a toolbar control, not as something a seven year
+   old reaches for. Three changes together, because they only work as a set:
+     box    106 -> 86 wide, corner 16 -> 20. Still a 86x62 tap target, well over the 44px floor,
+            but no longer a slab; the rounder corner is what carries the friendliness.
+     stroke 8.8 -> 5.5 rendered px.
+     head   70% of the arrow height -> 55%, so it reads as a pointer rather than a spearhead.
+   The shape is REDRAWN, not rescaled: a thinner stroke on the old geometry would have left the
+   head looking oversized against it. viewBox 41x30 is sized to the ink (x 0.25-40.75 including
+   the round caps), so the drawing fills the element with no letterboxing.
+   Clearance inside the 80x56 content box: 14px either side, 9px top and bottom. */
+.nav-btn .nav-arrow{width:52px;height:38px;display:block;fill:none;stroke:currentColor;
+  stroke-width:4.3;stroke-linecap:round;stroke-linejoin:round;}
 .stage.tut .nav-btn{bottom:152px !important;}              /* src 152 (was 128) */
 
 /* ---- 3. BOOT / NUDGE ----------------------------------------------------------------------- */
@@ -2586,6 +2640,25 @@ body.is-start .phase-gate{
    No transition here - the travel is a Web Animation on transform (see _flyIn), which a left/top
    transition would fight. */
 .nudge-hand.demo-fly{width:76px !important;height:76px !important;}
+/* [H11-23] THE WORD THAT COMPLETES THE SENTENCE.
+   .fly is the copy in flight, parented to .slide-stage (the same positioning context the nudge
+   hand uses) so its left/top are stage px; its font is copied from the landed span at runtime,
+   because .stimulus-pic .lbl is 24px normally but 36px inside a .q-row, and the flight ends at
+   scale(1) - if the two fonts disagreed the word would visibly jump on landing. */
+.fill-word.fly{position:absolute;z-index:60;pointer-events:none;white-space:nowrap;
+  transform-origin:0 0;}
+.fill-word.landed{animation:fillPop .34s ease-out;}
+@keyframes fillPop{0%{transform:scale(1);}45%{transform:scale(1.13);}100%{transform:scale(1);}}
+.opt-cell.fx-clear{opacity:0 !important;transform:scale(.86) !important;
+  transition:opacity .38s ease,transform .38s ease !important;pointer-events:none !important;}
+.nudge-hand.demo-match{overflow:visible;}
+/* [H11-26] The arrow is gone - it was asked for, then taken back out. What it was carrying, the
+   hand size, was never about the arrow, so it moves onto a class named for what it actually is:
+   the match demo. .demo-fly stays at 76px for the sort demo, which is the size that was asked
+   for there; 72x90 holds nudge_hand_new.svg's own 75:94 aspect so it fills the box instead of
+   letterboxing inside it. It was 88x110 first, which read as too big over a 150px card. The arrow markup, its rules and the --nh-ang bearing are all removed
+   rather than left switched off - index.html.bak-prearrowdrop has them if they are wanted back. */
+.nudge-hand.demo-match{width:72px !important;height:90px !important;}
    /* src 120x120 (was 56x70) */
 
 /* ---- 4. LANDING (start gate) --------------------------------------------------------------- */
@@ -2606,9 +2679,21 @@ body .sg-card{background:url("assets/UI/start_card.webp") center/100% 100% no-re
 .sg-acell{gap:10px !important;}
 .sg-acell img,.sg-art img{height:104px !important;width:auto !important;
                           max-height:none !important;max-width:none !important;}
-.sg-btn{bottom:40px !important;width:250px !important;min-width:186px !important;
-        height:64px !important;padding:12px 36px !important;font-size:32px !important;
-        border-width:4.54px !important;border-radius:44.56px !important;}
+/* [H11-36] A ROUND PLAY BUTTON. The pill was 250x64 because it held two Hindi words; with the
+   triangle carrying the meaning there is nothing to size it to, so it becomes a disc.
+   88px keeps it a comfortable target for a seven year old - well clear of the 44px floor and
+   bigger than the old pill was tall - and bottom:40px is untouched, so it sits where it did.
+   The triangle is filled AND stroked in the same colour with a round join: that is what rounds
+   its three corners, which a plain filled path cannot do. It is nudged right of centre (path
+   starts at x=11 in a 34 box) because a play glyph centred on its bounding box reads as sitting
+   too far left - the eye centres it on its visual mass, not its box. */
+.sg-btn{bottom:40px !important;width:88px !important;min-width:0 !important;
+        height:88px !important;padding:0 !important;
+        border-width:4.54px !important;border-radius:50% !important;}
+/* [H11-38] the glyph grows, the disc does not: 42 -> 52px inside the same 88px button, which is
+   66% of the 79px content circle. */
+.sg-btn .sg-play{width:52px;height:52px;display:block;
+  fill:currentColor;stroke:currentColor;stroke-width:5.5;stroke-linejoin:round;}
 
 /* ---- 5. END / CELEBRATION ------------------------------------------------------------------ */
 .end-screen{gap:22px !important;}
@@ -2742,10 +2827,25 @@ body .sg-card{background:url("assets/UI/start_card.webp") center/100% 100% no-re
 .sort-item img{width:78px !important;height:78px !important;}
 .sort-item .emoji{font-size:60px !important;}                      /* <- src .sort-emoji */
 .sort-item .lbl{font-size:22px !important;}                        /* src 22 (was 16) */
-.sort-item.snapped{width:96px !important;min-height:96px !important;height:auto !important;}
-.sort-item.snapped img{width:44px !important;height:44px !important;}
-.sort-item.snapped .emoji{font-size:32px !important;}
-.sort-item.snapped .lbl{font-size:15px !important;}
+/* [H11-24] BIGGER ONCE IT IS IN THE BOX. At 96px with a 44px picture the sorted animal was
+   less than a third of the tray tile it came from and the label dropped to 15px, so the bin
+   read as a parking strip rather than as the answer. 116 is the largest that still keeps a
+   bin on ONE row: .sort-bins.many .sort-bin is 430px wide with 14px side padding, so the
+   three items G5 puts in a bin need 3x134 + 2x10 = 422px of the 442px a 470px bin leaves.
+   Wrapping to a second row is the limit, not the bin height - two rows overflow it. 490/142
+   also fits on paper but leaves the bins row 9px inside .slide-stage, which is no margin. */
+/* The bin has to be wide enough to hold them on one row. SORT_GENDER builds its row as plain
+   "sort-bins" (never "sort-bins many" - only the 4+ bin mechanic at ~6625 adds that), so the
+   430px `.sort-bins.many .sort-bin` rule never applied here and the real width was 360px,
+   i.e. 332px inside. Three 116px tiles need 368px, so they wrapped to a second row and the
+   bin grew past its 210px. There is room: .slide-stage is 1033px wide inside its padding and
+   two 430px bins with the 44px gap come to 904px.
+   :not(.sort-gates) keeps P4 out of it - that variant sizes its bins to the gate artwork. */
+.sort-stage:not(.sort-gates) .sort-bin{width:470px !important;}
+.sort-item.snapped{width:134px !important;min-height:134px !important;height:auto !important;}
+.sort-item.snapped img{width:68px !important;height:68px !important;}
+.sort-item.snapped .emoji{font-size:50px !important;}
+.sort-item.snapped .lbl{font-size:19px !important;}
 
 /* ---- 12. DRAG-MATCH  <- src .match-stage / .match-col / .match-zone / .match-tile ----------- */
 /* src lays the two groups out as SIDE-BY-SIDE COLUMNS (row axis, 220px apart); this engine
@@ -2754,7 +2854,7 @@ body .sg-card{background:url("assets/UI/start_card.webp") center/100% 100% no-re
    To go back to the stacked rows, delete just the two rules marked [AXIS]. */
 .slide-host > .dd-stage{width:100% !important;max-width:1160px !important;
                         align-self:center !important;margin:0 auto !important;padding:0 !important;}
-.dd-stage.match-line{flex-direction:row-reverse !important;gap:220px !important;     /* [AXIS] */
+.dd-stage.match-line{flex-direction:row-reverse !important;gap:264px !important;     /* [AXIS] */
           align-items:center !important;justify-content:center !important;
           position:relative !important;}   /* row-reverse: DOM is zoneRow,tileRow -> tiles paint LEFT,
              zones RIGHT, so a tile's right dot faces a zone's left socket (src order). position:
@@ -2791,6 +2891,18 @@ body .sg-card{background:url("assets/UI/start_card.webp") center/100% 100% no-re
 .dd-tile.pic-tile::after{content:"";position:absolute;top:50%;right:-9px;width:18px;height:18px;
            margin-top:-9px;border-radius:50%;background:#CBD2DC;z-index:2;}
 .dd-tile.pic-tile.matched::after{width:24px;height:24px;margin-top:-12px;right:-12px;background:var(--correct);}
+/* [H11-25] THE SECOND DOT. The reference puts a small companion dot just outside the plug dot on
+   the source side - it reads as "the line starts here and runs that way" before anything is
+   drawn. ::before was free on this element; ::after is the plug dot itself.
+   It clears once this tile is the one being dragged (the real line has taken over) or once it is
+   matched. The two live states are the other half of what the reference shows: the plug dot goes
+   blue on the tile being dragged, and the socket ring goes blue on the zone under the finger. */
+/* [H11-44] The blue wire and its lead dot are gone - only the grey plug on the card edge is
+   left, which is where the line itself starts and, since [H11-43], where the hand starts too.
+   The two live states below stay: the plug turns blue on the tile being dragged, and the
+   socket ring turns blue on the zone under the finger. */
+.dd-tile.pic-tile.linking::after{background:#386AF6;}
+.match-line .dd-zone.hover::before{border-color:#386AF6;}
 /* while connecting the card LIFTS but stays visible - it never travels. Deliberately .linking and
    not .dragging: .dd-tile.dragging goes transparent for the mechanics that fly a ghost instead. */
 .dd-tile.pic-tile.linking{cursor:grabbing;z-index:50;transform:scale(1.08);
@@ -2868,46 +2980,126 @@ body .sg-card{background:url("assets/UI/start_card.webp") center/100% 100% no-re
   /* Sized to the REAL budget. .slide-stage is 612px tall but its 6px/90px padding leaves
      only 516px of CONTENT - my first two guesses (442, then 430) both used 612 and so
      overflowed, and .slide-stage has overflow:hidden, which clipped the tray cards.
-     344 + 20 gap + 150 tray = 514, inside 516. 608x344 holds the art's 1667:943 ratio. */
-  width:608px !important;height:344px !important;margin:0 auto !important;gap:0 !important;
-  background:url("assets/Images/gates.png") center/100% 100% no-repeat;}
+     342 + 20 gap + 150 tray = 512, inside 516. 608x342 holds the art's 16:9 ratio.
+     [H11-27] gates.png was replaced by gates.svg, which is 1920x1080 rather than 1667x943 - a
+     different ratio AND different arch positions, so the box height and all four percentages
+     below were re-measured against the new file rather than carried over. The PNG is gone from
+     disk, so until this line changed the slide was loading a 404 and no gates appeared. */
+  width:608px !important;height:342px !important;margin:0 auto !important;gap:0 !important;
+  /* [H11-31] THE BACKGROUND ONLY. gates.svg turned out to be three stacked layers - a
+     1667x943 scene with the two gates as separate 717x692 / 676x689 images over it - which
+     is why it was supplied as an SVG. As a CSS background-image none of that is reachable,
+     so the three layers are split back out into their own files and stacked here: the scene
+     on this element, the gaya gate on ::before, the gai gate on ::after. Each gate is then
+     an element in its own right and can be animated on its own.
+     Offsets are the rect geometry from the SVG, as percentages of its 1920x1080 viewBox, so
+     the three layers land exactly where the artist placed them.
+     Side effect worth having: 3.1MB of base64 became 211KB of webp. */
+  background:url("assets/Images/gate_bg.webp") no-repeat;
+  background-size:100.781% 101.111%;background-position:-0.260% -0.556%;}
 .sort-stage.sort-gates .sort-bins .sort-bin,
 .sort-stage.sort-gates .sort-bins.many .sort-bin{
-  position:absolute !important;top:42% !important;height:34% !important;width:27% !important;
-  min-height:0 !important;padding:0 !important;
+  position:absolute !important;top:45% !important;height:37% !important;width:25% !important;
+  min-height:0 !important;padding:0 !important;z-index:2 !important;
   background:transparent !important;border:0 !important;box-shadow:none !important;
   border-radius:14px !important;}
-.sort-stage.sort-gates .sort-bins .sort-bin:not(.fem){left:14% !important;}   /* गया - blue gate  */
-.sort-stage.sort-gates .sort-bins .sort-bin.fem     {left:59% !important;}   /* गई  - pink gate  */
+.sort-stage.sort-gates .sort-bins .sort-bin:not(.fem){left:13% !important;}   /* गया - blue gate  */
+.sort-stage.sort-gates .sort-bins .sort-bin.fem     {left:60% !important;}   /* गई  - pink gate  */
 .sort-stage.sort-gates .sort-bin::before{display:none !important;}    /* red beam is in the art */
 .sort-stage.sort-gates .sort-bin .bin-title{display:none !important;} /* गया / गई are in the art */
 .sort-stage.sort-gates .sort-bin .bin-items{
   width:100% !important;height:100% !important;min-height:0 !important;
   border:0 !important;background:transparent !important;border-radius:14px !important;
   align-content:center !important;justify-content:center !important;gap:6px !important;}
-/* ABSORBED BY THE GATE. The slide says "मेले में भेजिए" - send the animal IN - so a correct
-   drop must read as walking THROUGH the arch, not parking in it. The tile is NOT removed from
-   the DOM (settle() has already done placed++ and the engine counts .bin-items), it is taken
-   out of flow and animated toward the vanishing point behind the arch: up, shrinking, fading.
-   Out of flow matters - left in flow, a second animal at the same gate would be shoved aside
-   by an invisible 96px box. */
+/* [H11-37] THE ANIMAL WALKS IN AND STOPS. The slide says "mele mein bhejiye" - send the animal
+   IN - and it used to fade out going up, so nothing arrived anywhere. Now the tile swaps to the
+   supplied walking clip, carries itself up through the arch getting smaller as it goes, and
+   PARKS inside. No fade: the child should be able to see what they have already sent in.
+   The tile sheds its card here (no box, no border, no word) and becomes just the animal - the
+   gate art already carries gaya / gai, so the word would only be clutter inside the arch.
+   112x63 holds the clips own 240:135 ratio so the walk is not squashed; the still picture that
+   replaces it at the end is square and object-fit:contain letterboxes it in the same box.
+   --gx parks the two animals of a gate side by side instead of on top of each other. */
 .sort-stage.sort-gates .sort-bin .bin-items{position:relative !important;}
+/* [H11-39] FEET ON THE GROUND. The first cut anchored the tile at top:50% and moved it up by
+   88% of its own height while scaling from its CENTRE - two separate reasons for the animal to
+   leave the path: the rise, and a centre-origin shrink, which pulls the feet up as it gets
+   smaller. It read as walking through the air above the gateway.
+   Anchored from the BOTTOM instead, with transform-origin at the feet, so shrinking keeps them
+   planted on the same line. bottom:4% of .bin-items lands on the walkway under the arch.
+   What is left is a 14% lift, which is perspective only - an animal walking away rises a
+   little in frame - not the hop the 88% was. */
 .sort-stage.sort-gates .sort-item.snapped{
-  position:absolute !important;left:50% !important;top:50% !important;margin:0 !important;
-  pointer-events:none !important;
-  animation:gateAbsorb .66s cubic-bezier(.4,0,.7,1) forwards !important;}
-@keyframes gateAbsorb{
-  0%  {transform:translate(-50%,-50%)  scale(1);   opacity:1;}
-  30% {transform:translate(-50%,-62%)  scale(.88); opacity:1;}
-  100%{transform:translate(-50%,-130%) scale(.34); opacity:0;}
-}
-/* reduced motion kills the keyframes, so make sure it still LEAVES rather than sitting there */
-html.no-anim .sort-stage.sort-gates .sort-item.snapped{opacity:0 !important;}
+  position:absolute !important;left:var(--gx,50%) !important;
+  top:auto !important;bottom:4% !important;transform-origin:50% 100% !important;
+  margin:0 !important;width:auto !important;min-width:0 !important;min-height:0 !important;
+  padding:0 !important;background:transparent !important;border:0 !important;
+  box-shadow:none !important;pointer-events:none !important;
+  animation:gateWalk 2.1s cubic-bezier(.36,.02,.52,1) forwards !important;}
+.sort-stage.sort-gates .sort-item.snapped .lbl{display:none !important;}
+/* [H11-42] SIZED BY HEIGHT, NOT WIDTH. The clips were 240x135 with the animal filling only
+   36-48% of that - so a 112px box was mostly scaling empty margin and the animal came out
+   tiny. They are re-cut to the animal now, which makes them portrait and of differing widths
+   (90 to 118px), so a fixed width would size each species differently. Height is the shared
+   dimension: 96px makes every animal the same height, and width:auto keeps each one its own
+   shape. object-fit is irrelevant once the box matches the image ratio. */
+.sort-stage.sort-gates .sort-item.snapped img{height:96px !important;width:auto !important;}
+/* [H11-41] IT HAS TO ARRIVE FROM SOMEWHERE. The walk used to begin where it ended - inside the
+   arch - so there was no approach to see and it read as shrinking on the spot rather than
+   walking in. It now starts on the path IN FRONT of the gate, below the arch and larger because
+   it is nearer, and walks up through the opening getting smaller as it goes.
+   translateY(64%) is measured against the tile's own height, which puts the feet about 39px
+   below the arch - on the foreground path in the artwork, not floating over it. */
+@keyframes gateWalk{
+  0%  {transform:translateX(-50%) translateY(64%)  scale(1.35);}
+  100%{transform:translateX(-50%) translateY(-14%) scale(.62);}}
+html.no-anim .sort-stage.sort-gates .sort-item.snapped{
+  animation:none !important;transform:translateX(-50%) translateY(-14%) scale(.62) !important;}
 /* the drop target is invisible, so it MUST answer the drag - otherwise the child has no idea
    which gate is live. Kept light so it reads as a glow through the arch, not a box. */
-.sort-stage.sort-gates .sort-bin.hover{
-  background:rgba(255,255,255,.30) !important;
-  box-shadow:0 0 0 6px rgba(56,106,246,.26) !important;}
+/* [H11-45] NO BOX UNDER THE CARD WHILE IT IS BEING CARRIED. The drop zone is invisible in the
+   gates layout, so it used to answer the drag with a white panel and a blue ring - which read
+   as a second card floating behind the one in hand. Removed.
+   Note what this costs: nothing now marks which gate is live while the child drags. The wrong
+   and right flashes below still fire on the DROP, so the answer is still confirmed - it is the
+   aiming cue that is gone. */
+.sort-stage.sort-gates .sort-bin.hover{background:transparent !important;box-shadow:none !important;}
+/* [H11-46] over the artwork the card itself goes, leaving just the animal being carried. It
+   keeps its face over the tray, where a bare cut-out would float with nothing to hold it -
+   the change is keyed on being over a drop zone, not on dragging. */
+.sort-stage.sort-gates .sort-item.dragging.over-zone{
+  background:transparent !important;border-color:transparent !important;
+  box-shadow:none !important;}
+/* [H11-31] THE GATE ITSELF ANSWERS THE LINE.
+   vo_gate_rule says gaya and gai five times between them across 25s and nothing on screen
+   connected either word to either arch.
+   The first attempt drew a gold ring around the gate, which was wrong twice over: a border
+   is not the gate, and the wash before it made the lit gate the HAZY one. Now that the two
+   gates are their own layers, the gate can simply react - one gentle swell, lifting slightly
+   and brightening, then settling. Once per cue, not a loop: the class goes on when the word
+   is spoken and comes off after, so a repeating animation would keep twitching through the
+   rest of the sentence.
+   transform-origin sits at the foot of the arch so it grows UP from the ground it stands on
+   rather than swelling from its middle. */
+.sort-stage.sort-gates .sort-bins::before,
+.sort-stage.sort-gates .sort-bins::after{
+  content:"";position:absolute;z-index:0;pointer-events:none;
+  background-repeat:no-repeat;background-size:100% 100%;
+  transform-origin:50% 100%;}
+.sort-stage.sort-gates .sort-bins::before{
+  left:3.594%;top:6.296%;width:46.719%;height:80.185%;
+  background-image:url("assets/Images/gate_m.webp");}
+.sort-stage.sort-gates .sort-bins::after{
+  left:55.104%;top:7.222%;width:44.063%;height:79.815%;
+  background-image:url("assets/Images/gate_f.webp");}
+.sort-stage.sort-gates .sort-bins.lit-m::before,
+.sort-stage.sort-gates .sort-bins.lit-f::after{animation:gatePulse 1.1s ease-in-out;}
+@keyframes gatePulse{
+  0%  {transform:scale(1);     filter:brightness(1);}
+  38% {transform:scale(1.045); filter:brightness(1.16) saturate(1.12);}
+  100%{transform:scale(1);     filter:brightness(1);}}
+html.no-anim .sort-stage.sort-gates .sort-bins.lit-m::before,
+html.no-anim .sort-stage.sort-gates .sort-bins.lit-f::after{animation:none;filter:brightness(1.16);}
 .sort-stage.sort-gates .sort-bin.flash-wrong{background:rgba(249,53,68,.20) !important;}
 .sort-stage.sort-gates .sort-bin.flash-right{background:rgba(0,177,50,.20) !important;}
 
@@ -2959,7 +3151,14 @@ html.no-anim .sort-stage.sort-gates .sort-item.snapped{opacity:0 !important;}
     <div class="mascot-wrap" id="swBuddy"><div class="mascot-circle"><img class="mascot-img" id="swBuddyImg" src="assets/UI/sw_head_talking.webp" alt=""></div></div>
 
     <!-- Nav button — kit-style pill, floats bottom-right -->
-    <button class="nav-btn" id="navBtn" disabled>आगे</button>
+    <!-- [H11-22] the word is gone and the arrow carries the meaning, so the button needs an
+         aria-label: its only content is now a CSS ::after glyph, and generated content gives a
+         control no accessible name - it would announce as a bare "button". -->
+    <button class="nav-btn" id="navBtn" disabled aria-label="आगे">
+      <svg class="nav-arrow" viewBox="0 0 41 30" aria-hidden="true" focusable="false">
+        <path d="M3 15 H38"/><path d="M28 6.5 L38 15 L28 23.5"/>
+      </svg>
+    </button>
   </div>
 
   <!-- FEEDBACK OVERLAY — kit-style card + clean Swiftee large -->
@@ -2988,7 +3187,14 @@ html.no-anim .sort-stage.sort-gates .sort-item.snapped{opacity:0 !important;}
         <div class="sg-art" id="sgHero"></div>
       </div>
       <button class="sg-vo" id="sgVo" type="button" aria-label="सुनो"><svg viewBox="0 0 62 60" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Audio"><g filter="url(#sgChipShadow)"><rect x="8" y="4" width="46" height="44" rx="22" fill="url(#sgChipGrad)"/><rect x="6" y="2" width="50" height="48" rx="24" stroke="white" stroke-width="4"/><path d="M29.8466 19.0574C29.8804 19.0524 29.9145 19.0496 29.9487 19.0488C30.6094 19.0317 31.0021 19.5124 31.0015 20.1414C31.0008 20.9661 31.0003 21.7911 31.0005 22.6158L31.001 27.7212L31.0009 30.5591C31.0009 31.0364 31.0122 31.5472 30.9863 32.0228C30.9662 32.2709 30.902 32.4608 30.7251 32.643C30.3831 32.9952 29.8337 33.0842 29.4386 32.7671C29.0784 32.4781 28.7473 32.1159 28.4181 31.7862L26.4414 29.8087C26.1771 29.5426 25.9071 29.2636 25.6339 29.0081C25.0227 28.9649 24.3645 29.017 23.7487 28.9979C23.445 28.9885 23.1625 29.0211 22.8589 28.9606C22.3751 28.8616 22.0618 28.4823 22.0642 27.9824C22.0706 26.5937 22.0287 25.1949 22.0828 23.8081C22.0884 23.6626 22.2302 23.4334 22.3309 23.3252C22.454 23.1907 22.6146 23.0963 22.792 23.0543C23.0567 22.9904 23.5328 23.016 23.8224 23.0128C24.4143 23.0063 25.0171 23.0277 25.609 23.0073C25.6794 22.9529 25.8505 22.7743 25.919 22.706L26.5305 22.0945L28.5396 20.0838C28.9157 19.7059 29.3217 19.1749 29.8466 19.0574Z" fill="white"/><path class="wv wv2" d="M36.2367 18.6905C36.8783 18.6449 37.3041 19.231 37.6725 19.6829C38.7675 21.0046 39.4982 22.5894 39.7923 24.2804C40.2503 26.8763 39.6548 29.5478 38.1378 31.7035C37.8393 32.1274 37.508 32.5324 37.149 32.9063C36.9404 33.1236 36.7646 33.2558 36.4622 33.3081C36.2013 33.3412 35.9378 33.2717 35.7272 33.1144C35.5185 32.9615 35.3816 32.7298 35.3483 32.4733C35.2786 31.9235 35.5696 31.6821 35.8914 31.3297C36.0448 31.1639 36.1901 30.9908 36.3269 30.811C38.3669 28.136 38.4986 24.4654 36.6555 21.6511C36.4826 21.3899 36.2966 21.1376 36.0984 20.8951C35.8252 20.5652 35.3947 20.2691 35.3472 19.8184C35.2845 19.2225 35.6439 18.768 36.2367 18.6905Z" fill="white"/><path class="wv wv1" d="M33.3868 21.5044C33.9769 21.4549 34.2563 21.7845 34.5981 22.1981C35.1982 22.924 35.6149 23.7691 35.8211 24.6886C36.171 26.2384 35.8867 27.8637 35.0314 29.2026C34.7421 29.6568 34.2333 30.3745 33.6937 30.4946C33.1633 30.5437 32.6759 30.2927 32.5495 29.7376C32.3921 29.0462 32.9849 28.6956 33.3274 28.1763C34.2088 26.833 34.1932 25.0908 33.288 23.7635C33.0747 23.4522 32.6159 23.0564 32.5518 22.7133C32.4377 22.1027 32.7745 21.619 33.3868 21.5044Z" fill="white"/></g><defs><filter id="sgChipShadow" x="0" y="0" width="62" height="60" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/><feOffset dy="4"/><feGaussianBlur stdDeviation="2"/><feComposite in2="hardAlpha" operator="out"/><feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/><feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/><feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/></filter><linearGradient id="sgChipGrad" x1="8" y1="26" x2="54" y2="26" gradientUnits="userSpaceOnUse"><stop stop-color="#1987FC"/><stop offset="1" stop-color="#1565F4"/></linearGradient></defs></svg></button>
-      <button class="sg-btn" id="sgBtn">शुरू करें</button>
+      <!-- [H11-36] the word is gone and the play triangle carries it, so the button needs an
+           aria-label: an <svg> gives a control no accessible name and it would announce as a
+           bare "button". Same reasoning as the aage button. -->
+      <button class="sg-btn" id="sgBtn" aria-label="शुरू करें">
+        <svg class="sg-play" viewBox="0 0 34 34" aria-hidden="true" focusable="false">
+          <path d="M11 8 L27 17 L11 26 Z"/>
+        </svg>
+      </button>
     </div>
   </div>
 
@@ -3018,7 +3224,7 @@ html.no-anim .sort-stage.sort-gates .sort-item.snapped{opacity:0 !important;}
 
 <!-- ============ CARD DATA (embedded; in prod the compiler does this) ============ -->
 <script type="application/json" id="cardData">
-{"version": "0.2", "skill_code": "HI02H11_L03_S02", "lo_code": "HI02H11_L03", "grade": "G2", "attribute": "H11", "skill_type": "CORE", "part_label": "", "theme": "toybox", "title": {"hi": "आइए जोड़ी मिलाएं", "en": "Match the gender pairs (पुल्लिंग / स्त्रीलिंग)"}, "subtitle_hi": "", "skill_description_hi": "लिंग-सूचक शब्द-रूप बदलाव को पहचानता है — जैसे शेर से शेरनी, मोर से मोरनी।", "dt_fallback": null, "landing_hero": {"kind": "concept_strip", "cells": [{"type": "image", "src": "assets/Images/pic_mor_anim.webp", "label": "मोर"}, {"type": "image", "src": "assets/Images/pic_morni_anim.webp", "label": "मोरनी"}]}, "landing_nudge": false, "audio_chip_on_mascot_foot": true, "phase_distribution": {"tutorial": 9, "guided": 6, "practice": 5}, "scaffold_rules": {"nudge_timeout_ms": {"guided": 5000, "practice": 8000}, "max_attempts": 2}, "signals_expected": ["slide_entered", "slide_completed", "phase_transition_shown", "story_question_first_try", "gender_match_first_try", "gender_sort_item", "gender_sort_correct", "gender_pair_match", "answer_wrong", "answer_revealed", "lesson_completed"], "_emoji_fallback": {"pic_sher": "🦁", "pic_sherni": "🦁", "pic_mor": "🦚", "pic_morni": "🦚", "pic_ghoda": "🐎", "pic_ghodi": "🐴", "pic_bakra": "🐐", "pic_bakri": "🐐", "pic_murga": "🐓", "pic_murgi": "🐔", "pic_bandar": "🐒", "pic_bandariya": "🐒", "pic_bail": "🐂", "pic_gaay": "🐄", "pic_sherni_alone": "🦁", "pic_mor_alone": "🦚", "pic_bail_alone": "🐂", "pic_bakra_grass": "🐐"}, "slides": [{"id": "T1", "phase": "tutorial", "eis": "iconic", "type": "STORY_SCENE", "prompt_hi": "जंगल का मेला", "audio": {"narration": "vo_poem_01"}, "data": {"image_id": "sc_mela_01", "emoji": "🎪", "alt_hi": "आइए आज हम एक कविता सुनते हैं— जंगल का मेला। जंगल में एक मेला आया, रंग-बिरंगा खूब सजाया।"}, "signals": {"on_complete": []}}, {"id": "T2", "phase": "tutorial", "eis": "iconic", "type": "STORY_SCENE", "prompt_hi": "जंगल का मेला", "audio": {"narration": "vo_poem_02"}, "data": {"image_id": "sc_mela_02", "emoji": "🎪", "alt_hi": "शेर आया, शेरनी आई, दोनों ने मिलकर धूम मचाई।", "video_id": "sc_mela_02"}, "signals": {"on_complete": []}}, {"id": "T3", "phase": "tutorial", "eis": "iconic", "type": "STORY_SCENE", "prompt_hi": "जंगल का मेला", "audio": {"narration": "vo_poem_03"}, "data": {"image_id": "sc_mela_03", "emoji": "🎪", "alt_hi": "मोर पंख रंगीन फैलाए, मोरनी संग ठुमके लगाए।", "video_id": "sc_mela_03"}, "signals": {"on_complete": []}}, {"id": "T4", "phase": "tutorial", "eis": "iconic", "type": "STORY_SCENE", "prompt_hi": "जंगल का मेला", "audio": {"narration": "vo_poem_04"}, "data": {"image_id": "sc_mela_04", "emoji": "🎪", "alt_hi": "घोड़ा आया धूल उड़ाए, घोड़ी पीछे दौड़ी आए।", "video_id": "sc_mela_04"}, "signals": {"on_complete": []}}, {"id": "T5", "phase": "tutorial", "eis": "iconic", "type": "STORY_SCENE", "prompt_hi": "जंगल का मेला", "audio": {"narration": "vo_poem_05"}, "data": {"image_id": "sc_mela_05", "emoji": "🎪", "alt_hi": "बकरा बोला— “में-में-में!” बकरी बोली— “साथ चलें!”", "video_id": "sc_mela_05"}, "signals": {"on_complete": []}}, {"id": "T6", "phase": "tutorial", "eis": "iconic", "type": "STORY_SCENE", "prompt_hi": "जंगल का मेला", "audio": {"narration": "vo_poem_06"}, "data": {"image_id": "sc_mela_06", "emoji": "🎪", "alt_hi": "बंदर लाया लाल गुब्बारा, बंदरिया बोली कितना प्यारा!", "video_id": "sc_mela_06"}, "signals": {"on_complete": []}}, {"id": "T7", "phase": "tutorial", "eis": "iconic", "type": "STORY_SCENE", "prompt_hi": "जंगल का मेला", "audio": {"narration": "vo_poem_07"}, "data": {"image_id": "sc_mela_07", "emoji": "🎪", "alt_hi": "मुर्गा बोला— “कुकड़ू-कूँ!” मुर्गी बोली— “क्या खाऊँ!”", "video_id": "sc_mela_07"}, "signals": {"on_complete": []}}, {"id": "T8", "phase": "tutorial", "eis": "iconic", "type": "STORY_SCENE", "prompt_hi": "जंगल का मेला", "audio": {"narration": "vo_poem_08"}, "data": {"image_id": "sc_mela_08", "emoji": "🎪", "alt_hi": "बैल ने जब ढोल बजाया, गाय ने भी नाच दिखाया।", "video_id": "sc_mela_08"}, "signals": {"on_complete": []}}, {"id": "T9", "phase": "tutorial", "eis": "iconic", "type": "STORY_SCENE", "prompt_hi": "जंगल का मेला", "audio": {"narration": "vo_poem_09"}, "data": {"image_id": "sc_mela_09", "emoji": "🎪", "alt_hi": "सूरज ढलते शाम हुई, मेले भर में धूम हुई।", "video_id": "sc_mela_09"}, "signals": {"on_complete": []}}, {"id": "G1", "phase": "guided", "eis": "iconic", "type": "STORY_QUESTION", "prompt_hi": "सही जोड़ी से मिलाइए।", "audio": {"prompt": "vo_q_sherni", "try_again": "vo_try_again", "hint1": "vo_h1_sherni", "hint2": "vo_h2_sherni", "hint": "vo_h2_sherni", "reveal": "vo_h2_sherni", "correct": "vo_correct_pair"}, "data": {"recall_image_id": "pic_sherni_alone", "stim_word_hi": "शेरनी", "options": [{"img": "pic_bail", "emoji": "🐂", "word_hi": "बैल", "audio": "vo_name_bail", "label_hi": "बैल"}, {"img": "pic_sher", "emoji": "🦁", "word_hi": "शेर", "audio": "vo_name_sher", "label_hi": "शेर", "correct": true}, {"img": "pic_ghoda", "emoji": "🐎", "word_hi": "घोड़ा", "audio": "vo_name_ghoda", "label_hi": "घोड़ा"}], "reveal_seq": true, "signal_name": "gender_match_first_try"}, "signals": {"on_complete": ["gender_match_first_try"]}}, {"id": "G2", "phase": "guided", "eis": "iconic", "type": "STORY_QUESTION", "prompt_hi": "सही जोड़ी से मिलाइए।", "audio": {"prompt": "vo_q_mor", "try_again": "vo_try_again", "hint1": "vo_h1_mor", "hint2": "vo_h2_mor", "hint": "vo_h2_mor", "reveal": "vo_h2_mor", "correct": "vo_correct_pair"}, "data": {"recall_image_id": "pic_mor_alone", "stim_word_hi": "मोर", "options": [{"img": "pic_morni", "emoji": "🦚", "word_hi": "मोरनी", "audio": "vo_name_morni", "label_hi": "मोरनी", "correct": true}, {"img": "pic_murgi", "emoji": "🐔", "word_hi": "मुर्गी", "audio": "vo_name_murgi", "label_hi": "मुर्गी"}, {"img": "pic_bandariya", "emoji": "🐒", "word_hi": "बंदरिया", "audio": "vo_name_bandariya", "label_hi": "बंदरिया"}], "reveal_seq": true, "signal_name": "gender_match_first_try"}, "signals": {"on_complete": ["gender_match_first_try"]}}, {"id": "G3", "phase": "guided", "eis": "iconic", "type": "STORY_QUESTION", "prompt_hi": "सही तसवीर चुनिए।", "audio": {"prompt": "vo_q_bakri", "try_again": "vo_try_again", "hint1": "vo_h1_word", "hint2": "vo_h2_bakri", "hint": "vo_h2_bakri", "reveal": "vo_h2_bakri", "correct": "vo_correct_pair"}, "data": {"stim_word_hi": "बकरी", "options": [{"img": "pic_sherni", "emoji": "🦁", "word_hi": "शेरनी", "audio": "vo_name_sherni", "label_hi": "शेरनी"}, {"img": "pic_bakra", "emoji": "🐐", "word_hi": "बकरा", "audio": "vo_name_bakra", "label_hi": "बकरा", "correct": true}, {"img": "pic_bail", "emoji": "🐂", "word_hi": "बैल", "audio": "vo_name_bail", "label_hi": "बैल"}], "reveal_seq": true, "signal_name": "gender_match_first_try"}, "signals": {"on_complete": ["gender_match_first_try"]}}, {"id": "G4", "phase": "guided", "eis": "iconic", "type": "STORY_QUESTION", "prompt_hi": "सही तसवीर चुनिए।", "audio": {"prompt": "vo_q_ghoda", "try_again": "vo_try_again", "hint1": "vo_h1_word", "hint2": "vo_h2_ghoda", "hint": "vo_h2_ghoda", "reveal": "vo_h2_ghoda", "correct": "vo_correct_pair"}, "data": {"stim_word_hi": "घोड़ा", "options": [{"img": "pic_murgi", "emoji": "🐔", "word_hi": "मुर्गी", "audio": "vo_name_murgi", "label_hi": "मुर्गी"}, {"img": "pic_gaay", "emoji": "🐄", "word_hi": "गाय", "audio": "vo_name_gaay", "label_hi": "गाय"}, {"img": "pic_ghodi", "emoji": "🐴", "word_hi": "घोड़ी", "audio": "vo_name_ghodi", "label_hi": "घोड़ी", "correct": true}], "reveal_seq": true, "signal_name": "gender_match_first_try"}, "signals": {"on_complete": ["gender_match_first_try"]}}, {"id": "G5", "phase": "guided", "eis": "enactive", "type": "SORT_GENDER", "prompt_hi": "हर शब्द को सही डब्बे में रखिए।", "audio": {"prompt": "vo_sort_jata_demo", "try_again": "vo_try_again", "hint1": "vo_sort_jata_h1", "correct": "vo_sort_jata_done", "instruction": "vo_sort_jata_rule"}, "data": {"bins": [{"gender": "M", "label": "जाता है।"}, {"gender": "F", "label": "जाती है।"}], "items": [{"img": "pic_sher", "emoji": "🦁", "word_hi": "शेर", "audio": "vo_name_sher", "gender": "M", "hint2": "vo_h2_sher_jata"}, {"img": "pic_sherni", "emoji": "🦁", "word_hi": "शेरनी", "audio": "vo_name_sherni", "gender": "F", "hint2": "vo_h2_sherni_jati"}, {"img": "pic_murga", "emoji": "🐓", "word_hi": "मुर्गा", "audio": "vo_name_murga", "gender": "M", "hint2": "vo_h2_murga_jata"}, {"img": "pic_murgi", "emoji": "🐔", "word_hi": "मुर्गी", "audio": "vo_name_murgi", "gender": "F", "hint2": "vo_h2_murgi_jati"}, {"img": "pic_bail", "emoji": "🐂", "word_hi": "बैल", "audio": "vo_name_bail", "gender": "M", "hint2": "vo_h2_bail_jata"}, {"img": "pic_gaay", "emoji": "🐄", "word_hi": "गाय", "audio": "vo_name_gaay", "gender": "F", "hint2": "vo_h2_gaay_jati"}], "reveal_seq": true, "gates": false, "demo_items": ["बैल", "गाय"]}, "signals": {"on_complete": ["gender_sort_correct"]}}, {"id": "G6", "phase": "guided", "eis": "enactive", "type": "MATCH_GENDER_PAIRS", "prompt_hi": "सही जोड़ियाँ मिलाइए।", "audio": {"prompt": "vo_match_pairs", "try_again": "vo_try_again", "hint1": "vo_h1_pair", "correct": "vo_correct_pairs"}, "data": {"pairs": [{"id": "bandar", "m": {"img": "pic_bandar", "emoji": "🐒", "word_hi": "बंदर", "audio": "vo_name_bandar"}, "f": {"img": "pic_bandariya", "emoji": "🐒", "word_hi": "बंदरिया", "audio": "vo_name_bandariya"}, "hint2": "vo_h2_bandar"}, {"id": "murga", "m": {"img": "pic_murga", "emoji": "🐓", "word_hi": "मुर्गा", "audio": "vo_name_murga"}, "f": {"img": "pic_murgi", "emoji": "🐔", "word_hi": "मुर्गी", "audio": "vo_name_murgi"}, "hint2": "vo_h2_murga"}, {"id": "bail", "m": {"img": "pic_bail", "emoji": "🐂", "word_hi": "बैल", "audio": "vo_name_bail"}, "f": {"img": "pic_gaay", "emoji": "🐄", "word_hi": "गाय", "audio": "vo_name_gaay"}, "hint2": "vo_h2_bail"}], "demo_pair": "bandar"}, "signals": {"on_complete": ["gender_pair_match"]}}, {"id": "P1", "phase": "practice", "eis": "iconic", "type": "STORY_QUESTION", "prompt_hi": "सही जोड़ी से मिलाइए।", "audio": {"prompt": "vo_q_bail", "try_again": "vo_try_again", "hint1": "vo_h1_bail", "hint2": "vo_h2_bail_gaay", "hint": "vo_h2_bail_gaay", "reveal": "vo_h2_bail_gaay", "correct": "vo_correct_pair"}, "data": {"recall_image_id": "pic_bail_alone", "stim_word_hi": "बैल", "options": [{"img": "pic_gaay", "emoji": "🐄", "word_hi": "गाय", "audio": "vo_name_gaay", "label_hi": "गाय", "correct": true}, {"img": "pic_morni", "emoji": "🦚", "word_hi": "मोरनी", "audio": "vo_name_morni", "label_hi": "मोरनी"}, {"img": "pic_sherni", "emoji": "🦁", "word_hi": "शेरनी", "audio": "vo_name_sherni", "label_hi": "शेरनी"}], "reveal_seq": true, "signal_name": "gender_match_first_try"}, "signals": {"on_complete": ["gender_match_first_try"]}}, {"id": "P2", "phase": "practice", "eis": "iconic", "type": "TAP_GENDER", "prompt_hi": "वाक्य पूरा कीजिए।", "audio": {"prompt": "vo_q_sentence", "try_again": "vo_try_again", "hint1": "vo_h1_sentence", "hint2": "vo_h1_sentence", "hint": "vo_h1_sentence", "reveal": "vo_h1_sentence", "correct": "vo_c_sentence", "word_name": "vo_name_bakra"}, "data": {"noun": {"word_hi": "बकरा घास खा…", "emoji": "🐐", "img": "pic_bakra_grass"}, "options": [{"label": "रहा है", "gender": "M", "audio": "vo_word_raha_hai"}, {"label": "रही है", "gender": "F", "audio": "vo_word_rahi_hai"}], "target_gender": "M", "reveal_seq": true}, "signals": {"on_complete": ["gender_match_first_try"]}}, {"id": "P3", "phase": "practice", "eis": "enactive", "type": "MATCH_GENDER_PAIRS", "prompt_hi": "सही जोड़ियाँ मिलाइए।", "audio": {"prompt": "vo_match_pairs", "try_again": "vo_try_again", "hint1": "vo_h1_pair", "correct": "vo_correct_pairs"}, "data": {"pairs": [{"id": "bakra", "m": {"img": "pic_bakra", "emoji": "🐐", "word_hi": "बकरा", "audio": "vo_name_bakra"}, "f": {"img": "pic_bakri", "emoji": "🐐", "word_hi": "बकरी", "audio": "vo_name_bakri"}, "hint2": "vo_h2_bakra"}, {"id": "mor", "m": {"img": "pic_mor", "emoji": "🦚", "word_hi": "मोर", "audio": "vo_name_mor"}, "f": {"img": "pic_morni", "emoji": "🦚", "word_hi": "मोरनी", "audio": "vo_name_morni"}, "hint2": "vo_h2_mor_p"}, {"id": "ghoda", "m": {"img": "pic_ghoda", "emoji": "🐎", "word_hi": "घोड़ा", "audio": "vo_name_ghoda"}, "f": {"img": "pic_ghodi", "emoji": "🐴", "word_hi": "घोड़ी", "audio": "vo_name_ghodi"}, "hint2": "vo_h2_ghoda_p"}]}, "signals": {"on_complete": ["gender_pair_match"]}}, {"id": "P4", "phase": "practice", "eis": "enactive", "type": "SORT_GENDER", "prompt_hi": "हर जानवर को सही गेट से मेले में भेजिए।", "audio": {"prompt": "vo_gate_rule", "try_again": "vo_try_again", "hint1": "vo_gate_h1", "correct": "vo_gate_done"}, "data": {"bins": [{"gender": "M", "label": "गया।"}, {"gender": "F", "label": "गई।"}], "items": [{"img": "pic_bandar", "emoji": "🐒", "word_hi": "बंदर", "audio": "vo_name_bandar", "gender": "M", "hint2": "vo_h2_bandar_gaya"}, {"img": "pic_bandariya", "emoji": "🐒", "word_hi": "बंदरिया", "audio": "vo_name_bandariya", "gender": "F", "hint2": "vo_h2_bandariya_gai"}, {"img": "pic_murga", "emoji": "🐓", "word_hi": "मुर्गा", "audio": "vo_name_murga", "gender": "M", "hint2": "vo_h2_murga_gaya"}, {"img": "pic_murgi", "emoji": "🐔", "word_hi": "मुर्गी", "audio": "vo_name_murgi", "gender": "F", "hint2": "vo_h2_murgi_gai"}], "reveal_seq": true, "gates": true}, "signals": {"on_complete": ["gender_sort_correct"]}}, {"id": "CEL", "phase": "practice", "eis": "enactive", "type": "CELEBRATION", "prompt_hi": "", "audio": {"prompt": "vo_well_done", "sfx": "sfx_celebrate"}, "data": {}, "signals": {"on_complete": ["lesson_completed"]}}], "assets": {"audio_ext": "ogg", "img_ext": "webp", "audio": {"vo_bridge_lost": "assets/Audio/vo_bridge_lost.ogg", "vo_c_sentence": "assets/Audio/vo_c_sentence.ogg", "vo_correct_pair": "assets/Audio/vo_correct_pair.ogg", "vo_correct_pairs": "assets/Audio/vo_correct_pairs.ogg", "vo_gate_done": "assets/Audio/vo_gate_done.ogg", "vo_gate_h1": "assets/Audio/vo_gate_h1.ogg", "vo_gate_rule": "assets/Audio/vo_gate_rule.ogg", "vo_h1_bail": "assets/Audio/vo_h1_bail.ogg", "vo_h1_mor": "assets/Audio/vo_h1_mor.ogg", "vo_h1_pair": "assets/Audio/vo_h1_pair.ogg", "vo_h1_sentence": "assets/Audio/vo_h1_sentence.ogg", "vo_h1_sherni": "assets/Audio/vo_h1_sherni.ogg", "vo_h1_word": "assets/Audio/vo_h1_word.ogg", "vo_h2_bail": "assets/Audio/vo_h2_bail.ogg", "vo_h2_bail_gaay": "assets/Audio/vo_h2_bail_gaay.ogg", "vo_h2_bail_jata": "assets/Audio/vo_h2_bail_jata.ogg", "vo_h2_bakra": "assets/Audio/vo_h2_bakra.ogg", "vo_h2_bakri": "assets/Audio/vo_h2_bakri.ogg", "vo_h2_bandar": "assets/Audio/vo_h2_bandar.ogg", "vo_h2_bandar_gaya": "assets/Audio/vo_h2_bandar_gaya.ogg", "vo_h2_bandariya_gai": "assets/Audio/vo_h2_bandariya_gai.ogg", "vo_h2_gaay_jati": "assets/Audio/vo_h2_gaay_jati.ogg", "vo_h2_ghoda": "assets/Audio/vo_h2_ghoda.ogg", "vo_h2_ghoda_p": "assets/Audio/vo_h2_ghoda_p.ogg", "vo_h2_mor": "assets/Audio/vo_h2_mor.ogg", "vo_h2_mor_p": "assets/Audio/vo_h2_mor_p.ogg", "vo_h2_murga": "assets/Audio/vo_h2_murga.ogg", "vo_h2_murga_gaya": "assets/Audio/vo_h2_murga_gaya.ogg", "vo_h2_murga_jata": "assets/Audio/vo_h2_murga_jata.ogg", "vo_h2_murgi_gai": "assets/Audio/vo_h2_murgi_gai.ogg", "vo_h2_murgi_jati": "assets/Audio/vo_h2_murgi_jati.ogg", "vo_h2_sher_jata": "assets/Audio/vo_h2_sher_jata.ogg", "vo_h2_sherni": "assets/Audio/vo_h2_sherni.ogg", "vo_h2_sherni_jati": "assets/Audio/vo_h2_sherni_jati.ogg", "vo_landing": "assets/Audio/vo_landing.ogg", "vo_match_pairs": "assets/Audio/vo_match_pairs.ogg", "vo_name_bail": "assets/Audio/vo_name_bail.ogg", "vo_name_bakra": "assets/Audio/vo_name_bakra.ogg", "vo_name_bakri": "assets/Audio/vo_name_bakri.ogg", "vo_name_bandar": "assets/Audio/vo_name_bandar.ogg", "vo_name_bandariya": "assets/Audio/vo_name_bandariya.ogg", "vo_name_gaay": "assets/Audio/vo_name_gaay.ogg", "vo_name_ghoda": "assets/Audio/vo_name_ghoda.ogg", "vo_name_ghodi": "assets/Audio/vo_name_ghodi.ogg", "vo_name_mor": "assets/Audio/vo_name_mor.ogg", "vo_name_morni": "assets/Audio/vo_name_morni.ogg", "vo_name_murga": "assets/Audio/vo_name_murga.ogg", "vo_name_murgi": "assets/Audio/vo_name_murgi.ogg", "vo_name_sher": "assets/Audio/vo_name_sher.ogg", "vo_name_sherni": "assets/Audio/vo_name_sherni.ogg", "vo_poem_01": "assets/Audio/vo_poem_01.ogg", "vo_poem_02": "assets/Audio/vo_poem_02.ogg", "vo_poem_03": "assets/Audio/vo_poem_03.ogg", "vo_poem_04": "assets/Audio/vo_poem_04.ogg", "vo_poem_05": "assets/Audio/vo_poem_05.ogg", "vo_poem_06": "assets/Audio/vo_poem_06.ogg", "vo_poem_07": "assets/Audio/vo_poem_07.ogg", "vo_poem_08": "assets/Audio/vo_poem_08.ogg", "vo_poem_09": "assets/Audio/vo_poem_09.ogg", "vo_pt_guided": "assets/Audio/vo_pt_guided.ogg", "vo_pt_practice": "assets/Audio/vo_pt_practice.ogg", "vo_pt_tutorial": "assets/Audio/vo_pt_tutorial.ogg", "vo_q_bail": "assets/Audio/vo_q_bail.ogg", "vo_q_bakri": "assets/Audio/vo_q_bakri.ogg", "vo_q_ghoda": "assets/Audio/vo_q_ghoda.ogg", "vo_q_mor": "assets/Audio/vo_q_mor.ogg", "vo_q_sentence": "assets/Audio/vo_q_sentence.ogg", "vo_q_sherni": "assets/Audio/vo_q_sherni.ogg", "vo_sort_jata_demo": "assets/Audio/vo_sort_jata_demo.ogg", "vo_sort_jata_done": "assets/Audio/vo_sort_jata_done.ogg", "vo_sort_jata_h1": "assets/Audio/vo_sort_jata_h1.ogg", "vo_sort_jata_rule": "assets/Audio/vo_sort_jata_rule.ogg", "vo_try_again": "assets/Audio/vo_try_again.ogg", "vo_well_done": "assets/Audio/vo_well_done.ogg", "vo_word_raha_hai": "assets/Audio/vo_word_raha_hai.ogg", "vo_word_rahi_hai": "assets/Audio/vo_word_rahi_hai.ogg", "sfx_correct": "assets/Audio/sfx_correct.ogg", "sfx_wrong": "assets/Audio/sfx_wrong.ogg", "sfx_burst": "assets/Audio/sfx_burst.ogg", "sfx_celebrate": "assets/Audio/sfx_celebrate.ogg"}, "audio_text": {"vo_bridge_lost": "क्या आपको कविता सुनकर मज़ा आया? मेले में भीड़ की वजह से सभी जोड़ियाँ बिछड़ गईं। क्या आप सही जोड़ियाँ ढूँढने में मेरी मदद करेंगे? आइए साथ मिलकर ढूँढ़ते हैं।", "vo_c_sentence": "शाबाश! सही वाक्य है— बकरा घास खा रहा है।", "vo_correct_pair": "शाबाश! आपने सही जोड़ी मिला दी।", "vo_correct_pairs": "शाबाश! आपने सभी सही जोड़ियाँ मिला दीं।", "vo_gate_done": "शाबाश! आपने सभी जानवर सही गेट से मेले में भेज दिए।", "vo_gate_h1": "सोचिए इस जानवर के नाम से वाक्य बनाने पर गया आता है या गई?", "vo_gate_rule": "यहाँ दो गेट हैं, एक पर गया लिखा है और दूसरे पर गई लिखा है। हर जानवर के नाम से वाक्य बनाकर देखिए — जिनके अंत में गया आता है उन्हें गया वाले गेट से और जिनके अंत में गई आता है उन्हें गई वाले गेट से मेले में भेजिए। जैसे— मुर्गा मेले में गया। इसे गया वाले गेट से भेजिए। अब आप खुद करिए।", "vo_h1_bail": "सोचिए बैल मेले में किसके साथ आया था?", "vo_h1_mor": "सोचिए मोर मेले में किसके साथ आया था?", "vo_h1_pair": "फिर से कोशिश कीजिए, सही जोड़ी पहचानिए।", "vo_h1_sentence": "हम वाक्य में बोलते हैं— बकरा घास खा रहा है। रहा है पर टैप कीजिए और वाक्य पूरा कीजिए।", "vo_h1_sherni": "सोचिए शेरनी मेले में किसके साथ आई थी?", "vo_h1_word": "फिर से कोशिश कीजिए, सही शब्द पहचानिए।", "vo_h2_bail": "यह बैल है, इसे गाय से मिलाएंगे। गाय की तसवीर पर टैप कीजिए।", "vo_h2_bail_gaay": "बैल मेले में गाय के साथ आया था। गाय की तस्वीर पर टैप कीजिए।", "vo_h2_bail_jata": "यह बैल है, बैल जाता है। इसे जाता है वाले डब्बे में रखेंगे।", "vo_h2_bakra": "यह बकरा है, इसे बकरी से मिलाएंगे। बकरी की तसवीर पर टैप कीजिए।", "vo_h2_bakri": "यह बकरा है, बकरी-बकरे के साथ मेले में आई थी, इसपर टैप कीजिए।", "vo_h2_bandar": "यह बंदर है, इसे बंदरिया से मिलाएंगे। बंदरिया की तसवीर पर टैप कीजिए।", "vo_h2_bandar_gaya": "यह बंदर है, बंदर मेले में गया। इसे गया वाले गेट से अंदर भेजेंगे।", "vo_h2_bandariya_gai": "यह बंदरिया है, बंदरिया मेले में गई। इसे गई वाले गेट से अंदर भेजेंगे।", "vo_h2_gaay_jati": "यह गाय है, गाय जाती है। इसे जाती है वाले डब्बे में रखेंगे।", "vo_h2_ghoda": "यह घोड़ी है, घोड़ा-घोड़ी के साथ मेले में आया था, इसपर टैप कीजिए।", "vo_h2_ghoda_p": "यह घोड़ा है, इसे घोड़ी से मिलाएंगे। घोड़ी की तसवीर पर टैप कीजिए।", "vo_h2_mor": "मोर मेले में मोरनी के साथ आया था। मोरनी की तस्वीर पर टैप कीजिए।", "vo_h2_mor_p": "यह मोर है, इसे मोरनी से मिलाएंगे। मोरनी की तसवीर पर टैप कीजिए।", "vo_h2_murga": "यह मुर्गा है, इसे मुर्गी से मिलाएंगे। मुर्गी की तसवीर पर टैप कीजिए।", "vo_h2_murga_gaya": "यह मुर्गा है, मुर्गा मेले में गया। इसे गया वाले गेट से अंदर भेजेंगे।", "vo_h2_murga_jata": "यह मुर्गा है, मुर्गा जाता है। इसे जाता है वाले डब्बे में रखेंगे।", "vo_h2_murgi_gai": "यह मुर्गी है, मुर्गी मेले में गई। इसे गई वाले गेट से अंदर भेजेंगे।", "vo_h2_murgi_jati": "यह मुर्गी है, मुर्गी जाती है। इसे जाती है वाले डब्बे में रखेंगे।", "vo_h2_sher_jata": "यह शेर है, शेर जाता है। इसे जाता है वाले डब्बे में रखेंगे।", "vo_h2_sherni": "शेरनी मेले में शेर के साथ आई थी। शेर की तस्वीर पर टैप कीजिए।", "vo_h2_sherni_jati": "यह शेरनी है, शेरनी जाती है। इसे जाती है वाले डब्बे में रखेंगे।", "vo_landing": "नमस्ते दोस्त! मैं हूँ स्विफ्टी। आइए आज हम शब्दों की जोड़ियाँ बनाते हैं। जैसे— मोर-मोरनी।", "vo_match_pairs": "सही जोड़ियाँ मिलाइए।", "vo_name_bail": "बैल", "vo_name_bakra": "बकरा", "vo_name_bakri": "बकरी", "vo_name_bandar": "बंदर", "vo_name_bandariya": "बंदरिया", "vo_name_gaay": "गाय", "vo_name_ghoda": "घोड़ा", "vo_name_ghodi": "घोड़ी", "vo_name_mor": "मोर", "vo_name_morni": "मोरनी", "vo_name_murga": "मुर्गा", "vo_name_murgi": "मुर्गी", "vo_name_sher": "शेर", "vo_name_sherni": "शेरनी", "vo_poem_01": "आइए आज हम एक कविता सुनते हैं— जंगल का मेला। जंगल में एक मेला आया, रंग-बिरंगा खूब सजाया।", "vo_poem_02": "शेर आया, शेरनी आई, दोनों ने मिलकर धूम मचाई।", "vo_poem_03": "मोर पंख रंगीन फैलाए, मोरनी संग ठुमके लगाए।", "vo_poem_04": "घोड़ा आया धूल उड़ाए, घोड़ी पीछे दौड़ी आए।", "vo_poem_05": "बकरा बोला— “में-में-में!” बकरी बोली— “साथ चलें!”", "vo_poem_06": "बंदर लाया लाल गुब्बारा, बंदरिया बोली कितना प्यारा!", "vo_poem_07": "मुर्गा बोला— “कुकड़ू-कूँ!” मुर्गी बोली— “क्या खाऊँ!”", "vo_poem_08": "बैल ने जब ढोल बजाया, गाय ने भी नाच दिखाया।", "vo_poem_09": "सूरज ढलते शाम हुई, मेले भर में धूम हुई।", "vo_pt_guided": "बहुत बढ़िया! अब हम साथ मिलकर शुरू करते हैं। चलिए, साथ में करें!", "vo_pt_practice": "वाह! अब आपकी बारी।", "vo_pt_tutorial": "ध्यान से देखिए और मेरे साथ जानिए। चलिए, शुरू करें!", "vo_q_bail": "यह बैल है, इसे इसकी सही जोड़ी से मिलाइए।", "vo_q_bakri": "यह किसके साथ मेले में आई थी?", "vo_q_ghoda": "यह किसके साथ मेले में आया था?", "vo_q_mor": "यह मोर है, इसे इसकी सही जोड़ी से मिलाइए।", "vo_q_sentence": "सही शब्द चुनकर वाक्य पूरा कीजिए। बकरा घास खा… रहा है या रही है?", "vo_q_sherni": "यह शेरनी है, इसे इसकी सही जोड़ी से मिलाइए।", "vo_sort_jata_demo": "बैल मेले में जाता है। गाय मेले में जाती है।", "vo_sort_jata_done": "शाबाश! आपने सभी जानवर सही डब्बे में रख दिए।", "vo_sort_jata_h1": "वाक्य बनाकर देखिए, यह जानवर जाता है या जाती है।", "vo_sort_jata_rule": "इसी तरह हर जानवर के शब्द का वाक्य बनाकर देखिए। जिन वाक्यों के अंत में जाता है आता है उन्हें जाता है वाले डब्बे में, और जिन वाक्यों के अंत में जाती है आता है उन्हें जाती है वाले डब्बे में रखिए।", "vo_try_again": "फिर से कोशिश कीजिए।", "vo_well_done": "शाबाश! आपने सभी सही जोड़ियाँ पहचान लीं।", "vo_word_raha_hai": "रहा है", "vo_word_rahi_hai": "रही है"}, "image": {"pic_bail": "assets/Images/pic_bail.webp", "pic_bail_alone": "assets/Images/pic_bail_alone.webp", "pic_bakra": "assets/Images/pic_bakra.webp", "pic_bakra_grass": "assets/Images/pic_bakra_grass.webp", "pic_bakri": "assets/Images/pic_bakri.webp", "pic_bandar": "assets/Images/pic_bandar.webp", "pic_bandariya": "assets/Images/pic_bandariya.webp", "pic_gaay": "assets/Images/pic_gaay.webp", "pic_ghoda": "assets/Images/pic_ghoda.webp", "pic_ghodi": "assets/Images/pic_ghodi.webp", "pic_mor": "assets/Images/pic_mor.webp", "pic_mor_alone": "assets/Images/pic_mor_alone.webp", "pic_morni": "assets/Images/pic_morni.webp", "pic_murga": "assets/Images/pic_murga.webp", "pic_murgi": "assets/Images/pic_murgi.webp", "pic_sher": "assets/Images/pic_sher.webp", "pic_sherni": "assets/Images/pic_sherni.webp", "pic_sherni_alone": "assets/Images/pic_sherni_alone.webp", "sc_mela_01": "assets/Images/sc_mela_01.webp", "sc_mela_02": "assets/Images/sc_mela_02.webp", "sc_mela_03": "assets/Images/sc_mela_03.webp", "sc_mela_04": "assets/Images/sc_mela_04.webp", "sc_mela_05": "assets/Images/sc_mela_05.webp", "sc_mela_06": "assets/Images/sc_mela_06.webp", "sc_mela_07": "assets/Images/sc_mela_07.webp", "sc_mela_08": "assets/Images/sc_mela_08.webp", "sc_mela_09": "assets/Images/sc_mela_09.webp", "pic_mor_anim": "assets/Images/pic_mor_anim.webp", "pic_morni_anim": "assets/Images/pic_morni_anim.webp"}, "video": {"sc_mela_02": "assets/video/sc_mela_02.mp4", "sc_mela_03": "assets/video/sc_mela_03.mp4", "sc_mela_04": "assets/video/sc_mela_04.mp4", "sc_mela_05": "assets/video/sc_mela_05.mp4", "sc_mela_06": "assets/video/sc_mela_06.mp4", "sc_mela_07": "assets/video/sc_mela_07.mp4", "sc_mela_08": "assets/video/sc_mela_08.mp4", "sc_mela_09": "assets/video/sc_mela_09.mp4"}}}
+{"version": "0.2", "skill_code": "HI02H11_L03_S02", "lo_code": "HI02H11_L03", "grade": "G2", "attribute": "H11", "skill_type": "CORE", "part_label": "", "theme": "toybox", "title": {"hi": "आइए जोड़ी मिलाएं", "en": "Match the gender pairs (पुल्लिंग / स्त्रीलिंग)"}, "subtitle_hi": "", "skill_description_hi": "लिंग-सूचक शब्द-रूप बदलाव को पहचानता है — जैसे शेर से शेरनी, मोर से मोरनी।", "dt_fallback": null, "landing_hero": {"kind": "concept_strip", "cells": [{"type": "image", "src": "assets/Images/pic_mor_anim.webp", "label": "मोर"}, {"type": "image", "src": "assets/Images/pic_morni_anim.webp", "label": "मोरनी"}]}, "landing_nudge": false, "audio_chip_on_mascot_foot": true, "phase_distribution": {"tutorial": 9, "guided": 6, "practice": 5}, "scaffold_rules": {"nudge_timeout_ms": {"guided": 5000, "practice": 8000}, "max_attempts": 2}, "signals_expected": ["slide_entered", "slide_completed", "phase_transition_shown", "story_question_first_try", "gender_match_first_try", "gender_sort_item", "gender_sort_correct", "gender_pair_match", "answer_wrong", "answer_revealed", "lesson_completed"], "_emoji_fallback": {"pic_sher": "🦁", "pic_sherni": "🦁", "pic_mor": "🦚", "pic_morni": "🦚", "pic_ghoda": "🐎", "pic_ghodi": "🐴", "pic_bakra": "🐐", "pic_bakri": "🐐", "pic_murga": "🐓", "pic_murgi": "🐔", "pic_bandar": "🐒", "pic_bandariya": "🐒", "pic_bail": "🐂", "pic_gaay": "🐄", "pic_sherni_alone": "🦁", "pic_mor_alone": "🦚", "pic_bail_alone": "🐂", "pic_bakra_grass": "🐐"}, "slides": [{"id": "T1", "phase": "tutorial", "eis": "iconic", "type": "STORY_SCENE", "prompt_hi": "जंगल का मेला", "audio": {"narration": "vo_poem_01"}, "data": {"image_id": "sc_mela_01", "emoji": "🎪", "alt_hi": "आइए आज हम एक कविता सुनते हैं— जंगल का मेला। जंगल में एक मेला आया, रंग-बिरंगा खूब सजाया।"}, "signals": {"on_complete": []}}, {"id": "T2", "phase": "tutorial", "eis": "iconic", "type": "STORY_SCENE", "prompt_hi": "जंगल का मेला", "audio": {"narration": "vo_poem_02"}, "data": {"image_id": "sc_mela_02", "emoji": "🎪", "alt_hi": "शेर आया, शेरनी आई, दोनों ने मिलकर धूम मचाई।", "video_id": "sc_mela_02"}, "signals": {"on_complete": []}}, {"id": "T3", "phase": "tutorial", "eis": "iconic", "type": "STORY_SCENE", "prompt_hi": "जंगल का मेला", "audio": {"narration": "vo_poem_03"}, "data": {"image_id": "sc_mela_03", "emoji": "🎪", "alt_hi": "मोर पंख रंगीन फैलाए, मोरनी संग ठुमके लगाए।", "video_id": "sc_mela_03"}, "signals": {"on_complete": []}}, {"id": "T4", "phase": "tutorial", "eis": "iconic", "type": "STORY_SCENE", "prompt_hi": "जंगल का मेला", "audio": {"narration": "vo_poem_04"}, "data": {"image_id": "sc_mela_04", "emoji": "🎪", "alt_hi": "घोड़ा आया धूल उड़ाए, घोड़ी पीछे दौड़ी आए।", "video_id": "sc_mela_04"}, "signals": {"on_complete": []}}, {"id": "T5", "phase": "tutorial", "eis": "iconic", "type": "STORY_SCENE", "prompt_hi": "जंगल का मेला", "audio": {"narration": "vo_poem_05"}, "data": {"image_id": "sc_mela_05", "emoji": "🎪", "alt_hi": "बकरा बोला— “में-में-में!” बकरी बोली— “साथ चलें!”", "video_id": "sc_mela_05"}, "signals": {"on_complete": []}}, {"id": "T6", "phase": "tutorial", "eis": "iconic", "type": "STORY_SCENE", "prompt_hi": "जंगल का मेला", "audio": {"narration": "vo_poem_06"}, "data": {"image_id": "sc_mela_06", "emoji": "🎪", "alt_hi": "बंदर लाया लाल गुब्बारा, बंदरिया बोली कितना प्यारा!", "video_id": "sc_mela_06"}, "signals": {"on_complete": []}}, {"id": "T7", "phase": "tutorial", "eis": "iconic", "type": "STORY_SCENE", "prompt_hi": "जंगल का मेला", "audio": {"narration": "vo_poem_07"}, "data": {"image_id": "sc_mela_07", "emoji": "🎪", "alt_hi": "मुर्गा बोला— “कुकड़ू-कूँ!” मुर्गी बोली— “क्या खाऊँ!”", "video_id": "sc_mela_07"}, "signals": {"on_complete": []}}, {"id": "T8", "phase": "tutorial", "eis": "iconic", "type": "STORY_SCENE", "prompt_hi": "जंगल का मेला", "audio": {"narration": "vo_poem_08"}, "data": {"image_id": "sc_mela_08", "emoji": "🎪", "alt_hi": "बैल ने जब ढोल बजाया, गाय ने भी नाच दिखाया।", "video_id": "sc_mela_08"}, "signals": {"on_complete": []}}, {"id": "T9", "phase": "tutorial", "eis": "iconic", "type": "STORY_SCENE", "prompt_hi": "जंगल का मेला", "audio": {"narration": "vo_poem_09"}, "data": {"image_id": "sc_mela_09", "emoji": "🎪", "alt_hi": "सूरज ढलते शाम हुई, मेले भर में धूम हुई।", "video_id": "sc_mela_09"}, "signals": {"on_complete": []}}, {"id": "G1", "phase": "guided", "eis": "iconic", "type": "STORY_QUESTION", "prompt_hi": "सही जोड़ी से मिलाइए।", "audio": {"prompt": "vo_q_sherni", "hint1": "vo_h1_sherni", "hint2": "vo_h2_sherni", "hint": "vo_h2_sherni", "reveal": "vo_h2_sherni", "correct": "vo_correct_pair"}, "data": {"recall_image_id": "pic_sherni_alone", "stim_word_hi": "शेरनी", "options": [{"img": "pic_bail", "emoji": "🐂", "word_hi": "बैल", "audio": "vo_name_bail", "label_hi": "बैल"}, {"img": "pic_sher", "emoji": "🦁", "word_hi": "शेर", "audio": "vo_name_sher", "label_hi": "शेर", "correct": true}, {"img": "pic_ghoda", "emoji": "🐎", "word_hi": "घोड़ा", "audio": "vo_name_ghoda", "label_hi": "घोड़ा"}], "reveal_seq": true, "signal_name": "gender_match_first_try"}, "signals": {"on_complete": ["gender_match_first_try"]}}, {"id": "G2", "phase": "guided", "eis": "iconic", "type": "STORY_QUESTION", "prompt_hi": "सही जोड़ी से मिलाइए।", "audio": {"prompt": "vo_q_mor", "hint1": "vo_h1_mor", "hint2": "vo_h2_mor", "hint": "vo_h2_mor", "reveal": "vo_h2_mor", "correct": "vo_correct_pair"}, "data": {"recall_image_id": "pic_mor_alone", "stim_word_hi": "मोर", "options": [{"img": "pic_morni", "emoji": "🦚", "word_hi": "मोरनी", "audio": "vo_name_morni", "label_hi": "मोरनी", "correct": true}, {"img": "pic_murgi", "emoji": "🐔", "word_hi": "मुर्गी", "audio": "vo_name_murgi", "label_hi": "मुर्गी"}, {"img": "pic_bandariya", "emoji": "🐒", "word_hi": "बंदरिया", "audio": "vo_name_bandariya", "label_hi": "बंदरिया"}], "reveal_seq": true, "signal_name": "gender_match_first_try"}, "signals": {"on_complete": ["gender_match_first_try"]}}, {"id": "G3", "phase": "guided", "eis": "iconic", "type": "STORY_QUESTION", "prompt_hi": "सही तसवीर चुनिए।", "audio": {"prompt": "vo_q_bakri", "hint1": "vo_h1_word", "hint2": "vo_h2_bakri", "hint": "vo_h2_bakri", "reveal": "vo_h2_bakri", "correct": "vo_correct_pair"}, "data": {"stim_word_hi": "बकरी", "options": [{"img": "pic_sherni", "emoji": "🦁", "word_hi": "शेरनी", "audio": "vo_name_sherni", "label_hi": "शेरनी"}, {"img": "pic_bakra", "emoji": "🐐", "word_hi": "बकरा", "audio": "vo_name_bakra", "label_hi": "बकरा", "correct": true}, {"img": "pic_bail", "emoji": "🐂", "word_hi": "बैल", "audio": "vo_name_bail", "label_hi": "बैल"}], "reveal_seq": true, "signal_name": "gender_match_first_try"}, "signals": {"on_complete": ["gender_match_first_try"]}}, {"id": "G4", "phase": "guided", "eis": "iconic", "type": "STORY_QUESTION", "prompt_hi": "सही तसवीर चुनिए।", "audio": {"prompt": "vo_q_ghoda", "hint1": "vo_h1_word", "hint2": "vo_h2_ghoda", "hint": "vo_h2_ghoda", "reveal": "vo_h2_ghoda", "correct": "vo_correct_pair"}, "data": {"stim_word_hi": "घोड़ा", "options": [{"img": "pic_murgi", "emoji": "🐔", "word_hi": "मुर्गी", "audio": "vo_name_murgi", "label_hi": "मुर्गी"}, {"img": "pic_gaay", "emoji": "🐄", "word_hi": "गाय", "audio": "vo_name_gaay", "label_hi": "गाय"}, {"img": "pic_ghodi", "emoji": "🐴", "word_hi": "घोड़ी", "audio": "vo_name_ghodi", "label_hi": "घोड़ी", "correct": true}], "reveal_seq": true, "signal_name": "gender_match_first_try"}, "signals": {"on_complete": ["gender_match_first_try"]}}, {"id": "G5", "phase": "guided", "eis": "enactive", "type": "SORT_GENDER", "prompt_hi": "हर शब्द को सही डब्बे में रखिए।", "audio": {"prompt": "vo_sort_jata_demo", "hint1": "vo_sort_jata_h1", "instruction": "vo_sort_jata_rule"}, "data": {"bins": [{"gender": "M", "label": "जाता है।"}, {"gender": "F", "label": "जाती है।"}], "items": [{"img": "pic_sher", "emoji": "🦁", "word_hi": "शेर", "audio": "vo_name_sher", "gender": "M", "hint2": "vo_h2_sher_jata"}, {"img": "pic_sherni", "emoji": "🦁", "word_hi": "शेरनी", "audio": "vo_name_sherni", "gender": "F", "hint2": "vo_h2_sherni_jati"}, {"img": "pic_murga", "emoji": "🐓", "word_hi": "मुर्गा", "audio": "vo_name_murga", "gender": "M", "hint2": "vo_h2_murga_jata"}, {"img": "pic_murgi", "emoji": "🐔", "word_hi": "मुर्गी", "audio": "vo_name_murgi", "gender": "F", "hint2": "vo_h2_murgi_jati"}, {"img": "pic_bail", "emoji": "🐂", "word_hi": "बैल", "audio": "vo_name_bail", "gender": "M"}, {"img": "pic_gaay", "emoji": "🐄", "word_hi": "गाय", "audio": "vo_name_gaay", "gender": "F"}], "reveal_seq": true, "gates": false, "demo_items": ["बैल", "गाय"]}, "signals": {"on_complete": ["gender_sort_correct"]}}, {"id": "G6", "phase": "guided", "eis": "enactive", "type": "MATCH_GENDER_PAIRS", "prompt_hi": "सही जोड़ियाँ मिलाइए।", "audio": {"hint1": "vo_h1_pair", "correct": "vo_correct_pairs"}, "data": {"pairs": [{"id": "bandar", "m": {"img": "pic_bandar", "emoji": "🐒", "word_hi": "बंदर", "audio": "vo_name_bandar"}, "f": {"img": "pic_bandariya", "emoji": "🐒", "word_hi": "बंदरिया", "audio": "vo_name_bandariya"}, "hint2": "vo_h2_bandar"}, {"id": "murga", "m": {"img": "pic_murga", "emoji": "🐓", "word_hi": "मुर्गा", "audio": "vo_name_murga"}, "f": {"img": "pic_murgi", "emoji": "🐔", "word_hi": "मुर्गी", "audio": "vo_name_murgi"}, "hint2": "vo_h2_murga"}, {"id": "bail", "m": {"img": "pic_bail", "emoji": "🐂", "word_hi": "बैल", "audio": "vo_name_bail"}, "f": {"img": "pic_gaay", "emoji": "🐄", "word_hi": "गाय", "audio": "vo_name_gaay"}, "hint2": "vo_h2_bail"}], "demo_pair": "bandar"}, "signals": {"on_complete": ["gender_pair_match"]}}, {"id": "P1", "phase": "practice", "eis": "iconic", "type": "STORY_QUESTION", "prompt_hi": "सही जोड़ी से मिलाइए।", "audio": {"prompt": "vo_q_bail", "hint1": "vo_h1_bail", "hint2": "vo_h2_bail_gaay", "hint": "vo_h2_bail_gaay", "reveal": "vo_h2_bail_gaay", "correct": "vo_correct_pair"}, "data": {"recall_image_id": "pic_bail_alone", "stim_word_hi": "बैल", "options": [{"img": "pic_gaay", "emoji": "🐄", "word_hi": "गाय", "audio": "vo_name_gaay", "label_hi": "गाय", "correct": true}, {"img": "pic_morni", "emoji": "🦚", "word_hi": "मोरनी", "audio": "vo_name_morni", "label_hi": "मोरनी"}, {"img": "pic_sherni", "emoji": "🦁", "word_hi": "शेरनी", "audio": "vo_name_sherni", "label_hi": "शेरनी"}], "reveal_seq": true, "signal_name": "gender_match_first_try"}, "signals": {"on_complete": ["gender_match_first_try"]}}, {"id": "P2", "phase": "practice", "eis": "iconic", "type": "TAP_GENDER", "prompt_hi": "वाक्य पूरा कीजिए।", "audio": {"prompt": "vo_q_sentence", "hint1": "vo_h1_sentence", "hint2": "vo_h1_sentence", "hint": "vo_h1_sentence", "reveal": "vo_h1_sentence", "correct": "vo_c_sentence", "word_name": "vo_name_bakra"}, "data": {"noun": {"word_hi": "बकरा घास खा…", "emoji": "🐐", "img": "pic_bakra_grass"}, "options": [{"label": "रहा है", "gender": "M"}, {"label": "रही है", "gender": "F"}], "target_gender": "M", "reveal_seq": true}, "signals": {"on_complete": ["gender_match_first_try"]}}, {"id": "P3", "phase": "practice", "eis": "enactive", "type": "MATCH_GENDER_PAIRS", "prompt_hi": "सही जोड़ियाँ मिलाइए।", "audio": {"hint1": "vo_h1_pair", "correct": "vo_correct_pairs"}, "data": {"pairs": [{"id": "bakra", "m": {"img": "pic_bakra", "emoji": "🐐", "word_hi": "बकरा", "audio": "vo_name_bakra"}, "f": {"img": "pic_bakri", "emoji": "🐐", "word_hi": "बकरी", "audio": "vo_name_bakri"}, "hint2": "vo_h2_bakra"}, {"id": "mor", "m": {"img": "pic_mor", "emoji": "🦚", "word_hi": "मोर", "audio": "vo_name_mor"}, "f": {"img": "pic_morni", "emoji": "🦚", "word_hi": "मोरनी", "audio": "vo_name_morni"}, "hint2": "vo_h2_mor_p"}, {"id": "ghoda", "m": {"img": "pic_ghoda", "emoji": "🐎", "word_hi": "घोड़ा", "audio": "vo_name_ghoda"}, "f": {"img": "pic_ghodi", "emoji": "🐴", "word_hi": "घोड़ी", "audio": "vo_name_ghodi"}, "hint2": "vo_h2_ghoda_p"}]}, "signals": {"on_complete": ["gender_pair_match"]}}, {"id": "P4", "phase": "practice", "eis": "enactive", "type": "SORT_GENDER", "prompt_hi": "हर जानवर को सही गेट से मेले में भेजिए।", "audio": {"prompt": "vo_gate_rule", "hint1": "vo_gate_h1"}, "data": {"bins": [{"gender": "M", "label": "गया।"}, {"gender": "F", "label": "गई।"}], "items": [{"img": "pic_bandar", "emoji": "🐒", "word_hi": "बंदर", "audio": "vo_name_bandar", "gender": "M", "hint2": "vo_h2_bandar_gaya"}, {"img": "pic_bandariya", "emoji": "🐒", "word_hi": "बंदरिया", "audio": "vo_name_bandariya", "gender": "F", "hint2": "vo_h2_bandariya_gai"}, {"img": "pic_murga", "emoji": "🐓", "word_hi": "मुर्गा", "audio": "vo_name_murga", "gender": "M", "hint2": "vo_h2_murga_gaya"}, {"img": "pic_murgi", "emoji": "🐔", "word_hi": "मुर्गी", "audio": "vo_name_murgi", "gender": "F", "hint2": "vo_h2_murgi_gai"}], "reveal_seq": true, "gates": true}, "signals": {"on_complete": ["gender_sort_correct"]}}, {"id": "CEL", "phase": "practice", "eis": "enactive", "type": "CELEBRATION", "prompt_hi": "", "audio": {"prompt": "vo_well_done", "sfx": "sfx_celebrate"}, "data": {}, "signals": {"on_complete": ["lesson_completed"]}}], "assets": {"audio_ext": "ogg", "img_ext": "webp", "audio": {"vo_bridge_lost": "assets/VO/vo_bridge_lost.ogg", "vo_c_sentence": "assets/VO/vo_c_sentence.ogg", "vo_correct_pair": "assets/VO/vo_correct_pair.ogg", "vo_correct_pairs": "assets/VO/vo_correct_pairs.ogg", "vo_gate_h1": "assets/VO/vo_gate_h1.ogg", "vo_gate_rule": "assets/VO/vo_gate_rule.ogg", "vo_h1_bail": "assets/VO/vo_h1_bail.ogg", "vo_h1_mor": "assets/VO/vo_h1_mor.ogg", "vo_h1_pair": "assets/VO/vo_h1_pair.ogg", "vo_h1_sentence": "assets/VO/vo_h1_sentence.ogg", "vo_h1_sherni": "assets/VO/vo_h1_sherni.ogg", "vo_h1_word": "assets/VO/vo_h1_word.ogg", "vo_h2_bail": "assets/VO/vo_h2_bail.ogg", "vo_h2_bail_gaay": "assets/VO/vo_h2_bail_gaay.ogg", "vo_h2_bakra": "assets/VO/vo_h2_bakra.ogg", "vo_h2_bakri": "assets/VO/vo_h2_bakri.ogg", "vo_h2_bandar": "assets/VO/vo_h2_bandar.ogg", "vo_h2_bandar_gaya": "assets/VO/vo_h2_bandar_gaya.ogg", "vo_h2_bandariya_gai": "assets/VO/vo_h2_bandariya_gai.ogg", "vo_h2_ghoda": "assets/VO/vo_h2_ghoda.ogg", "vo_h2_ghoda_p": "assets/VO/vo_h2_ghoda_p.ogg", "vo_h2_mor": "assets/VO/vo_h2_mor.ogg", "vo_h2_mor_p": "assets/VO/vo_h2_mor_p.ogg", "vo_h2_murga": "assets/VO/vo_h2_murga.ogg", "vo_h2_murga_gaya": "assets/VO/vo_h2_murga_gaya.ogg", "vo_h2_murga_jata": "assets/VO/vo_h2_murga_jata.ogg", "vo_h2_murgi_gai": "assets/VO/vo_h2_murgi_gai.ogg", "vo_h2_murgi_jati": "assets/VO/vo_h2_murgi_jati.ogg", "vo_h2_sher_jata": "assets/VO/vo_h2_sher_jata.ogg", "vo_h2_sherni": "assets/VO/vo_h2_sherni.ogg", "vo_h2_sherni_jati": "assets/VO/vo_h2_sherni_jati.ogg", "vo_landing": "assets/VO/vo_landing.ogg", "vo_name_bail": "assets/VO/vo_name_bail.ogg", "vo_name_bakra": "assets/VO/vo_name_bakra.ogg", "vo_name_bakri": "assets/VO/vo_name_bakri.ogg", "vo_name_bandar": "assets/VO/vo_name_bandar.ogg", "vo_name_bandariya": "assets/VO/vo_name_bandariya.ogg", "vo_name_gaay": "assets/VO/vo_name_gaay.ogg", "vo_name_ghoda": "assets/VO/vo_name_ghoda.ogg", "vo_name_ghodi": "assets/VO/vo_name_ghodi.ogg", "vo_name_mor": "assets/VO/vo_name_mor.ogg", "vo_name_morni": "assets/VO/vo_name_morni.ogg", "vo_name_murga": "assets/VO/vo_name_murga.ogg", "vo_name_murgi": "assets/VO/vo_name_murgi.ogg", "vo_name_sher": "assets/VO/vo_name_sher.ogg", "vo_name_sherni": "assets/VO/vo_name_sherni.ogg", "vo_poem_01": "assets/VO/vo_poem_01.ogg", "vo_poem_02": "assets/VO/vo_poem_02.ogg", "vo_poem_03": "assets/VO/vo_poem_03.ogg", "vo_poem_04": "assets/VO/vo_poem_04.ogg", "vo_poem_05": "assets/VO/vo_poem_05.ogg", "vo_poem_06": "assets/VO/vo_poem_06.ogg", "vo_poem_07": "assets/VO/vo_poem_07.ogg", "vo_poem_08": "assets/VO/vo_poem_08.ogg", "vo_poem_09": "assets/VO/vo_poem_09.ogg", "vo_pt_guided": "assets/VO/vo_pt_guided.ogg", "vo_pt_practice": "assets/VO/vo_pt_practice.ogg", "vo_pt_tutorial": "assets/VO/vo_pt_tutorial.ogg", "vo_q_bail": "assets/VO/vo_q_bail.ogg", "vo_q_bakri": "assets/VO/vo_q_bakri.ogg", "vo_q_ghoda": "assets/VO/vo_q_ghoda.ogg", "vo_q_mor": "assets/VO/vo_q_mor.ogg", "vo_q_sentence": "assets/VO/vo_q_sentence.ogg", "vo_q_sherni": "assets/VO/vo_q_sherni.ogg", "vo_sort_jata_demo": "assets/VO/vo_sort_jata_demo.ogg", "vo_sort_jata_h1": "assets/VO/vo_sort_jata_h1.ogg", "vo_sort_jata_rule": "assets/VO/vo_sort_jata_rule.ogg", "vo_well_done": "assets/VO/vo_well_done.ogg", "sfx_correct": "assets/SFX/sfx_correct.ogg", "sfx_wrong": "assets/SFX/sfx_wrong.ogg", "sfx_burst": "assets/SFX/sfx_burst.ogg", "sfx_celebrate": "assets/SFX/sfx_celebrate.ogg"}, "audio_text": {"vo_bridge_lost": "क्या आपको कविता सुनकर मज़ा आया? मेले में भीड़ की वजह से सभी जोड़ियाँ बिछड़ गईं। क्या आप सही जोड़ियाँ ढूँढने में मेरी मदद करेंगे? आइए साथ मिलकर ढूँढ़ते हैं।", "vo_c_sentence": "शाबाश! सही वाक्य है— बकरा घास खा रहा है।", "vo_correct_pair": "शाबाश! आपने सही जोड़ी मिला दी।", "vo_correct_pairs": "शाबाश! आपने सभी सही जोड़ियाँ मिला दीं।", "vo_gate_h1": "सोचिए इस जानवर के नाम से वाक्य बनाने पर गया आता है या गई?", "vo_gate_rule": "यहाँ दो गेट हैं, एक पर गया लिखा है और दूसरे पर गई लिखा है। हर जानवर के नाम से वाक्य बनाकर देखिए — जिनके अंत में गया आता है उन्हें गया वाले गेट से और जिनके अंत में गई आता है उन्हें गई वाले गेट से मेले में भेजिए। जैसे— मुर्गा मेले में गया। इसे गया वाले गेट से भेजिए। अब आप खुद करिए।", "vo_h1_bail": "सोचिए बैल मेले में किसके साथ आया था?", "vo_h1_mor": "सोचिए मोर मेले में किसके साथ आया था?", "vo_h1_pair": "फिर से कोशिश कीजिए, सही जोड़ी पहचानिए।", "vo_h1_sentence": "हम वाक्य में बोलते हैं— बकरा घास खा रहा है। रहा है पर टैप कीजिए और वाक्य पूरा कीजिए।", "vo_h1_sherni": "सोचिए शेरनी मेले में किसके साथ आई थी?", "vo_h1_word": "फिर से कोशिश कीजिए, सही शब्द पहचानिए।", "vo_h2_bail": "यह बैल है, इसे गाय से मिलाएंगे। गाय की तसवीर पर टैप कीजिए।", "vo_h2_bail_gaay": "बैल मेले में गाय के साथ आया था। गाय की तस्वीर पर टैप कीजिए।", "vo_h2_bakra": "यह बकरा है, इसे बकरी से मिलाएंगे। बकरी की तसवीर पर टैप कीजिए।", "vo_h2_bakri": "यह बकरा है, बकरी-बकरे के साथ मेले में आई थी, इसपर टैप कीजिए।", "vo_h2_bandar": "यह बंदर है, इसे बंदरिया से मिलाएंगे। बंदरिया की तसवीर पर टैप कीजिए।", "vo_h2_bandar_gaya": "यह बंदर है, बंदर मेले में गया। इसे गया वाले गेट से अंदर भेजेंगे।", "vo_h2_bandariya_gai": "यह बंदरिया है, बंदरिया मेले में गई। इसे गई वाले गेट से अंदर भेजेंगे।", "vo_h2_ghoda": "यह घोड़ी है, घोड़ा-घोड़ी के साथ मेले में आया था, इसपर टैप कीजिए।", "vo_h2_ghoda_p": "यह घोड़ा है, इसे घोड़ी से मिलाएंगे। घोड़ी की तसवीर पर टैप कीजिए।", "vo_h2_mor": "मोर मेले में मोरनी के साथ आया था। मोरनी की तस्वीर पर टैप कीजिए।", "vo_h2_mor_p": "यह मोर है, इसे मोरनी से मिलाएंगे। मोरनी की तसवीर पर टैप कीजिए।", "vo_h2_murga": "यह मुर्गा है, इसे मुर्गी से मिलाएंगे। मुर्गी की तसवीर पर टैप कीजिए।", "vo_h2_murga_gaya": "यह मुर्गा है, मुर्गा मेले में गया। इसे गया वाले गेट से अंदर भेजेंगे।", "vo_h2_murga_jata": "यह मुर्गा है, मुर्गा जाता है। इसे जाता है वाले डब्बे में रखेंगे।", "vo_h2_murgi_gai": "यह मुर्गी है, मुर्गी मेले में गई। इसे गई वाले गेट से अंदर भेजेंगे।", "vo_h2_murgi_jati": "यह मुर्गी है, मुर्गी जाती है। इसे जाती है वाले डब्बे में रखेंगे।", "vo_h2_sher_jata": "यह शेर है, शेर जाता है। इसे जाता है वाले डब्बे में रखेंगे।", "vo_h2_sherni": "शेरनी मेले में शेर के साथ आई थी। शेर की तस्वीर पर टैप कीजिए।", "vo_h2_sherni_jati": "यह शेरनी है, शेरनी जाती है। इसे जाती है वाले डब्बे में रखेंगे।", "vo_landing": "नमस्ते दोस्त! मैं हूँ swiftee, आइए आज हम शब्दों की जोड़ियाँ बनाते हैं। जैसे- मोर-मोरनी", "vo_name_bail": "बैल", "vo_name_bakra": "बकरा", "vo_name_bakri": "बकरी", "vo_name_bandar": "बंदर", "vo_name_bandariya": "बंदरिया", "vo_name_gaay": "गाय", "vo_name_ghoda": "घोड़ा", "vo_name_ghodi": "घोड़ी", "vo_name_mor": "मोर", "vo_name_morni": "मोरनी", "vo_name_murga": "मुर्गा", "vo_name_murgi": "मुर्गी", "vo_name_sher": "शेर", "vo_name_sherni": "शेरनी", "vo_poem_01": "आइए आज हम एक कविता सुनते हैं— जंगल का मेला। जंगल में एक मेला आया, रंग-बिरंगा खूब सजाया।", "vo_poem_02": "शेर आया, शेरनी आई, दोनों ने मिलकर धूम मचाई।", "vo_poem_03": "मोर पंख रंगीन फैलाए, मोरनी संग ठुमके लगाए।", "vo_poem_04": "घोड़ा आया धूल उड़ाए, घोड़ी पीछे दौड़ी आए।", "vo_poem_05": "बकरा बोला— “में-में-में!” बकरी बोली— “साथ चलें!”", "vo_poem_06": "बंदर लाया लाल गुब्बारा, बंदरिया बोली कितना प्यारा!", "vo_poem_07": "मुर्गा बोला— “कुकड़ू-कूँ!” मुर्गी बोली— “क्या खाऊँ!”", "vo_poem_08": "बैल ने जब ढोल बजाया, गाय ने भी नाच दिखाया।", "vo_poem_09": "सूरज ढलते शाम हुई, मेले भर में धूम हुई।", "vo_pt_guided": "बहुत बढ़िया! अब हम साथ मिलकर शुरू करते हैं। चलिए, साथ में करें!", "vo_pt_practice": "वाह! अब आपकी बारी।", "vo_pt_tutorial": "ध्यान से देखिए और मेरे साथ जानिए। चलिए, शुरू करें!", "vo_q_bail": "यह बैल है, इसे इसकी सही जोड़ी से मिलाइए।", "vo_q_bakri": "यह किसके साथ मेले में आई थी?", "vo_q_ghoda": "यह किसके साथ मेले में आया था?", "vo_q_mor": "यह मोर है, इसे इसकी सही जोड़ी से मिलाइए।", "vo_q_sentence": "सही शब्द चुनकर वाक्य पूरा कीजिए। बकरा घास खा… रहा है या रही है?", "vo_q_sherni": "यह शेरनी है, इसे इसकी सही जोड़ी से मिलाइए।", "vo_sort_jata_demo": "बैल मेले में जाता है। गाय मेले में जाती है।", "vo_sort_jata_h1": "वाक्य बनाकर देखिए, यह जानवर जाता है या जाती है।", "vo_sort_jata_rule": "इसी तरह हर जानवर के शब्द का वाक्य बनाकर देखिए। जिन वाक्यों के अंत में जाता है आता है उन्हें जाता है वाले डब्बे में, और जिन वाक्यों के अंत में जाती है आता है उन्हें जाती है वाले डब्बे में रखिए।", "vo_well_done": "शाबाश! आपने सभी सही जोड़ियाँ पहचान लीं।"}, "image": {"pic_bail": "assets/Images/pic_bail.webp", "pic_bail_alone": "assets/Images/pic_bail_alone.webp", "pic_bakra": "assets/Images/pic_bakra.webp", "pic_bakra_grass": "assets/Images/pic_bakra_grass.webp", "pic_bakri": "assets/Images/pic_bakri.webp", "pic_bandar": "assets/Images/pic_bandar.webp", "pic_bandariya": "assets/Images/pic_bandariya.webp", "pic_gaay": "assets/Images/pic_gaay.webp", "pic_ghoda": "assets/Images/pic_ghoda.webp", "pic_ghodi": "assets/Images/pic_ghodi.webp", "pic_mor": "assets/Images/pic_mor.webp", "pic_mor_alone": "assets/Images/pic_mor_alone.webp", "pic_morni": "assets/Images/pic_morni.webp", "pic_murga": "assets/Images/pic_murga.webp", "pic_murgi": "assets/Images/pic_murgi.webp", "pic_sher": "assets/Images/pic_sher.webp", "pic_sherni": "assets/Images/pic_sherni.webp", "pic_sherni_alone": "assets/Images/pic_sherni_alone.webp", "sc_mela_01": "assets/Images/sc_mela_01.webp", "sc_mela_02": "assets/Images/sc_mela_02.webp", "sc_mela_03": "assets/Images/sc_mela_03.webp", "sc_mela_04": "assets/Images/sc_mela_04.webp", "sc_mela_05": "assets/Images/sc_mela_05.webp", "sc_mela_06": "assets/Images/sc_mela_06.webp", "sc_mela_07": "assets/Images/sc_mela_07.webp", "sc_mela_08": "assets/Images/sc_mela_08.webp", "sc_mela_09": "assets/Images/sc_mela_09.webp", "pic_mor_anim": "assets/Images/pic_mor_anim.webp", "pic_morni_anim": "assets/Images/pic_morni_anim.webp"}, "video": {"sc_mela_02": "assets/video/sc_mela_02.mp4", "sc_mela_03": "assets/video/sc_mela_03.mp4", "sc_mela_04": "assets/video/sc_mela_04.mp4", "sc_mela_05": "assets/video/sc_mela_05.mp4", "sc_mela_06": "assets/video/sc_mela_06.mp4", "sc_mela_07": "assets/video/sc_mela_07.mp4", "sc_mela_08": "assets/video/sc_mela_08.mp4", "sc_mela_09": "assets/video/sc_mela_09.mp4"}}}
 </script>
 
 <!-- ============ ENGINE ============ -->
@@ -3070,14 +3276,24 @@ const CARD = JSON.parse(document.getElementById('cardData').textContent);
 try{ if(/[?&]still=1/.test(location.search))
   document.documentElement.classList.add("no-anim"); }catch(e){}
   /* `cue` is the preview's sound trigger and the ONLY thing its effect code reaches for
-     outside itself. Mapped onto the real recordings already in assets/Audio. `sprinkle`
+     outside itself. Mapped onto the real recordings in assets/SFX. `sprinkle`
      shares sfx_burst on the kit's own instruction: burst fires on "every elements-burst
      moment: landing stars, the end-screen burst, and the correct-answer confetti". */
   var SFX = { correct:"sfx_correct", wrong:"sfx_wrong", burst:"sfx_burst",
               celebrate:"sfx_celebrate", sprinkle:"sfx_burst" };
   function cue(el, name){
+    /* [H11-54] THIS LOADER WAS LEFT BEHIND BY THE FOLDER SPLIT. [H11-50] moved the effects to
+       assets/SFX and taught audioDir() to _sfxFile and playSfx - but cue() is a THIRD loader,
+       inside the kit block, with its own hard-coded folder, so every effect it plays (correct,
+       wrong, burst, celebrate, sprinkle) has been asking for a file that is not there. Caught
+       by logging a real match: the confetti burst requested assets/VO/sfx_burst.ogg.
+       audioDir lives in a later script block, but cue() only ever runs on a user action, long
+       after that block has parsed; the inline fallback covers the impossible case rather than
+       letting a missing helper silence the effects a second time. */
     try{ var f = SFX[name]; if(!f) return;
-         var a = new Audio("assets/Audio/" + f + ".ogg"); a.volume = 0.7;
+         var dir = (typeof audioDir === "function") ? audioDir(f)
+                 : (f.indexOf("sfx_") === 0 ? "assets/SFX/" : "assets/VO/");
+         var a = new Audio(dir + f + ".ogg"); a.volume = 0.7;
          a.play().catch(function(){}); }catch(e){}
   }
 var CONF = [
@@ -3934,6 +4150,68 @@ function _loadVoiceBuffer(src){
 let isMuted = false;
 function setMuted(m){ isMuted = m; if(m && typeof stopAudio==="function") stopAudio();
   document.querySelectorAll(".audio-chip").forEach(c => c.classList.toggle("muted", m)); }
+/* [H11-15] THE SCENE DUCKS UNDER THE SPOKEN LINE.
+   The poem clips (T2-T9) carry their own ambience track. That was fine while vo_poem_* did not
+   exist - the comment on the <video> block still says the scene would otherwise be silent - but
+   with the narration recorded the two now compete, and the ambience wins because the video plays
+   at volume 1 while the VO sits at 0.7. Ducking to 15% puts roughly 16dB between them, which is
+   what speech needs to stay intelligible over a bed.
+
+   TWO PATHS, because one does not cover the devices this ships to:
+     - volume ramp. Works on Android and desktop. Ramped over 260ms rather than snapped: an
+       instant drop on every clip start reads as a glitch, not as mixing.
+     - mute fallback. iOS/iPadOS makes HTMLMediaElement.volume READ-ONLY - the assignment is
+       silently ignored, so on an iPad the ramp alone would leave the ambience at full volume and
+       the narration buried. We read the value back; if it did not take, we mute instead. Harsher
+       than a duck, but the child hearing the line is the point.
+   _voMutedByUs is tracked separately so we never UNMUTE a video that was already muted - the
+   loadeddata handler above mutes it deliberately when autoplay-with-sound is refused, and undoing
+   that would turn sound on mid-poem on exactly the devices that refused it. */
+const VO_DUCK = 0.15;
+function _voRampVol(v, to, ms){
+  try{
+    if(v._voRamp){ clearInterval(v._voRamp); v._voRamp = null; }
+    const from = v.volume;
+    if(Math.abs(to - from) < 0.02){ v.volume = to; return; }
+    const t0 = Date.now();
+    v._voRamp = setInterval(function(){
+      const k = Math.min(1, (Date.now() - t0) / ms);
+      try{ v.volume = from + (to - from) * k; }catch(e){}
+      if(k >= 1){ clearInterval(v._voRamp); v._voRamp = null; }
+    }, 30);
+  }catch(e){}
+}
+function _duckScene(on){
+  let vids; try{ vids = document.querySelectorAll("video"); }catch(e){ return; }
+  (vids || []).forEach(function(v){
+    try{
+      if(on){
+        if(v._voDucked) return;
+        v._voDucked = true;
+        const _full = (typeof v.volume === "number" && v.volume > 0) ? v.volume : 1;
+        v._voFull = _full;
+        /* Probe whether this platform honours the volume setter AT ALL before choosing a path.
+           Done as a half-volume write that is immediately undone, both inside one synchronous
+           block, so nothing is audible: on Android/desktop it sticks and we take the ramp, on
+           iOS the assignment is ignored, v.volume reads back as _full, and we mute instead.
+           Probing matters - reading the ducked value back would report success on every
+           platform if we had already snapped the volume down to test it, which also threw
+           away the ramp this function exists to provide. */
+        const _probe = _full * 0.5;
+        v.volume = _probe;
+        const _settable = Math.abs(v.volume - _probe) < 0.01;
+        v.volume = _full;
+        if(!_settable){ if(!v.muted){ v.muted = true; v._voMutedByUs = true; } }
+        else _voRampVol(v, _full * VO_DUCK, 260);
+      } else {
+        if(!v._voDucked) return;
+        v._voDucked = false;
+        if(v._voMutedByUs){ v.muted = false; v._voMutedByUs = false; try{ v.volume = v._voFull; }catch(e){} }
+        else _voRampVol(v, (v._voFull == null ? 1 : v._voFull), 260);
+      }
+    }catch(e){}
+  });
+}
 function setPlaying(on){
   // the dynamic Swiftie sits header-left; the audio chips pulse to signal playback. r4/F1: share the
   // .playing toggle across the header chip AND the tut-card replay chip (the header is hidden in the
@@ -3953,6 +4231,7 @@ function setPlaying(on){
      Toggled on `on` alone, NOT `on && !isMuted` like the chips above: the tap gate keys off isPlaying
      regardless of mute, so gating this on mute would let taps land while muted and diverge from it. */
   document.body.classList.toggle("vo-lock", !!on);
+  _duckScene(!!on);   /* [H11-15] scene ambience steps back while the line speaks */
 }
 /* stopAudio(): hard-stop the current clip AND bump the playback generation so any in-flight
    callback (a chain's onended, a fallback timer, a cancelled TTS onend) becomes a no-op. This is
@@ -4074,7 +4353,7 @@ function playSfx(id, onEnd){
      every other call site is unchanged. onEnd fires on EVERY path — ended, fallback ended, blocked
      play(), and the catch — so a missing or blocked sfx can never swallow a VO sequenced off it. */
   if(!id){ if(onEnd) onEnd(); return; }
-  const src="assets/Audio/"+id+"."+AUDIO_EXT;
+  const src=audioDir(id)+id+"."+AUDIO_EXT;   /* [H11-50] playSfx also takes sfx_ ids */
   _loadVoiceBuffer(src).then(buffer=>{
     /* [34w] NEVER START ON A SUSPENDED CONTEXT. resume() is async and pre-gesture the browser will
        not resume at all, so a source started here is queued SILENTLY and `onended` never fires —
@@ -4110,8 +4389,16 @@ const sfxTap       = ()=> _tone([520], "sine", 0.09, 0.09);
    stays as the fallback ONLY for a genuinely missing file, so an asset-pruned dist degrades to
    the previous behaviour instead of going mute. Volume matches playSfx (0.7) so the cue sits
    under the VO rather than over it. */
+/* [H11-50] VOICE AND EFFECTS LIVE IN SEPARATE FOLDERS NOW: assets/VO and assets/SFX.
+   They are commissioned, reviewed and replaced on completely different cycles - a whole
+   voice batch gets dropped in at once, the four effects almost never change - and keeping
+   them in one folder meant every VO sweep had to tiptoe around four files that were not
+   part of it.
+   audioDir() decides from the id's own prefix, in ONE place, so a new sfx_ id lands in SFX
+   and a new vo_ id in VO with nothing else to edit and no call site left behind. */
+function audioDir(id){ return String(id).indexOf("sfx_") === 0 ? "assets/SFX/" : "assets/VO/"; }
 function _sfxFile(name){
-  try{ const a = new Audio("assets/Audio/" + name + ".ogg"); a.volume = 0.7;
+  try{ const a = new Audio(audioDir(name) + name + ".ogg"); a.volume = 0.7;
        a.play().catch(()=>{}); return true; }catch(e){ return false; }
 }
 const sfxCorrect   = ()=> { if(!_sfxFile("sfx_correct")) _tone([660, 880, 1180], "sine", 0.42, 0.13); };
@@ -4232,11 +4519,11 @@ function btCraneMeet(host, slide){
   let i = 0;
   const step = ()=>{
     if(i >= N){ if(d.topper){ const t = document.createElement("div"); t.className = "bt-topper snap"; t.innerHTML = `<img src="assets/Images/${d.topper}.png" alt="">`; plot.appendChild(t); }
-      burstStars(); play("assets/Audio/vo_total_" + N + "." + AUDIO_EXT, ()=> setNavActive(true)); return; }
+      burstStars(); play("assets/VO/vo_total_" + N + "." + AUDIO_EXT, ()=> setNavActive(true)); return; }
     const b = btBlock(i); b.classList.add("drop"); plot.appendChild(b); i++;
     if(cells[i-1]){ cells[i-1].classList.add("lit"); cells[i-1].textContent = i; }
     btThunk(i); btDust(plot);
-    play("assets/Audio/vo_num_" + i + "." + AUDIO_EXT, ()=> setTimeout(step, 340));
+    play("assets/VO/vo_num_" + i + "." + AUDIO_EXT, ()=> setTimeout(step, 340));
   };
   // play the slide prompt FIRST, then start the crane count sequence — so the count VO never cuts the
   // prompt off (we own the audio here; mountSlide's autoPlayChain is skipped via state.ownsAudio).
@@ -4244,11 +4531,11 @@ function btCraneMeet(host, slide){
 }
 /* slide audio path: per slide, we look at slide.audio.prompt / .phoneme / etc.
    In this v0.1 the embedded card holds short ids; the compiler would replace
-   them with base64 data URIs. We resolve to assets/Audio/{id}.ogg with fallback. */
+   them with base64 data URIs. We resolve to assets/VO/{id}.ogg with fallback. */
 function audioFor(slide, key){
   if(!slide.audio || !slide.audio[key]) return null;
   const _v = slide.audio[key];
-  return "assets/Audio/" + (Array.isArray(_v) ? _v[0] : _v) + "." + AUDIO_EXT;
+  return "assets/VO/" + (Array.isArray(_v) ? _v[0] : _v) + "." + AUDIO_EXT;
 }
 /* [2026-08-31] An audio slot may hold an ARRAY of ids, played back-to-back. WHY: a 2-option slide
    offers exactly TWO wrong taps (measured on HI01H01_L03_S01/G1 -- wrong 1 speaks, wrong 2 speaks
@@ -4259,7 +4546,7 @@ function audioFor(slide, key){
 function audioSeqFor(slide, key){
   if(!slide.audio || !slide.audio[key]) return null;
   const _v = slide.audio[key];
-  return (Array.isArray(_v) ? _v : [_v]).map(id => "assets/Audio/" + id + "." + AUDIO_EXT);
+  return (Array.isArray(_v) ? _v : [_v]).map(id => "assets/VO/" + id + "." + AUDIO_EXT);
 }
 function playSeq(list, cb){
   if(!list || !list.length){ if(cb) cb(); return null; }
@@ -4431,7 +4718,10 @@ function startNudge(slide, target){
 function stopNudge(){
   clearTimeout(state.nudgeTimer);
   if(state._handTravel){ try { state._handTravel.cancel(); } catch(e){} state._handTravel = null; }
-  $("nudgeHand").classList.remove("show");
+  /* [H11-21] the demo skins come off here too. stopNudge() is the one exit every hand path
+     takes, so clearing them at the choke point means no slide can inherit a stray arrow from
+     the previous one - which a per-demo cleanup would miss on any early return. */
+  $("nudgeHand").classList.remove("show","demo-fly","demo-match");
 }
 /* [28o] ON A DRAG, THE HAND SHOWS THE MOVE — it does not just sit on the tile.
    Yasir 2026-07-28: "on drag, the hand nudge guides the student precisely... move the hand nudge from
@@ -4445,7 +4735,7 @@ function stopNudge(){
 function travelNudge(fromEl, toEl, slide){
   if(!fromEl) return;
   if(!toEl || typeof $("nudgeHand").animate !== "function"){ handOnAnswer(fromEl, slide); return; }
-  if(!slide || !HAND_PHASES.has(slide.phase)) return;      // same phase rule as handOnAnswer
+  if(!slide || !_earnedHandOK(slide)) return;              // same phase rule as handOnAnswer
   stopNudge();
   const nh = $("nudgeHand");
   const sw = document.querySelector(".slide-stage").getBoundingClientRect();
@@ -4533,6 +4823,21 @@ function terminalHold(target, others, slide, dest){
   if(dest) travelNudge(target, dest, slide); else handOnAnswer(target, slide);
 }
 function clearHold(container){
+  /* [H11-18] RELEASING THE HOLD HAS TO PUT THE HAND AWAY TOO.
+     terminalHold() is what STARTS the hand - it ends in travelNudge()/handOnAnswer() - so its
+     counterpart has to stop it, but clearHold only ever undid the CSS: the classes on the tiles
+     and the inline pointer-events/opacity. The looping hand and its state._handTravel animation
+     were left running, so once the child finally got the placement right after two wrong tries,
+     the hand stayed on screen pointing at a zone that was already filled.
+     SORT_GENDER had been calling stopNudge() by hand right before clearHold() since [28u],
+     which is the same fix written at one call site instead of at the pair - MATCH_GENDER_PAIRS
+     and SEQUENCE_DRAG were simply never given that line. Putting it here covers all five call
+     sites and any future mechanic, the way [31o] argued clearHold itself should have been.
+     BEFORE the null guard: a caller with nothing to un-dim still wants the hand gone.
+     Safe at the two placeCorrect() sites (PATTERN_BUILD, SEQUENCE_COMPLETE): both call
+     clearHold FIRST and only then markActive() -> startNudge() for the next blank, so the
+     replacement nudge is armed after this clears the old one, never before. */
+  stopNudge();
   if(!container) return;
   [...container.children].forEach(x=>{
     x.classList.remove("reveal-hold","tile-disabled");
@@ -4540,10 +4845,25 @@ function clearHold(container){
   });
 }
 const HAND_PHASES = new Set(["tutorial", "guided"]);
+/* [H11-47] THE ONE DOCUMENTED EXCEPTION TO "NO HAND IN ROUND 3".
+   [28j] made pointNudgeAt the single choke point precisely so that rule could not be worked
+   around per mechanic, and it is worth keeping: an un-earned hand in round 3 hands the answer
+   over. This exception is narrow and deliberate, asked for directly:
+     - the GATES slide only (slide.data.gates), which is P4;
+     - EARNED help only - it rides on terminalHold, i.e. after the attempts are spent. The idle
+       mount-timer hand still goes through IDLE_HAND_PHASES and is still tutorial-only.
+   Why that slide: its two drop targets are INVISIBLE, painted into the artwork, so a child who
+   has run out of attempts has nothing on screen telling them which arch to aim at. Every other
+   round-3 slide has visible options. To undo it, delete this function and put HAND_PHASES back
+   in the three guards below. */
+function _earnedHandOK(slide){
+  const s = slide || CARD.slides[state.idx] || {};
+  return HAND_PHASES.has(s.phase) || !!(s.data && s.data.gates);
+}
 /* [28i] the UN-EARNED hand (idle timer / progress cue) is tutorial-only — see startNudge. */
 const IDLE_HAND_PHASES = new Set(["tutorial"]);
 function handOnAnswer(el, slide){
-  if(!el || !slide || !HAND_PHASES.has(slide.phase)) return;
+  if(!el || !slide || !_earnedHandOK(slide)) return;
   stopNudge();          // the flow nudge must not drag the hand off the answer
   pointNudgeAt(el, true);   // earned by 2 failed attempts — the one case allowed outside tutorial
 }
@@ -4561,7 +4881,7 @@ function pointNudgeAt(el, earned){
      `earned` is the one opt-in: handOnAnswer passes it for terminal help, which Yasir does allow in
      guided because two failed attempts paid for it. Round 3 gets no hand by ANY route. */
   const _ph = (CARD.slides[state.idx] || {}).phase;
-  if(!(earned ? HAND_PHASES : IDLE_HAND_PHASES).has(_ph)) return;
+  if(earned ? !_earnedHandOK(CARD.slides[state.idx]) : !IDLE_HAND_PHASES.has(_ph)) return;
   const nh = $("nudgeHand");
   /* Placement is computed TWICE: now, and once more on the next frame. Measuring text rects only helps
      if the text has stopped moving, and a teach slide places the hand while its card is still animating
@@ -4730,6 +5050,68 @@ function showBox(emoji, text, theme, audioSrc, onEnd){
 }
 
 /* ---------- 8. TAP-OPTION HELPER (shared by 5 slide types) ---------- */
+/* [H11-23] ON A CORRECT TAP THE WORD JOINS THE SENTENCE AND THE CHOICES GO.
+   Opt-in by DATA, not by a flag: it runs only when the stimulus label ends in an ellipsis, which
+   is exactly what marks the label as an unfinished sentence ("bakra ghaas kha..."). Every other
+   caller of mountTapOptions - and there are several, this is shared code - has a complete label
+   and is untouched, so no call site needed changing and no new card field was invented.
+   FLIP, the way the sort demo does it: put the word in its FINAL place first (invisible) so the
+   browser reports where it actually lands, then fly a copy from the option back to that spot.
+   Predicting the landing point would mean re-implementing text layout.
+   Returns false and leaves everything alone on any surprise, so a card this was not written for
+   degrades to the old behaviour rather than losing its stimulus. */
+function fillSentenceFromOption(stimulus, cell, grid){
+  try{
+    if(!stimulus || !cell) return false;
+    const lbl = stimulus.querySelector(".lbl"); if(!lbl) return false;
+    const raw = lbl.textContent || "";
+    if(!/(\u2026|\.\.\.)\s*$/.test(raw)) return false;      // no blank at the end = not a sentence slide
+    const srcEl = cell.querySelector(".gender-label") || cell;
+    const word  = (srcEl.textContent || "").trim(); if(!word) return false;
+    const stage = document.querySelector(".slide-stage"); if(!stage) return false;
+    const s = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--scale")) || 1;
+
+    const srcR = srcEl.getBoundingClientRect();
+    lbl.textContent = raw.replace(/(\u2026|\.\.\.)\s*$/, "") + " ";
+    const ins = document.createElement("span");
+    ins.className = "fill-word"; ins.textContent = word; ins.style.visibility = "hidden";
+    lbl.appendChild(ins);
+    const dstR = ins.getBoundingClientRect();
+    if(!dstR.width){ ins.style.visibility = ""; return false; }
+
+    const cs = getComputedStyle(ins);
+    const stR = stage.getBoundingClientRect();
+    const fly = document.createElement("span");
+    fly.className = "fill-word fly"; fly.textContent = word;
+    ["fontSize","fontWeight","fontFamily","color","letterSpacing","lineHeight"]
+      .forEach(k => { fly.style[k] = cs[k]; });
+    fly.style.left = ((dstR.left - stR.left)/s) + "px";
+    fly.style.top  = ((dstR.top  - stR.top )/s) + "px";
+    stage.appendChild(fly);
+
+    srcEl.style.visibility = "hidden";        // the word has left the option
+    const dx = (srcR.left - dstR.left)/s, dy = (srcR.top - dstR.top)/s;
+    const sc = srcR.width / dstR.width;
+    const arc = [
+      { transform:"translate("+dx.toFixed(1)+"px,"+dy.toFixed(1)+"px) scale("+sc.toFixed(3)+")" },
+      { transform:"translate("+(dx*0.45).toFixed(1)+"px,"+(dy*0.45-30).toFixed(1)+"px) scale("+((sc+1)/2).toFixed(3)+")",
+        offset:0.55 },
+      { transform:"translate(0px,0px) scale(1)" }
+    ];
+    const anim = fly.animate(arc, { duration:780, easing:"cubic-bezier(.35,.02,.25,1)", fill:"forwards" });
+    let landed = false;
+    const land = ()=>{ if(landed) return; landed = true;
+      ins.style.visibility = ""; ins.classList.add("landed"); try{ fly.remove(); }catch(e){} };
+    anim.onfinish = land;
+    setTimeout(land, 1200);                   // WAAPI onfinish can be skipped if the slide is torn down
+
+    /* the losing choices step away at once; the chosen one waits until its word has landed, so
+       the child sees WHERE the word came from rather than a box vanishing under their finger. */
+    if(grid) [...grid.children].forEach(c => { if(c !== cell) c.classList.add("fx-clear"); });
+    setTimeout(()=>{ cell.classList.add("fx-clear"); }, 820);
+    return true;
+  }catch(e){ return false; }
+}
 function mountTapOptions({slide, host, signalName, stimulus, options, isCorrect, optionRenderer, columnsHint, mastery, hintAction, nudgeTarget, shuffle}){
   state.attempts = 0; state.selectedKey = null; state.locked = false;
   state.audioReplays = 0; state.hintUsed = false; state.nudgeUsed = false; state.scaffoldLevel = 0; state.helpShown = false;
@@ -4789,7 +5171,7 @@ function mountTapOptions({slide, host, signalName, stimulus, options, isCorrect,
       // without per-module or per-card changes. Explicit opt.audio always wins.
       const _aid = opt.audio ||
                    (opt.letter && slide.data && slide.data.phonemes && slide.data.phonemes[opt.letter]) || null;
-      const _word = _aid ? ("assets/Audio/" + _aid + "." + AUDIO_EXT) : null;
+      const _word = _aid ? ("assets/VO/" + _aid + "." + AUDIO_EXT) : null;
       // [24a A2] _busy covers the word-speak beat; the 4s _vb fail-safe clears the gate even if the
       // word's onEnd is superseded (e.g. the volume chip tapped mid-word) — gender #53 soft-lock fix.
       _busy = true;
@@ -4803,6 +5185,7 @@ function mountTapOptions({slide, host, signalName, stimulus, options, isCorrect,
         if(_word){ cell.classList.add("opt-speaking"); play(_word, done); } else done(); };
       if(isCorrect(opt, i)){
         state.locked = true; cell.classList.add("correct"); sfxCorrect(); confettiCannon(); setSwMood("happy");
+        fillSentenceFromOption(stimulus, cell, grid);   /* [H11-23] sentence slides only */
         /* [KIT 19] tile-level confirm; recipe 7 above is the room-level celebration. The
            kit is explicit that the two run together, not as alternatives. */
         try{ if(window.FLNKit) FLNKit.ck(cell, {}); }catch(e){}
@@ -4996,7 +5379,7 @@ function mountTapOptions({slide, host, signalName, stimulus, options, isCorrect,
     const steps = [
       [null, audioFor(slide, "prompt")],
       [_correct || null, audioFor(slide, "instruction")],
-      [_correct || null, _cAid ? "assets/Audio/" + _cAid + "." + AUDIO_EXT : null]
+      [_correct || null, _cAid ? "assets/VO/" + _cAid + "." + AUDIO_EXT : null]
     ];
     // reveal = the same shape SENTENCE_SOUND's demo already uses: the answer goes green + pulses,
     // the other choices fade back, so a 5-year-old cannot mistake which one is being taught.
@@ -5063,7 +5446,7 @@ function mountTapOptions({slide, host, signalName, stimulus, options, isCorrect,
       const c = _cells[i]; c.classList.remove("opt-seq-hidden");
       const opt = _opts[+c.dataset.key];
       const aid = (opt && opt.audio) || (opt && opt.letter && slide.data.phonemes && slide.data.phonemes[opt.letter]) || null;
-      _sayThen(aid ? "assets/Audio/" + aid + "." + AUDIO_EXT : null, ()=> setTimeout(()=> _revStep(i + 1), 180));
+      _sayThen(aid ? "assets/VO/" + aid + "." + AUDIO_EXT : null, ()=> setTimeout(()=> _revStep(i + 1), 180));
     };
     _sayThen(audioFor(slide, "prompt") || null, ()=> _revStep(0));  // prompt FULLY, then options one at a time
     setTimeout(()=>{ if(CARD.slides[state.idx] === slide) _enableAll(); }, 16000);   // global safety net — never soft-lock
@@ -5082,7 +5465,13 @@ function mountTapOptions({slide, host, signalName, stimulus, options, isCorrect,
    Gated by slide.data.reveal_seq: hides the draggable tiles, fades them in one at a time speaking each
    item's own clip (tile.dataset.audio), then a SAFETY NET force-shows all so a missing/late clip can
    never soft-lock (mirrors the mountTapOptions reveal_seq). Sort games without reveal_seq are untouched. */
-function sortSeqReveal(tray, slide){
+/* [H11-17] `opts` is OPT-IN and both fields default off, so the two other call sites
+   (MATCH_DRAG_N at ~6497, the sentence row at ~7280) keep their exact behaviour.
+     skipPrompt - do not narrate the prompt chain before the tiles. A slide whose prompt IS the
+                  demo narration has to show the tray FIRST, or the child hears the whole line
+                  described before there is anything on screen to describe.
+     onDone     - fires once the tray is fully up and interactive. */
+function sortSeqReveal(tray, slide, opts){
   const tiles = [...tray.children];
   tiles.forEach(t => t.classList.add("sort-seq-hidden"));
   state.revealing = true;   // [24a N8] drag + replay chip both blocked while the tray is still revealing
@@ -5095,7 +5484,8 @@ function sortSeqReveal(tray, slide){
   state.replayAudio = ()=> autoPlayChain(slide);
   let i = 0, done = false;
   const enableAll = ()=>{ if(done) return; done = true; state.revealing = false; state.ownsAudio = false;
-    tiles.forEach(t => t.classList.remove("sort-seq-hidden")); };
+    tiles.forEach(t => t.classList.remove("sort-seq-hidden"));
+    if(opts && opts.onDone) opts.onDone(); };
   // play `src`, run `next` when it ENDS; per-clip fallback so a missing/slow clip never stalls the chain
   const sayThen = (src, next)=>{
     if(done || CARD.slides[state.idx] !== slide) return;
@@ -5107,9 +5497,10 @@ function sortSeqReveal(tray, slide){
     if(done || CARD.slides[state.idx] !== slide) return;         // navigated away / net fired -> abort
     if(i >= tiles.length){ enableAll(); return; }
     const t = tiles[i]; t.classList.remove("sort-seq-hidden"); i++;
-    sayThen(t.dataset.audio ? "assets/Audio/" + t.dataset.audio + "." + AUDIO_EXT : null, ()=> setTimeout(step, 180));
+    sayThen(t.dataset.audio ? "assets/VO/" + t.dataset.audio + "." + AUDIO_EXT : null, ()=> setTimeout(step, 180));
   };
-  autoPlayChain(slide, ()=> setTimeout(step, 250));               // prompt chain FULLY, then tiles one at a time
+  if(opts && opts.skipPrompt) setTimeout(step, 250);              // tray first; the caller narrates after
+  else autoPlayChain(slide, ()=> setTimeout(step, 250));          // prompt chain FULLY, then tiles one at a time
   setTimeout(()=>{ if(CARD.slides[state.idx] === slide) enableAll(); }, 16000);   // global safety net — never soft-lock
 }
 function imgOrEmoji(imgKey, emoji, imgClass, emojiClass){
@@ -5319,7 +5710,7 @@ function demoCount(items, numerals, onDone){
     let cal = o.querySelector(".count-callout");
     if(!cal){ cal = document.createElement("span"); cal.className = "count-callout"; o.appendChild(cal); }
     cal.textContent = String(i+1);   // Arabic count callout; Hindi number-word is spoken separately
-    play("assets/Audio/vo_num_" + (i+1) + "." + AUDIO_EXT, ()=>{ i++; setTimeout(step, 320); });
+    play("assets/VO/vo_num_" + (i+1) + "." + AUDIO_EXT, ()=>{ i++; setTimeout(step, 320); });
   })();
 }
 function demoCountSet(setEl, count, numerals, onDone){   // count the "how many?" stimulus set
@@ -5540,6 +5931,10 @@ function makeDraggable(tileEl, onDrop, opts){
     tileEl.style.pointerEvents = "";
     const zone = under?.closest?.(".dd-zone");
     if(zone && !zone.classList.contains("filled")) zone.classList.add("hover");
+    /* [H11-46] tell the TILE it is over a zone too, not just the zone. makeDraggable is shared
+       by every drag mechanic, so this only adds a class - nothing styles it except the gates
+       rule, which drops the card face so the animal alone crosses the artwork. */
+    tileEl.classList.toggle("over-zone", !!(zone && !zone.classList.contains("filled")));
     e.preventDefault();
   }
   function _unbind(){
@@ -5793,14 +6188,14 @@ function dragWrong(slide, tile){
      tile carries its own id and we read it straight off. Checked FIRST because it is explicit;
      the letter path below is untouched and still serves every existing card. */
   if(_dwN > 1 && tile && tile.dataset && tile.dataset.hint2){
-    play("assets/Audio/" + tile.dataset.hint2 + "." + AUDIO_EXT, ()=>{});
+    play("assets/VO/" + tile.dataset.hint2 + "." + AUDIO_EXT, ()=>{});
     return;
   }
   if(_dwN > 1 && tile && slide && slide.data && Array.isArray(slide.data.pairs)){
     const L = (tile.textContent || "").trim();
     const pr = slide.data.pairs.find(p => String(p.letter || "").trim() === L);
     if(pr && pr.hint2_audio){
-      play("assets/Audio/" + pr.hint2_audio + "." + AUDIO_EXT, ()=>{});
+      play("assets/VO/" + pr.hint2_audio + "." + AUDIO_EXT, ()=>{});
       return;
     }
   }
@@ -6012,13 +6407,13 @@ const SlideModules = {
             if(!_autoDone) return;
             tile.classList.add("played");
             const clip = clipOf(i);
-            play(clip ? "assets/Audio/" + clip + "." + AUDIO_EXT : null);
+            play(clip ? "assets/VO/" + clip + "." + AUDIO_EXT : null);
             GameBus.emit(pics ? "intro_pic_tap" : "intro_letter_tap", { slide_id: slide.id, letter: keyOf(i), replay: true });
             return;
           }
           tile.classList.add("played");
           const clip = clipOf(i);
-          play(clip ? "assets/Audio/" + clip + "." + AUDIO_EXT : null);
+          play(clip ? "assets/VO/" + clip + "." + AUDIO_EXT : null);
           GameBus.emit(pics ? "intro_pic_tap" : "intro_letter_tap", { slide_id: slide.id, letter: keyOf(i) });
           tapped.add(keyOf(i));
           if(tapped.size >= items.length){ stopNudge(); setNavActive(true); }
@@ -6053,7 +6448,7 @@ const SlideModules = {
           tile.classList.add("played"); pointNudgeAt(tile);
           const clip = clipOf(ai);
           ai++;
-          play(clip ? "assets/Audio/" + clip + "." + AUDIO_EXT : null, ()=> setTimeout(aStep, 380));
+          play(clip ? "assets/VO/" + clip + "." + AUDIO_EXT : null, ()=> setTimeout(aStep, 380));
         };
         play(audioFor(slide, "prompt") || null, ()=> setTimeout(aStep, 500));
       }   // start by guiding the first tile
@@ -6131,7 +6526,7 @@ const SlideModules = {
         if(slide.data.matra){
           // point at the matra + speak its sound. In-word (red) matra → point the word box and
           // PULSE the red matra; callout matra → point the ◌<matra> pill (old behaviour).
-          const mAudio = slide.data.matra_audio ? "assets/Audio/" + slide.data.matra_audio + "." + AUDIO_EXT : null;
+          const mAudio = slide.data.matra_audio ? "assets/VO/" + slide.data.matra_audio + "." + AUDIO_EXT : null;
           steps.push([pillEl || boxEl, mAudio, pillEl ? null : "matra"]);
         }
         if(picEl) steps.push([picEl, audioFor(slide, "word_name")]);
@@ -6193,12 +6588,12 @@ const SlideModules = {
           if(slide.data.auto){
             if(!_autoDone) return;
             tile.classList.add("played");
-            play(sh.name_audio ? "assets/Audio/" + sh.name_audio + "." + AUDIO_EXT : null);
+            play(sh.name_audio ? "assets/VO/" + sh.name_audio + "." + AUDIO_EXT : null);
             GameBus.emit("intro_shape_tap", { slide_id: slide.id, shape: sh.shape, replay: true });
             return;
           }
           tile.classList.add("played");
-          play(sh.name_audio ? "assets/Audio/" + sh.name_audio + "." + AUDIO_EXT : null);
+          play(sh.name_audio ? "assets/VO/" + sh.name_audio + "." + AUDIO_EXT : null);
           GameBus.emit("intro_shape_tap", { slide_id: slide.id, shape: sh.shape });
           tapped.add(i);
           if(tapped.size >= shapes.length){ stopNudge(); setNavActive(true); }
@@ -6236,7 +6631,7 @@ const SlideModules = {
           tile.classList.add("played"); pointNudgeAt(tile);
           const clip = shapes[ai].name_audio;
           ai++;
-          play(clip ? "assets/Audio/" + clip + "." + AUDIO_EXT : null, ()=> setTimeout(aStep, 380));
+          play(clip ? "assets/VO/" + clip + "." + AUDIO_EXT : null, ()=> setTimeout(aStep, 380));
         };
         play(audioFor(slide, "prompt") || null, ()=> setTimeout(aStep, 500));
       }
@@ -6441,7 +6836,7 @@ const SlideModules = {
             t.classList.add("snapped");
             bin.querySelector(".bin-items").appendChild(t);
             placed++;
-            if(t.dataset.audio && placed < need) play("assets/Audio/" + t.dataset.audio + "." + AUDIO_EXT, ()=>{});   // [20a SORT-01] speak-on-match
+            if(t.dataset.audio && placed < need) play("assets/VO/" + t.dataset.audio + "." + AUDIO_EXT, ()=>{});   // [20a SORT-01] speak-on-match
             GameBus.emit("shape_sort_item", { slide_id: slide.id, shape: t.dataset.shape, attempts: state.attempts });
             if(placed === need){
               state.locked = true;
@@ -6499,10 +6894,10 @@ const SlideModules = {
             GameBus.emit("count_oto_complete", { slide_id: slide.id, phase: slide.phase,
               total: R, value: true, latency_ms: Date.now()-state.slideStart });
             // say the LAST number, then the total; enable आगे ONLY after "कुल N" finishes
-            play("assets/Audio/vo_num_" + c + "." + AUDIO_EXT, ()=> setTimeout(()=>
-              play("assets/Audio/vo_total_" + R + "." + AUDIO_EXT, ()=> setNavActive(true)), 300));
+            play("assets/VO/vo_num_" + c + "." + AUDIO_EXT, ()=> setTimeout(()=>
+              play("assets/VO/vo_total_" + R + "." + AUDIO_EXT, ()=> setNavActive(true)), 300));
           } else {
-            play("assets/Audio/vo_num_" + c + "." + AUDIO_EXT);    // one number word per touch
+            play("assets/VO/vo_num_" + c + "." + AUDIO_EXT);    // one number word per touch
             nudgeNext();
           }
         };
@@ -6550,7 +6945,7 @@ const SlideModules = {
       function finish(){   // last number already spoken by the caller → say the cardinal total, then settle
         GameBus.emit("combine_count_correct", { slide_id: slide.id, phase: slide.phase,
           a: A, b: B, total: N, value: true, latency_ms: Date.now()-state.slideStart });
-        play("assets/Audio/vo_total_" + N + "." + AUDIO_EXT, ()=>{
+        play("assets/VO/vo_total_" + N + "." + AUDIO_EXT, ()=>{
           if(demo){ play(audioFor(slide, "conclude") || null, ()=>{ state.demoRunning = false; setNavActive(true); }); }   // [24a N8] demo chain over → chip live
           else { sfxCorrect(); confettiCannon(); setSwMood("celebrate"); setNavActive(true); }   // produce: celebrate in place, then unlock आगे
         });
@@ -6570,15 +6965,15 @@ const SlideModules = {
             if(c >= N){ setTimeout(finish, 380); return; }
             const it = merged[c]; c++; it.classList.add("counted","demo-hit");
             it.querySelector(".count-badge").textContent = String(c); pointNudgeAt(it);
-            play("assets/Audio/vo_num_" + c + "." + AUDIO_EXT, ()=> setTimeout(stepC, 430));
+            play("assets/VO/vo_num_" + c + "." + AUDIO_EXT, ()=> setTimeout(stepC, 430));
           })();
         } else {
           merged.forEach(it=>{ it.onclick = ()=>{
             if(it.classList.contains("counted")) return;   // one-to-one; re-tap INERT → never double-count the overlap
             c++; it.classList.add("counted"); it.querySelector(".count-badge").textContent = String(c);
             GameBus.emit("count_tap", { slide_id: slide.id, phase: slide.phase, n: c });
-            if(c >= N){ stopNudge(); play("assets/Audio/vo_num_" + N + "." + AUDIO_EXT, finish); }
-            else { play("assets/Audio/vo_num_" + c + "." + AUDIO_EXT); nudgeNext(); }
+            if(c >= N){ stopNudge(); play("assets/VO/vo_num_" + N + "." + AUDIO_EXT, finish); }
+            else { play("assets/VO/vo_num_" + c + "." + AUDIO_EXT); nudgeNext(); }
           }; });
           nudgeNext();
         }
@@ -6673,10 +7068,10 @@ const SlideModules = {
           GameBus.emit("count_tap", { slide_id: slide.id, phase: slide.phase, n: c });
           if(c >= N){
             stopNudge();
-            play("assets/Audio/vo_num_" + c + "." + AUDIO_EXT, ()=> setTimeout(()=>
-              play("assets/Audio/vo_total_" + N + "." + AUDIO_EXT, ()=> setTimeout(afterCount, 450)), 300));
+            play("assets/VO/vo_num_" + c + "." + AUDIO_EXT, ()=> setTimeout(()=>
+              play("assets/VO/vo_total_" + N + "." + AUDIO_EXT, ()=> setTimeout(afterCount, 450)), 300));
           } else {
-            play("assets/Audio/vo_num_" + c + "." + AUDIO_EXT);
+            play("assets/VO/vo_num_" + c + "." + AUDIO_EXT);
             nudgeNext();
           }
         };
@@ -6723,10 +7118,10 @@ const SlideModules = {
           GameBus.emit("count_tap", { slide_id: slide.id, phase: slide.phase, n: c });
           if(c >= N){
             stopNudge();
-            play("assets/Audio/vo_num_" + c + "." + AUDIO_EXT, ()=> setTimeout(()=>
-              play("assets/Audio/vo_total_" + N + "." + AUDIO_EXT, ()=> setTimeout(()=>{
+            play("assets/VO/vo_num_" + c + "." + AUDIO_EXT, ()=> setTimeout(()=>
+              play("assets/VO/vo_total_" + N + "." + AUDIO_EXT, ()=> setTimeout(()=>{
                 play(audioFor(slide, "ask") || null, ()=>{}); askOptions(); }, 450)), 300));
-          } else { play("assets/Audio/vo_num_" + c + "." + AUDIO_EXT); nudgeNext(); }
+          } else { play("assets/VO/vo_num_" + c + "." + AUDIO_EXT); nudgeNext(); }
         };
       });
       state.replayAudio = ()=> play(audioFor(slide, c >= N ? "ask" : "prompt") || null, ()=>{});
@@ -6789,9 +7184,9 @@ const SlideModules = {
       items.forEach(it => { it.onclick = ()=>{ if(it.classList.contains("counted")) return;
         c++; it.classList.add("counted"); it.querySelector(".count-badge").textContent = String(c);
         GameBus.emit("count_tap", { slide_id: slide.id, phase: slide.phase, n: c });
-        if(c >= N){ stopNudge(); play("assets/Audio/vo_num_"+c+"."+AUDIO_EXT, ()=> setTimeout(()=>
-          play("assets/Audio/vo_total_"+N+"."+AUDIO_EXT, ()=> setTimeout(buildDrag, 450)), 300)); }
-        else { play("assets/Audio/vo_num_"+c+"."+AUDIO_EXT); nudgeNext(); }
+        if(c >= N){ stopNudge(); play("assets/VO/vo_num_"+c+"."+AUDIO_EXT, ()=> setTimeout(()=>
+          play("assets/VO/vo_total_"+N+"."+AUDIO_EXT, ()=> setTimeout(buildDrag, 450)), 300)); }
+        else { play("assets/VO/vo_num_"+c+"."+AUDIO_EXT); nudgeNext(); }
       }; });
       state.attempts = 0; state.locked = false;
       state.replayAudio = ()=> play(audioFor(slide, c >= N ? "ask" : "prompt") || null, ()=>{});
@@ -6847,7 +7242,7 @@ const SlideModules = {
         counter.classList.remove("demo-pop"); void counter.offsetWidth; counter.classList.add("demo-pop");
         pointNudgeAt(it);
         i++;
-        play("assets/Audio/vo_num_" + i + "." + AUDIO_EXT, ()=> setTimeout(step, 420));
+        play("assets/VO/vo_num_" + i + "." + AUDIO_EXT, ()=> setTimeout(step, 420));
       };
       /* one leaver at a time, so a child can SEE each one go (all at once reads as a glitch) */
       const removeOne = ()=> taLeaveSeq(leavers, d.leave_style, alive,
@@ -6968,7 +7363,7 @@ const SlideModules = {
         if(state.locked || state.hintActive) return;
         if(c >= MAXITEMS){ addBtn.classList.add("shake"); setTimeout(()=> addBtn.classList.remove("shake"), 420); return; }  // cap at 5
         c++; makeItem();
-        play("assets/Audio/vo_num_" + c + "." + AUDIO_EXT);   // count up as you add
+        play("assets/VO/vo_num_" + c + "." + AUDIO_EXT);   // count up as you add
         GameBus.emit("make_set_add", { slide_id: slide.id, count: c });
         refreshNav();
       };
@@ -6988,7 +7383,7 @@ const SlideModules = {
           state.locked = true; refreshNav();
           GameBus.emit("make_set_correct", { slide_id: slide.id, phase: slide.phase,
             value: true, target: N, attempts: state.attempts + 1, latency_ms: Date.now()-state.slideStart });
-          play("assets/Audio/vo_total_" + N + "." + AUDIO_EXT, ()=>
+          play("assets/VO/vo_total_" + N + "." + AUDIO_EXT, ()=>
             celebrateThenAdvance(slide, false));   // standard: confetti + VO + auto-advance, no popup
           return;
         }
@@ -7007,7 +7402,7 @@ const SlideModules = {
           // count the (now-correct) set 1..N, then say the total "कुल N", then advance
           demoCount([...frame.querySelectorAll(".ms-item")], numerals, ()=>{
             state.hintActive = false;
-            play("assets/Audio/vo_total_" + N + "." + AUDIO_EXT, ()=> setTimeout(()=> completeSlide(false), 500));
+            play("assets/VO/vo_total_" + N + "." + AUDIO_EXT, ()=> setTimeout(()=> completeSlide(false), 500));
           });
         } else if(state.attempts === 2){
           runHint();                                                   // 2nd wrong → count what they made
@@ -7098,7 +7493,7 @@ const SlideModules = {
             let cal = o.querySelector(".count-callout");
             if(!cal){ cal = document.createElement("span"); cal.className = "count-callout"; o.appendChild(cal); }
             cal.textContent = n;
-            play("assets/Audio/vo_num_" + n + "." + AUDIO_EXT, ()=>{});
+            play("assets/VO/vo_num_" + n + "." + AUDIO_EXT, ()=>{});
             if(items.every(x=>x.classList.contains("counted"))){ stopNudge(); setTimeout(cb, 550); }
             else nudgeNext();
           };
@@ -7179,7 +7574,7 @@ const SlideModules = {
         addItem(); tilt(); sfxTap();
         // count EVERY added item aloud INCLUDING the final/target one (एक, दो, तीन) — then, on the
         // last count, the "बराबर" VO follows (check runs in the count's onEnd so the number isn't cut).
-        if(right <= L) play("assets/Audio/vo_num_" + right + "." + AUDIO_EXT, right === L ? ()=> check() : ()=>{});
+        if(right <= L) play("assets/VO/vo_num_" + right + "." + AUDIO_EXT, right === L ? ()=> check() : ()=>{});
         else check();   // overshoot → "एक हटाओ" hint
       };
       setNavActive(false);
@@ -7338,11 +7733,11 @@ const SlideModules = {
         if(!cells[pos].contains(token)) cells[pos].appendChild(token); };
       const glowNext = ()=>{ cells.forEach((c,i)=> c.classList.toggle("active", i === pos+1));
         if(pos+1 < cells.length) startNudge(slide, cells[pos+1]); else stopNudge(); };
-      place(); btThunk(1); play("assets/Audio/vo_num_" + nums[0] + "." + AUDIO_EXT, ()=>{}); glowNext();
+      place(); btThunk(1); play("assets/VO/vo_num_" + nums[0] + "." + AUDIO_EXT, ()=>{}); glowNext();
       const advance = ()=>{
         if(pos >= cells.length-1) return;
         pos++; cells[pos].classList.remove("active"); place(); btThunk(pos+1);
-        play("assets/Audio/vo_num_" + nums[pos] + "." + AUDIO_EXT, ()=>{});
+        play("assets/VO/vo_num_" + nums[pos] + "." + AUDIO_EXT, ()=>{});
         if(pos >= cells.length-1){ stopNudge();
           GameBus.emit("meet_sequence_done", { slide_id: slide.id, phase: slide.phase });
           setTimeout(()=> play(audioFor(slide, "explain") || null, ()=> setNavActive(true)), 500);
@@ -7350,7 +7745,7 @@ const SlideModules = {
       };
       cells.forEach((c,i)=>{ c.onclick = ()=>{ if(i === pos+1) advance(); }; });
       // 🔊 replay re-speaks the current number (module owns its audio; autoPlayChain is skipped)
-      state.replayAudio = ()=> play("assets/Audio/vo_num_" + nums[pos] + "." + AUDIO_EXT, ()=>{});
+      state.replayAudio = ()=> play("assets/VO/vo_num_" + nums[pos] + "." + AUDIO_EXT, ()=>{});
       $("navBtn").onclick = ()=> completeSlide(true);
     }
   },
@@ -7505,7 +7900,7 @@ const SlideModules = {
           c.style.opacity = "1"; c.classList.add("reveal-glow"); pointNudgeAt(c);
           setTimeout(()=> c.classList.remove("reveal-glow"), 600);
           const rid = d.rank_audio[ai]; ai++;
-          play(rid ? "assets/Audio/" + rid + "." + AUDIO_EXT : null, ()=> setTimeout(aStep, 520));
+          play(rid ? "assets/VO/" + rid + "." + AUDIO_EXT : null, ()=> setTimeout(aStep, 520));
         };
         setTimeout(aStep, 400);
       } else {
@@ -7513,7 +7908,7 @@ const SlideModules = {
         cells.forEach((c,i)=>{ c.onclick = ()=>{ if(i !== tapped) return; stopNudge();
           c.classList.remove("active"); c.style.opacity = "1"; c.classList.add("reveal-glow");
           setTimeout(()=> c.classList.remove("reveal-glow"), 600);
-          play("assets/Audio/" + (d.rank_audio[i]) + "." + AUDIO_EXT, ()=>{}); tapped++;
+          play("assets/VO/" + (d.rank_audio[i]) + "." + AUDIO_EXT, ()=>{}); tapped++;
           if(tapped >= cells.length){ stopNudge();
             GameBus.emit("meet_order_done", { slide_id: slide.id, phase: slide.phase });
             setTimeout(()=> play(audioFor(slide, "explain") || null, ()=> setNavActive(true)), 450);
@@ -7547,7 +7942,7 @@ const SlideModules = {
         c.style.opacity = "1"; c.classList.add("reveal-glow"); pointNudgeAt(c);
         setTimeout(()=> c.classList.remove("reveal-glow"), 600);
         const lid = (d.label_audio || [])[ai]; ai++;
-        play(lid ? "assets/Audio/" + lid + "." + AUDIO_EXT : null, ()=> setTimeout(aStep, 520));
+        play(lid ? "assets/VO/" + lid + "." + AUDIO_EXT : null, ()=> setTimeout(aStep, 520));
       };
       setTimeout(aStep, 400);
       state.replayAudio = ()=> play(audioFor(slide, "explain") || audioFor(slide, "conclude") || null, ()=>{});
@@ -7744,7 +8139,7 @@ const SlideModules = {
 
       let count = 0; state.locked = false; state.attempts = 0;
       const lit = ()=> cells.forEach((c,i)=>{ const on = i < count; c.classList.toggle("lit", on); c.textContent = on ? (i+1) : ""; });
-      const addSound = ()=>{ btThunk(count); btDust(plot); play("assets/Audio/vo_num_" + count + "." + AUDIO_EXT); };
+      const addSound = ()=>{ btThunk(count); btDust(plot); play("assets/VO/vo_num_" + count + "." + AUDIO_EXT); };
 
       function success(){
         state.locked = true; if(serveBtn) serveBtn.disabled = true;
@@ -7755,7 +8150,7 @@ const SlideModules = {
         const lots = [...stage.querySelectorAll(".bt-bldg")]; const nextLot = lots[d.skyline_done || 0];
         if(nextLot) setTimeout(()=> nextLot.classList.add("done"), 380);
         GameBus.emit("build_to_number_correct", { slide_id: slide.id, phase: slide.phase, value: true, target: N, attempts: state.attempts + 1, latency_ms: Date.now()-state.slideStart });
-        play("assets/Audio/vo_total_" + N + "." + AUDIO_EXT); setNavActive(true);
+        play("assets/VO/vo_total_" + N + "." + AUDIO_EXT); setNavActive(true);
       }
 
       if(mode === "guided"){
@@ -7810,7 +8205,7 @@ const SlideModules = {
       let val = 1; state.locked = false; const valEl = dial.querySelector(".bt-dial-val");
       const check = ()=>{ if(val === N && !state.locked){ state.locked = true; valEl.classList.add("match"); plot.style.filter = "";
         if(d.topper){ const t = document.createElement("div"); t.className = "bt-topper snap"; t.innerHTML = `<img src="assets/Images/${d.topper}.png" alt="">`; plot.appendChild(t); }
-        sfxCorrect(); burstStars(); play("assets/Audio/vo_total_" + N + "." + AUDIO_EXT);
+        sfxCorrect(); burstStars(); play("assets/VO/vo_total_" + N + "." + AUDIO_EXT);
         GameBus.emit("make_number_correct", { slide_id: slide.id, phase: slide.phase, value: true, count: N, latency_ms: Date.now()-state.slideStart });
         setNavActive(true); } };
       dial.querySelectorAll(".bt-dial-btn").forEach(btn=> btn.onclick = ()=>{ if(state.locked) return;
@@ -7946,7 +8341,7 @@ const SlideModules = {
           // the demo's own chain (echo guard) and stall it. After teaching completes, tap = replay.
           if(slide.data.auto && !_autoDone) return;
           card.classList.add("played");
-          playChain(["assets/Audio/" + cat.label_audio + "." + AUDIO_EXT, "assets/Audio/" + cat.name_audio + "." + AUDIO_EXT], 0);
+          playChain(["assets/VO/" + cat.label_audio + "." + AUDIO_EXT, "assets/VO/" + cat.name_audio + "." + AUDIO_EXT], 0);
           tapped.add(cat.gender);
           GameBus.emit("gender_intro_tap", { slide_id: slide.id, gender: cat.gender });
           if(tapped.size >= cats.length){ stopNudge(); setNavActive(true); }
@@ -7961,13 +8356,13 @@ const SlideModules = {
         let ci = 0, _done = false;
         const finish = ()=>{ if(_done) return; _done = true; stopNudge();
           _autoDone = true; state.demoRunning = false;   // [24a A3/N8] teaching over → taps replay, chip re-enabled
-          state.replayAudio = ()=> playChain(cats.reduce((a,c)=> a.concat(["assets/Audio/" + c.label_audio + "." + AUDIO_EXT, "assets/Audio/" + c.name_audio + "." + AUDIO_EXT]), []), 0, ()=>{});
+          state.replayAudio = ()=> playChain(cats.reduce((a,c)=> a.concat(["assets/VO/" + c.label_audio + "." + AUDIO_EXT, "assets/VO/" + c.name_audio + "." + AUDIO_EXT]), []), 0, ()=>{});
           $("navBtn").onclick = ()=> completeSlide(true); setNavActive(true); };
         const step = ()=>{
           if(CARD.slides[state.idx] !== slide) return;
           if(ci >= cats.length){ finish(); return; }
           const cat = cats[ci], el = cardEls[ci]; el.classList.add("played"); pointNudgeAt(el); ci++;
-          playChain(["assets/Audio/" + cat.label_audio + "." + AUDIO_EXT, "assets/Audio/" + cat.name_audio + "." + AUDIO_EXT], 0, ()=> setTimeout(step, 500));
+          playChain(["assets/VO/" + cat.label_audio + "." + AUDIO_EXT, "assets/VO/" + cat.name_audio + "." + AUDIO_EXT], 0, ()=> setTimeout(step, 500));
         };
         $("navBtn").onclick = ()=> completeSlide(true);
         setTimeout(step, 400);
@@ -7996,7 +8391,7 @@ const SlideModules = {
         const steps = [];
         const picEl = wrap.querySelector(".meet-pic-box"), badgeEl = wrap.querySelector(".gender-badge");
         if(picEl) steps.push([picEl, audioFor(slide, "prompt")]);
-        if(badgeEl) steps.push([badgeEl, slide.data.label_audio ? "assets/Audio/" + slide.data.label_audio + "." + AUDIO_EXT : null]);
+        if(badgeEl) steps.push([badgeEl, slide.data.label_audio ? "assets/VO/" + slide.data.label_audio + "." + AUDIO_EXT : null]);
         let si = 0, _done = false;
         const finish = ()=>{ if(_done) return; _done = true; stopNudge(); state.demoRunning = false; $("navBtn").onclick = ()=> completeSlide(true); setNavActive(true); };
         const step = ()=>{
@@ -8056,6 +8451,7 @@ const SlideModules = {
          other tile stays the child's to solve, so this is a demonstration, not an auto-solve.
          Guarded on CARD.slides[state.idx] === slide so navigating away mid-demo stops it, with a
          fail-safe that always clears demoRunning. Skipped entirely when the flag is absent. */
+      let _startDemo = null;
       if(Array.isArray(slide.data.demo_items) && slide.data.demo_items.length){
         state.ownsAudio = true; state.demoRunning = true; setSwMood("teach");
         const _names = slide.data.demo_items.slice();
@@ -8163,11 +8559,90 @@ const SlideModules = {
           }, 780);   /* beat on the tile first - "pick THIS one up" */
           return;
         };
-        play(audioFor(slide, "prompt") || null, ()=>{});
-        setTimeout(_placeOne, 1200);
-        setTimeout(()=>{ state.demoRunning = false; }, _names.length * 1400 + 9000);   // FAIL-SAFE
+        /* [H11-17] THE TILE MOVES ON THE SENTENCE THAT NAMES IT.
+           Two faults, one cause - the demo and its narration were never connected.
+           (a) ORDER. mount() played the prompt, then sortSeqReveal() immediately called
+               autoPlayChain(), whose play() opens with stopAudio() and killed it - then narrated
+               prompt AND instruction back to back (4.6s + 13.6s) before a single tile appeared.
+               So the child heard eighteen seconds about a tray that was not on screen yet.
+               Now the tray reveals first (skipPrompt) and the demo narrates afterwards.
+           (b) SYNC. The flights ran off fixed 780/1500/700ms timers started 1200ms after mount,
+               i.e. with no relation to what was being said - and by the time they ran, the line
+               that explains them had finished long before.
+           CUE is measured off vo_sort_jata_demo (4.56s): "bail mele mein jaata hai" runs
+           0.00-1.94s, a 0.60s pause, then "gaay mele mein jaati hai" 2.54-4.28s. Each pair is
+           [hand lands on the tile, flight starts], chosen so the DEMO_LIFT=1500ms flight lands as
+           its own sentence ends (440+1500=1940ms, 2830+1500=4330ms). Re-measure these two numbers
+           if that clip is ever re-recorded; a clip with no file at all falls through to the old
+           sequential _placeOne chain below, which needs no timing at all. */
+        const CUE = [[60, 440], [2350, 2830]];
+        let _demoRan = false;
+        _startDemo = ()=>{
+          if(CARD.slides[state.idx] !== slide) return;
+          /* [H11-51] ONCE PER MOUNT. Logged on the live engine: G5 spoke vo_sort_jata_demo and
+             vo_sort_jata_rule, then spoke both again - the whole 18s teaching sequence twice.
+             sortSeqReveal calls onDone from enableAll, which is itself guarded, but enableAll
+             is reachable from three places (the last tile, the per-clip fallback and the 16s
+             net) and the demo had no guard of its own. Guarding the demo rather than chasing
+             the callers: it can only ever be right to run it once for one mount. */
+          if(_demoRan) return;
+          _demoRan = true;
+          state.ownsAudio = true; state.demoRunning = true; setSwMood("teach");
+          setTimeout(()=>{ state.demoRunning = false; }, _names.length * 1400 + 9000);   // FAIL-SAFE
+          const src = audioFor(slide, "prompt") || null;
+          if(!src){ setTimeout(_placeOne, 400); return; }        // nothing to sync to
+          _names.forEach((nm, k)=>{
+            const cue = CUE[k] || [60 + k*2300, 440 + k*2300];
+            const pick = ()=> [...tray.children].find(x => x.dataset.word === nm && !x.classList.contains("snapped"));
+            setTimeout(()=>{ const t = pick();
+              if(t && CARD.slides[state.idx] === slide) _handOnTile(t); }, cue[0]);
+            setTimeout(()=>{ const t = pick();
+              if(!t || CARD.slides[state.idx] !== slide) return;
+              const b = [...binsRow.children].find(x => x.dataset.gender === t.dataset.gender);
+              if(b) _flyIn(t, b, ()=>{ placed++; });
+            }, cue[1]);
+          });
+          play(src, ()=>{
+            state.demoRunning = false;
+            stopNudge();
+            const _nh0 = $("nudgeHand"); if(_nh0) _nh0.classList.remove("demo-fly");
+            play(audioFor(slide, "instruction") || null, ()=>{ state.ownsAudio = false; });
+          });
+        };
       }
-      if(slide.data.reveal_seq) sortSeqReveal(tray, slide);   // [20a SORT-01] opt-in
+      /* [H11-27] CUES FOR THE GATE GLOW, in ms from the start of vo_gate_rule (25.40s).
+         Derived by segmenting the clip on its own pauses: 14 speech groups came out for the 14
+         phrases of the scripted line, and the five spans below are the groups that say gaya/gai.
+           2.86-4.26  "ek par GAYA likha hai"                   -> m
+           5.50-6.36  "GAI likha hai"                           -> f
+          10.16-13.52 "jinke ant mein GAYA... unhein GAYA wale" -> m
+          14.06-18.30 "aur jinke ant mein GAI... GAI wale"      -> f
+          19.80-23.66 "murga mele mein GAYA. ise GAYA wale..."  -> m
+         This is phrase-level alignment, not word-level - the clip carries no timing data - so if
+         the line is ever re-recorded these five pairs are what has to be re-measured. They run
+         off setTimeout from the moment the prompt is asked for, so a slow first decode can push
+         the audio slightly later than the glow; on a revisit the buffer is cached and they line
+         up. LEAD/HOLD give the glow a beat either side so it does not read as a flicker. */
+      if(slide.data.gates){
+        const CUES = [[2860,4260,"m"],[5500,6360,"f"],[10160,13520,"m"],
+                      [14060,18300,"f"],[19800,23660,"m"]];
+        const LEAD = 150, HOLD = 260;
+        const _lit = (c)=> c === "f" ? "lit-f" : "lit-m";
+        CUES.forEach(function(c){
+          setTimeout(function(){
+            if(CARD.slides[state.idx] !== slide) return;
+            binsRow.classList.remove("lit-m","lit-f");
+            binsRow.classList.add(_lit(c[2]));
+          }, Math.max(0, c[0] - LEAD));
+          setTimeout(function(){
+            if(CARD.slides[state.idx] !== slide) return;
+            binsRow.classList.remove(_lit(c[2]));
+          }, c[1] + HOLD);
+        });
+        setTimeout(function(){ binsRow.classList.remove("lit-m","lit-f"); }, 27000);   // FAIL-SAFE
+      }
+      if(slide.data.reveal_seq) sortSeqReveal(tray, slide, _startDemo ? { skipPrompt:true, onDone:_startDemo } : null);
+      else if(_startDemo) _startDemo();
       [...tray.children].forEach(tile => {
         makeDraggable(tile, (zone, t) => {
           const bin = zone.closest(".sort-bin"); if(!bin) return;
@@ -8176,6 +8651,23 @@ const SlideModules = {
             leaveTrayGhost(t);   // [24a A5] capture the tray-slot size before .snapped shrinks/moves it
             t.classList.add("snapped");
             bin.querySelector(".bin-items").appendChild(t);
+            /* [H11-37] walk it through the gate. The clip is found by NAME from the still it
+               replaces (pic_bandar -> pic_bandar_walk), so no card field was needed and an
+               animal with no walk clip simply keeps its picture - onerror puts the still back
+               the moment the load fails, which is also what happens on a pruned build.
+               The still is restored at the end because the clip loops: parked but still
+               marching on the spot would read as stuck, not as arrived. */
+            if(slide.data.gates){
+              const _n = bin.querySelectorAll(".bin-items .sort-item.snapped").length;
+              t.style.setProperty("--gx", (_n <= 1 ? 36 : 64) + "%");
+              const _im = t.querySelector("img");
+              if(_im){
+                const _still = _im.getAttribute("src");
+                _im.onerror = function(){ _im.onerror = null; _im.src = _still; };
+                _im.src = _still.replace(/\.(webp|png)$/i, "_walk.$1");
+                setTimeout(function(){ if(_im.parentNode) _im.src = _still; }, 2100);
+              }
+            }
             placed++; _sgWrong.delete(t);          /* [28p] this tile is done */
             /* [28u] RELEASE THE TERMINAL HOLD ON A CORRECT DROP — this slide was UNWINNABLE.
                28p armed the terminal rung here but the correct-drop branch cleared none of it:
@@ -8201,7 +8693,7 @@ const SlideModules = {
               clearHold(tray); clearHold(binsRow);
               state.helpShown = false; state.scaffoldLevel = 0;
             }
-            if(t.dataset.audio && placed < need) play("assets/Audio/" + t.dataset.audio + "." + AUDIO_EXT, ()=>{});   // [20a SORT-01] speak-on-match
+            if(t.dataset.audio && placed < need) play("assets/VO/" + t.dataset.audio + "." + AUDIO_EXT, ()=>{});   // [20a SORT-01] speak-on-match
             GameBus.emit("gender_sort_item", { slide_id: slide.id, gender: t.dataset.gender, attempts: state.attempts });
             if(placed === need){
               state.locked = true;
@@ -8242,18 +8734,37 @@ const SlideModules = {
     mount(host, slide){
       const wrap = document.createElement("div"); wrap.className = "dd-stage match-line";   /* [match-by-line] marker: scopes the two-column layout + connector dots to THIS mechanic */
       const zoneRow = document.createElement("div"); zoneRow.className = "dd-row";
-      const zones = slide.data.pairs.slice().sort(()=> Math.random() - 0.5);
+      /* [H11-19] A PAIR MUST NEVER SIT DIRECTLY OPPOSITE ITS OWN MATCH.
+         The two rows were shuffled independently, so nothing stopped a pair landing at the SAME
+         index in both - and with three pairs that happens about two thirds of the time. When it
+         does, the child can draw a straight across line without reading either card, and the
+         slide stops testing the thing it exists to test.
+         The shuffle itself was also wrong: `sort(() => Math.random() - 0.5)` is not uniform,
+         because the comparator is inconsistent and what the sort then does is up to the engine.
+         Fisher-Yates, then re-draw the second row until no index faces its own match. The
+         fallback is a rotation by one, which cannot have a fixed point while the ids are
+         distinct, so this terminates even if every retry were unlucky. */
+      const _shuf = (a)=>{ const r = a.slice();
+        for(let i = r.length - 1; i > 0; i--){ const j = (Math.random() * (i + 1)) | 0;
+          const t = r[i]; r[i] = r[j]; r[j] = t; }
+        return r; };
+      const _faces = (A, B)=> A.length > 1 && A.some((p, i)=> B[i] && p.id === B[i].id);
+      const zones = _shuf(slide.data.pairs);
       zones.forEach(p => {
         const z = document.createElement("div"); z.className = "dd-zone"; z.dataset.accept = p.id;
+        if(p.m && p.m.audio) z.dataset.audio = p.m.audio;   /* [H11-49] its own name clip */
         /* [H11-14] ROLE SWAP: the drop TARGET is the masculine card now, and the draggable one
            is feminine - so the child drags LEFT to RIGHT (tiles left, zones right). */
         z.innerHTML = imgOrEmoji(p.m.img, p.m.emoji, "zone-img", "zone-emoji") + `<span class="zone-lbl">${p.m.word_hi}</span>`;
         zoneRow.appendChild(z);
       });
       const tileRow = document.createElement("div"); tileRow.className = "dd-row"; tileRow.style.marginTop = "34px";
-      const tiles = slide.data.pairs.slice().sort(()=> Math.random() - 0.5);
+      let tiles = _shuf(slide.data.pairs);
+      for(let g = 0; g < 40 && _faces(tiles, zones); g++) tiles = _shuf(slide.data.pairs);
+      if(_faces(tiles, zones)) tiles = zones.slice(1).concat(zones[0]);
       tiles.forEach(p => {
         const t = document.createElement("div"); t.className = "dd-tile pic-tile"; t.dataset.pairId = p.id;
+        if(p.f && p.f.audio) t.dataset.audio = p.f.audio;   /* [H11-49] its own name clip */
         if(p.hint2) t.dataset.hint2 = p.hint2;   /* [H11-1] this pair's own rung-2 line */
         t.innerHTML = imgOrEmoji(p.f.img, p.f.emoji, "zone-img", "zone-emoji") + `<span class="zone-lbl">${p.f.word_hi}</span>`;
         tileRow.appendChild(t);
@@ -8262,6 +8773,49 @@ const SlideModules = {
       host.appendChild(wrap);
 
       state.attempts = 0; state.locked = false;
+      /* [H11-49] THIS SLIDE USED TO MAKE NO SOUND AT ALL. Logged against the live engine: G5 asks
+         for its six animal names plus two instruction lines, P4 for four names plus its rule, and
+         this mechanic for NOTHING WHATSOEVER - a child met six animals in silence.
+         The name clips were in the card the whole time (pair.m.audio / pair.f.audio); nothing read
+         them, because SORT was given a one-by-one reveal in [20a SORT-01] and MATCH never was.
+         The deck asks for it in as many words on p14-p17: "options ek ek krke screen pr aane
+         chahie with vo".
+         Revealed in PAIRS - a masculine card then its feminine - because the pairing is the thing
+         being taught, so hearing bakra then bakri IS the lesson. state.revealing blocks dragging
+         while it runs (same flag the sort reveal sets), each clip has a 3s escape hatch and a 16s
+         net force-shows everything, so a slow or missing clip can never strand the slide. */
+      let _startMatchDemo = null;   /* [H11-52] set by the demo block below, fired when the
+                                       reveal finishes - it used to start 1.2s after mount and
+                                       so played over the middle of a ~10s reveal. */
+      (function matchSeqReveal(){
+        /* [H11-52] ONE COLUMN AT A TIME, LEFT THEN RIGHT. This first read them in pairs -
+           a card and its mate - on the reasoning that the pairing is the lesson. Asked to be
+           the other way, and it is the better order anyway: naming a card and then its answer
+           in the same breath gives the matching away before the child has been asked to do it.
+           .dd-stage.match-line is row-reverse, so tileRow is the LEFT column on screen even
+           though it is appended second - hence tiles first here, not zones. */
+        const cards = [...tileRow.children, ...zoneRow.children];
+        if(!cards.some(c => c.dataset.audio)) return;      // nothing to say: leave the slide alone
+        cards.forEach(c => c.classList.add("sort-seq-hidden"));
+        state.revealing = true; state.ownsAudio = true;
+        let k = 0, fin = false;
+        const showAll = ()=>{ if(fin) return; fin = true;
+          state.revealing = false; state.ownsAudio = false;
+          cards.forEach(c => c.classList.remove("sort-seq-hidden"));
+          if(_startMatchDemo) setTimeout(_startMatchDemo, 420); };
+        const step = ()=>{
+          if(fin || CARD.slides[state.idx] !== slide) return;
+          if(k >= cards.length){ showAll(); return; }
+          const c = cards[k++]; c.classList.remove("sort-seq-hidden");
+          const src = c.dataset.audio ? ("assets/VO/" + c.dataset.audio + "." + AUDIO_EXT) : null;
+          let moved = false, fb = null;
+          const go = ()=>{ if(moved || fin) return; moved = true; if(fb) clearTimeout(fb);
+                           setTimeout(step, 160); };
+          play(src, go); fb = setTimeout(go, 3000);
+        };
+        setTimeout(step, 320);
+        setTimeout(()=>{ if(CARD.slides[state.idx] === slide) showAll(); }, 16000);
+      })();
       let filled = 0, wrongStreak = 0, revealed = false; const need = slide.data.pairs.length;
       const settle = (zone, t)=>{                       // the one correct-placement path (drop AND reveal)
         zone.classList.add("filled","correct");
@@ -8270,6 +8824,13 @@ const SlideModules = {
         drawLink(wrap, t, zone, "correct");   /* [match-by-line] permanent green connector; drawn
            AFTER .matched so drawLink samples the settled card edge, not a mid-transition one. */
         filled++;
+        /* [H11-53] SAY SOMETHING WHEN A PAIR LANDS. settle() is the one correct-placement path
+           in this mechanic and it made no sound at all - every other mechanic calls sfxCorrect()
+           on a right answer, this one never did, so a child matched a pair and heard nothing
+           until the whole slide was finished.
+           Not on the LAST pair: that hands over to celebrateThenAdvance, which plays sfxCorrect
+           itself, and firing both would stack two chimes on one action. */
+        if(filled < need) sfxCorrect();
         if(filled === need){ state.locked = true; setTimeout(()=> celebrateThenAdvance(slide, revealed), 250); }
       };
       // A8 reveal ceiling: after max consecutive misses, DEMONSTRATE one pair (pulse + auto-settle) so
@@ -8304,7 +8865,7 @@ const SlideModules = {
         const _dz = [...zoneRow.children].find(x => x.dataset.accept === slide.data.demo_pair);
         if(_dt && _dz){
           state.demoRunning = true; setSwMood("teach");
-          const DEMO_DUR = 1500, HAND_W = 76;
+          const DEMO_DUR = 1500, HAND_W = 72;
           const _handAt = (el, travelTo)=>{
             const nh = $("nudgeHand");
             if(!nh || !HAND_PHASES.has(slide.phase)) return null;   /* round 3 still gets no hand */
@@ -8313,14 +8874,32 @@ const SlideModules = {
             if(state._handTravel){ try { state._handTravel.cancel(); } catch(e){} state._handTravel = null; }
             const sw = document.querySelector(".slide-stage").getBoundingClientRect();
             const s  = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--scale")) || 1;
-            const at = (e2)=>{ const r = e2.getBoundingClientRect();
-              return { left:(r.left - sw.left)/s + r.width/s/2 - HAND_W/2,
-                       top :(r.top  - sw.top )/s + r.height/s*0.26 }; };   /* ON the picture, above the word */
-            const A = at(el);
+            /* [H11-29] THE HAND STARTS AND ENDS ON THE CONNECTOR, NOT ON THE PICTURE.
+               Anchored at the card's centre it lay right across the animal the child is being
+               asked to look at. The gesture begins at the LEAD dot - the blue dot at the end of
+               the little wire, 35px outside the card - and finishes on the socket ring at the
+               zone's left edge. Those are the two ends of the line itself, so the hand now traces
+               exactly what the child has to trace, and both ends sit in clear space.
+               The offsets aim the FINGERTIP: nudge_hand_new.svg points up from about 42% of its
+               width, so the box is shifted left by that much and dropped 10px, putting the tip on
+               the dot rather than above it. */
+            /* [H11-43] LEAD was 35: the hand started at the LEAD dot, 35px outside the card,
+               while the line started at the plug dot on the card edge - so the two set off from
+               different points and the hand looked detached from the line it was meant to be
+               drawing. 0 puts the fingertip exactly on edgePoint(..., "right"), which is the
+               point drawLink() itself uses, so they leave together. */
+            const LEAD = 0, TIPX = 0.42, TIPY = 10;
+            const at = (e2, side)=>{ const r = e2.getBoundingClientRect();
+              const px = (side === "in") ? (r.left - sw.left)/s - 3
+                                         : (r.left - sw.left)/s + r.width/s + LEAD;
+              const py = (r.top - sw.top)/s + r.height/s/2;
+              return { left: px - HAND_W*TIPX, top: py - TIPY }; };
+            const A = at(el, "out");
             nh.style.left = A.left + "px"; nh.style.top = A.top + "px";
-            nh.classList.add("show","demo-fly");
+            /* [H11-26] demo-match is the match demo's own hand size - see the note on the rule. */
+            nh.classList.add("show","demo-fly","demo-match");
             if(travelTo){
-              const B = at(travelTo);
+              const B = at(travelTo, "in");
               state._handTravel = nh.animate(
                 [{ left:A.left+"px", top:A.top+"px" }, { left:B.left+"px", top:B.top+"px" }],
                 { duration:DEMO_DUR, easing:"cubic-bezier(.45,.02,.35,1)", fill:"forwards" });
@@ -8345,14 +8924,26 @@ const SlideModules = {
                          { duration:DEMO_DUR, easing:"cubic-bezier(.45,.02,.35,1)", fill:"forwards" });
               _handAt(_dt, _dz);                                 /* hand traces the same line */
               setTimeout(function(){
-                ln.remove();
-                if(CARD.slides[state.idx] !== slide){ state.demoRunning = false; return; }
-                settle(_dz, _dt);            /* permanent green link + the tile greys out */
+                /* [H11-21] SHOW THE GESTURE, DO NOT SOLVE A PAIR.
+                   This used to end in settle(), which drew the permanent green link and greyed
+                   the tile out - i.e. the worked example handed the child one of the three
+                   answers already done. The demo is meant to teach the MOVE. So the traced
+                   line now retracts the way it came and every pair is left for the child.
+                   Retracting rather than cutting to nothing: a line that vanishes mid-air
+                   reads as a mistake, one that pulls back reads as "now you try". */
+                if(CARD.slides[state.idx] !== slide){ ln.remove(); state.demoRunning = false; stopNudge(); return; }
+                const _back = ln.animate([{ width:len.toFixed(1) + "px" }, { width:"0px" }],
+                              { duration:380, easing:"cubic-bezier(.4,0,.6,1)", fill:"forwards" });
+                _back.onfinish = ()=> ln.remove();
+                setTimeout(()=> ln.remove(), 900);        // belt and braces if onfinish never runs
                 state.demoRunning = false; stopNudge();
               }, DEMO_DUR + 40);
             }, 780);
           };
-          setTimeout(_runDemo, 1200);
+          /* [H11-52] handed to the reveal; if this slide has no reveal (no name clips in the
+             card) nothing would ever call it, so fall back to the original timer. */
+          _startMatchDemo = _runDemo;
+          if(!state.revealing) setTimeout(_runDemo, 1200);
           setTimeout(function(){ state.demoRunning = false; }, 12000);   /* FAIL-SAFE */
         }
       }
@@ -8469,7 +9060,7 @@ const SlideModules = {
         const zoneSrc = p.zone_audio || p.match_audio || p.word_audio;
         if(zoneSrc) z.addEventListener("pointerdown", ()=>{
           if(z.classList.contains("filled") || isPlaying) return;
-          play("assets/Audio/" + zoneSrc + "." + AUDIO_EXT, ()=>{});
+          play("assets/VO/" + zoneSrc + "." + AUDIO_EXT, ()=>{});
         });
         zoneRow.appendChild(z);
       });
@@ -8481,7 +9072,7 @@ const SlideModules = {
         // match_audio = vo_word_<word>. Additive + gated: fall back to legacy letter_audio so sibling
         // MATCH games (no tap_audio/match_audio fields) stay byte-for-byte identical. Fire-and-forget on tap.
         const tapSrc = p.tap_audio || p.letter_audio;
-        if(tapSrc) t.addEventListener("pointerdown", ()=>{ if(t.classList.contains("snapped")) return; play("assets/Audio/" + tapSrc + "." + AUDIO_EXT, ()=>{}); });   // [24a bug-hunt F5] a placed tile must not replay-and-cut the current VO (the A1 gate exempts snapped tiles)
+        if(tapSrc) t.addEventListener("pointerdown", ()=>{ if(t.classList.contains("snapped")) return; play("assets/VO/" + tapSrc + "." + AUDIO_EXT, ()=>{}); });   // [24a bug-hunt F5] a placed tile must not replay-and-cut the current VO (the A1 gate exempts snapped tiles)
         if(p.match_audio) t.dataset.matchAudio = p.match_audio;
         tileRow.appendChild(t);
       });
@@ -8626,7 +9217,7 @@ const SlideModules = {
               slide_id: slide.id, phase: slide.phase, value: true,
               letter: t.textContent, attempts: state.attempts
             });
-            if(t.dataset.matchAudio) play("assets/Audio/" + t.dataset.matchAudio + "." + AUDIO_EXT, ()=>{});   // [21c flag#4] correct drop → speak the WORD
+            if(t.dataset.matchAudio) play("assets/VO/" + t.dataset.matchAudio + "." + AUDIO_EXT, ()=>{});   // [21c flag#4] correct drop → speak the WORD
             leaveTrayGhost(t);   // [25c] ghost slot: placeholder stays where the tile came from
             clearHelp();
             settle(zone, t);
@@ -8753,7 +9344,7 @@ const SlideModules = {
             GameBus.emit("answer_wrong", { slide_id: slide.id, phase: slide.phase, attempts: state.attempts });
             if(++wrongStreak >= (CARD.scaffold_rules.max_attempts||2)) revealOne();
           }
-        }, wordMode ? { onTap: ()=>{ if(tile.dataset.audio) play("assets/Audio/" + tile.dataset.audio + "." + AUDIO_EXT, ()=>{}); } } : undefined);   // [21c flag#5] tap a word-tile → speak that word
+        }, wordMode ? { onTap: ()=>{ if(tile.dataset.audio) play("assets/VO/" + tile.dataset.audio + "." + AUDIO_EXT, ()=>{}); } } : undefined);   // [21c flag#5] tap a word-tile → speak that word
       });
       if(wordMode) glowNext();   // [21c flag#5] glow the first word immediately; the auto-played prompt speaks over it
     }
@@ -9137,7 +9728,7 @@ const SlideModules = {
           /* [2026-09-04 no-cut-feedback] this replay had no onEnd at all, so a queued आगे tap (see
              _navAdvance) would never resolve after a post-walk word replay — hooked _resolveNavPending
              in, harmless when nothing is queued. */
-          play("assets/Audio/vo_phrase_" + p.key + "." + AUDIO_EXT, _resolveNavPending);
+          play("assets/VO/vo_phrase_" + p.key + "." + AUDIO_EXT, _resolveNavPending);
 
           GameBus.emit("phrase_intro_tap", { slide_id: slide.id, phrase: p.key });
 
@@ -9169,7 +9760,7 @@ const SlideModules = {
 
         el.classList.remove("tap-demo-pop"); void el.offsetWidth; el.classList.add("tap-demo-pop");
 
-        play("assets/Audio/vo_phrase_" + p.key + "." + AUDIO_EXT, ()=>{
+        play("assets/VO/vo_phrase_" + p.key + "." + AUDIO_EXT, ()=>{
 
           if(stopped || !document.contains(grid)) return;
 
@@ -9339,12 +9930,12 @@ const SlideModules = {
         const chip = document.createElement("div"); chip.className = "sentence-word";
         chip.innerHTML = `<span class="sw-text ink-glyph">${w.text}</span>`;
         chip.onclick = ()=>{ chip.classList.add("said"); state.audioReplays++;
-          if(w.audio) play("assets/Audio/" + w.audio + "." + AUDIO_EXT); };
+          if(w.audio) play("assets/VO/" + w.audio + "." + AUDIO_EXT); };
         strip.appendChild(chip);
       });
       const readBtn = document.createElement("button"); readBtn.className = "read-whole-btn";
       readBtn.innerHTML = `पूरा पढ़ो`;                          /* [28m] no volume glyph */
-      const wholeSrc = d.whole_audio ? ("assets/Audio/" + d.whole_audio + "." + AUDIO_EXT) : null;
+      const wholeSrc = d.whole_audio ? ("assets/VO/" + d.whole_audio + "." + AUDIO_EXT) : null;
       readBtn.onclick = ()=>{ state.audioReplays++; readBtn.classList.add("playing");
         strip.querySelectorAll(".sentence-word").forEach(c => c.classList.add("said"));
         play(wholeSrc, ()=>{ readBtn.classList.remove("playing"); readBtn.classList.add("done"); setNavActive(true); }); };
@@ -9362,7 +9953,7 @@ const SlideModules = {
             play(wholeSrc, ()=>{ state.demoRunning = false; setNavActive(true); }); return; }
           // read-along: the hand-nudge points at each word AS it is spoken (SME: "hand nudge on words being spoken")
           const c = chips[wi]; c.classList.add("said"); pointNudgeAt(c); const w = (d.words || [])[wi]; wi++;
-          play(w && w.audio ? "assets/Audio/" + w.audio + "." + AUDIO_EXT : null, ()=> setTimeout(wStep, 300));
+          play(w && w.audio ? "assets/VO/" + w.audio + "." + AUDIO_EXT : null, ()=> setTimeout(wStep, 300));
         };
         state.replayAudio = ()=> play(wholeSrc, ()=>{});
         $("navBtn").onclick = ()=> completeSlide(true);                     // explicit — dead-button lesson
@@ -9389,7 +9980,7 @@ const SlideModules = {
         const chip = document.createElement("div"); chip.className = "sentence-word tappable";
         chip.innerHTML = `<span class="sw-text ink-glyph">${w.text}</span>`;
         chip.__target = (w.target === true);
-        const wordSrc = w.audio ? ("assets/Audio/" + w.audio + "." + AUDIO_EXT) : null;
+        const wordSrc = w.audio ? ("assets/VO/" + w.audio + "." + AUDIO_EXT) : null;
         chip.onclick = ()=>{
           if(state.locked || chip.classList.contains("crossed") || chip.classList.contains("correct")) return;
           const after = (cb)=>{ if(wordSrc) play(wordSrc, cb); else cb(); };
@@ -9471,7 +10062,7 @@ const SlideModules = {
       state.ownsAudio = true;
       const _tgt = chips.find(c => c.__target);
       const _clipFor = (i)=>{ const w = (d.words || [])[i];
-        return w && w.audio ? "assets/Audio/" + w.audio + "." + AUDIO_EXT : null; };
+        return w && w.audio ? "assets/VO/" + w.audio + "." + AUDIO_EXT : null; };
       const _readAlong = ()=>{                                   // opt-in: data.read_along === true
         let i = 0;
         const step = ()=>{
@@ -9513,7 +10104,7 @@ const SlideModules = {
       items.forEach(it => {
         const chip = document.createElement("div"); chip.className = "tap-all-item";
         chip.innerHTML = imgOrEmoji(it.img, it.emoji, "img", "emoji") + `<span class="lbl">${it.word_hi}</span>`;
-        const src = it.audio ? ("assets/Audio/" + it.audio + "." + AUDIO_EXT) : null;
+        const src = it.audio ? ("assets/VO/" + it.audio + "." + AUDIO_EXT) : null;
         chip.onclick = ()=>{
           if(state.locked || chip.classList.contains("got") || chip.classList.contains("nope")) return;
           const after = (cb)=>{ if(src) play(src, cb); else cb(); };
@@ -9569,7 +10160,7 @@ const SlideModules = {
         chip.innerHTML = `<span class="sw-text ink-glyph">${(typeof w === "string") ? w : w.text}</span>`;
         strip.appendChild(chip);
       });
-      const whole = d.whole_audio ? ("assets/Audio/" + d.whole_audio + "." + AUDIO_EXT) : null;
+      const whole = d.whole_audio ? ("assets/VO/" + d.whole_audio + "." + AUDIO_EXT) : null;
       const spk = document.createElement("button"); spk.className = "read-whole-btn"; spk.innerHTML = "फिर सुनो";   /* [28m] no volume glyph */
       spk.onclick = ()=>{ if(state.demoRunning || isPlaying) return;   // [24a N8] a mid-demo/mid-VO replay would gen-kill the reveal chain (आगे brick)
         state.audioReplays++; strip.querySelectorAll(".sentence-word").forEach(c => c.classList.add("said"));
@@ -9622,7 +10213,7 @@ const SlideModules = {
         chip.innerHTML = `<span class="sw-text ink-glyph">${(typeof w === "string") ? w : w.text}</span>`;
         strip.appendChild(chip);
       });
-      const whole = d.whole_audio ? ("assets/Audio/" + d.whole_audio + "." + AUDIO_EXT) : null;
+      const whole = d.whole_audio ? ("assets/VO/" + d.whole_audio + "." + AUDIO_EXT) : null;
       stim.appendChild(strip);
       if(whole){ const spk = document.createElement("button"); spk.className = "read-whole-btn"; spk.innerHTML = "फिर सुनो";   /* [28m] no volume glyph */
         spk.onclick = ()=>{ state.audioReplays++; strip.querySelectorAll(".sentence-word").forEach(c => c.classList.add("said")); play(whole, ()=>{}); };
@@ -9891,7 +10482,24 @@ function afterConfetti(fn){
      to load. This is the kit's own confetti.after() contract: never advance on a bare timeout. */
   const started = Date.now();
   (function check(){
-    if(!document.querySelector(".fx-confetti, .conf-shot") || Date.now() - started > 8000){ fn(); return; }
+    /* [H11-14] HOLD FOR THE SPOKEN LINE TOO, NOT ONLY THE CONFETTI.
+       With real recorded VO in place this became audible on every correct answer: the praise
+       clips run 3.1-5.0s (vo_correct_pair 3.11, vo_correct_pairs 4.01, vo_c_sentence 5.01)
+       while the confetti clears in ~2.8s, so the old single condition mounted the next slide
+       mid-sentence and mountSlide() -> stopAudio() cut the line dead. vo_c_sentence lost its
+       last 2.2s - the child heard "shabash! sahi vakya hai- bakra ghaas kha" and nothing more.
+       isPlaying is the right signal: setPlaying() is the one function EVERY playback exit
+       passes through (natural end, supersede, missing-file fallback, autoplay refusal), which
+       is the same property body.vo-lock already relies on, so this can never outlive the audio.
+       playChain hands off synchronously (fire() -> onEnd -> play() in one tick), so a 200ms poll
+       cannot slip through the gap between two clips of a chain and advance early.
+       Two SEPARATE caps, not one: confetti keeps its original 8s exactly, and the voice gets its
+       own 15s - long enough for every clip this card ships (longest at a completion point is
+       vo_sort_jata_rule at 13.6s) while still bounding a stalled clip to a known worst case. */
+    const _t = Date.now() - started;
+    const _confettiUp = !!document.querySelector(".fx-confetti, .conf-shot") && _t < 8000;
+    const _voiceUp    = isPlaying && _t < 15000;
+    if(!_confettiUp && !_voiceUp){ fn(); return; }
     setTimeout(check, 200);
   })();
 }
@@ -9971,7 +10579,7 @@ function phaseBlurTransition(cb, toPhase){
   setTimeout(()=>{ if(tok === _gateToken) finishGate(); }, 12000);
   // VO only if the card actually ships it; else a silent beat — the 2s min-hold keeps the peek visible.
   const voId = PHASE_GATE_VO[toPhase];
-  const voSrc = voId ? ("assets/Audio/" + voId + "." + AUDIO_EXT) : null;   // [20a] use AUDIO_EXT path so generated clips resolve (was: assets.audio .mp3 map -> silent)
+  const voSrc = voId ? ("assets/VO/" + voId + "." + AUDIO_EXT) : null;   // [20a] use AUDIO_EXT path so generated clips resolve (was: assets.audio .mp3 map -> silent)
   const openedAt = Date.now();
   play(voSrc, ()=>{
     if(tok !== _gateToken){ closeGate(); return; }               // a newer gate superseded us
@@ -10111,7 +10719,7 @@ function warmCardAudio(){
     if(typeof PHASE_GATE_VO!=="undefined"&&PHASE_GATE_VO.tutorial)initialIds.add(PHASE_GATE_VO.tutorial);
     if(CARD.slides&&CARD.slides[0])_collectAudioIds(CARD.slides[0],initialIds);
     initialIds.forEach(id=>allIds.add(id));
-    const toSrc=id=>"assets/Audio/"+id+"."+AUDIO_EXT;
+    const toSrc=id=>"assets/VO/"+id+"."+AUDIO_EXT;
     const first=[...initialIds].map(toSrc);
     const rest=[...allIds].filter(id=>!initialIds.has(id)).map(toSrc);
     window.__voWarm=_voiceBuffers;
@@ -10123,7 +10731,7 @@ function warmCardAudio(){
 /* [31q] Fetch AND DECODE every card image during the landing. Art used to arrive ~1s after the text on
    the tab, and an undecoded image in an unreserved box is 0px tall, which is what slid a word strip down
    onto an already-placed hand nudge. EXACT art keys only, plus a value guard: a first cut matched any key
-   ending `_pic`, swept up AUDIO ids and requested `assets/Images/assets/Audio/vo_corr_pic.ogg.png` — 3x404
+   ending `_pic`, swept up AUDIO ids and requested `assets/Images/assets/VO/vo_corr_pic.ogg.png` — 3x404
    that verify_bundle read as 0 FAIL and only render_check caught. A real art id is a bare token: never a
    path, an extension, or Devanagari. */
 function boot(){
@@ -10181,13 +10789,17 @@ function boot(){
   // (a) expose a pulsing 🔊 "listen" button, and (b) fire it on the first pointer-down. The whole
   // greeting lives HERE now (not on slide 0), which also kills the old overlap glitch where the
   // landing VO and slide-0 VO could talk over each other.
-  const landSrc = (CARD.assets && CARD.assets.audio && CARD.assets.audio["vo_landing"]) || ("assets/Audio/vo_landing." + AUDIO_EXT);
+  const landSrc = (CARD.assets && CARD.assets.audio && CARD.assets.audio["vo_landing"]) || ("assets/VO/vo_landing." + AUDIO_EXT);
   /* [2026-09-04 no-cut-landing] `_landingSpeaking`/`_tutorialPending` let an eager tap on शुरू करें
      wait for THIS clip's own onEnd instead of getting silenced mid-sentence — see sgBtn.onclick. */
   let _landingSpeaking = false, _tutorialPending = false;
   const playLanding = ()=>{ if(!$("startGate").classList.contains("hidden")){
     _landingSpeaking = true;
-    play(landSrc, ()=>{ _landingSpeaking = false; if(_tutorialPending){ _tutorialPending = false; enterTutorial(); } });
+    /* [H11-48] The deck gives the landing ONE line and nothing else, so nothing else plays
+       here. The peacock calls that used to follow this clip are gone. */
+    play(landSrc, ()=>{ _landingSpeaking = false;
+      if(_tutorialPending){ _tutorialPending = false; enterTutorial(); }
+    });
   } };
   const sgVo = $("sgVo"); if(sgVo) sgVo.onclick = (e)=>{ e.stopPropagation(); playLanding(); };
   // ---- [engine JS] r4/P2 boot loader: loader.gif until assets warm, then it dismisses ITSELF into

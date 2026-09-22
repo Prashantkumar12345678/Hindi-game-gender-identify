@@ -349,18 +349,18 @@
   },
   {
    "id": "G3",
-   "phase": "guided",
+   "audio": {
+            "hint1": "vo_h1_bakri",
+            "hint2": "vo_h2_bakri",
+            "hint": "vo_h2_bakri",
+            "reveal": "vo_h2_bakri",
+            "correct": "vo_correct_pair"
+        },
+        "phase": "guided",
    "eis": "iconic",
    "type": "STORY_QUESTION",
    "prompt_hi": "सही जोड़ी चुनिए।",
-   "audio": {
-    "prompt": "vo_q_bakri",
-    "hint1": "vo_h1_bakri",
-    "hint2": "vo_h2_bakri",
-    "hint": "vo_h2_bakri",
-    "reveal": "vo_h2_bakri",
-    "correct": "vo_correct_pair"
-   },
+   
    "data": {
     "stim_word_hi": "बकरी",
     "options": [
@@ -398,18 +398,18 @@
   },
   {
    "id": "G4",
-   "phase": "guided",
+   "audio": {
+            "hint1": "vo_h1_ghoda",
+            "hint2": "vo_h2_ghoda",
+            "hint": "vo_h2_ghoda",
+            "reveal": "vo_h2_ghoda",
+            "correct": "vo_correct_pair"
+        },
+        "phase": "guided",
    "eis": "iconic",
    "type": "STORY_QUESTION",
    "prompt_hi": "सही जोड़ी चुनिए।",
-   "audio": {
-    "prompt": "vo_q_ghoda",
-    "hint1": "vo_h1_ghoda",
-    "hint2": "vo_h2_ghoda",
-    "hint": "vo_h2_ghoda",
-    "reveal": "vo_h2_ghoda",
-    "correct": "vo_correct_pair"
-   },
+   
    "data": {
     "stim_word_hi": "घोड़ा",
     "options": [

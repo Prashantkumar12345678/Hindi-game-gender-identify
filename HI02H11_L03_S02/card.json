@@ -252,7 +252,7 @@
    "phase": "guided",
    "eis": "iconic",
    "type": "STORY_QUESTION",
-   "prompt_hi": "सही जोड़ी से मिलाइए।",
+   "prompt_hi": "सही जोड़ी चुनिए।",
    "audio": {
     "prompt": "vo_q_sherni",
     "hint1": "vo_h1_sherni",
@@ -302,7 +302,7 @@
    "phase": "guided",
    "eis": "iconic",
    "type": "STORY_QUESTION",
-   "prompt_hi": "सही जोड़ी से मिलाइए।",
+   "prompt_hi": "सही जोड़ी चुनिए।",
    "audio": {
     "prompt": "vo_q_mor",
     "hint1": "vo_h1_mor",
@@ -603,7 +603,7 @@
    "phase": "practice",
    "eis": "iconic",
    "type": "STORY_QUESTION",
-   "prompt_hi": "सही जोड़ी से मिलाइए।",
+   "prompt_hi": "सही जोड़ी चुनिए।",
    "audio": {
     "prompt": "vo_q_bail",
     "hint1": "vo_h1_bail",

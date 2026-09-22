@@ -350,6 +350,7 @@
   {
    "id": "G3",
    "audio": {
+            "prompt": "vo_q_bakri",
             "hint1": "vo_h1_bakri",
             "hint2": "vo_h2_bakri",
             "hint": "vo_h2_bakri",
@@ -399,6 +400,7 @@
   {
    "id": "G4",
    "audio": {
+            "prompt": "vo_q_ghoda",
             "hint1": "vo_h1_ghoda",
             "hint2": "vo_h2_ghoda",
             "hint": "vo_h2_ghoda",

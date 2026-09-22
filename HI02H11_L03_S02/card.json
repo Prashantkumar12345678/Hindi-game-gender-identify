@@ -350,7 +350,6 @@
   {
    "id": "G3",
    "audio": {
-            "prompt": "vo_q_bakri",
             "hint1": "vo_h1_bakri",
             "hint2": "vo_h2_bakri",
             "hint": "vo_h2_bakri",
@@ -400,7 +399,6 @@
   {
    "id": "G4",
    "audio": {
-            "prompt": "vo_q_ghoda",
             "hint1": "vo_h1_ghoda",
             "hint2": "vo_h2_ghoda",
             "hint": "vo_h2_ghoda",
@@ -947,8 +945,6 @@
    "vo_pt_practice": "assets/VO/vo_pt_practice.ogg",
    "vo_pt_tutorial": "assets/VO/vo_pt_tutorial.ogg",
    "vo_q_bail": "assets/VO/vo_q_bail.ogg",
-   "vo_q_bakri": "assets/VO/vo_q_bakri.ogg",
-   "vo_q_ghoda": "assets/VO/vo_q_ghoda.ogg",
    "vo_q_mor": "assets/VO/vo_q_mor.ogg",
    "vo_q_sentence": "assets/VO/vo_q_sentence.ogg",
    "vo_q_sherni": "assets/VO/vo_q_sherni.ogg",
@@ -1021,8 +1017,6 @@
    "vo_pt_practice": "वाह! अब आपकी बारी।",
    "vo_pt_tutorial": "ध्यान से देखिए और मेरे साथ जानिए। चलिए, शुरू करें!",
    "vo_q_bail": "बैल मेले में किसके साथ आया था?",
-   "vo_q_bakri": "बकरी मेले में किसके साथ आई थी?",
-   "vo_q_ghoda": "घोड़ा मेले में किसके साथ आया था?",
    "vo_q_mor": "मोर मेले में किसके साथ आया था?",
    "vo_q_sentence": "सही शब्द चुनकर वाक्य पूरा कीजिए। बकरा घास खा… रहा है या रही है?",
    "vo_q_sherni": "शेरनी मेले में किसके साथ आई थी?",

@@ -86,7 +86,7 @@
    "audio": {
     "narration": "vo_poem_01"
    },
-   "data": {"caption_hi": "जंगल में एक मेला आया,\nरंग-बिरंगा खूब सजाया।", 
+   "data": { "caption_cues_ms": [260, 875, 1070, 1480, 1950, 2620, 3625, 3975],"caption_hi": "जंगल में एक मेला आया,\nरंग-बिरंगा खूब सजाया।", 
     "image_id": "sc_mela_01",
     "emoji": "🎪",
     "alt_hi": "आइए आज हम एक कविता सुनते हैं— जंगल का मेला। जंगल में एक मेला आया, रंग-बिरंगा खूब सजाया।"
@@ -104,7 +104,7 @@
    "audio": {
     "narration": "vo_poem_02"
    },
-   "data": {"caption_hi": "<span class=\"gw\">शेर</span> आया, <span class=\"gw\">शेरनी</span> आई,\nदोनों ने मिलकर धूम मचाई।", 
+   "data": { "caption_cues_ms": [320, 760, 1455, 2132, 3050, 3457, 3660, 4410, 4880],"caption_hi": "<span class=\"gw\">शेर</span> आया, <span class=\"gw\">शेरनी</span> आई,\nदोनों ने मिलकर धूम मचाई।", 
     "image_id": "sc_mela_02",
     "emoji": "🎪",
     "alt_hi": "शेर आया, शेरनी आई, दोनों ने मिलकर धूम मचाई।",
@@ -123,7 +123,7 @@
    "audio": {
     "narration": "vo_poem_03"
    },
-   "data": { "caption_first": true,"caption_hi": "<span class=\"gw\">मोर</span> पंख रंगीन फैलाए,\n<span class=\"gw\">मोरनी</span> संग ठुमके लगाए।", 
+   "data": { "caption_cues_ms": [300, 775, 1105, 1820, 2740, 3355, 3670, 4075], "caption_first": true,"caption_hi": "<span class=\"gw\">मोर</span> पंख रंगीन फैलाए,\n<span class=\"gw\">मोरनी</span> संग ठुमके लगाए।", 
     "image_id": "sc_mela_03",
     "emoji": "🎪",
     "alt_hi": "मोर पंख रंगीन फैलाए, मोरनी संग ठुमके लगाए।",
@@ -142,7 +142,7 @@
    "audio": {
     "narration": "vo_poem_04"
    },
-   "data": {"caption_hi": "<span class=\"gw\">घोड़ा</span> आया धूल उड़ाए,\n<span class=\"gw\">घोड़ी</span> पीछे दौड़ी आए।", 
+   "data": { "caption_cues_ms": [280, 727, 1173, 1550, 2660, 3220, 3560, 3990],"caption_hi": "<span class=\"gw\">घोड़ा</span> आया धूल उड़ाए,\n<span class=\"gw\">घोड़ी</span> पीछे दौड़ी आए।", 
     "image_id": "sc_mela_04",
     "emoji": "🎪",
     "alt_hi": "घोड़ा आया धूल उड़ाए, घोड़ी पीछे दौड़ी आए।",
@@ -161,7 +161,7 @@
    "audio": {
     "narration": "vo_poem_05"
    },
-   "data": {"caption_hi": "<span class=\"gw\">बकरा</span> बोला— “में-में-में!”\n<span class=\"gw\">बकरी</span> बोली— “साथ चलें!”", 
+   "data": { "caption_cues_ms": [260, 1425, 2366, 4240, 4945, 5345, 5685],"caption_hi": "<span class=\"gw\">बकरा</span> बोला— “में-में-में!”\n<span class=\"gw\">बकरी</span> बोली— “साथ चलें!”", 
     "image_id": "sc_mela_05",
     "emoji": "🎪",
     "alt_hi": "बकरा बोला— “में-में-में!” बकरी बोली— “साथ चलें!”",
@@ -180,7 +180,7 @@
    "audio": {
     "narration": "vo_poem_06"
    },
-   "data": {"caption_hi": "<span class=\"gw\">बंदर</span> लाया लाल गुब्बारा,\n<span class=\"gw\">बंदरिया</span> बोली कितना प्यारा!", 
+   "data": { "caption_cues_ms": [270, 870, 1297, 1795, 3030, 3790, 4275, 4890],"caption_hi": "<span class=\"gw\">बंदर</span> लाया लाल गुब्बारा,\n<span class=\"gw\">बंदरिया</span> बोली कितना प्यारा!", 
     "image_id": "sc_mela_06",
     "emoji": "🎪",
     "alt_hi": "बंदर लाया लाल गुब्बारा, बंदरिया बोली कितना प्यारा!",
@@ -199,7 +199,7 @@
    "audio": {
     "narration": "vo_poem_07"
    },
-   "data": {"caption_hi": "<span class=\"gw\">मुर्गा</span> बोला— “कुकड़ू-कूँ!”\n<span class=\"gw\">मुर्गी</span> बोली— “क्या खाऊँ!”", 
+   "data": { "caption_cues_ms": [250, 1035, 1410, 2760, 3570, 3910, 4410],"caption_hi": "<span class=\"gw\">मुर्गा</span> बोला— “कुकड़ू-कूँ!”\n<span class=\"gw\">मुर्गी</span> बोली— “क्या खाऊँ!”", 
     "image_id": "sc_mela_07",
     "emoji": "🎪",
     "alt_hi": "मुर्गा बोला— “कुकड़ू-कूँ!” मुर्गी बोली— “क्या खाऊँ!”",
@@ -218,7 +218,7 @@
    "audio": {
     "narration": "vo_poem_08"
    },
-   "data": {"caption_hi": "<span class=\"gw\">बैल</span> ने जब ढोल बजाया,\n<span class=\"gw\">गाय</span> ने भी नाच दिखाया।", 
+   "data": { "caption_cues_ms": [250, 622, 808, 1250, 1575, 2420, 2804, 3035, 3189, 3490],"caption_hi": "<span class=\"gw\">बैल</span> ने जब ढोल बजाया,\n<span class=\"gw\">गाय</span> ने भी नाच दिखाया।", 
     "image_id": "sc_mela_08",
     "emoji": "🎪",
     "alt_hi": "बैल ने जब ढोल बजाया, गाय ने भी नाच दिखाया।",
@@ -237,7 +237,7 @@
    "audio": {
     "narration": "vo_poem_09"
    },
-   "data": {"caption_hi": "सूरज ढलते शाम हुई,\nमेले भर में धूम हुई।", 
+   "data": { "caption_cues_ms": [290, 955, 1545, 2045, 2780, 3260, 3520, 3830, 4210],"caption_hi": "सूरज ढलते शाम हुई,\nमेले भर में धूम हुई।", 
     "image_id": "sc_mela_09",
     "emoji": "🎪",
     "alt_hi": "सूरज ढलते शाम हुई, मेले भर में धूम हुई।",

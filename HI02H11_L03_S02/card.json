@@ -19,12 +19,12 @@
   "cells": [
    {
     "type": "image",
-    "src": "assets/Images/pic_mor_anim.webp",
+    "src": "assets/Images/pic_mor.webp",
     "label": "मोर"
    },
    {
     "type": "image",
-    "src": "assets/Images/pic_morni_anim.webp",
+    "src": "assets/Images/pic_morni.webp",
     "label": "मोरनी"
    }
   ]
@@ -82,11 +82,11 @@
    "phase": "tutorial",
    "eis": "iconic",
    "type": "STORY_SCENE",
-   "prompt_hi": "जंगल का मेला",
+   "prompt_hi": "",
    "audio": {
     "narration": "vo_poem_01"
    },
-   "data": {
+   "data": {"caption_hi": "जंगल में एक मेला आया,\nरंग-बिरंगा खूब सजाया।", 
     "image_id": "sc_mela_01",
     "emoji": "🎪",
     "alt_hi": "आइए आज हम एक कविता सुनते हैं— जंगल का मेला। जंगल में एक मेला आया, रंग-बिरंगा खूब सजाया।"
@@ -100,11 +100,11 @@
    "phase": "tutorial",
    "eis": "iconic",
    "type": "STORY_SCENE",
-   "prompt_hi": "जंगल का मेला",
+   "prompt_hi": "",
    "audio": {
     "narration": "vo_poem_02"
    },
-   "data": {
+   "data": {"caption_hi": "<span class=\"gw\">शेर</span> आया, <span class=\"gw\">शेरनी</span> आई,\nदोनों ने मिलकर धूम मचाई।", 
     "image_id": "sc_mela_02",
     "emoji": "🎪",
     "alt_hi": "शेर आया, शेरनी आई, दोनों ने मिलकर धूम मचाई।",
@@ -119,11 +119,11 @@
    "phase": "tutorial",
    "eis": "iconic",
    "type": "STORY_SCENE",
-   "prompt_hi": "जंगल का मेला",
+   "prompt_hi": "",
    "audio": {
     "narration": "vo_poem_03"
    },
-   "data": {
+   "data": { "caption_first": true,"caption_hi": "<span class=\"gw\">मोर</span> पंख रंगीन फैलाए,\n<span class=\"gw\">मोरनी</span> संग ठुमके लगाए।", 
     "image_id": "sc_mela_03",
     "emoji": "🎪",
     "alt_hi": "मोर पंख रंगीन फैलाए, मोरनी संग ठुमके लगाए।",
@@ -138,11 +138,11 @@
    "phase": "tutorial",
    "eis": "iconic",
    "type": "STORY_SCENE",
-   "prompt_hi": "जंगल का मेला",
+   "prompt_hi": "",
    "audio": {
     "narration": "vo_poem_04"
    },
-   "data": {
+   "data": {"caption_hi": "<span class=\"gw\">घोड़ा</span> आया धूल उड़ाए,\n<span class=\"gw\">घोड़ी</span> पीछे दौड़ी आए।", 
     "image_id": "sc_mela_04",
     "emoji": "🎪",
     "alt_hi": "घोड़ा आया धूल उड़ाए, घोड़ी पीछे दौड़ी आए।",
@@ -157,11 +157,11 @@
    "phase": "tutorial",
    "eis": "iconic",
    "type": "STORY_SCENE",
-   "prompt_hi": "जंगल का मेला",
+   "prompt_hi": "",
    "audio": {
     "narration": "vo_poem_05"
    },
-   "data": {
+   "data": {"caption_hi": "<span class=\"gw\">बकरा</span> बोला— “में-में-में!”\n<span class=\"gw\">बकरी</span> बोली— “साथ चलें!”", 
     "image_id": "sc_mela_05",
     "emoji": "🎪",
     "alt_hi": "बकरा बोला— “में-में-में!” बकरी बोली— “साथ चलें!”",
@@ -176,11 +176,11 @@
    "phase": "tutorial",
    "eis": "iconic",
    "type": "STORY_SCENE",
-   "prompt_hi": "जंगल का मेला",
+   "prompt_hi": "",
    "audio": {
     "narration": "vo_poem_06"
    },
-   "data": {
+   "data": {"caption_hi": "<span class=\"gw\">बंदर</span> लाया लाल गुब्बारा,\n<span class=\"gw\">बंदरिया</span> बोली कितना प्यारा!", 
     "image_id": "sc_mela_06",
     "emoji": "🎪",
     "alt_hi": "बंदर लाया लाल गुब्बारा, बंदरिया बोली कितना प्यारा!",
@@ -195,11 +195,11 @@
    "phase": "tutorial",
    "eis": "iconic",
    "type": "STORY_SCENE",
-   "prompt_hi": "जंगल का मेला",
+   "prompt_hi": "",
    "audio": {
     "narration": "vo_poem_07"
    },
-   "data": {
+   "data": {"caption_hi": "<span class=\"gw\">मुर्गा</span> बोला— “कुकड़ू-कूँ!”\n<span class=\"gw\">मुर्गी</span> बोली— “क्या खाऊँ!”", 
     "image_id": "sc_mela_07",
     "emoji": "🎪",
     "alt_hi": "मुर्गा बोला— “कुकड़ू-कूँ!” मुर्गी बोली— “क्या खाऊँ!”",
@@ -214,11 +214,11 @@
    "phase": "tutorial",
    "eis": "iconic",
    "type": "STORY_SCENE",
-   "prompt_hi": "जंगल का मेला",
+   "prompt_hi": "",
    "audio": {
     "narration": "vo_poem_08"
    },
-   "data": {
+   "data": {"caption_hi": "<span class=\"gw\">बैल</span> ने जब ढोल बजाया,\n<span class=\"gw\">गाय</span> ने भी नाच दिखाया।", 
     "image_id": "sc_mela_08",
     "emoji": "🎪",
     "alt_hi": "बैल ने जब ढोल बजाया, गाय ने भी नाच दिखाया।",
@@ -233,11 +233,11 @@
    "phase": "tutorial",
    "eis": "iconic",
    "type": "STORY_SCENE",
-   "prompt_hi": "जंगल का मेला",
+   "prompt_hi": "",
    "audio": {
     "narration": "vo_poem_09"
    },
-   "data": {
+   "data": {"caption_hi": "सूरज ढलते शाम हुई,\nमेले भर में धूम हुई।", 
     "image_id": "sc_mela_09",
     "emoji": "🎪",
     "alt_hi": "सूरज ढलते शाम हुई, मेले भर में धूम हुई।",
@@ -1055,8 +1055,8 @@
    "sc_mela_07": "assets/Images/sc_mela_07.webp",
    "sc_mela_08": "assets/Images/sc_mela_08.webp",
    "sc_mela_09": "assets/Images/sc_mela_09.webp",
-   "pic_mor_anim": "assets/Images/pic_mor_anim.webp",
-   "pic_morni_anim": "assets/Images/pic_morni_anim.webp"
+   "pic_mor_anim": "assets/Images/pic_mor.webp",
+   "pic_morni_anim": "assets/Images/pic_morni.webp"
   },
   "video": {
    "sc_mela_02": "assets/video/sc_mela_02.mp4",

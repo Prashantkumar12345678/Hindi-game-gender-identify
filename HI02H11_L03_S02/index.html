@@ -830,7 +830,7 @@ html.no-anim .stimulus-pic .lbl .say-word.say-now{transform:none;}
 .start-gate{position:absolute;inset:0;z-index:80;display:flex;align-items:center;justify-content:center;background:transparent;cursor:default;}   /* [20a landing] transparent — the fixed .start-bg is the ground; [21c flag#1] cursor:default — hand-pointer belongs on .sg-btn/.sg-vo only, gate is not tap-anywhere */
 .start-gate.hidden{display:none;}
 /* inner white tile is the provided image (border + faint rays baked in) */
-.sg-card{position:relative;width:1114px;height:456px;background:url("assets/UI/start_card.webp?v=20260923170853") center/100% 100% no-repeat;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;}
+.sg-card{position:relative;width:1114px;height:456px;background:url("assets/UI/start_card.webp?v=20260923172143") center/100% 100% no-repeat;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;}
 /* full-body standing mascot (feet included): size by HEIGHT so the whole body incl. feet shows;
    the art frame is square with side padding, so it's constrained to the card height, not width. */
 .sg-mascot{position:absolute;left:-24px;bottom:-12px;width:208px;height:auto;z-index:3;object-fit:contain;filter:drop-shadow(0 10px 18px rgba(0,47,118,.18));animation:none;}   /* [25d] CORRECTED. My 25c change to left:8/bottom:6 was WRONG: I copied strilling's BASE rule (its line 611) instead of its WINNING late override (line 1104 = left:-24/bottom:-12/width:208 !important) — which is what the engine already had. Moving her right by 32px is also what threw .sg-vo out of line, since left:96px is tuned to this position. "Hovering" = the sgFloat bob: strilling kills it at its line 5600 `animation:none !important`, so it must be OFF here too (I previously said strilling bobs as well — that was reading line 611 and missing 5600). */
@@ -1013,7 +1013,7 @@ body.loaded .sg-acell{animation-play-state:running;}
    .wg-, .nh-, .ol-), NOT on a guessed prefix: keying on `sg-` alone is what dropped the
    entire drifting sky the first time round. */
 /* ===== FLN ANIMATION KIT: sky-drift BEGIN ===== */
-.start-bg{background-image:url("assets/UI/startnew_bg_plain.webp?v=20260923170853");}   /* mandatory */
+.start-bg{background-image:url("assets/UI/startnew_bg_plain.webp?v=20260923172143");}   /* mandatory */
 
 .sg-glow,.sg-sky{position:fixed;inset:0;pointer-events:none;display:none;z-index:1;}
 body.is-start .sg-glow,body.is-start .sg-sky,
@@ -1055,9 +1055,9 @@ body.is-end .sg-sky{
   margin:calc(var(--s) / -2) 0 0 calc(var(--s) / -2);
   background:center/contain no-repeat;opacity:0;
   animation:sgFly var(--t) linear infinite;animation-delay:var(--d);}
-.sg-sky .s1{background-image:url("assets/UI/bgdeco_star.svg?v=20260923170853");}
-.sg-sky .s2{background-image:url("assets/UI/bgdeco_star_o.svg?v=20260923170853");}
-.sg-sky .s3{background-image:url("assets/UI/bgdeco_spark.svg?v=20260923170853");}
+.sg-sky .s1{background-image:url("assets/UI/bgdeco_star.svg?v=20260923172143");}
+.sg-sky .s2{background-image:url("assets/UI/bgdeco_star_o.svg?v=20260923172143");}
+.sg-sky .s3{background-image:url("assets/UI/bgdeco_spark.svg?v=20260923172143");}
 .sg-sky .s4{border-radius:50%;border:.22vmax solid rgba(255,255,255,.92);}
 .sg-sky .s5{border-radius:50%;background:rgba(255,255,255,.92);}
 
@@ -1475,7 +1475,7 @@ html.no-anim .ol-alpha,html.no-anim .ol-band{animation:none !important;}
    startnew_bg_plain.webp is the same artwork with the decorations stripped.
    `body .start-bg` because the engine declares .start-bg AFTER this block; matching its
    specificity and relying on order is precisely what R11 forbids. */
-body .start-bg{background-image:url("assets/UI/startnew_bg_plain.webp?v=20260923170853");}
+body .start-bg{background-image:url("assets/UI/startnew_bg_plain.webp?v=20260923172143");}
 
 /* ---- the white centre box, more opaque ------------------------------------------
    start_card.webp is white at alpha 166/255 (65%), which is why the background rays read
@@ -1484,9 +1484,9 @@ body .start-bg{background-image:url("assets/UI/startnew_bg_plain.webp?v=20260923
    art's rounded corners are alpha - a background-color would square them off.
    Drop one layer for ~88% if this is too solid. */
 body .sg-card{background:
-   url("assets/UI/start_card.webp?v=20260923170853") center/100% 100% no-repeat,
-   url("assets/UI/start_card.webp?v=20260923170853") center/100% 100% no-repeat,
-   url("assets/UI/start_card.webp?v=20260923170853") center/100% 100% no-repeat;}
+   url("assets/UI/start_card.webp?v=20260923172143") center/100% 100% no-repeat,
+   url("assets/UI/start_card.webp?v=20260923172143") center/100% 100% no-repeat,
+   url("assets/UI/start_card.webp?v=20260923172143") center/100% 100% no-repeat;}
 
    which is why the first attempt at this changed almost nothing. Here it is constant.
    The kit's objection to filters on these elements (recipe 1, Deviations) is to ANIMATING
@@ -1525,7 +1525,7 @@ body .opt-cell.wg-wrong{animation:wgNo var(--wgT) ease-in-out both;}
 /* ===== END / CELEBRATION ===== */
 .end-screen{position:absolute;inset:0;z-index:90;display:none;flex-direction:column;align-items:center;justify-content:center;gap:22px;background:transparent;overflow:hidden;}
 /* r4: immersive celebration (adopted from Shruti's build — end_screen.webp sunburst + centred mascot + subtitle) */
-.end-bg{position:fixed;inset:0;background:#FDE9A8 url("assets/UI/end_screen.webp?v=20260923170853") center/cover no-repeat;display:none;pointer-events:none;z-index:0;}
+.end-bg{position:fixed;inset:0;background:#FDE9A8 url("assets/UI/end_screen.webp?v=20260923172143") center/cover no-repeat;display:none;pointer-events:none;z-index:0;}
 body.is-end .end-bg{display:block;}
 body.is-end{background:#FDE9A8 !important;}
 body.is-end .stage{background:transparent !important;}
@@ -1915,7 +1915,7 @@ body.gating .stage.gating .start-gate{filter:none;}
 
 /* [20a landing] fixed full-viewport ground so #47BCFD + art reach the true edges (kills the #7FC8F4 letterbox band);
    start-gate goes transparent (above) so this single image is seamless; in-lesson chrome hidden while landing shows. */
-.start-bg{position:fixed;inset:0;background:#47BCFD url("assets/UI/startnew_bg.webp?v=20260923170853") center/cover no-repeat;display:none;pointer-events:none;z-index:0;}
+.start-bg{position:fixed;inset:0;background:#47BCFD url("assets/UI/startnew_bg.webp?v=20260923172143") center/cover no-repeat;display:none;pointer-events:none;z-index:0;}
 body.is-start .start-bg{display:block;}
 body.is-start .stage-inner{visibility:hidden !important;}
 body.is-start .stage{background:transparent !important;}
@@ -2679,8 +2679,8 @@ body.is-start .phase-gate{
    it sat before - otherwise every one of these buttons would quietly rise 14px up the screen. */
 .nav-btn{width:198px !important;height:90px !important;min-width:0 !important;bottom:18px !important;
   padding:0 !important;border:0 !important;box-shadow:none !important;
-  background:transparent url("assets/swiftpal_buttons/btn-next-disabled.svg?v=20260923170853") center/198px 90px no-repeat !important;}
-.nav-btn.active{background-image:url("assets/swiftpal_buttons/btn-next.svg?v=20260923170853") !important;
+  background:transparent url("assets/swiftpal_buttons/btn-next-disabled.svg?v=20260923172143") center/198px 90px no-repeat !important;}
+.nav-btn.active{background-image:url("assets/swiftpal_buttons/btn-next.svg?v=20260923172143") !important;
   box-shadow:none !important;}
 .nav-btn.active:active{box-shadow:none !important;}
 .nav-btn .nav-arrow{display:none !important;}
@@ -2734,7 +2734,7 @@ body.is-start .phase-gate{
    paints it ONCE, so the blue .start-bg tints through and the card reads as a blue-white
    gradient with a white ring. This build stacked the SAME file 3x, which made it opaque
    flat white. Back to a single paint = src. (Sky sparkles deliberately NOT ported.) */
-body .sg-card{background:url("assets/UI/start_card.webp?v=20260923170853") center/100% 100% no-repeat !important;}
+body .sg-card{background:url("assets/UI/start_card.webp?v=20260923172143") center/100% 100% no-repeat !important;}
 .sg-mascot{left:-24px !important;bottom:-12px !important;width:208px !important;}
 .sg-vo{left:89px !important;bottom:-6px !important;width:58px !important;height:58px !important;}  /* <- src .sg-audio */
 .sg-content{width:100% !important;height:100% !important;max-width:none !important;
@@ -2778,9 +2778,34 @@ body .sg-card{background:url("assets/UI/start_card.webp?v=20260923170853") cente
         height:126px !important;padding:0 !important;border:0 !important;border-radius:50% !important;
         box-shadow:none !important;
         animation:sgBtnPulse 1.8s ease-in-out infinite !important;
-        background:transparent url("assets/swiftpal_buttons/btn-play-round.svg?v=20260923170853") center/126px 126px no-repeat !important;}
+        background:transparent url("assets/swiftpal_buttons/btn-play-round.svg?v=20260923172143") center/126px 126px no-repeat !important;}
 .sg-btn:active{animation:none !important;}
-body.vo-lock .sg-btn{background-image:url("assets/swiftpal_buttons/btn-play-round.svg?v=20260923170853") !important;}
+
+/* [H11-93] SWIFTY ARRIVES. The landing used to have him already standing there when the screen
+   came up; now he runs in from the left, overshoots a step, lands with a squash and settles.
+   THE MOTION, NOT THE GIF FILE. The arrival was built first as _masters/art/swifty_arrives.gif
+   from the one still - that GIF is now the spec for this timing, kept as a reference - but a GIF
+   carries an opaque rectangle with it, and Swifty stands ON the corner of the white card with
+   blue sky behind his other half. Dropped in as a file he would have arrived inside a pale box
+   laid over both. The same movement in CSS has no box, weighs nothing, keeps the existing
+   animated webp underneath, and stays sharp at any size.
+   transform-origin is the FEET: a squash about the middle sinks the whole bird into the floor
+   instead of planting him on it. */
+@keyframes sgSwiftyIn{
+  0%   {transform:translate(-268px,0)   scale(.88)      rotate(-7deg);}
+  36%  {transform:translate(-112px,-30px) scale(.93)    rotate(-5deg);}   /* mid-hop */
+  74%  {transform:translate(26px,0)     scale(1)        rotate(0deg);}    /* down, a step past */
+  85%  {transform:translate(16px,0)     scale(1.07,.91) rotate(0deg);}    /* the squash */
+  100% {transform:translate(0,0)        scale(1)        rotate(0deg);}
+}
+body.is-start .sg-mascot{transform-origin:50% 100%;
+  animation:sgSwiftyIn .86s cubic-bezier(.22,.7,.3,1) both !important;}
+/* the speaker chip waits for him rather than hovering where he is about to be */
+@keyframes sgVoIn{0%{opacity:0;transform:scale(.6);}70%{opacity:1;transform:scale(1.08);}100%{opacity:1;transform:scale(1);}}
+body.is-start .sg-vo{animation:sgVoIn .34s ease-out .78s both !important;}
+html.no-anim body.is-start .sg-mascot,
+html.no-anim body.is-start .sg-vo{animation:none !important;transform:none !important;opacity:1 !important;}
+body.vo-lock .sg-btn{background-image:url("assets/swiftpal_buttons/btn-play-round.svg?v=20260923172143") !important;}
 .sg-btn .sg-play{display:none !important;}
 /* [H11-38] the glyph grows, the disc does not: 42 -> 52px inside the same 88px button, which is
    66% of the 79px content circle. */
@@ -2798,7 +2823,7 @@ body.vo-lock .sg-btn{background-image:url("assets/swiftpal_buttons/btn-play-roun
    the control keeps an accessible name instead of announcing as a bare "button". */
 .end-btn{width:163px !important;height:117px !important;min-width:0 !important;padding:0 !important;
          border:0 !important;border-radius:0 !important;box-shadow:none !important;font-size:0 !important;
-         background:transparent url("assets/swiftpal_buttons/btn-finish.svg?v=20260923170853") center/163px 117px no-repeat !important;}
+         background:transparent url("assets/swiftpal_buttons/btn-finish.svg?v=20260923172143") center/163px 117px no-repeat !important;}
 .end-btn:active{box-shadow:none !important;}
 
 /* ---- 6. FEEDBACK OVERLAY ------------------------------------------------------------------- */
@@ -3194,7 +3219,7 @@ html.no-anim .nav-btn.nav-call{animation:none !important;}
      two banner boxes coincide. ONE scale for both axes, so nothing is stretched.
      The odd size/position below existed to fit the old 1667x943 art into a 16:9 box; the new
      file IS 16:9 (1672x941), so it simply fills. */
-  background:url("assets/Images/gate_bg.webp?v=20260923170853") no-repeat;
+  background:url("assets/Images/gate_bg.webp?v=20260923172143") no-repeat;
   background-size:100% 100%;background-position:0 0;}
 .sort-stage.sort-gates .sort-bins .sort-bin,
 .sort-stage.sort-gates .sort-bins.many .sort-bin{
@@ -3307,10 +3332,10 @@ html.no-anim .sort-stage.sort-gates .sort-item.snapped{
   transform-origin:50% 60%;}
 .sort-stage.sort-gates .gate-glow.gm{
   left:15.300%;top:20.403%;width:25.499%;height:15.740%;   /* [H11-74] the new board's own ratio */
-  background-image:url("assets/Images/gate_m.webp?v=20260923170853");}
+  background-image:url("assets/Images/gate_m.webp?v=20260923172143");}
 .sort-stage.sort-gates .gate-glow.gf{
   left:58.780%;top:20.248%;width:26.025%;height:16.182%;   /* [H11-74] */
-  background-image:url("assets/Images/gate_f.webp?v=20260923170853");}
+  background-image:url("assets/Images/gate_f.webp?v=20260923172143");}
 .sort-stage.sort-gates .sort-bins.lit-m .gate-glow.gm,
 .sort-stage.sort-gates .sort-bins.lit-f .gate-glow.gf{animation:gatePulse 1.1s ease-in-out;}
 @keyframes gatePulse{
@@ -4382,7 +4407,7 @@ function _resumeVoiceAudio(){
    AUDIO_BUILD changes whenever the game is rebuilt, so every clip URL changes with it and the
    browser has to fetch. It is added in the two places every clip passes through, rather than at
    the ~20 sites that spell out a path, so nothing can be missed. */
-const AUDIO_BUILD = "20260923170853";
+const AUDIO_BUILD = "20260923172143";
 function bustAudio(u){
   return (!u || u.indexOf("data:") === 0 || u.indexOf("?") >= 0) ? u : (u + "?v=" + AUDIO_BUILD);
 }

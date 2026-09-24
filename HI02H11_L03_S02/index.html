@@ -837,7 +837,7 @@ html.no-anim .stimulus-pic .lbl .say-word.say-now{transform:none;}
 .start-gate{position:absolute;inset:0;z-index:80;display:flex;align-items:center;justify-content:center;background:transparent;cursor:default;}   /* [20a landing] transparent — the fixed .start-bg is the ground; [21c flag#1] cursor:default — hand-pointer belongs on .sg-btn/.sg-vo only, gate is not tap-anywhere */
 .start-gate.hidden{display:none;}
 /* inner white tile is the provided image (border + faint rays baked in) */
-.sg-card{position:relative;width:1114px;height:456px;background:url("assets/UI/start_card.webp?v=20260924135248") center/100% 100% no-repeat;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;}
+.sg-card{position:relative;width:1114px;height:456px;background:url("assets/UI/start_card.webp?v=20260924140518") center/100% 100% no-repeat;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;}
 /* full-body standing mascot (feet included): size by HEIGHT so the whole body incl. feet shows;
    the art frame is square with side padding, so it's constrained to the card height, not width. */
 .sg-mascot{position:absolute;left:-24px;bottom:-12px;width:208px;height:auto;z-index:3;object-fit:contain;filter:drop-shadow(0 10px 18px rgba(0,47,118,.18));animation:none;}   /* [25d] CORRECTED. My 25c change to left:8/bottom:6 was WRONG: I copied strilling's BASE rule (its line 611) instead of its WINNING late override (line 1104 = left:-24/bottom:-12/width:208 !important) — which is what the engine already had. Moving her right by 32px is also what threw .sg-vo out of line, since left:96px is tuned to this position. "Hovering" = the sgFloat bob: strilling kills it at its line 5600 `animation:none !important`, so it must be OFF here too (I previously said strilling bobs as well — that was reading line 611 and missing 5600). */
@@ -1020,7 +1020,7 @@ body.loaded .sg-acell{animation-play-state:running;}
    .wg-, .nh-, .ol-), NOT on a guessed prefix: keying on `sg-` alone is what dropped the
    entire drifting sky the first time round. */
 /* ===== FLN ANIMATION KIT: sky-drift BEGIN ===== */
-.start-bg{background-image:url("assets/UI/startnew_bg_plain.webp?v=20260924135248");}   /* mandatory */
+.start-bg{background-image:url("assets/UI/startnew_bg_plain.webp?v=20260924140518");}   /* mandatory */
 
 .sg-glow,.sg-sky{position:fixed;inset:0;pointer-events:none;display:none;z-index:1;}
 body.is-start .sg-glow,body.is-start .sg-sky,
@@ -1062,9 +1062,9 @@ body.is-end .sg-sky{
   margin:calc(var(--s) / -2) 0 0 calc(var(--s) / -2);
   background:center/contain no-repeat;opacity:0;
   animation:sgFly var(--t) linear infinite;animation-delay:var(--d);}
-.sg-sky .s1{background-image:url("assets/UI/bgdeco_star.svg?v=20260924135248");}
-.sg-sky .s2{background-image:url("assets/UI/bgdeco_star_o.svg?v=20260924135248");}
-.sg-sky .s3{background-image:url("assets/UI/bgdeco_spark.svg?v=20260924135248");}
+.sg-sky .s1{background-image:url("assets/UI/bgdeco_star.svg?v=20260924140518");}
+.sg-sky .s2{background-image:url("assets/UI/bgdeco_star_o.svg?v=20260924140518");}
+.sg-sky .s3{background-image:url("assets/UI/bgdeco_spark.svg?v=20260924140518");}
 .sg-sky .s4{border-radius:50%;border:.22vmax solid rgba(255,255,255,.92);}
 .sg-sky .s5{border-radius:50%;background:rgba(255,255,255,.92);}
 
@@ -1482,7 +1482,7 @@ html.no-anim .ol-alpha,html.no-anim .ol-band{animation:none !important;}
    startnew_bg_plain.webp is the same artwork with the decorations stripped.
    `body .start-bg` because the engine declares .start-bg AFTER this block; matching its
    specificity and relying on order is precisely what R11 forbids. */
-body .start-bg{background-image:url("assets/UI/startnew_bg_plain.webp?v=20260924135248");}
+body .start-bg{background-image:url("assets/UI/startnew_bg_plain.webp?v=20260924140518");}
 
 /* ---- the white centre box, more opaque ------------------------------------------
    start_card.webp is white at alpha 166/255 (65%), which is why the background rays read
@@ -1491,9 +1491,9 @@ body .start-bg{background-image:url("assets/UI/startnew_bg_plain.webp?v=20260924
    art's rounded corners are alpha - a background-color would square them off.
    Drop one layer for ~88% if this is too solid. */
 body .sg-card{background:
-   url("assets/UI/start_card.webp?v=20260924135248") center/100% 100% no-repeat,
-   url("assets/UI/start_card.webp?v=20260924135248") center/100% 100% no-repeat,
-   url("assets/UI/start_card.webp?v=20260924135248") center/100% 100% no-repeat;}
+   url("assets/UI/start_card.webp?v=20260924140518") center/100% 100% no-repeat,
+   url("assets/UI/start_card.webp?v=20260924140518") center/100% 100% no-repeat,
+   url("assets/UI/start_card.webp?v=20260924140518") center/100% 100% no-repeat;}
 
    which is why the first attempt at this changed almost nothing. Here it is constant.
    The kit's objection to filters on these elements (recipe 1, Deviations) is to ANIMATING
@@ -1532,7 +1532,7 @@ body .opt-cell.wg-wrong{animation:wgNo var(--wgT) ease-in-out both;}
 /* ===== END / CELEBRATION ===== */
 .end-screen{position:absolute;inset:0;z-index:90;display:none;flex-direction:column;align-items:center;justify-content:center;gap:22px;background:transparent;overflow:hidden;}
 /* r4: immersive celebration (adopted from Shruti's build — end_screen.webp sunburst + centred mascot + subtitle) */
-.end-bg{position:fixed;inset:0;background:#FDE9A8 url("assets/UI/end_screen.webp?v=20260924135248") center/cover no-repeat;display:none;pointer-events:none;z-index:0;}
+.end-bg{position:fixed;inset:0;background:#FDE9A8 url("assets/UI/end_screen.webp?v=20260924140518") center/cover no-repeat;display:none;pointer-events:none;z-index:0;}
 body.is-end .end-bg{display:block;}
 body.is-end{background:#FDE9A8 !important;}
 body.is-end .stage{background:transparent !important;}
@@ -1946,7 +1946,7 @@ body.gating .stage.gating .start-gate{filter:none;}
 
 /* [20a landing] fixed full-viewport ground so #47BCFD + art reach the true edges (kills the #7FC8F4 letterbox band);
    start-gate goes transparent (above) so this single image is seamless; in-lesson chrome hidden while landing shows. */
-.start-bg{position:fixed;inset:0;background:#47BCFD url("assets/UI/startnew_bg.webp?v=20260924135248") center/cover no-repeat;display:none;pointer-events:none;z-index:0;}
+.start-bg{position:fixed;inset:0;background:#47BCFD url("assets/UI/startnew_bg.webp?v=20260924140518") center/cover no-repeat;display:none;pointer-events:none;z-index:0;}
 body.is-start .start-bg{display:block;}
 body.is-start .stage-inner{visibility:hidden !important;}
 body.is-start .stage{background:transparent !important;}
@@ -2291,6 +2291,25 @@ body.is-start .phase-gate{
    "not that one" buzz, NOT a lock, so pointer-events stays auto and the child may retry a first miss.
    Their grey locks (.sentence-word.crossed / .tap-all-item.nope, from 28e) are unchanged and now apply
    only from the 2nd wrong. */
+/* [H11-116] THE RED WAS COMING FROM A THIRD PLACE - the "wg" kit, which neither [H11-101] nor
+   [H11-112] touched because neither knew it was there. A wrong tap puts THREE classes on the
+   card: .wrong-flash (cleaned already), and .wg-wrong plus a .wg-fx child from the kit. Dumped
+   off a live wrong tap on G1, which is the only way this was ever going to be found:
+       ['opt-cell wrong-flash wg-wrong']  border rgb(249,53,68) 2px
+                                          shadow rgba(249,53,68,.16) 0 6px 16px
+   That border and that pink halo are the ring in the screenshot, and .wg-pulse draws a 3px red
+   ring on top of them for good measure.
+   The WIGGLE lives in this same kit - `animation:wgNo` on .wg-wrong - so the colour comes off
+   and the movement stays. The card keeps its own rim and its own cream: restated rather than
+   reverted, because the kit sets them with !important and there is nothing to revert TO.
+   .wg-out is the elimination state and gets the same treatment; it keeps its fade. */
+.opt-cell.wg-wrong,.opt-cell.wg-out{
+  border-color:#EEF3FA !important;box-shadow:none !important;}
+body .stage.thm-toybox .opt-cell.wg-wrong,
+body .stage.thm-toybox .opt-cell.wg-out{
+  border-color:#DCD5C6 !important;background:#FFFDF7 !important;box-shadow:none !important;}
+.wg-pulse{display:none !important;}          /* the red ring - the wiggle is enough */
+
 /* [H11-112] AND THE SAME EVERYWHERE ELSE A CHILD CAN BE WRONG IN THIS GAME. [H11-101] took the
    red off the option cards, but this lesson also runs SORT_GENDER and MATCH_GENDER_PAIRS, and
    both had their own red:
@@ -2730,8 +2749,8 @@ body.is-start .phase-gate{
    it sat before - otherwise every one of these buttons would quietly rise 14px up the screen. */
 .nav-btn{width:198px !important;height:90px !important;min-width:0 !important;bottom:18px !important;
   padding:0 !important;border:0 !important;box-shadow:none !important;
-  background:transparent url("assets/swiftpal_buttons/btn-next-disabled.svg?v=20260924135248") center/198px 90px no-repeat !important;}
-.nav-btn.active{background-image:url("assets/swiftpal_buttons/btn-next.svg?v=20260924135248") !important;
+  background:transparent url("assets/swiftpal_buttons/btn-next-disabled.svg?v=20260924140518") center/198px 90px no-repeat !important;}
+.nav-btn.active{background-image:url("assets/swiftpal_buttons/btn-next.svg?v=20260924140518") !important;
   box-shadow:none !important;}
 .nav-btn.active:active{box-shadow:none !important;}
 .nav-btn .nav-arrow{display:none !important;}
@@ -2791,7 +2810,7 @@ body.is-start .phase-gate{
    paints it ONCE, so the blue .start-bg tints through and the card reads as a blue-white
    gradient with a white ring. This build stacked the SAME file 3x, which made it opaque
    flat white. Back to a single paint = src. (Sky sparkles deliberately NOT ported.) */
-body .sg-card{background:url("assets/UI/start_card.webp?v=20260924135248") center/100% 100% no-repeat !important;}
+body .sg-card{background:url("assets/UI/start_card.webp?v=20260924140518") center/100% 100% no-repeat !important;}
 .sg-mascot{left:-24px !important;bottom:-12px !important;width:208px !important;}
 .sg-vo{left:89px !important;bottom:-6px !important;width:58px !important;height:58px !important;}  /* <- src .sg-audio */
 .sg-content{width:100% !important;height:100% !important;max-width:none !important;
@@ -2842,7 +2861,7 @@ body .sg-card{background:url("assets/UI/start_card.webp?v=20260924135248") cente
 .sg-btn{bottom:40px !important;width:214px !important;height:92px !important;min-width:0 !important;
         padding:0 !important;border:0 !important;border-radius:46px !important;
         box-shadow:none !important;
-        background:transparent url("assets/swiftpal_buttons/btn-play.svg?v=20260924135248") center/214px 92px no-repeat !important;
+        background:transparent url("assets/swiftpal_buttons/btn-play.svg?v=20260924140518") center/214px 92px no-repeat !important;
         animation:sgBtnPulse 1.4s ease-in-out infinite !important;}
 .sg-btn:active{animation:none !important;}
 /* [H11-114] the landing pair: bigger, and standing closer. The strip is sized by .sg-ex's own
@@ -2869,7 +2888,7 @@ body .sg-card{background:url("assets/UI/start_card.webp?v=20260924135248") cente
    kept at _backup/swiftpal_buttons/btn-play-waiting.svg.gold-flat.
    The ?v= matters here more than usual: the FILE changed while its name did not, so without a
    fresh token a browser that has been on this page today keeps showing the gold one. */
-.sg-btn.sg-waiting{background-image:url("assets/swiftpal_buttons/btn-play-waiting.svg?v=20260924135248") !important;
+.sg-btn.sg-waiting{background-image:url("assets/swiftpal_buttons/btn-play-waiting.svg?v=20260924140518") !important;
                    cursor:default !important;animation:none !important;
                    pointer-events:none !important;}   /* see setStartBtnReady - NOT disabled */
 
@@ -2914,7 +2933,7 @@ html.no-anim body.is-start .sg-vo{animation:none !important;transform:none !impo
    the control keeps an accessible name instead of announcing as a bare "button". */
 .end-btn{width:163px !important;height:117px !important;min-width:0 !important;padding:0 !important;
          border:0 !important;border-radius:0 !important;box-shadow:none !important;font-size:0 !important;
-         background:transparent url("assets/swiftpal_buttons/btn-finish.svg?v=20260924135248") center/163px 117px no-repeat !important;}
+         background:transparent url("assets/swiftpal_buttons/btn-finish.svg?v=20260924140518") center/163px 117px no-repeat !important;}
 .end-btn:active{box-shadow:none !important;}
 
 /* ---- 6. FEEDBACK OVERLAY ------------------------------------------------------------------- */
@@ -3356,7 +3375,7 @@ html.no-anim .nav-btn.nav-call{animation:none !important;}
      two banner boxes coincide. ONE scale for both axes, so nothing is stretched.
      The odd size/position below existed to fit the old 1667x943 art into a 16:9 box; the new
      file IS 16:9 (1672x941), so it simply fills. */
-  background:url("assets/Images/gate_bg.webp?v=20260924135248") no-repeat;
+  background:url("assets/Images/gate_bg.webp?v=20260924140518") no-repeat;
   background-size:100% 100%;background-position:0 0;}
 .sort-stage.sort-gates .sort-bins .sort-bin,
 .sort-stage.sort-gates .sort-bins.many .sort-bin{
@@ -3469,10 +3488,10 @@ html.no-anim .sort-stage.sort-gates .sort-item.snapped{
   transform-origin:50% 60%;}
 .sort-stage.sort-gates .gate-glow.gm{
   left:15.300%;top:20.403%;width:25.499%;height:15.740%;   /* [H11-74] the new board's own ratio */
-  background-image:url("assets/Images/gate_m.webp?v=20260924135248");}
+  background-image:url("assets/Images/gate_m.webp?v=20260924140518");}
 .sort-stage.sort-gates .gate-glow.gf{
   left:58.780%;top:20.248%;width:26.025%;height:16.182%;   /* [H11-74] */
-  background-image:url("assets/Images/gate_f.webp?v=20260924135248");}
+  background-image:url("assets/Images/gate_f.webp?v=20260924140518");}
 .sort-stage.sort-gates .sort-bins.lit-m .gate-glow.gm,
 .sort-stage.sort-gates .sort-bins.lit-f .gate-glow.gf{animation:gatePulse 1.1s ease-in-out;}
 @keyframes gatePulse{
@@ -4544,7 +4563,7 @@ function _resumeVoiceAudio(){
    AUDIO_BUILD changes whenever the game is rebuilt, so every clip URL changes with it and the
    browser has to fetch. It is added in the two places every clip passes through, rather than at
    the ~20 sites that spell out a path, so nothing can be missed. */
-const AUDIO_BUILD = "20260924135248";
+const AUDIO_BUILD = "20260924140518";
 function bustAudio(u){
   return (!u || u.indexOf("data:") === 0 || u.indexOf("?") >= 0) ? u : (u + "?v=" + AUDIO_BUILD);
 }
@@ -5421,8 +5440,14 @@ function resetIdleVo(){ stopIdleVo(); _idleVoFired = false; }
    replay lands 7s after the prompt stops, never on top of it. (First cut used a plain 7s setTimeout
    that re-armed a FULL 7s whenever it found audio playing, which stretched the real delay to as much
    as 14s — measured in-browser, it never fired. A ticker that resets the silence clock is exact.) */
+/* [H11-117] THE REMINDER REPEATS NOW - asked for: "har 7 sec baad inactivity pai phir se bole".
+   This reverses [27f], which capped it at one per slide on a specific complaint, and the
+   complaint is worth keeping in view: the uncapped first cut was caught as sound coming from an
+   UNATTENDED TAB, replaying forever into an empty room. So it repeats for a child who is there
+   and goes quiet for one who is not - see the document.hidden check in the ticker, which is the
+   part that makes repeating safe rather than the cap. A correct answer still holds it
+   (state.locked) and the teardown still clears it. */
 function armIdleVo(){
-  if(_idleVoFired){ stopIdleVo(); return; }      // [27f] one reminder per slide — already spent
   _idleSince = 0;                                // any (re)arm restarts the silence clock
   const slide = CARD.slides[state.idx];
   if(!slide || slide.type === "CELEBRATION" || !IDLE_VO_PHASES.has(slide.phase)){ stopIdleVo(); return; }
@@ -5441,8 +5466,11 @@ function armIdleVo(){
     if(Date.now() - _idleSince < ms) return;
     // [27f] ONE reminder, then done for this slide. Mark spent and stop the ticker BEFORE speaking,
     // so a pointerdown arriving during the replay cannot re-arm it.
-    _idleVoFired = true;
-    stopIdleVo();
+    /* [H11-117] a backgrounded tab says nothing. This is the guard that replaces [27f]'s cap:
+       it silences the exact case that cap was introduced for, without silencing the child who
+       is sitting in front of the screen waiting to be asked again. */
+    if(document.hidden){ _idleSince = Date.now(); return; }
+    _idleSince = Date.now();                     // restart the silence clock for the NEXT reminder
     GameBus.emit("idle_vo_replay", { slide_id: s.id, phase: s.phase });
     if(state.replayAudio) state.replayAudio(); else autoPlayChain(s);
   }, IDLE_VO_TICK);
@@ -11417,7 +11445,7 @@ function phaseBlurTransition(cb, toPhase){
   gate.classList.toggle("pg-talk", _bigTalk);
   if(img){ img.removeAttribute("src"); void img.offsetWidth;
            img.onload = function(){ _peekStart = Date.now(); };
-           img.src = _bigTalk ? "assets/UI/sw_peek_up.png?v=20260924135248" : "assets/UI/peeking.webp"; }
+           img.src = _bigTalk ? "assets/UI/sw_peek_up.png?v=20260924140518" : "assets/UI/peeking.webp"; }
   /* [H11-94] THE GATE SHOWS SWIFTY, NOT A SENTENCE. Asked for: this screen without the text.
      The line is still SPOKEN - only the writing goes, the same ruling [30i] made for the
      celebration page ("no sentence on the last page").
@@ -11774,8 +11802,18 @@ function boot(){
       let _namesOver = false;
       const _finishNames = ()=>{ if(_namesOver) return; _namesOver = true; _done(); };
       setTimeout(_finishNames, 6000);                       // the escape hatch for the pair
+      /* [H11-118] AND THEN THE PEACOCK ITSELF. Asked for: after the voice finishes, the bird's
+         own call - the way a dog barks after you say "dog".
+         THE FILE DOES NOT EXIST YET. There is no peacock cry anywhere in this project (not in
+         assets/SFX, not in assets/VO, not in _masters), and it is a recording, not something
+         that can be written. The chain is wired for it anyway, because play() treats a missing
+         clip as a silent beat: until the file is dropped at the path below this line simply
+         costs nothing and nothing waits on it. Drop a peacock call at
+             assets/SFX/sfx_mor_call.ogg
+         and it starts playing with no further change. */
       play("assets/VO/vo_name_mor." + AUDIO_EXT, ()=>{
-        play("assets/VO/vo_name_morni." + AUDIO_EXT, _finishNames); });
+        play("assets/VO/vo_name_morni." + AUDIO_EXT, ()=>{
+          play("assets/SFX/sfx_mor_call." + AUDIO_EXT, _finishNames); }); });
     });
   } };
   const sgVo = $("sgVo"); if(sgVo) sgVo.onclick = (e)=>{ e.stopPropagation(); playLanding(); };

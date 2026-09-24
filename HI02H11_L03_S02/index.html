@@ -837,7 +837,7 @@ html.no-anim .stimulus-pic .lbl .say-word.say-now{transform:none;}
 .start-gate{position:absolute;inset:0;z-index:80;display:flex;align-items:center;justify-content:center;background:transparent;cursor:default;}   /* [20a landing] transparent — the fixed .start-bg is the ground; [21c flag#1] cursor:default — hand-pointer belongs on .sg-btn/.sg-vo only, gate is not tap-anywhere */
 .start-gate.hidden{display:none;}
 /* inner white tile is the provided image (border + faint rays baked in) */
-.sg-card{position:relative;width:1114px;height:456px;background:url("assets/UI/start_card.webp?v=20260924140518") center/100% 100% no-repeat;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;}
+.sg-card{position:relative;width:1114px;height:456px;background:url("assets/UI/start_card.webp?v=20260924140949") center/100% 100% no-repeat;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;}
 /* full-body standing mascot (feet included): size by HEIGHT so the whole body incl. feet shows;
    the art frame is square with side padding, so it's constrained to the card height, not width. */
 .sg-mascot{position:absolute;left:-24px;bottom:-12px;width:208px;height:auto;z-index:3;object-fit:contain;filter:drop-shadow(0 10px 18px rgba(0,47,118,.18));animation:none;}   /* [25d] CORRECTED. My 25c change to left:8/bottom:6 was WRONG: I copied strilling's BASE rule (its line 611) instead of its WINNING late override (line 1104 = left:-24/bottom:-12/width:208 !important) — which is what the engine already had. Moving her right by 32px is also what threw .sg-vo out of line, since left:96px is tuned to this position. "Hovering" = the sgFloat bob: strilling kills it at its line 5600 `animation:none !important`, so it must be OFF here too (I previously said strilling bobs as well — that was reading line 611 and missing 5600). */
@@ -1020,7 +1020,7 @@ body.loaded .sg-acell{animation-play-state:running;}
    .wg-, .nh-, .ol-), NOT on a guessed prefix: keying on `sg-` alone is what dropped the
    entire drifting sky the first time round. */
 /* ===== FLN ANIMATION KIT: sky-drift BEGIN ===== */
-.start-bg{background-image:url("assets/UI/startnew_bg_plain.webp?v=20260924140518");}   /* mandatory */
+.start-bg{background-image:url("assets/UI/startnew_bg_plain.webp?v=20260924140949");}   /* mandatory */
 
 .sg-glow,.sg-sky{position:fixed;inset:0;pointer-events:none;display:none;z-index:1;}
 body.is-start .sg-glow,body.is-start .sg-sky,
@@ -1062,9 +1062,9 @@ body.is-end .sg-sky{
   margin:calc(var(--s) / -2) 0 0 calc(var(--s) / -2);
   background:center/contain no-repeat;opacity:0;
   animation:sgFly var(--t) linear infinite;animation-delay:var(--d);}
-.sg-sky .s1{background-image:url("assets/UI/bgdeco_star.svg?v=20260924140518");}
-.sg-sky .s2{background-image:url("assets/UI/bgdeco_star_o.svg?v=20260924140518");}
-.sg-sky .s3{background-image:url("assets/UI/bgdeco_spark.svg?v=20260924140518");}
+.sg-sky .s1{background-image:url("assets/UI/bgdeco_star.svg?v=20260924140949");}
+.sg-sky .s2{background-image:url("assets/UI/bgdeco_star_o.svg?v=20260924140949");}
+.sg-sky .s3{background-image:url("assets/UI/bgdeco_spark.svg?v=20260924140949");}
 .sg-sky .s4{border-radius:50%;border:.22vmax solid rgba(255,255,255,.92);}
 .sg-sky .s5{border-radius:50%;background:rgba(255,255,255,.92);}
 
@@ -1482,7 +1482,7 @@ html.no-anim .ol-alpha,html.no-anim .ol-band{animation:none !important;}
    startnew_bg_plain.webp is the same artwork with the decorations stripped.
    `body .start-bg` because the engine declares .start-bg AFTER this block; matching its
    specificity and relying on order is precisely what R11 forbids. */
-body .start-bg{background-image:url("assets/UI/startnew_bg_plain.webp?v=20260924140518");}
+body .start-bg{background-image:url("assets/UI/startnew_bg_plain.webp?v=20260924140949");}
 
 /* ---- the white centre box, more opaque ------------------------------------------
    start_card.webp is white at alpha 166/255 (65%), which is why the background rays read
@@ -1491,9 +1491,9 @@ body .start-bg{background-image:url("assets/UI/startnew_bg_plain.webp?v=20260924
    art's rounded corners are alpha - a background-color would square them off.
    Drop one layer for ~88% if this is too solid. */
 body .sg-card{background:
-   url("assets/UI/start_card.webp?v=20260924140518") center/100% 100% no-repeat,
-   url("assets/UI/start_card.webp?v=20260924140518") center/100% 100% no-repeat,
-   url("assets/UI/start_card.webp?v=20260924140518") center/100% 100% no-repeat;}
+   url("assets/UI/start_card.webp?v=20260924140949") center/100% 100% no-repeat,
+   url("assets/UI/start_card.webp?v=20260924140949") center/100% 100% no-repeat,
+   url("assets/UI/start_card.webp?v=20260924140949") center/100% 100% no-repeat;}
 
    which is why the first attempt at this changed almost nothing. Here it is constant.
    The kit's objection to filters on these elements (recipe 1, Deviations) is to ANIMATING
@@ -1532,7 +1532,7 @@ body .opt-cell.wg-wrong{animation:wgNo var(--wgT) ease-in-out both;}
 /* ===== END / CELEBRATION ===== */
 .end-screen{position:absolute;inset:0;z-index:90;display:none;flex-direction:column;align-items:center;justify-content:center;gap:22px;background:transparent;overflow:hidden;}
 /* r4: immersive celebration (adopted from Shruti's build — end_screen.webp sunburst + centred mascot + subtitle) */
-.end-bg{position:fixed;inset:0;background:#FDE9A8 url("assets/UI/end_screen.webp?v=20260924140518") center/cover no-repeat;display:none;pointer-events:none;z-index:0;}
+.end-bg{position:fixed;inset:0;background:#FDE9A8 url("assets/UI/end_screen.webp?v=20260924140949") center/cover no-repeat;display:none;pointer-events:none;z-index:0;}
 body.is-end .end-bg{display:block;}
 body.is-end{background:#FDE9A8 !important;}
 body.is-end .stage{background:transparent !important;}
@@ -1946,7 +1946,7 @@ body.gating .stage.gating .start-gate{filter:none;}
 
 /* [20a landing] fixed full-viewport ground so #47BCFD + art reach the true edges (kills the #7FC8F4 letterbox band);
    start-gate goes transparent (above) so this single image is seamless; in-lesson chrome hidden while landing shows. */
-.start-bg{position:fixed;inset:0;background:#47BCFD url("assets/UI/startnew_bg.webp?v=20260924140518") center/cover no-repeat;display:none;pointer-events:none;z-index:0;}
+.start-bg{position:fixed;inset:0;background:#47BCFD url("assets/UI/startnew_bg.webp?v=20260924140949") center/cover no-repeat;display:none;pointer-events:none;z-index:0;}
 body.is-start .start-bg{display:block;}
 body.is-start .stage-inner{visibility:hidden !important;}
 body.is-start .stage{background:transparent !important;}
@@ -2749,8 +2749,8 @@ body.is-start .phase-gate{
    it sat before - otherwise every one of these buttons would quietly rise 14px up the screen. */
 .nav-btn{width:198px !important;height:90px !important;min-width:0 !important;bottom:18px !important;
   padding:0 !important;border:0 !important;box-shadow:none !important;
-  background:transparent url("assets/swiftpal_buttons/btn-next-disabled.svg?v=20260924140518") center/198px 90px no-repeat !important;}
-.nav-btn.active{background-image:url("assets/swiftpal_buttons/btn-next.svg?v=20260924140518") !important;
+  background:transparent url("assets/swiftpal_buttons/btn-next-disabled.svg?v=20260924140949") center/198px 90px no-repeat !important;}
+.nav-btn.active{background-image:url("assets/swiftpal_buttons/btn-next.svg?v=20260924140949") !important;
   box-shadow:none !important;}
 .nav-btn.active:active{box-shadow:none !important;}
 .nav-btn .nav-arrow{display:none !important;}
@@ -2810,7 +2810,7 @@ body.is-start .phase-gate{
    paints it ONCE, so the blue .start-bg tints through and the card reads as a blue-white
    gradient with a white ring. This build stacked the SAME file 3x, which made it opaque
    flat white. Back to a single paint = src. (Sky sparkles deliberately NOT ported.) */
-body .sg-card{background:url("assets/UI/start_card.webp?v=20260924140518") center/100% 100% no-repeat !important;}
+body .sg-card{background:url("assets/UI/start_card.webp?v=20260924140949") center/100% 100% no-repeat !important;}
 .sg-mascot{left:-24px !important;bottom:-12px !important;width:208px !important;}
 .sg-vo{left:89px !important;bottom:-6px !important;width:58px !important;height:58px !important;}  /* <- src .sg-audio */
 .sg-content{width:100% !important;height:100% !important;max-width:none !important;
@@ -2861,7 +2861,7 @@ body .sg-card{background:url("assets/UI/start_card.webp?v=20260924140518") cente
 .sg-btn{bottom:40px !important;width:214px !important;height:92px !important;min-width:0 !important;
         padding:0 !important;border:0 !important;border-radius:46px !important;
         box-shadow:none !important;
-        background:transparent url("assets/swiftpal_buttons/btn-play.svg?v=20260924140518") center/214px 92px no-repeat !important;
+        background:transparent url("assets/swiftpal_buttons/btn-play.svg?v=20260924140949") center/214px 92px no-repeat !important;
         animation:sgBtnPulse 1.4s ease-in-out infinite !important;}
 .sg-btn:active{animation:none !important;}
 /* [H11-114] the landing pair: bigger, and standing closer. The strip is sized by .sg-ex's own
@@ -2888,7 +2888,7 @@ body .sg-card{background:url("assets/UI/start_card.webp?v=20260924140518") cente
    kept at _backup/swiftpal_buttons/btn-play-waiting.svg.gold-flat.
    The ?v= matters here more than usual: the FILE changed while its name did not, so without a
    fresh token a browser that has been on this page today keeps showing the gold one. */
-.sg-btn.sg-waiting{background-image:url("assets/swiftpal_buttons/btn-play-waiting.svg?v=20260924140518") !important;
+.sg-btn.sg-waiting{background-image:url("assets/swiftpal_buttons/btn-play-waiting.svg?v=20260924140949") !important;
                    cursor:default !important;animation:none !important;
                    pointer-events:none !important;}   /* see setStartBtnReady - NOT disabled */
 
@@ -2933,7 +2933,7 @@ html.no-anim body.is-start .sg-vo{animation:none !important;transform:none !impo
    the control keeps an accessible name instead of announcing as a bare "button". */
 .end-btn{width:163px !important;height:117px !important;min-width:0 !important;padding:0 !important;
          border:0 !important;border-radius:0 !important;box-shadow:none !important;font-size:0 !important;
-         background:transparent url("assets/swiftpal_buttons/btn-finish.svg?v=20260924140518") center/163px 117px no-repeat !important;}
+         background:transparent url("assets/swiftpal_buttons/btn-finish.svg?v=20260924140949") center/163px 117px no-repeat !important;}
 .end-btn:active{box-shadow:none !important;}
 
 /* ---- 6. FEEDBACK OVERLAY ------------------------------------------------------------------- */
@@ -3216,16 +3216,14 @@ html.no-anim body.is-start .sg-vo{animation:none !important;transform:none !impo
    keeps the stroke behind the fill so Devanagari counters do not fill in.
    ONE treatment for both genders, not a colour each: working the gender out from the word is the
    task, and colour-coding hands it over - the same reason P2's two options are a single navy. */
-.story-caption .gw{
-  font-weight:800;                                 /* [H11-102] the heavier of the two real faces */
-  /* [H11-103] ORANGE, asked for. No orange clears WCAG's 4.5:1 on white - that is orange's own
-     ceiling, not a choice - but these are 26px at weight 800, which counts as LARGE text, where
-     the bar is 3:1. #D95F02 sits at 3.76:1, comfortably over, and still reads orange rather than
-     brown; the brighter oranges (#F28C0F at 2.46, the game's own #FCB717 at 1.76) would have
-     been decoration a child could not read. */
-  color:#04205A;   /* [H11-109] navy while read; .verse-done turns the pair orange */
-  -webkit-text-stroke:.5px currentColor;           /* the real weight - see note */
-  paint-order:stroke fill;}
+/* [H11-119] THE PAIR EARNS ITS LOOK - it does not start with it. While the verse is being read
+   शेर/शेरनी are just two more words in the line: the same weight and the same navy as everything
+   round them, taking the moving orange as their turn comes like any other word. Only when the
+   reading is over do they go bold and orange together, which is what .verse-done now carries.
+   That is the better teaching order as well as what was asked for: marked from the first frame,
+   the answer sits on the page before the child has heard the question; marked at the end, the
+   line is read first and the pair is what it leaves behind. */
+.story-caption .gw{}
 /* [H11-81] the picture is back to its own size, and it sits higher. Shrinking it to make room
    was the wrong trade - on a verse slide the picture IS the story - and the room came from
    somewhere better: the nine slides no longer repeat "जंगल का मेला" above every verse, which
@@ -3276,7 +3274,10 @@ html.no-anim body.is-start .sg-vo{animation:none !important;transform:none !impo
    the #D95F02 it replaces, which was chosen to clear a contrast bar; this one does not, and
    that is a house-palette decision rather than an oversight. */
 .story-caption .verse-word.saying{color:#FF8A00;transform:scale(1.10);}
-.story-caption.verse-done .gw{color:#FF8A00;}
+.story-caption.verse-done .gw{
+  color:#FF8A00;                                   /* the reference build's own .mb-m orange */
+  font-weight:800;                                 /* [H11-102] the heavier of the two real faces */
+  -webkit-text-stroke:.5px currentColor;paint-order:stroke fill;}
 html.no-anim .story-caption .verse-word{transition:none !important;}
 
 /* [H11-90] the aage button swells 7s after the reading ends. translateX(-50%) is repeated inside
@@ -3375,7 +3376,7 @@ html.no-anim .nav-btn.nav-call{animation:none !important;}
      two banner boxes coincide. ONE scale for both axes, so nothing is stretched.
      The odd size/position below existed to fit the old 1667x943 art into a 16:9 box; the new
      file IS 16:9 (1672x941), so it simply fills. */
-  background:url("assets/Images/gate_bg.webp?v=20260924140518") no-repeat;
+  background:url("assets/Images/gate_bg.webp?v=20260924140949") no-repeat;
   background-size:100% 100%;background-position:0 0;}
 .sort-stage.sort-gates .sort-bins .sort-bin,
 .sort-stage.sort-gates .sort-bins.many .sort-bin{
@@ -3488,10 +3489,10 @@ html.no-anim .sort-stage.sort-gates .sort-item.snapped{
   transform-origin:50% 60%;}
 .sort-stage.sort-gates .gate-glow.gm{
   left:15.300%;top:20.403%;width:25.499%;height:15.740%;   /* [H11-74] the new board's own ratio */
-  background-image:url("assets/Images/gate_m.webp?v=20260924140518");}
+  background-image:url("assets/Images/gate_m.webp?v=20260924140949");}
 .sort-stage.sort-gates .gate-glow.gf{
   left:58.780%;top:20.248%;width:26.025%;height:16.182%;   /* [H11-74] */
-  background-image:url("assets/Images/gate_f.webp?v=20260924140518");}
+  background-image:url("assets/Images/gate_f.webp?v=20260924140949");}
 .sort-stage.sort-gates .sort-bins.lit-m .gate-glow.gm,
 .sort-stage.sort-gates .sort-bins.lit-f .gate-glow.gf{animation:gatePulse 1.1s ease-in-out;}
 @keyframes gatePulse{
@@ -4563,7 +4564,7 @@ function _resumeVoiceAudio(){
    AUDIO_BUILD changes whenever the game is rebuilt, so every clip URL changes with it and the
    browser has to fetch. It is added in the two places every clip passes through, rather than at
    the ~20 sites that spell out a path, so nothing can be missed. */
-const AUDIO_BUILD = "20260924140518";
+const AUDIO_BUILD = "20260924140949";
 function bustAudio(u){
   return (!u || u.indexOf("data:") === 0 || u.indexOf("?") >= 0) ? u : (u + "?v=" + AUDIO_BUILD);
 }
@@ -11445,7 +11446,7 @@ function phaseBlurTransition(cb, toPhase){
   gate.classList.toggle("pg-talk", _bigTalk);
   if(img){ img.removeAttribute("src"); void img.offsetWidth;
            img.onload = function(){ _peekStart = Date.now(); };
-           img.src = _bigTalk ? "assets/UI/sw_peek_up.png?v=20260924140518" : "assets/UI/peeking.webp"; }
+           img.src = _bigTalk ? "assets/UI/sw_peek_up.png?v=20260924140949" : "assets/UI/peeking.webp"; }
   /* [H11-94] THE GATE SHOWS SWIFTY, NOT A SENTENCE. Asked for: this screen without the text.
      The line is still SPOKEN - only the writing goes, the same ruling [30i] made for the
      celebration page ("no sentence on the last page").
@@ -11789,19 +11790,18 @@ function boot(){
          clip, so treat it as a refusal: stay waiting and let the unlock listener replay it. The
          9s watchdog is what stops that decision ever becoming a trap. */
       if(Date.now() - _t0 < 400) return;
-      /* [H11-114] AND THEN THE TWO NAMES, because the greeting ends on "जैसे- मोर- मोरनी" and
-         the two birds are sitting right there on the screen. Asked for: the mor and morni voice
-         after the VO. They are a chain, not a list, so each waits for the one before it.
-         The button is released only after BOTH - it is the same contract as before, just with a
-         longer thing to wait for - and every step carries its own escape hatch, because play()'s
-         end callback is not guaranteed and a clip that never ends must not hold the landing.
-         ([H11-48] had removed the peacock calls that used to follow this line; these are the
-         NAMES, which is a different thing and is what was asked for.) */
+      /* [H11-120] THE CALL, AND ONLY THE CALL. The names were being spoken here for a moment -
+         and they were the wrong thing, because the greeting ALREADY ends on "जैसे- मोर- मोरनी".
+         Saying them again straight afterwards is the same two words twice in four seconds. What
+         belongs after the line is the bird itself, the way a dog barks after you say "dog".
+         So: greeting, then the peacock, then the button opens. The button is still released only
+         when the whole chain is done, and the chain carries its own escape hatch, because play()'s
+         end callback is not guaranteed and a clip that never ends must not hold the landing shut. */
       const _done = ()=>{ clearTimeout(_landReleaseT); setStartBtnReady(true);
         if(_tutorialPending){ _tutorialPending = false; enterTutorial(); } };
       let _namesOver = false;
       const _finishNames = ()=>{ if(_namesOver) return; _namesOver = true; _done(); };
-      setTimeout(_finishNames, 6000);                       // the escape hatch for the pair
+      setTimeout(_finishNames, 4000);                       // the escape hatch for the call
       /* [H11-118] AND THEN THE PEACOCK ITSELF. Asked for: after the voice finishes, the bird's
          own call - the way a dog barks after you say "dog".
          THE FILE DOES NOT EXIST YET. There is no peacock cry anywhere in this project (not in
@@ -11811,9 +11811,7 @@ function boot(){
          costs nothing and nothing waits on it. Drop a peacock call at
              assets/SFX/sfx_mor_call.ogg
          and it starts playing with no further change. */
-      play("assets/VO/vo_name_mor." + AUDIO_EXT, ()=>{
-        play("assets/VO/vo_name_morni." + AUDIO_EXT, ()=>{
-          play("assets/SFX/sfx_mor_call." + AUDIO_EXT, _finishNames); }); });
+      play("assets/SFX/sfx_mor_call." + AUDIO_EXT, _finishNames);
     });
   } };
   const sgVo = $("sgVo"); if(sgVo) sgVo.onclick = (e)=>{ e.stopPropagation(); playLanding(); };

@@ -123,7 +123,7 @@
    "audio": {
     "narration": "vo_poem_03"
    },
-   "data": { "caption_cues_ms": [300, 775, 1105, 1820, 2740, 3355, 3670, 4075], "caption_first": true,"caption_hi": "<span class=\"gw\">मोर</span> पंख रंगीन फैलाए,\n<span class=\"gw\">मोरनी</span> संग ठुमके लगाए।", 
+   "data": { "caption_cues_ms": [300, 775, 1105, 1820, 2740, 3355, 3670, 4075],"caption_hi": "<span class=\"gw\">मोर</span> पंख रंगीन फैलाए,\n<span class=\"gw\">मोरनी</span> संग ठुमके लगाए।", 
     "image_id": "sc_mela_03",
     "emoji": "🎪",
     "alt_hi": "मोर पंख रंगीन फैलाए, मोरनी संग ठुमके लगाए।",

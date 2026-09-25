@@ -14,21 +14,7 @@
  "subtitle_hi": "",
  "skill_description_hi": "लिंग-सूचक शब्द-रूप बदलाव को पहचानता है — जैसे शेर से शेरनी, मोर से मोरनी।",
  "dt_fallback": null,
- "landing_hero": {
-  "kind": "concept_strip",
-  "cells": [
-   {
-    "type": "image",
-    "src": "assets/Images/pic_mor.webp",
-    "label": "मोर"
-   },
-   {
-    "type": "image",
-    "src": "assets/Images/pic_morni.webp",
-    "label": "मोरनी"
-   }
-  ]
- },
+ "landing_hero": {"kind": "concept_strip", "cells": [{"type": "image", "src": "assets/Images/mor title image.png", "label": "मोर"}, {"type": "image", "src": "assets/Images/title.png", "label": "आइए जोड़ी मिलाएँ"}, {"type": "image", "src": "assets/Images/morni title image.png", "label": "मोरनी"}]},
  "phase_gate_vo": {"guided": "vo_bridge_lost"}, "landing_nudge": false,
  "audio_chip_on_mascot_foot": true,
  "phase_distribution": {

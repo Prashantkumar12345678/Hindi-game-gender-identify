@@ -1,14 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 116 116" width="116" height="116" role="img" aria-label="Play (waiting)">
   <defs>
     <filter id="sh" x="-40%" y="-40%" width="180%" height="195%">
-      <feDropShadow dx="0" dy="4" stdDeviation="3" flood-color="#9A9AA1" flood-opacity="0.30"/>
+      <feDropShadow dx="0" dy="4" stdDeviation="3" flood-color="#7C7C86" flood-opacity="0.30"/>
     </filter>
-    <!-- the FACE: light at the top, one shade down at the foot. It stops at #D9D9DE - the older
+    <!-- the FACE: light at the top, one shade down at the foot. It stops at #C6C6CE - the older
          #E8930A read as dirty brown once the disc came down to ~105px on screen. -->
     <linearGradient id="face" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#F4F4F6"/>
-      <stop offset=".52" stop-color="#E8E8EA"/>
-      <stop offset="1" stop-color="#D9D9DE"/>
+      <stop offset="0" stop-color="#E9E9EE"/>
+      <stop offset=".52" stop-color="#D8D8DF"/>
+      <stop offset="1" stop-color="#C6C6CE"/>
     </linearGradient>
     <linearGradient id="gloss" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="#fff" stop-opacity=".58"/>
@@ -23,7 +23,7 @@
          what makes a thing look pressable. A dome shaded on one flat disc only ever looks
          painted; this is the same way the pill buttons in this set are built. -->
     <circle cx="44" cy="48" r="43" fill="#FFFFFF"/>
-    <circle cx="44" cy="48" r="40.5" fill="#C2C2C8"/>
+    <circle cx="44" cy="48" r="40.5" fill="#A8A8B2"/>
     <circle cx="44" cy="43" r="43" fill="#FFFFFF"/>
     <circle cx="44" cy="43" r="39" fill="url(#face)"/>
 
@@ -38,7 +38,7 @@
          without a white line round the glyph.
          Nudged right of centre because a play glyph centred on its bounding box reads as sitting
          too far left - the eye centres it on its visual mass, not its box. -->
-    <g transform="translate(46 43) scale(1.6)" fill="#B3B3B8" stroke="#B3B3B8"
+    <g transform="translate(46 43) scale(1.6)" fill="#8B8B95" stroke="#8B8B95"
        stroke-width="2.6" stroke-linejoin="round">
       <path d="M-6.8 -10.2 L10.2 0 -6.8 10.2 Z"/>
     </g>

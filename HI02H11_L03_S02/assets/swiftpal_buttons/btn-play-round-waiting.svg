@@ -1,50 +1,39 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 116 116" width="116" height="116" role="img" aria-label="Play (waiting)">
   <defs>
     <filter id="sh" x="-40%" y="-40%" width="180%" height="190%">
-      <feDropShadow dx="0" dy="5" stdDeviation="3.2" flood-color="#B3B3B8" flood-opacity="0.28"/>
+      <feDropShadow dx="0" dy="4" stdDeviation="3" flood-color="#9A9AA1" flood-opacity="0.30"/>
     </filter>
-    <!-- the body: lighter at the top, deeper at the foot, which is what reads as a dome -->
+    <!-- the dome: light at the top, one shade down at the foot. No brown - the old one went to
+         #E8930A and read as dirty at this size. -->
     <linearGradient id="body" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="#F2F2F4"/>
-      <stop offset=".46" stop-color="#E8E8EA"/>
-      <stop offset="1" stop-color="#D3D3D8"/>
+      <stop offset=".55" stop-color="#E8E8EA"/>
+      <stop offset="1" stop-color="#D6D6DB"/>
     </linearGradient>
-    <!-- the big top-left gloss, an ellipse faded to nothing -->
-    <radialGradient id="gloss" cx=".36" cy=".26" r=".52">
-      <stop offset="0" stop-color="#fff" stop-opacity=".72"/>
-      <stop offset=".62" stop-color="#fff" stop-opacity=".16"/>
+    <!-- one soft top gloss, wide and low-contrast, instead of a hard white blob -->
+    <linearGradient id="gloss" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity=".55"/>
       <stop offset="1" stop-color="#fff" stop-opacity="0"/>
-    </radialGradient>
-    <!-- the bounce light along the bottom rim -->
-    <linearGradient id="bounce" x1="0" y1="1" x2=".5" y2="0">
-      <stop offset="0" stop-color="#fff" stop-opacity=".40"/>
-      <stop offset=".42" stop-color="#fff" stop-opacity="0"/>
     </linearGradient>
-    <linearGradient id="tri" x1="0" y1="0" x2=".3" y2="1">
-      <stop offset="0" stop-color="#C9C9CE"/>
-      <stop offset=".45" stop-color="#B3B3B8"/>
-      <stop offset="1" stop-color="#9A9AA1"/>
-    </linearGradient>
-    <clipPath id="disc"><circle cx="44" cy="44" r="41"/></clipPath>
+    <clipPath id="disc"><circle cx="44" cy="44" r="40.5"/></clipPath>
   </defs>
 
   <g transform="translate(14 14)" filter="url(#sh)">
-    <!-- white rim, thick, as its own disc under the body -->
-    <circle cx="44" cy="44" r="43.5" fill="#FFFFFF"/>
-    <circle cx="44" cy="44" r="41" fill="url(#body)"/>
+    <circle cx="44" cy="44" r="43" fill="#FFFFFF"/>
+    <circle cx="44" cy="44" r="40.5" fill="url(#body)"/>
     <g clip-path="url(#disc)">
-      <ellipse cx="34" cy="26" rx="34" ry="27" fill="url(#gloss)"/>
-      <ellipse cx="44" cy="44" rx="41" ry="41" fill="url(#bounce)"/>
-      <!-- the two little sparks the reference has at the top-left of the dome -->
-      <ellipse cx="20.5" cy="30" rx="3.1" ry="4.6" fill="#fff" opacity=".85" transform="rotate(-28 20.5 30)"/>
-      <ellipse cx="27.5" cy="24.5" rx="1.7" ry="2.5" fill="#fff" opacity=".7" transform="rotate(-28 27.5 24.5)"/>
+      <ellipse cx="44" cy="20" rx="36" ry="24" fill="url(#gloss)"/>
     </g>
 
-    <!-- the triangle: white outline, navy face, a lighter sliver along its top edge -->
-    <g transform="translate(46.5 44) scale(1.52)">
-      <path d="M-7.5 -11.2 q0-2.4 2-1.2 L11 -1.6 q2 1.2 0 2.4 L-5.5 12.4 q-2 1.2-2-1.2 Z"
-            fill="url(#tri)" stroke="#FFFFFF" stroke-width="2.1" stroke-linejoin="round"/>
-      <path d="M-5.6 -9.4 q0-1.2 1.1-.6 L5.2 -3.3 -5.6 -2.1 Z" fill="#DCDCE0" opacity=".55"/>
+    <!-- SOLID NAVY, NO OUTLINE. The triangle is filled and stroked in its OWN colour with a round
+         join: that is what rounds its three corners, which a plain filled path cannot do, and it
+         does it without putting a white line round the glyph.
+         Nudged right of centre (the path starts at x=-7.5 in its own box) because a play glyph
+         centred on its bounding box reads as sitting too far left - the eye centres it on its
+         visual mass, not its box. -->
+    <g transform="translate(46 44) scale(1.62)" fill="#B3B3B8" stroke="#B3B3B8"
+       stroke-width="2.6" stroke-linejoin="round">
+      <path d="M-6.8 -10.2 L10.2 0 -6.8 10.2 Z"/>
     </g>
   </g>
 </svg>

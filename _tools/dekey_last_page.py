@@ -120,7 +120,11 @@ for i, f in enumerate(out):
 fps = max(1, round(1000.0 / (interval * KEEP)))
 subprocess.run([FF, "-v", "error", "-y", "-framerate", str(fps),
                 "-i", os.path.join(tmp, "f%04d.png"),
-                "-loop", "0", "-c:v", "libwebp_anim", "-lossless", "0",
+                # ONCE, NOT FOREVER. In WebP's animation header 0 means infinite and N means
+                # play N times, so this is 1. Asked for: the celebration should finish and stay
+                # finished - a bird cheering on a loop behind a child who has already moved on
+                # reads as the screen being stuck.
+                "-loop", "1", "-c:v", "libwebp_anim", "-lossless", "0",
                 "-q:v", "62", "-pix_fmt", "yuva420p", OUT], check=True)
 shutil.rmtree(tmp, ignore_errors=True)
 print("%s  %dx%d  %d frames  %d fps  %.1fs  %d KB"

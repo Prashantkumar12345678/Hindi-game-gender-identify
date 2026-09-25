@@ -1,37 +1,44 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 116 116" width="116" height="116" role="img" aria-label="Play (waiting)">
   <defs>
-    <filter id="sh" x="-40%" y="-40%" width="180%" height="190%">
+    <filter id="sh" x="-40%" y="-40%" width="180%" height="195%">
       <feDropShadow dx="0" dy="4" stdDeviation="3" flood-color="#9A9AA1" flood-opacity="0.30"/>
     </filter>
-    <!-- the dome: light at the top, one shade down at the foot. No brown - the old one went to
-         #E8930A and read as dirty at this size. -->
-    <linearGradient id="body" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#F2F2F4"/>
-      <stop offset=".55" stop-color="#E8E8EA"/>
-      <stop offset="1" stop-color="#D6D6DB"/>
+    <!-- the FACE: light at the top, one shade down at the foot. It stops at #D9D9DE - the older
+         #E8930A read as dirty brown once the disc came down to ~105px on screen. -->
+    <linearGradient id="face" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F4F4F6"/>
+      <stop offset=".52" stop-color="#E8E8EA"/>
+      <stop offset="1" stop-color="#D9D9DE"/>
     </linearGradient>
-    <!-- one soft top gloss, wide and low-contrast, instead of a hard white blob -->
     <linearGradient id="gloss" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#fff" stop-opacity=".55"/>
+      <stop offset="0" stop-color="#fff" stop-opacity=".58"/>
       <stop offset="1" stop-color="#fff" stop-opacity="0"/>
     </linearGradient>
-    <clipPath id="disc"><circle cx="44" cy="44" r="40.5"/></clipPath>
+    <clipPath id="disc"><circle cx="44" cy="43" r="39"/></clipPath>
   </defs>
 
   <g transform="translate(14 14)" filter="url(#sh)">
-    <circle cx="44" cy="44" r="43" fill="#FFFFFF"/>
-    <circle cx="44" cy="44" r="40.5" fill="url(#body)"/>
+    <!-- THE DEPTH IS A SECOND DISC, not a gradient trick. A darker gold circle sits 5px lower and
+         the face covers all but its bottom crescent, so the button has a visible SIDE - which is
+         what makes a thing look pressable. A dome shaded on one flat disc only ever looks
+         painted; this is the same way the pill buttons in this set are built. -->
+    <circle cx="44" cy="48" r="43" fill="#FFFFFF"/>
+    <circle cx="44" cy="48" r="40.5" fill="#C2C2C8"/>
+    <circle cx="44" cy="43" r="43" fill="#FFFFFF"/>
+    <circle cx="44" cy="43" r="39" fill="url(#face)"/>
+
     <g clip-path="url(#disc)">
-      <ellipse cx="44" cy="20" rx="36" ry="24" fill="url(#gloss)"/>
+      <ellipse cx="44" cy="19" rx="35" ry="23" fill="url(#gloss)"/>
+      <!-- one small spark, top left, where the light would catch a dome -->
+      <ellipse cx="23" cy="28" rx="3" ry="4.4" fill="#fff" opacity=".7" transform="rotate(-30 23 28)"/>
     </g>
 
-    <!-- SOLID NAVY, NO OUTLINE. The triangle is filled and stroked in its OWN colour with a round
-         join: that is what rounds its three corners, which a plain filled path cannot do, and it
-         does it without putting a white line round the glyph.
-         Nudged right of centre (the path starts at x=-7.5 in its own box) because a play glyph
-         centred on its bounding box reads as sitting too far left - the eye centres it on its
-         visual mass, not its box. -->
-    <g transform="translate(46 44) scale(1.62)" fill="#B3B3B8" stroke="#B3B3B8"
+    <!-- SOLID NAVY, NO OUTLINE. Filled and stroked in its OWN colour with a round join: that is
+         what rounds the three corners, which a plain filled path cannot do, and it does it
+         without a white line round the glyph.
+         Nudged right of centre because a play glyph centred on its bounding box reads as sitting
+         too far left - the eye centres it on its visual mass, not its box. -->
+    <g transform="translate(46 43) scale(1.6)" fill="#B3B3B8" stroke="#B3B3B8"
        stroke-width="2.6" stroke-linejoin="round">
       <path d="M-6.8 -10.2 L10.2 0 -6.8 10.2 Z"/>
     </g>

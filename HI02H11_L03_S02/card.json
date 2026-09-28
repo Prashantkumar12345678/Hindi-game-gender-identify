@@ -139,62 +139,93 @@
    }
   },
   {
-   "id": "T5",
-   "phase": "tutorial",
-   "eis": "iconic",
-   "type": "STORY_SCENE",
-   "prompt_hi": "",
-   "audio": {
-    "narration": "vo_poem_05"
-   },
-   "data": { "caption_cues_ms": [260, 1425, 2366, 4240, 4945, 5345, 5685],"caption_hi": "<span class=\"gw\">बकरा</span> बोला— “में-में-में!”\n<span class=\"gw\">बकरी</span> बोली— “साथ चलें!”", 
-    "image_id": "sc_mela_05",
-    "emoji": "🎪",
-    "alt_hi": "बकरा बोला— “में-में-में!” बकरी बोली— “साथ चलें!”",
-    "video_id": "sc_mela_05"
-   },
-   "signals": {
-    "on_complete": []
-   }
+  "id": "T5",
+  "phase": "tutorial",
+  "eis": "iconic",
+  "type": "STORY_SCENE",
+  "prompt_hi": "",
+  "audio": {
+   "narration": "vo_poem_05"
   },
+  "data": {
+   "caption_cues_ms": [
+    260,
+    1425,
+    2366,
+    4240,
+    4945,
+    5345,
+    5685
+   ],
+   "caption_hi": "<span class=\"gw\">बकरा</span> बोला, “में-में-में”\n<span class=\"gw\">बकरी</span> बोली, “साथ चले।”",
+   "image_id": "sc_mela_05",
+   "emoji": "🎪",
+   "alt_hi": "बकरा बोला, “में-में-में” बकरी बोली, “साथ चले।”",
+   "video_id": "sc_mela_05"
+  },
+  "signals": {
+   "on_complete": []
+  }
+ },
   {
-   "id": "T6",
-   "phase": "tutorial",
-   "eis": "iconic",
-   "type": "STORY_SCENE",
-   "prompt_hi": "",
-   "audio": {
-    "narration": "vo_poem_06"
-   },
-   "data": { "caption_cues_ms": [270, 870, 1297, 1795, 3030, 3790, 4275, 4890],"caption_hi": "<span class=\"gw\">बंदर</span> लाया लाल गुब्बारा,\n<span class=\"gw\">बंदरिया</span> बोली कितना प्यारा!", 
-    "image_id": "sc_mela_06",
-    "emoji": "🎪",
-    "alt_hi": "बंदर लाया लाल गुब्बारा, बंदरिया बोली कितना प्यारा!",
-    "video_id": "sc_mela_06"
-   },
-   "signals": {
-    "on_complete": []
-   }
+  "id": "T6",
+  "phase": "tutorial",
+  "eis": "iconic",
+  "type": "STORY_SCENE",
+  "prompt_hi": "",
+  "audio": {
+   "narration": "vo_poem_06"
   },
+  "data": {
+   "caption_cues_ms": [
+    270,
+    870,
+    1297,
+    1795,
+    3030,
+    3790,
+    4275,
+    4890
+   ],
+   "caption_hi": "<span class=\"gw\">बंदर</span> लाया लाल गुब्बारा,\n<span class=\"gw\">बंदरिया</span> बोली, “कितना प्यारा।”",
+   "image_id": "sc_mela_06",
+   "emoji": "🎪",
+   "alt_hi": "बंदर लाया लाल गुब्बारा, बंदरिया बोली, “कितना प्यारा।”",
+   "video_id": "sc_mela_06"
+  },
+  "signals": {
+   "on_complete": []
+  }
+ },
   {
-   "id": "T7",
-   "phase": "tutorial",
-   "eis": "iconic",
-   "type": "STORY_SCENE",
-   "prompt_hi": "",
-   "audio": {
-    "narration": "vo_poem_07"
-   },
-   "data": { "caption_cues_ms": [250, 1035, 1410, 2760, 3570, 3910, 4410],"caption_hi": "<span class=\"gw\">मुर्गा</span> बोला— “कुकड़ू-कूँ!”\n<span class=\"gw\">मुर्गी</span> बोली— “क्या खाऊँ!”", 
-    "image_id": "sc_mela_07",
-    "emoji": "🎪",
-    "alt_hi": "मुर्गा बोला— “कुकड़ू-कूँ!” मुर्गी बोली— “क्या खाऊँ!”",
-    "video_id": "sc_mela_07"
-   },
-   "signals": {
-    "on_complete": []
-   }
+  "id": "T7",
+  "phase": "tutorial",
+  "eis": "iconic",
+  "type": "STORY_SCENE",
+  "prompt_hi": "",
+  "audio": {
+   "narration": "vo_poem_07"
   },
+  "data": {
+   "caption_cues_ms": [
+    250,
+    1035,
+    1410,
+    2760,
+    3570,
+    3910,
+    4410
+   ],
+   "caption_hi": "<span class=\"gw\">मुर्गा</span> बोला, “कुकड़ू-कूँ”\n<span class=\"gw\">मुर्गी</span> बोली, “क्या खाऊँ?”",
+   "image_id": "sc_mela_07",
+   "emoji": "🎪",
+   "alt_hi": "मुर्गा बोला, “कुकड़ू-कूँ” मुर्गी बोली, “क्या खाऊँ?”",
+   "video_id": "sc_mela_07"
+  },
+  "signals": {
+   "on_complete": []
+  }
+ },
   {
    "id": "T8",
    "phase": "tutorial",

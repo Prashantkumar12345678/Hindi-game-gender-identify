@@ -24,6 +24,7 @@ CHROME = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
 # once the opening has finished - the reference is a flat board with all six the same size.
 INJECT = """<style id="cmpOnly">
 .fw-seat{opacity:1 !important;filter:none !important;}
+.fw-disc,.fw-frame{filter:none !important;}
 .fw-swing{animation:none !important;transform:none !important;}
 .fw-name,.fw-riders,.fw-listen,.dev-banner,.dev-nav{display:none !important;}
 .fw-ask{opacity:1 !important;transform:none !important;}

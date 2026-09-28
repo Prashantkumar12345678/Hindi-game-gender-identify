@@ -384,55 +384,50 @@
    }
   },
   {
-   "id": "G4",
-   "audio": {
-            "prompt": "vo_q_ghoda_new",
-            "hint1": "vo_h1_ghoda",
-            "hint2": "vo_h2_ghoda",
-            "hint": "vo_h2_ghoda",
-            "reveal": "vo_h2_ghoda",
-            "correct": "vo_correct_pair"
-        },
-        "phase": "guided",
-   "eis": "iconic",
-   "type": "STORY_QUESTION",
-   "prompt_hi": "सही जोड़ी चुनिए।",
-   
-   "data": {
-    "stim_word_hi": "घोड़ा",
-    "options": [
-     {
-      "img": "pic_murgi",
-      "emoji": "🐔",
-      "word_hi": "मुर्गी",
-      "audio": "vo_name_murgi",
-      "label_hi": "मुर्गी"
-     },
-     {
-      "img": "pic_gaay",
-      "emoji": "🐄",
-      "word_hi": "गाय",
-      "audio": "vo_name_gaay",
-      "label_hi": "गाय"
-     },
-     {
-      "img": "pic_ghodi",
-      "emoji": "🐴",
-      "word_hi": "घोड़ी",
-      "audio": "vo_name_ghodi",
-      "label_hi": "घोड़ी",
-      "correct": true
-     }
-    ],
-    "reveal_seq": true,
-    "signal_name": "gender_match_first_try"
-   },
-   "signals": {
-    "on_complete": [
-     "gender_match_first_try"
-    ]
-   }
+  "id": "G4",
+  "audio": {
+   "prompt": "vo_q_ghoda_new",
+   "hint1": "vo_h1_ghoda",
+   "hint2": "vo_h2_ghoda",
+   "hint": "vo_h2_ghoda",
+   "reveal": "vo_h3_ghoda",
+   "correct": "vo_correct_pair"
   },
+  "phase": "guided",
+  "eis": "iconic",
+  "type": "STORY_QUESTION",
+  "prompt_hi": "सही जोड़ी चुनिए।",
+  "data": {
+   "stim_word_hi": "घोड़ा",
+   "options": [
+    {
+     "word_hi": "मुर्गी",
+     "audio": "vo_name_murgi",
+     "label_hi": "मुर्गी"
+    },
+    {
+     "word_hi": "गाय",
+     "audio": "vo_name_gaay",
+     "label_hi": "गाय"
+    },
+    {
+     "word_hi": "घोड़ी",
+     "audio": "vo_name_ghodi",
+     "label_hi": "घोड़ी",
+     "correct": true
+    }
+   ],
+   "reveal_seq": true,
+   "signal_name": "gender_match_first_try",
+   "recall_image_id": "pic_ghoda",
+   "options_words_only": true
+  },
+  "signals": {
+   "on_complete": [
+    "gender_match_first_try"
+   ]
+  }
+ },
   
   {
    "id": "G6",

@@ -670,13 +670,15 @@
       "word_hi": "मोरनी",
       "img": "pic_morni",
       "emoji": "🦚",
-      "faces": "left"
+      "faces": "left",
+      "sit": 0.761
      },
      "pair": {
       "word_hi": "मोर",
       "img": "pic_mor",
       "emoji": "🦚",
-      "faces": "left"
+      "faces": "left",
+      "sit": 0.801
      },
      "options": [
       "मोर",
@@ -692,12 +694,14 @@
      "seated": {
       "word_hi": "बकरा",
       "img": "pic_bakra",
-      "emoji": "🐐"
+      "emoji": "🐐",
+      "sit": 0.752
      },
      "pair": {
       "word_hi": "बकरी",
       "img": "pic_bakri",
-      "emoji": "🐐"
+      "emoji": "🐐",
+      "sit": 0.704
      },
      "options": [
       "बिल्ली",
@@ -713,12 +717,14 @@
      "seated": {
       "word_hi": "हाथी",
       "img": "pic_hathi",
-      "emoji": "🐘"
+      "emoji": "🐘",
+      "sit": 0.706
      },
      "pair": {
       "word_hi": "हथिनी",
       "img": "pic_hathini",
-      "emoji": "🐘"
+      "emoji": "🐘",
+      "sit": 0.675
      },
      "options": [
       "हथिनी",
@@ -734,12 +740,14 @@
      "seated": {
       "word_hi": "चुहिया",
       "img": "pic_chuhiya",
-      "emoji": "🐭"
+      "emoji": "🐭",
+      "sit": 0.819
      },
      "pair": {
       "word_hi": "चूहा",
       "img": "pic_chuha",
-      "emoji": "🐭"
+      "emoji": "🐭",
+      "sit": 0.833
      },
      "options": [
       "चूहा",
@@ -755,12 +763,14 @@
      "seated": {
       "word_hi": "घोड़ा",
       "img": "pic_ghoda",
-      "emoji": "🐎"
+      "emoji": "🐎",
+      "sit": 0.688
      },
      "pair": {
       "word_hi": "घोड़ी",
       "img": "pic_ghodi",
-      "emoji": "🐎"
+      "emoji": "🐎",
+      "sit": 0.66
      },
      "options": [
       "हथिनी",
@@ -776,12 +786,14 @@
      "seated": {
       "word_hi": "मुर्गी",
       "img": "pic_murgi",
-      "emoji": "🐔"
+      "emoji": "🐔",
+      "sit": 0.75
      },
      "pair": {
       "word_hi": "मुर्गा",
       "img": "pic_murga",
-      "emoji": "🐓"
+      "emoji": "🐓",
+      "sit": 0.774
      },
      "options": [
       "मुर्गा",

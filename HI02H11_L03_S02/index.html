@@ -3081,15 +3081,6 @@ html.no-anim .fw-swing{animation:none !important;}
    seat units that is (10.5,141.3) 228x76. See _tools/bucket_layers.py. */
 .fw-front{position:absolute;left:10.5px;top:141.3px;width:228px;height:76.1px;
   pointer-events:none;}
-/* THE SEAT, PAINTED AGAIN IN FRONT OF THE RIDER. Buket.svg keeps the hanger and the purple seat
-   together in one layer, but the mock-up has the animal's LEGS behind the seat and its body in
-   front of it - so the seat has to exist on both sides of the rider. This is the same picture
-   cropped from the cushion's top row (y167 of 304) downwards, which is why its edge is the
-   cushion's own ellipse and not a straight line: above that row the picture is transparent apart
-   from the hanger's arms, and those are far out at the sides where no animal reaches.
-   Cut by _tools/bucket_layers.py from the layer the artist supplied, so nothing here is drawn by
-   me - it is the same pixels, twice, with the rider in between. */
-.fw-seatfront{position:absolute;left:0;top:122px;width:249px;height:100px;pointer-events:none;}
 /* the plate, the name and the riders are all in bucket coordinates, so they come down by the
    same 0.9185 the bucket did - otherwise the nameplate would hang off the tub it belongs to. */
 .fw-plate{position:absolute;left:46px;top:164px;width:155px;height:43px;}
@@ -3116,16 +3107,23 @@ html.no-anim .fw-swing{animation:none !important;}
    changing the size cap never fixed it. 22px shows 82-86% of every animal.
    ONE SET OF NUMBERS COVERS ALL SIX because the tuck is set here, by the bottom edge, and is the
    same whatever shape the picture is. The cap below only decides how far each one reaches UP. */
-/* THE BOX'S BOTTOM IS THE SEAT LINE (-15 + 145 = 130, just past the cushion's top at 122), and
+/* THE BOX'S BOTTOM IS THE SEAT LINE (see the rule below for where it is now), and
    every rider drops itself by the part of itself that is below its own body line so that its
    BODY lands there - see --drop below. Bottom-aligning the pictures instead is what made one
    shared number impossible: the bottom of a picture is a bird's feet and an elephant's belly. */
-.fw-riders{position:absolute;left:24px;top:-15px;width:201px;height:145px;display:flex;
-  align-items:flex-end;justify-content:center;gap:4px;}
+/* THE SEAT LINE IS JUST BELOW THE RED RIM NOW (-15 + 175 = 160). The mock-up of 28 Sep has the animal in
+   FRONT of the purple cushion with only what is below its body hidden, and the thing that hides
+   it is the red basket - so the body lands on the basket's rim, not on the cushion's top.
+   ROW-REVERSE: a rider alone sits right of centre, as the mock-up draws her, and the partner
+   who joins comes in on the LEFT - so the first one never has to shuffle over to make room. */
+.fw-riders{position:absolute;left:24px;top:-15px;width:201px;height:175px;display:flex;
+  flex-direction:row-reverse;align-items:flex-end;justify-content:center;gap:4px;
+  box-sizing:border-box;}
+.fw-riders:has(> :only-child){justify-content:flex-start;padding-right:22px;}
 /* A PAIR IS TUCKED A LITTLE LESS. Two animals sharing a bucket are half the width and, for
    these wide pictures, barely half the height, so the same 22px takes a bigger bite out of them.
    Bottom lands at 158, i.e. 17px past the lip. */
-.fw-riders:has(> :not(:only-child)){height:126px;}
+.fw-riders:has(> :not(:only-child)){height:170px;}
 /* SIZED BY THE TUB, NOT BY THE ANIMAL. Height alone is the wrong constraint: these pictures are
    far wider than they are tall - an elephant is 654x420 - so two of them at a fixed height came
    to over 300px inside a 186px tub and spilled out past both arms of the hanger. Each rider is
@@ -3971,7 +3969,7 @@ html.no-anim .sort-stage.sort-gates .sort-bins.lit-f::after{animation:none;filte
      and shrink the gate with the stage - production pattern). -->
 <div class="phase-gate" id="phaseGate">
     <div class="pg-title" id="phaseGateTitle"></div>
-    <img id="phaseGateImg" src="assets/UI/sw_peek_hd.webp?v=20260928175756" alt="">   <!-- [20a landing-fix] reunited with #phaseGate (was orphaned in .stage → full-bleed on landing once the gate went transparent) -->
+    <img id="phaseGateImg" alt="">   <!-- [20a landing-fix] reunited with #phaseGate (was orphaned in .stage → full-bleed on landing once the gate went transparent) -->
 </div>
 
 <!-- ============ CARD DATA (embedded; in prod the compiler does this) ============ -->
@@ -11139,7 +11137,6 @@ const SlideModules = {
             `<div class="fw-seat" data-i="${i}"><div class="fw-swing">` +
               `<img class="fw-bucket" src="assets/Images/wheel_bucket.${IMG_EXT}" alt="">` +
               `<div class="fw-riders"></div>` +
-              `<img class="fw-seatfront" src="assets/Images/wheel_seat_front.${IMG_EXT}" alt="" aria-hidden="true">` +
               `<img class="fw-front"  src="assets/Images/wheel_bucket_front.${IMG_EXT}" alt="" aria-hidden="true">` +
               `<img class="fw-plate"  src="assets/Images/wheel_plate.${IMG_EXT}" alt="">` +
               `<div class="fw-name"></div>` +
@@ -11257,18 +11254,18 @@ const SlideModules = {
         el.innerHTML = rider(who);
         const node = el.firstElementChild; if(!node) return;
         if(fresh) node.classList.add("fw-new");
-        /* FACE YOUR NEIGHBOUR. First one in sits on the left of the tub and should look right;
-           the second sits on the right and should look left. The card says which way the picture
+        /* FACE YOUR NEIGHBOUR. First one in sits on the right of the tub and should look left;
+           the second joins on the left and should look right. The card says which way the picture
            is drawn (default right), so only the one pointing the wrong way is mirrored - and the
            single rider in a bucket is left exactly as the artist drew it. */
         const slot = box.children.length;
         if(slot === 1){
-          const wantLeft = true;
+          const wantLeft = false;
           if((who && who.faces === "left") !== wantLeft) node.classList.add("fw-flip");
           const first = box.children[0];
           if(first){
             const firstLeft = first.dataset.faces === "left";
-            if(firstLeft) first.classList.add("fw-flip");
+            if(!firstLeft) first.classList.add("fw-flip");
           }
         }
         node.dataset.faces = (who && who.faces === "left") ? "left" : "right";
@@ -12090,6 +12087,30 @@ const PHASE_GATE_VO    = { tutorial:"vo_pt_tutorial", guided:"vo_pt_guided",
 const PHASE_ROUND = { tutorial:"tutorial", guided:"guided", practice:"round3", independent:"round3" };
 const _gatedPhases = new Set();   // each ROUND gate plays ONCE (Start→tutorial, →guided, →round 3)
 let _gateToken = 0;
+/* [H11-132] EVERY GATE STARTS THE BIRD FROM FRAME 0. Chrome keeps ONE animation clock per image
+   URL: putting the same URL back on the <img> does not restart it, it carries on from wherever that
+   clock has got to - and it has been running since the page loaded. The old HD peek rose once and
+   HELD, so a gate that joined it late still showed him at the top and nobody could tell. The talking
+   clip loops every 16.1s, so a later gate showed whatever frame the clock was on - reported as him
+   stuck peeking over the edge at the second transition - and RISE_MS was timed from the wrong frame.
+   A NEW URL is a new image with its own clock. Over http it is a blob: URL minted from ONE fetch,
+   so the 6.9MB file is downloaded once, not once per gate (the problem [gate-cache] solved). From
+   file:// fetch is blocked, so it is a counter in the query instead - a disk read, not a download. */
+const PEEK_SRC = "assets/peeking_talk10s.webp?v=20260928175756";
+let _peekBlob = null, _peekBlobUrl = null, _peekN = 0;
+if(/^https?:$/.test(location.protocol)){
+  try{ fetch(PEEK_SRC).then(r => r.ok ? r.blob() : null).then(b => { _peekBlob = b; }).catch(()=>{}); }catch(e){}
+}
+function _freshPeekSrc(){
+  if(_peekBlob){
+    const old = _peekBlobUrl;
+    _peekBlobUrl = URL.createObjectURL(_peekBlob);
+    if(old) setTimeout(()=> URL.revokeObjectURL(old), 1000);
+    return _peekBlobUrl;
+  }
+  return PEEK_SRC + "&g=" + (++_peekN);
+}
+
 function phaseBlurTransition(cb, toPhase){
   const tok = ++_gateToken;
   /* [34u] A STALE GATE COULD REMOUNT A SLIDE THE CHILD HAD LEFT — and on the celebration that meant
@@ -12128,7 +12149,10 @@ function phaseBlurTransition(cb, toPhase){
               HOLDS at the top to the end - which is the behaviour that was asked for and the
               reason the still existed at all. So the first gate and the other two now show the
               same thing, and .pg-talk survives only to carry the sink on the way out. */
-           img.src = "assets/UI/sw_peek_hd.webp?v=20260928175756"; }
+           /* [H11-131] peeking_talk10s.webp: the same rise, then he TALKS - the beak moves from
+              ~4s on. 115 frames / 16.1s, and the file loops, so the gate must be gone before
+              16.1s or the rise plays a second time (see GATE_WATCHDOG_MS). */
+           img.src = _freshPeekSrc(); }
   /* [H11-94] THE GATE SHOWS SWIFTY, NOT A SENTENCE. Asked for: this screen without the text.
      The line is still SPOKEN - only the writing goes, the same ruling [30i] made for the
      celebration page ("no sentence on the last page").
@@ -12175,7 +12199,14 @@ function phaseBlurTransition(cb, toPhase){
     $("stage").classList.remove("gating");      // header returns once the slide is in
     document.body.classList.remove("gating");
   };
-  setTimeout(()=>{ if(tok === _gateToken) finishGate(); }, 12000);
+  /* [H11-131] HE IS UP BEFORE HE SPEAKS. Asked for: no voice while Swifty is still coming up from
+     below. peeking_talk10s.webp peeks to his eyes by 0.9s, rises the rest of the way 2.65-3.3s and
+     is settled by 3.3s - so the gate VO waits RISE_MS from when the art actually started.
+     The watchdog moves out by the same amount, or the longest gate line (vo_bridge_lost, 10.4s)
+     would be cut at 12s: 3.3 + 10.4 = 13.7s. 15.3s still ends before the file's 16.1s loop. */
+  const RISE_MS = 3300;
+  const GATE_WATCHDOG_MS = 12000 + RISE_MS;
+  setTimeout(()=>{ if(tok === _gateToken) finishGate(); }, GATE_WATCHDOG_MS);
   // VO only if the card actually ships it; else a silent beat — the 2s min-hold keeps the peek visible.
   /* [H11-73] A CARD MAY SAY MORE THAN THE STOCK LINE AT A GATE. The SME deck puts the line that
      carries the story across - "ये कविता सुनकर मुझे तो बहुत मज़ा आया... आइए साथ मिलकर सभी जोड़ियाँ
@@ -12188,7 +12219,15 @@ function phaseBlurTransition(cb, toPhase){
   const voList = (_vo ? (Array.isArray(_vo) ? _vo : [_vo]) : [])
                    .map(id => "assets/VO/" + id + "." + AUDIO_EXT);   // [20a] AUDIO_EXT so generated clips resolve
   const openedAt = Date.now();
-  playSeq(voList, ()=>{
+  const _speak = (go)=>{
+    (function waitRise(){
+      if(tok !== _gateToken) return;
+      const left = RISE_MS - (Date.now() - _peekStart);
+      if(left > 0){ setTimeout(waitRise, Math.min(left, 120)); return; }
+      go();
+    })();
+  };
+  _speak(()=> playSeq(voList, ()=>{
     if(tok !== _gateToken){ closeGate(); return; }               // a newer gate superseded us
     /* [peek-cut fix] WAS 2000ms AND CUT THE BIRD OFF MID-DUCK. peeking.webp runs 3.03s
        (73 frames: peeks up ~f14, ducks ~f29, hidden ~f43, comes fully up f58-72) and this
@@ -12203,14 +12242,14 @@ function phaseBlurTransition(cb, toPhase){
        watchdog above is untouched, so a stalled gate can never strand the child. */
     /* [H11-126] 3100 -> 4200. That number was measured against the OLD 3.03s peek; the HD clip
        takes 3.82s to bring him fully up, so the gate was letting go while he was still climbing. */
-    const PEEK_MS = 4200;   // sw_peek_hd.webp reaches the top at 3.82s, + a margin
+    const PEEK_MS = 4200;   // peeking_talk10s.webp is settled at the top by 3.3s, + a margin
     (function waitPeek(){
       if(tok !== _gateToken){ closeGate(); return; }
       const left = PEEK_MS - (Date.now() - _peekStart);
       if(left > 0){ setTimeout(waitPeek, Math.min(left, 120)); return; }
       finishGate();
     })();
-  });
+  }));
 }
 
 function completeSlide(success){

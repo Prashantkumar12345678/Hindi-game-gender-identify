@@ -433,89 +433,7 @@
     ]
    }
   },
-  {
-   "id": "G5",
-   "phase": "guided",
-   "eis": "enactive",
-   "type": "SORT_GENDER",
-   "prompt_hi": "हर शब्द को सही डब्बे में रखिए।",
-   "audio": {
-    "prompt": "vo_sort_jata_demo",
-    "hint1": "vo_sort_jata_h1",
-    "instruction": "vo_sort_jata_rule"
-   },
-   "data": {
-    "bins": [
-     {
-      "gender": "M",
-      "label": "जाता है।"
-     },
-     {
-      "gender": "F",
-      "label": "जाती है।"
-     }
-    ],
-    "items": [
-     {
-      "img": "pic_sher",
-      "emoji": "🦁",
-      "word_hi": "शेर",
-      "audio": "vo_name_sher",
-      "gender": "M",
-      "hint2": "vo_h2_sher_jata"
-     },
-     {
-      "img": "pic_sherni",
-      "emoji": "🦁",
-      "word_hi": "शेरनी",
-      "audio": "vo_name_sherni",
-      "gender": "F",
-      "hint2": "vo_h2_sherni_jati"
-     },
-     {
-      "img": "pic_murga",
-      "emoji": "🐓",
-      "word_hi": "मुर्गा",
-      "audio": "vo_name_murga",
-      "gender": "M",
-      "hint2": "vo_h2_murga_jata"
-     },
-     {
-      "img": "pic_murgi",
-      "emoji": "🐔",
-      "word_hi": "मुर्गी",
-      "audio": "vo_name_murgi",
-      "gender": "F",
-      "hint2": "vo_h2_murgi_jati"
-     },
-     {
-      "img": "pic_bail",
-      "emoji": "🐂",
-      "word_hi": "बैल",
-      "audio": "vo_name_bail",
-      "gender": "M"
-     },
-     {
-      "img": "pic_gaay",
-      "emoji": "🐄",
-      "word_hi": "गाय",
-      "audio": "vo_name_gaay",
-      "gender": "F"
-     }
-    ],
-    "reveal_seq": true,
-    "gates": false, "bin_cues": {"prompt": [[1700, 2340, "m"], [4350, 4930, "f"]], "instruction": [[4330, 8420, "m"], [8920, 13380, "f"]]},
-    "demo_items": [
-     "बैल",
-     "गाय"
-    ]
-   },
-   "signals": {
-    "on_complete": [
-     "gender_sort_correct"
-    ]
-   }
-  },
+  
   {
    "id": "G6",
    "phase": "guided",
@@ -586,56 +504,7 @@
     ]
    }
   },
-  {
-   "id": "P1",
-   "phase": "practice",
-   "eis": "iconic",
-   "type": "STORY_QUESTION",
-   "prompt_hi": "सही जोड़ी चुनिए।",
-   "audio": {
-    "prompt": "vo_q_bail",
-    "hint1": "vo_h1_bail",
-    "hint2": "vo_h2_bail_gaay",
-    "hint": "vo_h2_bail_gaay",
-    "reveal": "vo_h2_bail_gaay",
-    "correct": "vo_correct_pair"
-   },
-   "data": {
-    "recall_image_id": "pic_bail_alone",
-    "stim_word_hi": "बैल",
-    "options": [
-     {
-      "img": "pic_gaay",
-      "emoji": "🐄",
-      "word_hi": "गाय",
-      "audio": "vo_name_gaay",
-      "label_hi": "गाय",
-      "correct": true
-     },
-     {
-      "img": "pic_morni",
-      "emoji": "🦚",
-      "word_hi": "मोरनी",
-      "audio": "vo_name_morni",
-      "label_hi": "मोरनी"
-     },
-     {
-      "img": "pic_sherni",
-      "emoji": "🦁",
-      "word_hi": "शेरनी",
-      "audio": "vo_name_sherni",
-      "label_hi": "शेरनी"
-     }
-    ],
-    "reveal_seq": true,
-    "signal_name": "gender_match_first_try"
-   },
-   "signals": {
-    "on_complete": [
-     "gender_match_first_try"
-    ]
-   }
-  },
+  
   {
    "id": "P2",
    "phase": "practice",
@@ -682,176 +551,85 @@
   {
    "id": "P3",
    "phase": "practice",
-   "eis": "enactive",
-   "type": "MATCH_GENDER_PAIRS",
-   "prompt_hi": "सही जोड़ियाँ मिलाइए।",
+   "eis": "iconic",
+   "type": "TAP_GENDER",
+   "prompt_hi": "वाक्य पूरा कीजिए।",
    "audio": {
-    "prompt": "vo_match_pairs",
-    "hint1": "vo_h1_pair",
-    "correct": "vo_correct_pairs"
+    "prompt": "vo_q_sentence_sherni",
+    "hint1": "vo_h1_sentence_sherni",
+    "hint2": "vo_h2_sentence_sherni",
+    "hint": "vo_h1_sentence_sherni",
+    "reveal": "vo_h3_sentence_sherni",
+    "correct": "vo_c_sentence_sherni",
+    "word_name": "vo_name_sherni"
    },
    "data": {
-    "pairs": [
+    "noun": {
+     "word_hi": "शेरनी मेले में…",
+     "emoji": "🦁",
+     "img": "pic_sherni_mela"
+    },
+    "options": [
      {
-      "id": "bakra",
-      "m": {
-       "img": "pic_bakra",
-       "emoji": "🐐",
-       "word_hi": "बकरा",
-       "audio": "vo_name_bakra"
-      },
-      "f": {
-       "img": "pic_bakri",
-       "emoji": "🐐",
-       "word_hi": "बकरी",
-       "audio": "vo_name_bakri"
-      },
-      "hint2": "vo_h2_bakra"
+      "label": "जाता है।",
+      "gender": "M"
      },
      {
-      "id": "mor",
-      "m": {
-       "img": "pic_mor",
-       "emoji": "🦚",
-       "word_hi": "मोर",
-       "audio": "vo_name_mor"
-      },
-      "f": {
-       "img": "pic_morni",
-       "emoji": "🦚",
-       "word_hi": "मोरनी",
-       "audio": "vo_name_morni"
-      },
-      "hint2": "vo_h2_mor_p"
-     },
-     {
-      "id": "ghoda",
-      "m": {
-       "img": "pic_ghoda",
-       "emoji": "🐎",
-       "word_hi": "घोड़ा",
-       "audio": "vo_name_ghoda"
-      },
-      "f": {
-       "img": "pic_ghodi",
-       "emoji": "🐴",
-       "word_hi": "घोड़ी",
-       "audio": "vo_name_ghodi"
-      },
-      "hint2": "vo_h2_ghoda_p"
+      "label": "जाती है।",
+      "gender": "F"
      }
-    ]
+    ],
+    "target_gender": "F",
+    "reveal_seq": true
    },
    "signals": {
     "on_complete": [
-     "gender_pair_match"
+     "gender_match_first_try"
     ]
    }
   },
   {
    "id": "P4",
    "phase": "practice",
-   "eis": "enactive",
-   "type": "SORT_GENDER",
-   "prompt_hi": "हर जानवर को सही गेट से मेले में भेजिए।",
+   "eis": "iconic",
+   "type": "TAP_GENDER",
+   "prompt_hi": "वाक्य पूरा कीजिए।",
    "audio": {
-    "prompt": "vo_gate_rule",
-    "hint1": "vo_gate_h1"
+    "prompt": "vo_q_sentence_bandar",
+    "hint1": "vo_h1_sentence_bandar",
+    "hint2": "vo_h2_sentence_bandar",
+    "hint": "vo_h1_sentence_bandar",
+    "reveal": "vo_h3_sentence_bandar",
+    "correct": "vo_c_sentence_bandar",
+    "word_name": "vo_name_bandar"
    },
    "data": {
-    "bins": [
+    "noun": {
+     "word_hi": "बंदर पेड़ पर…",
+     "emoji": "🐒",
+     "img": "pic_bandar_ped"
+    },
+    "options": [
      {
-      "gender": "M",
-      "label": "गया।"
+      "label": "चढ़ता है।",
+      "gender": "M"
      },
      {
-      "gender": "F",
-      "label": "गई।"
+      "label": "चढ़ती है।",
+      "gender": "F"
      }
     ],
-    "items": [
-            {
-                "img": "pic_murga",
-                "emoji": "🐓",
-                "word_hi": "मुर्गा",
-                "audio": "vo_name_murga",
-                "gender": "M",
-                "hint2": "vo_h2_murga_gaya",
-                "done": "vo_gate_done_murga"
-            },
-            {
-                "img": "pic_murgi",
-                "emoji": "🐔",
-                "word_hi": "मुर्गी",
-                "audio": "vo_name_murgi",
-                "gender": "F",
-                "hint2": "vo_h2_murgi_gai",
-                "done": "vo_gate_done_murgi"
-            },
-            {
-                "img": "pic_bakra",
-                "emoji": "🐐",
-                "word_hi": "बकरा",
-                "audio": "vo_name_bakra",
-                "gender": "M",
-                "hint2": "vo_h2_bakra_gaya",
-                "done": "vo_gate_done_bakra"
-            },
-            {
-                "img": "pic_bakri",
-                "emoji": "🐐",
-                "word_hi": "बकरी",
-                "audio": "vo_name_bakri",
-                "gender": "F",
-                "hint2": "vo_h2_bakri_gai",
-                "done": "vo_gate_done_bakri"
-            },
-            {
-                "img": "pic_bandar",
-                "emoji": "🐒",
-                "word_hi": "बंदर",
-                "audio": "vo_name_bandar",
-                "gender": "M",
-                "hint2": "vo_h2_bandar_gaya",
-                "done": "vo_gate_done_bandar"
-            },
-            {
-                "img": "pic_bandariya",
-                "emoji": "🐒",
-                "word_hi": "बंदरिया",
-                "audio": "vo_name_bandariya",
-                "gender": "F",
-                "hint2": "vo_h2_bandariya_gai",
-                "done": "vo_gate_done_bandariya"
-            },
-            {
-                "img": "pic_sher",
-                "emoji": "🦁",
-                "word_hi": "शेर",
-                "audio": "vo_name_sher",
-                "gender": "M",
-                "hint2": "vo_h2_sher_gaya",
-                "done": "vo_gate_done_sher"
-            },
-            {
-                "img": "pic_sherni",
-                "emoji": "🦁",
-                "word_hi": "शेरनी",
-                "audio": "vo_name_sherni",
-                "gender": "F",
-                "hint2": "vo_h2_sherni_gai",
-                "done": "vo_gate_done_sherni"
-            }
-        ],
-    "reveal_seq": true,
-    "gates": true, "one_at_a_time": true, "tap_gates": true
+    "target_gender": "M",
+    "reveal_seq": true
    },
    "signals": {
     "on_complete": [
-     "gender_sort_correct"
+     "gender_match_first_try"
     ]
    }
   },
+  
+  
   {
    "id": "CEL",
    "phase": "practice",

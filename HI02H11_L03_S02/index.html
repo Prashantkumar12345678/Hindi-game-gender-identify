@@ -840,7 +840,7 @@ html.no-anim .stimulus-pic .lbl .say-word.say-now{transform:none;}
 .start-gate{position:absolute;inset:0;z-index:80;display:flex;align-items:center;justify-content:center;background:transparent;cursor:default;}   /* [20a landing] transparent — the fixed .start-bg is the ground; [21c flag#1] cursor:default — hand-pointer belongs on .sg-btn/.sg-vo only, gate is not tap-anywhere */
 .start-gate.hidden{display:none;}
 /* inner white tile is the provided image (border + faint rays baked in) */
-.sg-card{position:relative;width:1114px;height:456px;background:url("assets/UI/start_card.webp?v=20260928174257") center/100% 100% no-repeat;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;}
+.sg-card{position:relative;width:1114px;height:456px;background:url("assets/UI/start_card.webp?v=20260928175313") center/100% 100% no-repeat;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;}
 /* full-body standing mascot (feet included): size by HEIGHT so the whole body incl. feet shows;
    the art frame is square with side padding, so it's constrained to the card height, not width. */
 .sg-mascot{position:absolute;left:-24px;bottom:-12px;width:208px;height:auto;z-index:3;object-fit:contain;filter:drop-shadow(0 10px 18px rgba(0,47,118,.18));animation:none;}   /* [25d] CORRECTED. My 25c change to left:8/bottom:6 was WRONG: I copied strilling's BASE rule (its line 611) instead of its WINNING late override (line 1104 = left:-24/bottom:-12/width:208 !important) — which is what the engine already had. Moving her right by 32px is also what threw .sg-vo out of line, since left:96px is tuned to this position. "Hovering" = the sgFloat bob: strilling kills it at its line 5600 `animation:none !important`, so it must be OFF here too (I previously said strilling bobs as well — that was reading line 611 and missing 5600). */
@@ -1023,7 +1023,7 @@ body.loaded .sg-acell{animation-play-state:running;}
    .wg-, .nh-, .ol-), NOT on a guessed prefix: keying on `sg-` alone is what dropped the
    entire drifting sky the first time round. */
 /* ===== FLN ANIMATION KIT: sky-drift BEGIN ===== */
-.start-bg{background-image:url("assets/UI/startnew_bg_plain.webp?v=20260928174257");}   /* mandatory */
+.start-bg{background-image:url("assets/UI/startnew_bg_plain.webp?v=20260928175313");}   /* mandatory */
 
 .sg-glow,.sg-sky{position:fixed;inset:0;pointer-events:none;display:none;z-index:1;}
 body.is-start .sg-glow,body.is-start .sg-sky,
@@ -1065,9 +1065,9 @@ body.is-end .sg-sky{
   margin:calc(var(--s) / -2) 0 0 calc(var(--s) / -2);
   background:center/contain no-repeat;opacity:0;
   animation:sgFly var(--t) linear infinite;animation-delay:var(--d);}
-.sg-sky .s1{background-image:url("assets/UI/bgdeco_star.svg?v=20260928174257");}
-.sg-sky .s2{background-image:url("assets/UI/bgdeco_star_o.svg?v=20260928174257");}
-.sg-sky .s3{background-image:url("assets/UI/bgdeco_spark.svg?v=20260928174257");}
+.sg-sky .s1{background-image:url("assets/UI/bgdeco_star.svg?v=20260928175313");}
+.sg-sky .s2{background-image:url("assets/UI/bgdeco_star_o.svg?v=20260928175313");}
+.sg-sky .s3{background-image:url("assets/UI/bgdeco_spark.svg?v=20260928175313");}
 .sg-sky .s4{border-radius:50%;border:.22vmax solid rgba(255,255,255,.92);}
 .sg-sky .s5{border-radius:50%;background:rgba(255,255,255,.92);}
 
@@ -1484,7 +1484,7 @@ html.no-anim .ol-alpha,html.no-anim .ol-band{animation:none !important;}
    startnew_bg_plain.webp is the same artwork with the decorations stripped.
    `body .start-bg` because the engine declares .start-bg AFTER this block; matching its
    specificity and relying on order is precisely what R11 forbids. */
-body .start-bg{background-image:url("assets/UI/startnew_bg_plain.webp?v=20260928174257");}
+body .start-bg{background-image:url("assets/UI/startnew_bg_plain.webp?v=20260928175313");}
 
 /* ---- the white centre box, more opaque ------------------------------------------
    start_card.webp is white at alpha 166/255 (65%), which is why the background rays read
@@ -1493,9 +1493,9 @@ body .start-bg{background-image:url("assets/UI/startnew_bg_plain.webp?v=20260928
    art's rounded corners are alpha - a background-color would square them off.
    Drop one layer for ~88% if this is too solid. */
 body .sg-card{background:
-   url("assets/UI/start_card.webp?v=20260928174257") center/100% 100% no-repeat,
-   url("assets/UI/start_card.webp?v=20260928174257") center/100% 100% no-repeat,
-   url("assets/UI/start_card.webp?v=20260928174257") center/100% 100% no-repeat;}
+   url("assets/UI/start_card.webp?v=20260928175313") center/100% 100% no-repeat,
+   url("assets/UI/start_card.webp?v=20260928175313") center/100% 100% no-repeat,
+   url("assets/UI/start_card.webp?v=20260928175313") center/100% 100% no-repeat;}
 
    which is why the first attempt at this changed almost nothing. Here it is constant.
    The kit's objection to filters on these elements (recipe 1, Deviations) is to ANIMATING
@@ -1534,7 +1534,7 @@ body .opt-cell.wg-wrong{animation:wgNo var(--wgT) ease-in-out both;}
 /* ===== END / CELEBRATION ===== */
 .end-screen{position:absolute;inset:0;z-index:90;display:none;flex-direction:column;align-items:center;justify-content:center;gap:22px;background:transparent;overflow:hidden;}
 /* r4: immersive celebration (adopted from Shruti's build — end_screen.webp sunburst + centred mascot + subtitle) */
-.end-bg{position:fixed;inset:0;background:#FDE9A8 url("assets/UI/end_screen.webp?v=20260928174257") center/cover no-repeat;display:none;pointer-events:none;z-index:0;}
+.end-bg{position:fixed;inset:0;background:#FDE9A8 url("assets/UI/end_screen.webp?v=20260928175313") center/cover no-repeat;display:none;pointer-events:none;z-index:0;}
 body.is-end .end-bg{display:block;}
 body.is-end{background:#FDE9A8 !important;}
 body.is-end .stage{background:transparent !important;}
@@ -1945,7 +1945,7 @@ body.gating .stage.gating .start-gate{filter:none;}
 
 /* [20a landing] fixed full-viewport ground so #47BCFD + art reach the true edges (kills the #7FC8F4 letterbox band);
    start-gate goes transparent (above) so this single image is seamless; in-lesson chrome hidden while landing shows. */
-.start-bg{position:fixed;inset:0;background:#47BCFD url("assets/UI/startnew_bg.webp?v=20260928174257") center/cover no-repeat;display:none;pointer-events:none;z-index:0;}
+.start-bg{position:fixed;inset:0;background:#47BCFD url("assets/UI/startnew_bg.webp?v=20260928175313") center/cover no-repeat;display:none;pointer-events:none;z-index:0;}
 body.is-start .start-bg{display:block;}
 body.is-start .stage-inner{visibility:hidden !important;}
 body.is-start .stage{background:transparent !important;}
@@ -2748,8 +2748,8 @@ body.is-start .phase-gate{
    it sat before - otherwise every one of these buttons would quietly rise 14px up the screen. */
 .nav-btn{width:198px !important;height:90px !important;min-width:0 !important;bottom:18px !important;
   padding:0 !important;border:0 !important;box-shadow:none !important;
-  background:transparent url("assets/swiftpal_buttons/btn-next-disabled.svg?v=20260928174257") center/198px 90px no-repeat !important;}
-.nav-btn.active{background-image:url("assets/swiftpal_buttons/btn-next.svg?v=20260928174257") !important;
+  background:transparent url("assets/swiftpal_buttons/btn-next-disabled.svg?v=20260928175313") center/198px 90px no-repeat !important;}
+.nav-btn.active{background-image:url("assets/swiftpal_buttons/btn-next.svg?v=20260928175313") !important;
   box-shadow:none !important;}
 .nav-btn.active:active{box-shadow:none !important;}
 .nav-btn .nav-arrow{display:none !important;}
@@ -2815,7 +2815,7 @@ body.is-start .phase-gate{
    paints it ONCE, so the blue .start-bg tints through and the card reads as a blue-white
    gradient with a white ring. This build stacked the SAME file 3x, which made it opaque
    flat white. Back to a single paint = src. (Sky sparkles deliberately NOT ported.) */
-body .sg-card{background:url("assets/UI/start_card.webp?v=20260928174257") center/100% 100% no-repeat !important;}
+body .sg-card{background:url("assets/UI/start_card.webp?v=20260928175313") center/100% 100% no-repeat !important;}
 .sg-mascot{left:-24px !important;bottom:-12px !important;width:208px !important;}
 .sg-vo{left:89px !important;bottom:-6px !important;width:58px !important;height:58px !important;}  /* <- src .sg-audio */
 .sg-content{width:100% !important;height:100% !important;max-width:none !important;
@@ -2864,7 +2864,7 @@ body .sg-card{background:url("assets/UI/start_card.webp?v=20260928174257") cente
 .sg-btn{bottom:30px !important;width:140px !important;height:140px !important;min-width:0 !important;
         padding:0 !important;border:0 !important;border-radius:50% !important;
         box-shadow:none !important;
-        background:transparent url("assets/swiftpal_buttons/btn-play-round.svg?v=20260928174257") center/140px 140px no-repeat !important;
+        background:transparent url("assets/swiftpal_buttons/btn-play-round.svg?v=20260928175313") center/140px 140px no-repeat !important;
         animation:sgBtnPulse 1.4s ease-in-out infinite !important;}
 .sg-btn:active{animation:none !important;}
 /* [H11-123] THE TITLE PAGE IS THE ARTWORK NOW. Three supplied pictures in one row - मोर, the
@@ -2906,7 +2906,7 @@ body .sg-card{background:url("assets/UI/start_card.webp?v=20260928174257") cente
    kept at _backup/swiftpal_buttons/btn-play-waiting.svg.gold-flat.
    The ?v= matters here more than usual: the FILE changed while its name did not, so without a
    fresh token a browser that has been on this page today keeps showing the gold one. */
-.sg-btn.sg-waiting{background-image:url("assets/swiftpal_buttons/btn-play-round-waiting.svg?v=20260928174257") !important;
+.sg-btn.sg-waiting{background-image:url("assets/swiftpal_buttons/btn-play-round-waiting.svg?v=20260928175313") !important;
                    cursor:default !important;animation:none !important;
                    pointer-events:none !important;}   /* see setStartBtnReady - NOT disabled */
 
@@ -3069,20 +3069,27 @@ html.no-anim body.is-start .sg-vo{animation:none !important;transform:none !impo
 @keyframes fwRock{0%,100%{transform:rotate(-2.6deg);}50%{transform:rotate(2.6deg);}}
 html.no-anim .fw-swing{animation:none !important;}
 .fw-bucket{position:absolute;inset:0;width:100%;height:100%;}
-/* THE FRONT LIP OF THE SEAT, over the rider. Same file as .fw-bucket, clipped so that what is
-   painted back over the animal is the near edge of the cushion and everything below it - the
-   animal lies ON the seat and sinks in at the front, which is what sitting in a gondola looks
-   like.
-   IT IS A CURVE BECAUSE A STRAIGHT LINE CANNOT WORK HERE, and both ways of being wrong were
-   shipped before it. A horizontal cut at 134 ran THROUGH the cushion: the half above the line was
-   never painted over the animal, so the animal ended in a dead straight edge across its body -
-   reported as looking cut, and it was. Moving the line to 118, above the cushion entirely, put
-   the whole cushion in front and left the bird perched behind the seat instead of in it. The
-   boundary has to follow the cushion, so it is traced from the cushion's own ellipse - measured
-   off the file, centre (123.8,136.6) rx 84.3 at this render size - and flattened to an 8px dip
-   so it reads as the near edge of a seat and not as an outline drawn round one. */
-.fw-front{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;
-  clip-path:polygon(0.0px 136.6px, 208.1px 136.6px, 196.8px 140.6px, 165.9px 143.5px, 123.8px 144.6px, 81.6px 143.5px, 50.8px 140.6px, 39.5px 136.6px, 249.0px 136.6px, 249.0px 222.0px, 0.0px 222.0px);}
+/* THE RED BASKET, ITS OWN LAYER. Buket.svg ships the bucket with its layers apart - the hanger
+   and the purple seat in one picture, the basket in another - so the rider simply goes between
+   them and the basket is in front of its legs because the artist drew it there.
+   WHAT THIS REPLACES: a second copy of the flat bucket clipped along a polygon traced from the
+   cushion, positioned by eye against the animal. That had to be re-guessed every time and went
+   wrong in both directions - too high and the cushion covered the bird's breast, too low and its
+   legs hung out. None of that is a judgement call any more.
+   The rect is the SVG's own, including the pattern transform: matrix(0.000471122 0 0 0.00137931
+   -0.0106968 0) draws it 248.2 wide starting 2.6px left of its rect, not 243 wide at x=14. In
+   seat units that is (10.5,141.3) 228x76. See _tools/bucket_layers.py. */
+.fw-front{position:absolute;left:10.5px;top:141.3px;width:228px;height:76.1px;
+  pointer-events:none;}
+/* THE SEAT, PAINTED AGAIN IN FRONT OF THE RIDER. Buket.svg keeps the hanger and the purple seat
+   together in one layer, but the mock-up has the animal's LEGS behind the seat and its body in
+   front of it - so the seat has to exist on both sides of the rider. This is the same picture
+   cropped from the cushion's top row (y167 of 304) downwards, which is why its edge is the
+   cushion's own ellipse and not a straight line: above that row the picture is transparent apart
+   from the hanger's arms, and those are far out at the sides where no animal reaches.
+   Cut by _tools/bucket_layers.py from the layer the artist supplied, so nothing here is drawn by
+   me - it is the same pixels, twice, with the rider in between. */
+.fw-seatfront{position:absolute;left:0;top:122px;width:249px;height:100px;pointer-events:none;}
 /* the plate, the name and the riders are all in bucket coordinates, so they come down by the
    same 0.9185 the bucket did - otherwise the nameplate would hang off the tub it belongs to. */
 .fw-plate{position:absolute;left:46px;top:164px;width:155px;height:43px;}
@@ -3109,7 +3116,7 @@ html.no-anim .fw-swing{animation:none !important;}
    changing the size cap never fixed it. 22px shows 82-86% of every animal.
    ONE SET OF NUMBERS COVERS ALL SIX because the tuck is set here, by the bottom edge, and is the
    same whatever shape the picture is. The cap below only decides how far each one reaches UP. */
-.fw-riders{position:absolute;left:24px;top:18px;width:201px;height:145px;display:flex;
+.fw-riders{position:absolute;left:24px;top:12px;width:201px;height:145px;display:flex;
   align-items:flex-end;justify-content:center;gap:4px;}
 /* A PAIR IS TUCKED A LITTLE LESS. Two animals sharing a bucket are half the width and, for
    these wide pictures, barely half the height, so the same 22px takes a bigger bite out of them.
@@ -3125,7 +3132,7 @@ html.no-anim .fw-swing{animation:none !important;}
    the tuck is set by the box, not by the cap, both end up sitting the same way in the seat.
    134 keeps the tallest head just clear of the crown of the hanger arch, which the rider is
    drawn in front of. */
-.fw-riders img{max-height:136px;max-width:96%;width:auto;height:auto;object-fit:contain;
+.fw-riders img{max-height:130px;max-width:96%;width:auto;height:auto;object-fit:contain;
   filter:drop-shadow(0 3px 5px rgba(0,0,0,.28));}
 .fw-riders img:not(:only-child){max-width:48%;max-height:114px;}   /* two share the tub */
 .fw-riders .fw-emoji{font-size:98px;line-height:1;}
@@ -3193,7 +3200,7 @@ html.no-anim .fw-opt.fw-no,html.no-anim .fw-disc.fw-run{animation:none !importan
    the control keeps an accessible name instead of announcing as a bare "button". */
 .end-btn{width:163px !important;height:117px !important;min-width:0 !important;padding:0 !important;
          border:0 !important;border-radius:0 !important;box-shadow:none !important;font-size:0 !important;
-         background:transparent url("assets/swiftpal_buttons/btn-finish.svg?v=20260928174257") center/163px 117px no-repeat !important;}
+         background:transparent url("assets/swiftpal_buttons/btn-finish.svg?v=20260928175313") center/163px 117px no-repeat !important;}
 .end-btn:active{box-shadow:none !important;}
 
 /* ---- 6. FEEDBACK OVERLAY ------------------------------------------------------------------- */
@@ -3669,7 +3676,7 @@ html.no-anim .nav-btn.nav-call{animation:none !important;}
      two banner boxes coincide. ONE scale for both axes, so nothing is stretched.
      The odd size/position below existed to fit the old 1667x943 art into a 16:9 box; the new
      file IS 16:9 (1672x941), so it simply fills. */
-  background:url("assets/Images/gate_bg.webp?v=20260928174257") no-repeat;
+  background:url("assets/Images/gate_bg.webp?v=20260928175313") no-repeat;
   background-size:100% 100%;background-position:0 0;}
 .sort-stage.sort-gates .sort-bins .sort-bin,
 .sort-stage.sort-gates .sort-bins.many .sort-bin{
@@ -3782,10 +3789,10 @@ html.no-anim .sort-stage.sort-gates .sort-item.snapped{
   transform-origin:50% 60%;}
 .sort-stage.sort-gates .gate-glow.gm{
   left:15.300%;top:20.403%;width:25.499%;height:15.740%;   /* [H11-74] the new board's own ratio */
-  background-image:url("assets/Images/gate_m.webp?v=20260928174257");}
+  background-image:url("assets/Images/gate_m.webp?v=20260928175313");}
 .sort-stage.sort-gates .gate-glow.gf{
   left:58.780%;top:20.248%;width:26.025%;height:16.182%;   /* [H11-74] */
-  background-image:url("assets/Images/gate_f.webp?v=20260928174257");}
+  background-image:url("assets/Images/gate_f.webp?v=20260928175313");}
 .sort-stage.sort-gates .sort-bins.lit-m .gate-glow.gm,
 .sort-stage.sort-gates .sort-bins.lit-f .gate-glow.gf{animation:gatePulse 1.1s ease-in-out;}
 @keyframes gatePulse{
@@ -3938,7 +3945,7 @@ html.no-anim .sort-stage.sort-gates .sort-bins.lit-f::after{animation:none;filte
          Shipped as WebP because GIF alpha is one all-or-nothing index and this art has soft
          edges, which cut hard would fringe against the sunburst behind it.
          See _tools/dekey_last_page.py. -->
-    <img class="end-mascot" src="assets/Images/last_page_anim.webp?v=20260928174257" alt="Swiftee"
+    <img class="end-mascot" src="assets/Images/last_page_anim.webp?v=20260928175313" alt="Swiftee"
          onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'end-mascot',textContent:'🎉'}))">
     <button class="end-btn" id="endBtn" aria-label="आगे बढ़ें"></button>   <!-- [H11-66] the artwork carries the arrow -->
   </div>
@@ -3954,7 +3961,7 @@ html.no-anim .sort-stage.sort-gates .sort-bins.lit-f::after{animation:none;filte
      and shrink the gate with the stage - production pattern). -->
 <div class="phase-gate" id="phaseGate">
     <div class="pg-title" id="phaseGateTitle"></div>
-    <img id="phaseGateImg" src="assets/UI/sw_peek_hd.webp?v=20260928174257" alt="">   <!-- [20a landing-fix] reunited with #phaseGate (was orphaned in .stage → full-bleed on landing once the gate went transparent) -->
+    <img id="phaseGateImg" src="assets/UI/sw_peek_hd.webp?v=20260928175313" alt="">   <!-- [20a landing-fix] reunited with #phaseGate (was orphaned in .stage → full-bleed on landing once the gate went transparent) -->
 </div>
 
 <!-- ============ CARD DATA (embedded; in prod the compiler does this) ============ -->
@@ -4864,7 +4871,7 @@ function _resumeVoiceAudio(){
    AUDIO_BUILD changes whenever the game is rebuilt, so every clip URL changes with it and the
    browser has to fetch. It is added in the two places every clip passes through, rather than at
    the ~20 sites that spell out a path, so nothing can be missed. */
-const AUDIO_BUILD = "20260928174257";
+const AUDIO_BUILD = "20260928175313";
 function bustAudio(u){
   return (!u || u.indexOf("data:") === 0 || u.indexOf("?") >= 0) ? u : (u + "?v=" + AUDIO_BUILD);
 }
@@ -11122,7 +11129,8 @@ const SlideModules = {
             `<div class="fw-seat" data-i="${i}"><div class="fw-swing">` +
               `<img class="fw-bucket" src="assets/Images/wheel_bucket.${IMG_EXT}" alt="">` +
               `<div class="fw-riders"></div>` +
-              `<img class="fw-front"  src="assets/Images/wheel_bucket.${IMG_EXT}" alt="" aria-hidden="true">` +
+              `<img class="fw-seatfront" src="assets/Images/wheel_seat_front.${IMG_EXT}" alt="" aria-hidden="true">` +
+              `<img class="fw-front"  src="assets/Images/wheel_bucket_front.${IMG_EXT}" alt="" aria-hidden="true">` +
               `<img class="fw-plate"  src="assets/Images/wheel_plate.${IMG_EXT}" alt="">` +
               `<div class="fw-name"></div>` +
             `</div></div>`).join("") +
@@ -12105,7 +12113,7 @@ function phaseBlurTransition(cb, toPhase){
               HOLDS at the top to the end - which is the behaviour that was asked for and the
               reason the still existed at all. So the first gate and the other two now show the
               same thing, and .pg-talk survives only to carry the sink on the way out. */
-           img.src = "assets/UI/sw_peek_hd.webp?v=20260928174257"; }
+           img.src = "assets/UI/sw_peek_hd.webp?v=20260928175313"; }
   /* [H11-94] THE GATE SHOWS SWIFTY, NOT A SENTENCE. Asked for: this screen without the text.
      The line is still SPOKEN - only the writing goes, the same ruling [30i] made for the
      celebration page ("no sentence on the last page").

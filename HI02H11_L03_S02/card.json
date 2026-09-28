@@ -628,6 +628,151 @@
     ]
    }
   },
+  {
+   "id": "P5",
+   "phase": "practice",
+   "eis": "enactive",
+   "type": "WHEEL_PAIRS",
+   "prompt_hi": "सही जोड़ी को चुनिए और झूले पर बैठाइए।",
+   "audio": {
+    "prompt": "vo_wheel_intro"
+   },
+   "data": {
+    "seats": [
+     {
+      "seated": {
+       "word_hi": "मोरनी",
+       "img": "pic_morni",
+       "emoji": "🦚"
+      },
+      "pair": {
+       "word_hi": "मोर",
+       "img": "pic_mor",
+       "emoji": "🦚"
+      },
+      "options": [
+       "मोर",
+       "मुर्गी",
+       "घोड़ा"
+      ],
+      "answer": "मोर",
+      "audio": {
+       "prompt": "vo_wq_morni"
+      }
+     },
+     {
+      "seated": {
+       "word_hi": "बकरा",
+       "img": "pic_bakra",
+       "emoji": "🐐"
+      },
+      "pair": {
+       "word_hi": "बकरी",
+       "img": "pic_bakri",
+       "emoji": "🐐"
+      },
+      "options": [
+       "बिल्ली",
+       "बकरी",
+       "भेड़"
+      ],
+      "answer": "बकरी",
+      "audio": {
+       "prompt": "vo_wq_bakra"
+      }
+     },
+     {
+      "seated": {
+       "word_hi": "हाथी",
+       "img": "pic_hathi",
+       "emoji": "🐘"
+      },
+      "pair": {
+       "word_hi": "हथिनी",
+       "img": "pic_hathini",
+       "emoji": "🐘"
+      },
+      "options": [
+       "हथिनी",
+       "घोड़ी",
+       "शेरनी"
+      ],
+      "answer": "हथिनी",
+      "audio": {
+       "prompt": "vo_wq_hathi"
+      }
+     },
+     {
+      "seated": {
+       "word_hi": "चुहिया",
+       "img": "pic_chuhiya",
+       "emoji": "🐭"
+      },
+      "pair": {
+       "word_hi": "चूहा",
+       "img": "pic_chuha",
+       "emoji": "🐭"
+      },
+      "options": [
+       "चूहा",
+       "खरगोश",
+       "गाय"
+      ],
+      "answer": "चूहा",
+      "audio": {
+       "prompt": "vo_wq_chuhiya"
+      }
+     },
+     {
+      "seated": {
+       "word_hi": "घोड़ा",
+       "img": "pic_ghoda",
+       "emoji": "🐎"
+      },
+      "pair": {
+       "word_hi": "घोड़ी",
+       "img": "pic_ghodi",
+       "emoji": "🐎"
+      },
+      "options": [
+       "हथिनी",
+       "घोड़ी",
+       "घोड़नी"
+      ],
+      "answer": "घोड़ी",
+      "audio": {
+       "prompt": "vo_wq_ghoda"
+      }
+     },
+     {
+      "seated": {
+       "word_hi": "मुर्गी",
+       "img": "pic_murgi",
+       "emoji": "🐔"
+      },
+      "pair": {
+       "word_hi": "मुर्गा",
+       "img": "pic_murga",
+       "emoji": "🐓"
+      },
+      "options": [
+       "मुर्गा",
+       "मोर",
+       "तोता"
+      ],
+      "answer": "मुर्गा",
+      "audio": {
+       "prompt": "vo_wq_murgi"
+      }
+     }
+    ]
+   },
+   "signals": {
+    "on_complete": [
+     "gender_match_first_try"
+    ]
+   }
+  },
   
   
   {

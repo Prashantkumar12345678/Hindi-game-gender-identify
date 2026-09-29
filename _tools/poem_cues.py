@@ -51,10 +51,12 @@ def weight(word):
     w = len(_AK.findall(word))
     return max(1, w)
 
-def cues_for(words_by_line, path, lead=0.0):
-    """-> flat list of ms offsets, one per word, in reading order"""
+def cues_for(words_by_line, path, lead=0.0, skip=0):
+    """-> flat list of ms offsets, one per word, in reading order.
+    `skip` drops that many leading phrases first - speech in the clip that is NOT the verse on
+    screen, e.g. T1's spoken intro "पहले हम एक कविता पढ़ेंगे - जंगल का मेला।" (2 phrases)."""
     x = pcm(path)
-    ph = phrases(x)
+    ph = phrases(x)[skip:]
     lines = [l for l in words_by_line if l]
     # a clip that did not split into as many phrases as the verse has lines is not a failure:
     # fold the extra phrases together, or split the single long one by weight across the lines.
@@ -127,7 +129,9 @@ def measure(slide):
     nar = slide["audio"]["narration"]
     assert isinstance(nar, str), (slide["id"], "a LIST narration would need cues per clip")
     path = os.path.join(GAME, "assets", "VO", nar + ".ogg")
-    pred, ph, dur = cues_for(lines, path)
+    # [H11-139] a clip may open with speech that is not the caption (T1's intro). The card says
+    # how many leading phrases to leave out, so the verse is measured from where it is SAID.
+    pred, ph, dur = cues_for(lines, path, skip=int(slide["data"].get("caption_skip_phrases", 0)))
     x = pcm(path)
     c, _ = snap(pred, x)
     k = 0

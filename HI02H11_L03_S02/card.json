@@ -15,7 +15,7 @@
  "skill_description_hi": "लिंग-सूचक शब्द-रूप बदलाव को पहचानता है — जैसे शेर से शेरनी, मोर से मोरनी।",
  "dt_fallback": null,
  "landing_hero": {"kind": "concept_strip", "cells": [{"type": "image", "src": "assets/Images/mor title image.png", "label": "मोर"}, {"type": "image", "src": "assets/Images/title.png", "label": "आइए जोड़ी मिलाएँ"}, {"type": "image", "src": "assets/Images/morni title image.png", "label": "मोरनी"}]},
- "phase_gate_vo": {"guided": "vo_bridge_lost"}, "landing_nudge": false,
+ "phase_gate_vo": {"guided": "vo_bridge_lost"}, "phase_gate_caption": {"tutorial": {"text": "चलिए, शुरू करें!", "at_ms": 3210}, "guided": {"text": "चलिए, साथ में करें!", "at_ms": 9640}, "practice": {"text": "वाह! अब आपकी बारी।", "at_ms": 250}}, "phase_gate_at": {"practice": "P5"}, "landing_nudge": false, "landing_vo_on_tap": true,
  "audio_chip_on_mascot_foot": true,
  "phase_distribution": {
   "tutorial": 9,
@@ -72,7 +72,7 @@
    "audio": {
     "narration": "vo_poem_01"
    },
-   "data": { "caption_cues_ms": [260, 875, 1070, 1480, 1950, 2620, 3625, 3975],"caption_hi": "जंगल में एक मेला आया,\nरंग-बिरंगा खूब सजाया।", 
+   "data": { "caption_cues_ms": [4630, 5242, 5520, 5854, 6262, 6980, 8005, 8295], "caption_skip_phrases": 2, "caption_hi": "जंगल में एक मेला आया,\nरंग-बिरंगा खूब सजाया।", 
     "image_id": "sc_mela_01",
     "emoji": "🎪",
     "alt_hi": "आइए आज हम एक कविता सुनते हैं— जंगल का मेला। जंगल में एक मेला आया, रंग-बिरंगा खूब सजाया।"
@@ -148,15 +148,7 @@
    "narration": "vo_poem_05"
   },
   "data": {
-   "caption_cues_ms": [
-    260,
-    1425,
-    2366,
-    4240,
-    4945,
-    5345,
-    5685
-   ],
+   "caption_cues_ms": [270, 1485, 2125, 3970, 4540, 4995, 5525],
    "caption_hi": "<span class=\"gw\">बकरा</span> बोला, “में-में-में”\n<span class=\"gw\">बकरी</span> बोली, “साथ चले।”",
    "image_id": "sc_mela_05",
    "emoji": "🎪",
@@ -177,16 +169,7 @@
    "narration": "vo_poem_06"
   },
   "data": {
-   "caption_cues_ms": [
-    270,
-    870,
-    1297,
-    1795,
-    3030,
-    3790,
-    4275,
-    4890
-   ],
+   "caption_cues_ms": [250, 805, 1130, 1560, 2860, 3545, 4045, 4685],
    "caption_hi": "<span class=\"gw\">बंदर</span> लाया लाल गुब्बारा,\n<span class=\"gw\">बंदरिया</span> बोली, “कितना प्यारा।”",
    "image_id": "sc_mela_06",
    "emoji": "🎪",
@@ -207,15 +190,7 @@
    "narration": "vo_poem_07"
   },
   "data": {
-   "caption_cues_ms": [
-    250,
-    1035,
-    1410,
-    2760,
-    3570,
-    3910,
-    4410
-   ],
+   "caption_cues_ms": [330, 945, 1520, 2750, 3265, 3715, 4130],
    "caption_hi": "<span class=\"gw\">मुर्गा</span> बोला, “कुकड़ू-कूँ”\n<span class=\"gw\">मुर्गी</span> बोली, “क्या खाऊँ?”",
    "image_id": "sc_mela_07",
    "emoji": "🎪",
@@ -275,36 +250,13 @@
     "hint1": "vo_h1_sherni",
     "hint2": "vo_h2_sherni",
     "hint": "vo_h2_sherni",
-    "reveal": "vo_h2_sherni",
+    "reveal": "vo_h3_sherni",
     "correct": "vo_correct_pair"
    },
-   "data": {
+   "data": { "shuffle": false, "hint2_cues": [{"word": "बैल", "ms": 290, "end_ms": 790}, {"word": "शेर", "ms": 1580, "end_ms": 2070}, {"word": "घोड़ा", "ms": 3050, "end_ms": 3590}], "max_attempts": 3, "hint2_walk": true,
     "recall_image_id": "pic_sherni_alone",
     "stim_word_hi": "शेरनी",
-    "options": [
-     {
-      "img": "pic_bail",
-      "emoji": "🐂",
-      "word_hi": "बैल",
-      "audio": "vo_name_bail",
-      "label_hi": "बैल"
-     },
-     {
-      "img": "pic_sher",
-      "emoji": "🦁",
-      "word_hi": "शेर",
-      "audio": "vo_name_sher",
-      "label_hi": "शेर",
-      "correct": true
-     },
-     {
-      "img": "pic_ghoda",
-      "emoji": "🐎",
-      "word_hi": "घोड़ा",
-      "audio": "vo_name_ghoda",
-      "label_hi": "घोड़ा"
-     }
-    ],
+    "options": [{"img": "pic_bail", "emoji": "🐂", "word_hi": "बैल", "audio": "vo_name_bail", "label_hi": "बैल"}, {"img": "pic_sher", "emoji": "🦁", "word_hi": "शेर", "audio": "vo_name_sher", "label_hi": "शेर", "correct": true}, {"img": "pic_ghoda", "emoji": "🐎", "word_hi": "घोड़ा", "audio": "vo_name_ghoda", "label_hi": "घोड़ा"}],
     "reveal_seq": true,
     "signal_name": "gender_match_first_try"
    },
@@ -325,36 +277,13 @@
     "hint1": "vo_h1_mor",
     "hint2": "vo_h2_mor",
     "hint": "vo_h2_mor",
-    "reveal": "vo_h2_mor",
+    "reveal": "vo_h3_mor",
     "correct": "vo_correct_pair"
    },
-   "data": {
+   "data": { "shuffle": false, "hint2_cues": [{"word": "बंदरिया", "ms": 270, "end_ms": 1300}, {"word": "मोरनी", "ms": 1690, "end_ms": 2560}, {"word": "मुर्गी", "ms": 3030, "end_ms": 3740}], "max_attempts": 3, "hint2_walk": true,
     "recall_image_id": "pic_mor_alone",
     "stim_word_hi": "मोर",
-    "options": [
-     {
-      "img": "pic_morni",
-      "emoji": "🦚",
-      "word_hi": "मोरनी",
-      "audio": "vo_name_morni",
-      "label_hi": "मोरनी",
-      "correct": true
-     },
-     {
-      "img": "pic_murgi",
-      "emoji": "🐔",
-      "word_hi": "मुर्गी",
-      "audio": "vo_name_murgi",
-      "label_hi": "मुर्गी"
-     },
-     {
-      "img": "pic_bandariya",
-      "emoji": "🐒",
-      "word_hi": "बंदरिया",
-      "audio": "vo_name_bandariya",
-      "label_hi": "बंदरिया"
-     }
-    ],
+    "options": [{"img": "pic_bandariya", "emoji": "🐒", "word_hi": "बंदरिया", "audio": "vo_name_bandariya", "label_hi": "बंदरिया"}, {"img": "pic_morni", "emoji": "🦚", "word_hi": "मोरनी", "audio": "vo_name_morni", "label_hi": "मोरनी", "correct": true}, {"img": "pic_murgi", "emoji": "🐔", "word_hi": "मुर्गी", "audio": "vo_name_murgi", "label_hi": "मुर्गी"}],
     "reveal_seq": true,
     "signal_name": "gender_match_first_try"
    },
@@ -371,7 +300,7 @@
             "hint1": "vo_h1_bakri",
             "hint2": "vo_h2_bakri",
             "hint": "vo_h2_bakri",
-            "reveal": "vo_h2_bakri",
+            "reveal": "vo_h3_bakri",
             "correct": "vo_correct_pair"
         },
         "phase": "guided",
@@ -379,32 +308,9 @@
    "type": "STORY_QUESTION",
    "prompt_hi": "सही जोड़ी चुनिए।",
    
-   "data": {
+   "data": { "shuffle": false, "hint2_cues": [{"word": "बैल", "ms": 280, "end_ms": 900}, {"word": "बकरा", "ms": 1490, "end_ms": 2140}, {"word": "शेरनी", "ms": 2770, "end_ms": 3430}], "max_attempts": 3, "hint2_walk": true,
     "stim_word_hi": "बकरी",
-    "options": [
-     {
-      "img": "pic_sherni",
-      "emoji": "🦁",
-      "word_hi": "शेरनी",
-      "audio": "vo_name_sherni",
-      "label_hi": "शेरनी"
-     },
-     {
-      "img": "pic_bakra",
-      "emoji": "🐐",
-      "word_hi": "बकरा",
-      "audio": "vo_name_bakra",
-      "label_hi": "बकरा",
-      "correct": true
-     },
-     {
-      "img": "pic_bail",
-      "emoji": "🐂",
-      "word_hi": "बैल",
-      "audio": "vo_name_bail",
-      "label_hi": "बैल"
-     }
-    ],
+    "options": [{"img": "pic_bail", "emoji": "🐂", "word_hi": "बैल", "audio": "vo_name_bail", "label_hi": "बैल"}, {"img": "pic_bakra", "emoji": "🐐", "word_hi": "बकरा", "audio": "vo_name_bakra", "label_hi": "बकरा", "correct": true}, {"img": "pic_sherni", "emoji": "🦁", "word_hi": "शेरनी", "audio": "vo_name_sherni", "label_hi": "शेरनी"}],
     "reveal_seq": true,
     "signal_name": "gender_match_first_try"
    },
@@ -428,26 +334,9 @@
   "eis": "iconic",
   "type": "STORY_QUESTION",
   "prompt_hi": "सही जोड़ी चुनिए।",
-  "data": {
+  "data": { "shuffle": false, "hint2_cues": [{"word": "गाय", "ms": 300, "end_ms": 870}, {"word": "मुर्गी", "ms": 1480, "end_ms": 2050}, {"word": "घोड़ी", "ms": 2650, "end_ms": 3120}], "max_attempts": 3, "hint2_walk": true,
    "stim_word_hi": "घोड़ा",
-   "options": [
-    {
-     "word_hi": "मुर्गी",
-     "audio": "vo_name_murgi",
-     "label_hi": "मुर्गी"
-    },
-    {
-     "word_hi": "गाय",
-     "audio": "vo_name_gaay",
-     "label_hi": "गाय"
-    },
-    {
-     "word_hi": "घोड़ी",
-     "audio": "vo_name_ghodi",
-     "label_hi": "घोड़ी",
-     "correct": true
-    }
-   ],
+   "options": [{"word_hi": "गाय", "audio": "vo_name_gaay", "label_hi": "गाय"}, {"word_hi": "मुर्गी", "audio": "vo_name_murgi", "label_hi": "मुर्गी"}, {"word_hi": "घोड़ी", "audio": "vo_name_ghodi", "label_hi": "घोड़ी", "correct": true}],
    "reveal_seq": true,
    "signal_name": "gender_match_first_try",
    "recall_image_id": "pic_ghoda",
@@ -540,9 +429,9 @@
    "audio": {
     "prompt": "vo_q_sentence",
     "hint1": "vo_h1_sentence",
-    "hint2": "vo_h1_sentence",
-    "hint": "vo_h1_sentence",
-    "reveal": "vo_h1_sentence",
+    "hint2": "vo_h2_sentence",
+    "hint": ["vo_h2_sentence", "vo_h3_sentence"],
+    "reveal": "vo_h3_sentence",
     "correct": "vo_c_sentence",
     "word_name": "vo_name_bakra"
    },
@@ -581,10 +470,10 @@
    "type": "TAP_GENDER",
    "prompt_hi": "वाक्य पूरा कीजिए।",
    "audio": {
-    "prompt": "vo_q_sentence_sherni",
+    "prompt": "vo_stem_sherni",
     "hint1": "vo_h1_sentence_sherni",
     "hint2": "vo_h2_sentence_sherni",
-    "hint": "vo_h1_sentence_sherni",
+    "hint": ["vo_h2_sentence_sherni", "vo_h3_sentence_sherni"],
     "reveal": "vo_h3_sentence_sherni",
     "correct": "vo_c_sentence_sherni",
     "word_name": "vo_name_sherni"
@@ -597,16 +486,16 @@
     },
     "options": [
      {
-      "label": "जाता है।",
+      "label": "जाता है।", "audio": "vo_opt_jata",
       "gender": "M"
      },
      {
-      "label": "जाती है।",
+      "label": "जाती है।", "audio": "vo_opt_jati",
       "gender": "F"
      }
     ],
     "target_gender": "F",
-    "reveal_seq": true
+    "reveal_seq": true, "correct_cues_ms": [2800, 3700, 4000, 4340]
    },
    "signals": {
     "on_complete": [
@@ -621,10 +510,10 @@
    "type": "TAP_GENDER",
    "prompt_hi": "वाक्य पूरा कीजिए।",
    "audio": {
-    "prompt": "vo_q_sentence_bandar",
+    "prompt": "vo_stem_bandar",
     "hint1": "vo_h1_sentence_bandar",
     "hint2": "vo_h2_sentence_bandar",
-    "hint": "vo_h1_sentence_bandar",
+    "hint": ["vo_h2_sentence_bandar", "vo_h3_sentence_bandar"],
     "reveal": "vo_h3_sentence_bandar",
     "correct": "vo_c_sentence_bandar",
     "word_name": "vo_name_bandar"
@@ -637,16 +526,16 @@
     },
     "options": [
      {
-      "label": "चढ़ता है।",
+      "label": "चढ़ता है।", "audio": "vo_opt_chadhta",
       "gender": "M"
      },
      {
-      "label": "चढ़ती है।",
+      "label": "चढ़ती है।", "audio": "vo_opt_chadhti",
       "gender": "F"
      }
     ],
     "target_gender": "M",
-    "reveal_seq": true
+    "reveal_seq": true, "correct_cues_ms": [2800, 3480, 3740, 4110]
    },
    "signals": {
     "on_complete": [
@@ -661,10 +550,10 @@
   "type": "WHEEL_PAIRS",
   "prompt_hi": "सही जोड़ी को चुनिए और झूले पर बैठाइए।",
   "audio": {
-   "prompt": "vo_wheel_intro"
+   "prompt": "vo_wheel_intro", "hint1": "vo_h1_pair"
   },
-  "data": {
-   "seats": [
+  "data": { "earned_hand": true,
+   "option_audio": {"मोर": "vo_name_mor", "मुर्गी": "vo_name_murgi", "घोड़ा": "vo_name_ghoda", "बकरी": "vo_name_bakri", "घोड़ी": "vo_name_ghodi", "शेरनी": "vo_name_sherni", "गाय": "vo_name_gaay", "मुर्गा": "vo_name_murga", "बिल्ली": "vo_name_billi", "भेड़": "vo_name_bhed", "हथिनी": "vo_name_hathini", "चूहा": "vo_name_chuha", "खरगोश": "vo_name_khargosh", "घोड़नी": "vo_name_ghodni", "तोता": "vo_name_tota"}, "seats": [
     {
      "seated": {
       "word_hi": "मोरनी",
@@ -840,12 +729,27 @@
    "vo_bridge_lost": "assets/VO/vo_bridge_lost.ogg",
    "vo_c_sentence": "assets/VO/vo_c_sentence.ogg",
    "vo_correct_pair": "assets/VO/vo_correct_pair.ogg",
-   "vo_match_pairs": "assets/VO/vo_match_pairs.ogg", "vo_bridge_lost": "assets/VO/vo_bridge_lost.ogg", "vo_gate_done_bakra": "assets/VO/vo_gate_done_bakra.ogg", "vo_gate_done_bakri": "assets/VO/vo_gate_done_bakri.ogg", "vo_gate_done_bandar": "assets/VO/vo_gate_done_bandar.ogg", "vo_gate_done_bandariya": "assets/VO/vo_gate_done_bandariya.ogg", "vo_gate_done_murga": "assets/VO/vo_gate_done_murga.ogg", "vo_gate_done_murgi": "assets/VO/vo_gate_done_murgi.ogg", "vo_gate_done_sher": "assets/VO/vo_gate_done_sher.ogg", "vo_gate_done_sherni": "assets/VO/vo_gate_done_sherni.ogg", "vo_h2_bakra_gaya": "assets/VO/vo_h2_bakra_gaya.ogg", "vo_h2_bakri_gai": "assets/VO/vo_h2_bakri_gai.ogg", "vo_h2_sher_gaya": "assets/VO/vo_h2_sher_gaya.ogg", "vo_h2_sherni_gai": "assets/VO/vo_h2_sherni_gai.ogg", "vo_correct_pairs": "assets/VO/vo_correct_pairs.ogg",
+   "vo_match_pairs": "assets/VO/vo_match_pairs.ogg",
+   "vo_gate_done_bakra": "assets/VO/vo_gate_done_bakra.ogg",
+   "vo_gate_done_bakri": "assets/VO/vo_gate_done_bakri.ogg",
+   "vo_gate_done_bandar": "assets/VO/vo_gate_done_bandar.ogg",
+   "vo_gate_done_bandariya": "assets/VO/vo_gate_done_bandariya.ogg",
+   "vo_gate_done_murga": "assets/VO/vo_gate_done_murga.ogg",
+   "vo_gate_done_murgi": "assets/VO/vo_gate_done_murgi.ogg",
+   "vo_gate_done_sher": "assets/VO/vo_gate_done_sher.ogg",
+   "vo_gate_done_sherni": "assets/VO/vo_gate_done_sherni.ogg",
+   "vo_h2_bakra_gaya": "assets/VO/vo_h2_bakra_gaya.ogg",
+   "vo_h2_bakri_gai": "assets/VO/vo_h2_bakri_gai.ogg",
+   "vo_h2_sher_gaya": "assets/VO/vo_h2_sher_gaya.ogg",
+   "vo_h2_sherni_gai": "assets/VO/vo_h2_sherni_gai.ogg",
+   "vo_correct_pairs": "assets/VO/vo_correct_pairs.ogg",
    "vo_gate_h1": "assets/VO/vo_gate_h1.ogg",
    "vo_gate_rule": "assets/VO/vo_gate_rule.ogg",
    "vo_h1_bail": "assets/VO/vo_h1_bail.ogg",
    "vo_h1_mor": "assets/VO/vo_h1_mor.ogg",
-   "vo_h1_bakri": "assets/VO/vo_h1_bakri.ogg", "vo_h1_ghoda": "assets/VO/vo_h1_ghoda.ogg", "vo_h1_pair": "assets/VO/vo_h1_pair.ogg",
+   "vo_h1_bakri": "assets/VO/vo_h1_bakri.ogg",
+   "vo_h1_ghoda": "assets/VO/vo_h1_ghoda.ogg",
+   "vo_h1_pair": "assets/VO/vo_h1_pair.ogg",
    "vo_h1_sentence": "assets/VO/vo_h1_sentence.ogg",
    "vo_h1_sherni": "assets/VO/vo_h1_sherni.ogg",
    "vo_h1_word": "assets/VO/vo_h1_word.ogg",
@@ -895,7 +799,9 @@
    "vo_pt_guided": "assets/VO/vo_pt_guided.ogg",
    "vo_pt_practice": "assets/VO/vo_pt_practice.ogg",
    "vo_pt_tutorial": "assets/VO/vo_pt_tutorial.ogg",
-   "vo_q_bakri_new": "assets/VO/vo_q_bakri_new.ogg", "vo_q_ghoda_new": "assets/VO/vo_q_ghoda_new.ogg", "vo_q_bail": "assets/VO/vo_q_bail.ogg",
+   "vo_q_bakri_new": "assets/VO/vo_q_bakri_new.ogg",
+   "vo_q_ghoda_new": "assets/VO/vo_q_ghoda_new.ogg",
+   "vo_q_bail": "assets/VO/vo_q_bail.ogg",
    "vo_q_mor": "assets/VO/vo_q_mor.ogg",
    "vo_q_sentence": "assets/VO/vo_q_sentence.ogg",
    "vo_q_sherni": "assets/VO/vo_q_sherni.ogg",
@@ -906,31 +812,81 @@
    "sfx_correct": "assets/SFX/sfx_correct.ogg",
    "sfx_wrong": "assets/SFX/sfx_wrong.ogg",
    "sfx_burst": "assets/SFX/sfx_burst.ogg",
-   "sfx_celebrate": "assets/SFX/sfx_celebrate.ogg"
+   "sfx_celebrate": "assets/SFX/sfx_celebrate.ogg",
+   "vo_h1_sentence_bandar": "assets/VO/vo_h1_sentence_bandar.ogg",
+   "vo_h1_sentence_sherni": "assets/VO/vo_h1_sentence_sherni.ogg",
+   "vo_h2_sentence": "assets/VO/vo_h2_sentence.ogg",
+   "vo_h2_sentence_bandar": "assets/VO/vo_h2_sentence_bandar.ogg",
+   "vo_h2_sentence_sherni": "assets/VO/vo_h2_sentence_sherni.ogg",
+   "vo_h3_bakri": "assets/VO/vo_h3_bakri.ogg",
+   "vo_h3_ghoda": "assets/VO/vo_h3_ghoda.ogg",
+   "vo_h3_mor": "assets/VO/vo_h3_mor.ogg",
+   "vo_h3_sentence": "assets/VO/vo_h3_sentence.ogg",
+   "vo_h3_sentence_bandar": "assets/VO/vo_h3_sentence_bandar.ogg",
+   "vo_h3_sentence_sherni": "assets/VO/vo_h3_sentence_sherni.ogg",
+   "vo_h3_sherni": "assets/VO/vo_h3_sherni.ogg",
+   "vo_wq_bakra": "assets/VO/vo_wq_bakra.ogg",
+   "vo_wq_chuhiya": "assets/VO/vo_wq_chuhiya.ogg",
+   "vo_wq_ghoda": "assets/VO/vo_wq_ghoda.ogg",
+   "vo_wq_hathi": "assets/VO/vo_wq_hathi.ogg",
+   "vo_wq_morni": "assets/VO/vo_wq_morni.ogg",
+   "vo_wq_murgi": "assets/VO/vo_wq_murgi.ogg",
+   "vo_name_khargosh": "assets/VO/vo_name_khargosh.ogg",
+   "vo_name_ghodni": "assets/VO/vo_name_ghodni.ogg",
+   "vo_name_chuha": "assets/VO/vo_name_chuha.ogg",
+   "vo_name_tota": "assets/VO/vo_name_tota.ogg",
+   "vo_name_billi": "assets/VO/vo_name_billi.ogg",
+   "vo_name_bhed": "assets/VO/vo_name_bhed.ogg",
+   "vo_name_hathini": "assets/VO/vo_name_hathini.ogg",
+   "vo_q_sentence_sherni": "assets/VO/vo_q_sentence_sherni.ogg",
+   "vo_q_sentence_bandar": "assets/VO/vo_q_sentence_bandar.ogg",
+   "vo_c_sentence_sherni": "assets/VO/vo_c_sentence_sherni.ogg",
+   "vo_c_sentence_bandar": "assets/VO/vo_c_sentence_bandar.ogg",
+   "vo_stem_sherni": "assets/VO/vo_stem_sherni.ogg",
+   "vo_stem_bandar": "assets/VO/vo_stem_bandar.ogg",
+   "vo_opt_jata": "assets/VO/vo_opt_jata.ogg",
+   "vo_opt_jati": "assets/VO/vo_opt_jati.ogg",
+   "vo_opt_chadhta": "assets/VO/vo_opt_chadhta.ogg",
+   "vo_opt_chadhti": "assets/VO/vo_opt_chadhti.ogg"
   },
   "audio_text": {
-   "vo_bridge_lost": "क्या आपको कविता सुनकर मज़ा आया? मेले में भीड़ की वजह से सभी जोड़ियाँ बिछड़ गईं। क्या आप सही जोड़ियाँ ढूँढने में मेरी मदद करेंगे? आइए साथ मिलकर ढूँढ़ते हैं।",
+   "vo_bridge_lost": "ये कविता सुनकर मुझे तो बहुत मज़ा आया, लेकिन मेले में भीड़ की वजह से सभी जोड़ियाँ बिछड़ गईं। आइए साथ मिलकर ढूँढ़ते हैं। चलिए, साथ में करें!",
    "vo_c_sentence": "शाबाश! सही वाक्य है— बकरा घास खा रहा है।",
    "vo_correct_pair": "शाबाश! आपने सही जोड़ी मिला दी।",
-   "vo_match_pairs": "हर जानवर को उसकी सही जोड़ी से मिलाइए।", "vo_bridge_lost": "ये कविता सुनकर मुझे तो बहुत मज़ा आया, लेकिन मेले में भीड़ की वजह से सभी जोड़ियाँ बिछड़ गईं। आइए साथ मिलकर सभी जोड़ियाँ ढूँढ़ते हैं।", "vo_gate_done_bakra": "बकरा मेले में गया।", "vo_gate_done_bakri": "बकरी मेले में गई।", "vo_gate_done_bandar": "बंदर मेले में गया।", "vo_gate_done_bandariya": "बंदरिया मेले में गई।", "vo_gate_done_murga": "मुर्गा मेले में गया।", "vo_gate_done_murgi": "मुर्गी मेले में गई।", "vo_gate_done_sher": "शेर मेले में गया।", "vo_gate_done_sherni": "शेरनी मेले में गई।", "vo_h2_bakra_gaya": "यह बकरा है, बकरा मेले में गया। इसे गया वाले गेट से अंदर भेजेंगे।", "vo_h2_bakri_gai": "यह बकरी है, बकरी मेले में गई। इसे गई वाले गेट से अंदर भेजेंगे।", "vo_h2_sher_gaya": "यह शेर है, शेर मेले में गया। इसे गया वाले गेट से अंदर भेजेंगे।", "vo_h2_sherni_gai": "यह शेरनी है, शेरनी मेले में गई। इसे गई वाले गेट से अंदर भेजेंगे।", "vo_correct_pairs": "शाबाश! आपने सभी सही जोड़ियाँ मिला दीं।",
+   "vo_match_pairs": "हर जानवर को उसकी सही जोड़ी से मिलाइए।",
+   "vo_gate_done_bakra": "बकरा मेले में गया।",
+   "vo_gate_done_bakri": "बकरी मेले में गई।",
+   "vo_gate_done_bandar": "बंदर मेले में गया।",
+   "vo_gate_done_bandariya": "बंदरिया मेले में गई।",
+   "vo_gate_done_murga": "मुर्गा मेले में गया।",
+   "vo_gate_done_murgi": "मुर्गी मेले में गई।",
+   "vo_gate_done_sher": "शेर मेले में गया।",
+   "vo_gate_done_sherni": "शेरनी मेले में गई।",
+   "vo_h2_bakra_gaya": "यह बकरा है, बकरा मेले में गया। इसे गया वाले गेट से अंदर भेजेंगे।",
+   "vo_h2_bakri_gai": "यह बकरी है, बकरी मेले में गई। इसे गई वाले गेट से अंदर भेजेंगे।",
+   "vo_h2_sher_gaya": "यह शेर है, शेर मेले में गया। इसे गया वाले गेट से अंदर भेजेंगे।",
+   "vo_h2_sherni_gai": "यह शेरनी है, शेरनी मेले में गई। इसे गई वाले गेट से अंदर भेजेंगे।",
+   "vo_correct_pairs": "शाबाश! आपने सभी सही जोड़ियाँ मिला दीं।",
    "vo_gate_h1": "सोचिए इस जानवर के नाम से वाक्य बनाने पर गया आता है या गई?",
    "vo_gate_rule": "यहाँ दो गेट हैं, एक पर गया लिखा है और दूसरे पर गई लिखा है। हर जानवर के नाम से वाक्य बनाकर देखिए — जिनके अंत में गया आता है उन्हें गया वाले गेट से और जिनके अंत में गई आता है उन्हें गई वाले गेट से मेले में भेजिए। जैसे— मुर्गा मेले में गया। इसे गया वाले गेट से भेजिए। अब आप खुद करिए।",
    "vo_h1_bail": "सोचिए बैल मेले में किसके साथ आया था?",
-   "vo_h1_mor": "सोचिए मोर मेले में किसके साथ आया था?",
-   "vo_h1_bakri": "सोचिए बकरी मेले में किसके साथ आई थी?", "vo_h1_ghoda": "सोचिए घोड़ा मेले में किसके साथ आया था?", "vo_h1_pair": "फिर से कोशिश कीजिए, सही जोड़ी पहचानिए।",
-   "vo_h1_sentence": "हम वाक्य में बोलते हैं— बकरा घास खा रहा है। रहा है पर टैप कीजिए और वाक्य पूरा कीजिए।",
-   "vo_h1_sherni": "सोचिए शेरनी मेले में किसके साथ आई थी?",
+   "vo_h1_mor": "सोचिए, मोर मेले में किसके साथ आया था?",
+   "vo_h1_bakri": "सोचिए, बकरी मेले में किसके साथ आई थी?",
+   "vo_h1_ghoda": "सोचिए, घोड़ा मेले में किसके साथ आया था?",
+   "vo_h1_pair": "फिर से कोशिश कीजिए, सही जोड़ी पहचानिए।",
+   "vo_h1_sentence": "सोचिए, वाक्य में रहा है आएगा या रही है आएगा?",
+   "vo_h1_sherni": "सोचिए, शेरनी मेले में किसके साथ आई थी?",
    "vo_h1_word": "फिर से कोशिश कीजिए, सही शब्द पहचानिए।",
    "vo_h2_bail": "यह बैल है, इसे गाय से मिलाएंगे। गाय के चित्र पर टैप कीजिए।",
    "vo_h2_bail_gaay": "बैल मेले में गाय के साथ आया था। गाय के चित्र पर टैप कीजिए।",
    "vo_h2_bakra": "यह बकरा है, इसे बकरी से मिलाएंगे। बकरी के चित्र पर टैप कीजिए।",
-   "vo_h2_bakri": "बकरी मेले में बकरे के साथ आई थी। बकरे के चित्र पर टैप कीजिए।",
+   "vo_h2_bakri": "बैल, बकरा, शेरनी",
    "vo_h2_bandar": "यह बंदर है, इसे बंदरिया से मिलाएंगे। बंदरिया के चित्र पर टैप कीजिए।",
    "vo_h2_bandar_gaya": "यह बंदर है, बंदर मेले में गया। इसे गया वाले गेट से अंदर भेजेंगे।",
    "vo_h2_bandariya_gai": "यह बंदरिया है, बंदरिया मेले में गई। इसे गई वाले गेट से अंदर भेजेंगे।",
-   "vo_h2_ghoda": "घोड़ा मेले में घोड़ी के साथ आया था। घोड़ी के चित्र पर टैप कीजिए।",
+   "vo_h2_ghoda": "गाय, मुर्गी, घोड़ी",
    "vo_h2_ghoda_p": "यह घोड़ा है, इसे घोड़ी से मिलाएंगे। घोड़ी के चित्र पर टैप कीजिए।",
-   "vo_h2_mor": "मोर मेले में मोरनी के साथ आया था। मोरनी के चित्र पर टैप कीजिए।",
+   "vo_h2_mor": "बंदरिया, मोरनी, मुर्गी",
    "vo_h2_mor_p": "यह मोर है, इसे मोरनी से मिलाएंगे। मोरनी के चित्र पर टैप कीजिए।",
    "vo_h2_murga": "यह मुर्गा है, इसे मुर्गी से मिलाएंगे। मुर्गी के चित्र पर टैप कीजिए।",
    "vo_h2_murga_gaya": "यह मुर्गा है, मुर्गा मेले में गया। इसे गया वाले गेट से अंदर भेजेंगे।",
@@ -938,9 +894,9 @@
    "vo_h2_murgi_gai": "यह मुर्गी है, मुर्गी मेले में गई। इसे गई वाले गेट से अंदर भेजेंगे।",
    "vo_h2_murgi_jati": "यह मुर्गी है, मुर्गी जाती है। इसे जाती है वाले डब्बे में रखेंगे।",
    "vo_h2_sher_jata": "यह शेर है, शेर जाता है। इसे जाता है वाले डब्बे में रखेंगे।",
-   "vo_h2_sherni": "शेरनी मेले में शेर के साथ आई थी। शेर के चित्र पर टैप कीजिए।",
+   "vo_h2_sherni": "बैल, शेर, घोड़ा",
    "vo_h2_sherni_jati": "यह शेरनी है, शेरनी जाती है। इसे जाती है वाले डब्बे में रखेंगे।",
-   "vo_landing": "नमस्ते दोस्त! मैं हूँ swiftee, आइए आज हम शब्दों की जोड़ियाँ बनाते हैं। जैसे- मोर-मोरनी",
+   "vo_landing": "नमस्ते दोस्त, मैं हूँ swiftee, आज हम शब्दों की जोड़ियाँ मिलाएंगे।",
    "vo_name_bail": "बैल",
    "vo_name_bakra": "बकरा",
    "vo_name_bakri": "बकरी",
@@ -955,26 +911,63 @@
    "vo_name_murgi": "मुर्गी",
    "vo_name_sher": "शेर",
    "vo_name_sherni": "शेरनी",
-   "vo_poem_01": "आइए आज हम एक कविता सुनते हैं— जंगल का मेला। जंगल में एक मेला आया, रंग-बिरंगा खूब सजाया।",
+   "vo_poem_01": "पहले हम एक कविता पढ़ेंगे - जंगल का मेला। जंगल में एक मेला आया, रंग-बिरंगा खूब सजाया।",
    "vo_poem_02": "शेर आया, शेरनी आई, दोनों ने मिलकर धूम मचाई।",
    "vo_poem_03": "मोर पंख रंगीन फैलाए, मोरनी संग ठुमके लगाए।",
    "vo_poem_04": "घोड़ा आया धूल उड़ाए, घोड़ी पीछे दौड़ी आए।",
-   "vo_poem_05": "बकरा बोला— “में-में-में!” बकरी बोली— “साथ चलें!”",
-   "vo_poem_06": "बंदर लाया लाल गुब्बारा, बंदरिया बोली कितना प्यारा!",
-   "vo_poem_07": "मुर्गा बोला— “कुकड़ू-कूँ!” मुर्गी बोली— “क्या खाऊँ!”",
+   "vo_poem_05": "बकरा बोला, “में-में-में” बकरी बोली, “साथ चले।”",
+   "vo_poem_06": "बंदर लाया लाल गुब्बारा, बंदरिया बोली, “कितना प्यारा।”",
+   "vo_poem_07": "मुर्गा बोला, “कुकड़ू-कूँ” मुर्गी बोली, “क्या खाऊँ?”",
    "vo_poem_08": "बैल ने जब ढोल बजाया, गाय ने भी नाच दिखाया।",
    "vo_poem_09": "सूरज ढलते शाम हुई, मेले भर में धूम हुई।",
    "vo_pt_guided": "बहुत बढ़िया! अब हम साथ मिलकर शुरू करते हैं। चलिए, साथ में करें!",
    "vo_pt_practice": "वाह! अब आपकी बारी।",
    "vo_pt_tutorial": "ध्यान से देखिए और मेरे साथ जानिए। चलिए, शुरू करें!",
-   "vo_q_bakri_new": "बकरी मेले में किसके साथ आई थी?", "vo_q_ghoda_new": "घोड़ा मेले में किसके साथ आया था?", "vo_q_bail": "बैल मेले में किसके साथ आया था?",
+   "vo_q_bakri_new": "बकरी मेले में किसके साथ आई थी?",
+   "vo_q_ghoda_new": "घोड़ा मेले में किसके साथ आया था?",
+   "vo_q_bail": "बैल मेले में किसके साथ आया था?",
    "vo_q_mor": "मोर मेले में किसके साथ आया था?",
    "vo_q_sentence": "सही शब्द चुनकर वाक्य पूरा कीजिए। बकरा घास खा… रहा है या रही है?",
    "vo_q_sherni": "शेरनी मेले में किसके साथ आई थी?",
    "vo_sort_jata_demo": "बैल मेले में जाता है। गाय मेले में जाती है।",
    "vo_sort_jata_h1": "वाक्य बनाकर देखिए, यह जानवर जाता है या जाती है।",
    "vo_sort_jata_rule": "इसी तरह हर जानवर के शब्द का वाक्य बनाकर देखिए। जिन वाक्यों के अंत में जाता है आता है उन्हें जाता है वाले डब्बे में, और जिन वाक्यों के अंत में जाती है आता है उन्हें जाती है वाले डब्बे में रखिए।",
-   "vo_well_done": "शाबाश! आपने सभी सही जोड़ियाँ पहचान लीं।"
+   "vo_well_done": "शाबाश! आपने सभी सही जोड़ियाँ पहचान लीं।",
+   "vo_h1_sentence_bandar": "सोचिए, वाक्य में चढ़ता है आएगा या चढ़ती है आएगा?",
+   "vo_h1_sentence_sherni": "सोचिए, वाक्य में जाता है आएगा या जाती है आएगा?",
+   "vo_h2_sentence": "हम वाक्य में बोलते हैं, बकरा घास खा रहा है।",
+   "vo_h2_sentence_bandar": "हम वाक्य में बोलते हैं, बंदर पेड़ पर चढ़ता है।",
+   "vo_h2_sentence_sherni": "हम वाक्य में बोलते हैं, शेरनी मेले में जाती है।",
+   "vo_h3_bakri": "यह बकरा है, यह सही उत्तर है, इसपर टैप कीजिए।",
+   "vo_h3_ghoda": "यह घोड़ी शब्द है, यह सही उत्तर है, इसपर टैप कीजिए।",
+   "vo_h3_mor": "यह मोरनी है, यह सही उत्तर है, इसपर टैप कीजिए।",
+   "vo_h3_sentence": "रहा है पर टैप कीजिए और वाक्य पूरा कीजिए।",
+   "vo_h3_sentence_bandar": "चढ़ता है पर टैप कीजिए और वाक्य पूरा कीजिए।",
+   "vo_h3_sentence_sherni": "जाती है पर टैप कीजिए और वाक्य पूरा कीजिए।",
+   "vo_h3_sherni": "यह शेर है, यह सही उत्तर है, इसपर टैप कीजिए।",
+   "vo_wq_bakra": "बकरे की जोड़ी को चुनिए और उसके साथ झूले पर बैठाइए।",
+   "vo_wq_chuhiya": "चुहिया की जोड़ी को चुनिए और उसके साथ झूले पर बैठाइए।",
+   "vo_wq_ghoda": "घोड़े की जोड़ी को चुनिए और उसके साथ झूले पर बैठाइए।",
+   "vo_wq_hathi": "हाथी की जोड़ी को चुनिए और उसके साथ झूले पर बैठाइए।",
+   "vo_wq_morni": "मोरनी की जोड़ी को चुनिए और उसके साथ झूले पर बैठाइए।",
+   "vo_wq_murgi": "मुर्गी की जोड़ी को चुनिए और उसके साथ झूले पर बैठाइए।",
+   "vo_name_khargosh": "खरगोश",
+   "vo_name_ghodni": "घोड़नी",
+   "vo_name_chuha": "चूहा",
+   "vo_name_tota": "तोता",
+   "vo_name_billi": "बिल्ली",
+   "vo_name_bhed": "भेड़",
+   "vo_name_hathini": "हथिनी",
+   "vo_q_sentence_sherni": "सही शब्द चुनकर वाक्य पूरा कीजिए।",
+   "vo_q_sentence_bandar": "सही शब्द चुनकर वाक्य पूरा कीजिए।",
+   "vo_c_sentence_sherni": "शाबाश! सही वाक्य है— शेरनी मेले में जाती है।",
+   "vo_c_sentence_bandar": "शाबाश! सही वाक्य है— बंदर पेड़ पर चढ़ता है।",
+   "vo_stem_sherni": "शेरनी मेले में…",
+   "vo_stem_bandar": "बंदर पेड़ पर…",
+   "vo_opt_jata": "जाता है।",
+   "vo_opt_jati": "जाती है।",
+   "vo_opt_chadhta": "चढ़ता है।",
+   "vo_opt_chadhti": "चढ़ती है।"
   },
   "image": {
    "pic_bail": "assets/Images/pic_bail.webp",

@@ -2405,6 +2405,20 @@ body.vo-lock .stimulus-pic,
 body.vo-lock button.nav-btn{
   pointer-events:none !important;
 }
+/* [H11-135] G6 (जोड़ियाँ मिलाइए) STAYS DRAGGABLE WHILE A LINE IS SPOKEN. Reported: "vo and matching
+   atak rahi". This slide talks almost continuously once the child is playing - both names after
+   every pair (~2.8s), the hint after a miss (~3.5s), and the instruction again after every 7s of
+   quiet (3.4s) - and the lock above froze all six cards for each of those. A child who went for
+   the next pair while the last one was still being named found the cards dead and the drag
+   simply did not start, which is exactly what "atak" describes.
+   The things that MUST block a drag here still do, in the handler rather than in CSS: the
+   one-by-one naming on entry (state.revealing) and the worked example (state.demoRunning) - see
+   makeLinkDraggable's onDown. A drop that lands mid-line just speaks the new pair, because play()
+   stops whatever was sounding first. Specificity beats the rule above, both being !important. */
+body.vo-lock .match-line .dd-tile:not(.matched):not(.snapped),
+body.vo-lock .match-line .dd-zone:not(.filled){
+  pointer-events:auto !important;
+}
 
 /* ===== [30k] GATE SCRIM = THE FIGMA VALUE, MEASURED NOT GUESSED =========================
    Yasir 2026-07-30, with the eyedropper open on the original Figma transition frame: #393737 at 60%.
@@ -3055,7 +3069,12 @@ html.no-anim body.is-start .sg-vo{animation:none !important;transform:none !impo
    rides a circle centred (846.4,342.7), the hub's red boss is at (969.5,370.5), so the pin is on
    a 311 circle about the hub and sits 27.8px inside the bucket's top edge - inside the hanger
    loop, which is where a gondola is actually pinned. All six land within 2px of the reference. */
+/* [H11-138] THE FRONT BUCKET GROWS FROM ITS PIN. The 1.2x focus scale ran about the box CENTRE,
+   which lifted the pin (123.1,27.8) by 0.2 x (111 - 27.8) = 16.6px - so the bucket at the foot sat
+   visibly above the wheel's bottom node while the other five hung from theirs. With the origin on
+   the pin it stays hung where it is and the extra size goes downward, the way a gondola would. */
 .fw-seat{position:absolute;left:0;top:0;width:249px;height:222px;margin:-27.8px 0 0 -123.1px;
+  transform-origin:123.1px 27.8px;
   transition:opacity .5s ease, filter .5s ease;
   opacity:.92;filter:blur(2.6px);}
 .fw-seat.is-focus{opacity:1;filter:none;z-index:6;}
@@ -3169,6 +3188,27 @@ html.no-anim .fw-riders .fw-flip.fw-new{animation:none !important;}
    arrive. So .fw-flat goes on for the length of every ride - the opening, each question's
    advance, and the full turn at the end - and comes off when the wheel settles. */
 .fw-disc,.fw-frame{transition:filter .55s ease;}
+/* [H11-137] THE CENTRE STAR GLOWS WHILE THE WHEEL TURNS. The star is painted into wheel_disc, so
+   it cannot be lit on its own - this is a second copy laid exactly over it. [H11-138] It is the
+   painted star ITSELF now, cut out of wheel_disc (72x72 source px around the axle, keyed on the
+   gold against the red boss) - a hand-drawn SVG star was a different shape and never covered it.
+   The box is that crop mapped through the disc's own render scale (848/854, 788/793), and the
+   transform-origin is the axle, so place() turns it exactly as it turns the disc. Invisible at
+   rest; .fw-spin (set by ride() while the wheel moves) fades it in, brightened, with a warm halo
+   that pulses, and it fades back out as the wheel stops. */
+.fw-star{position:absolute;left:-36.23px;top:-35.61px;width:71.49px;height:71.55px;pointer-events:none;
+  transform-origin:36.23px 35.61px;opacity:0;transition:opacity .35s ease;}
+.fw-star img{position:relative;width:100%;height:100%;display:block;}
+.fw-star::before{content:"";position:absolute;left:50%;top:50%;width:150px;height:150px;
+  margin:-75px 0 0 -75px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,236,120,.85) 0%,rgba(255,200,40,.45) 35%,rgba(255,180,0,0) 70%);}
+.fw-stage.fw-spin .fw-star{opacity:1;}
+.fw-stage.fw-spin .fw-star img{animation:fwStarPulse .6s ease-in-out infinite alternate;
+  filter:brightness(1.35) saturate(1.2) drop-shadow(0 0 6px #FFF3A0) drop-shadow(0 0 14px #FFC400);}
+.fw-stage.fw-spin .fw-star::before{animation:fwHalo .6s ease-in-out infinite alternate;}
+@keyframes fwStarPulse{from{transform:scale(1);}to{transform:scale(1.14);}}
+@keyframes fwHalo{from{transform:scale(.85);opacity:.75;}to{transform:scale(1.15);opacity:1;}}
+html.no-anim .fw-star img,html.no-anim .fw-star::before{animation:none !important;}
 .fw-stage:not(.fw-flat) .fw-disc,
 .fw-stage:not(.fw-flat) .fw-frame{filter:blur(2.4px);}
 .fw-stage.fw-flat .fw-seat{filter:none;opacity:1;}
@@ -3642,6 +3682,17 @@ html.no-anim .nav-btn.nav-call{animation:none !important;}
   width:336px !important;height:300px !important;object-fit:contain !important;
   background:#fff !important;border-radius:20px !important;}
 .q-row:has(.opt-cell.q-word-only) .story-q-stim-label{font-size:36px !important;}
+/* [H11-134] THE WORD GOES INSIDE THE PICTURE'S BOX. Asked for: घोड़ा written inside the white
+   frame, the horse a little smaller, and the frame NOT smaller. The white frame is the <img>
+   itself, so the box stays 336x300 and the picture is shrunk by PADDING - object-fit:contain fits
+   into the content box, so the padding is a margin inside the frame - and the bottom padding is
+   the strip the word sits in. The label is taken out of the flow and laid over that strip. */
+.q-row:has(.opt-cell.q-word-only) .story-q-stim{position:relative !important;}
+.q-row:has(.opt-cell.q-word-only) .story-q-thumb{
+  box-sizing:border-box !important;padding:14px 34px 62px !important;}
+.q-row:has(.opt-cell.q-word-only) .story-q-stim-label{
+  position:absolute !important;left:0;right:0;bottom:24px;text-align:center;line-height:1.2;
+  pointer-events:none;}
 
 /* ---- 15. GATE SORT (P2) - the supplied mela-gate artwork ------------------------------- */
 /* The gates, their गया / गई banners, the bunting and the ground are ALL painted into
@@ -4928,6 +4979,7 @@ function _loadVoiceBuffer(src){
 }
 let isMuted = false;
 function setMuted(m){ isMuted = m; if(m && typeof stopAudio==="function") stopAudio();
+  if(typeof bgmUpdate === "function") bgmUpdate();
   document.querySelectorAll(".audio-chip").forEach(c => c.classList.toggle("muted", m)); }
 /* [H11-15] THE SCENE DUCKS UNDER THE SPOKEN LINE.
    The poem clips (T2-T9) carry their own ambience track. That was fine while vo_poem_* did not
@@ -5011,6 +5063,7 @@ function setPlaying(on){
      regardless of mute, so gating this on mute would let taps land while muted and diverge from it. */
   document.body.classList.toggle("vo-lock", !!on);
   _duckScene(!!on);   /* [H11-15] scene ambience steps back while the line speaks */
+  if(typeof bgmUpdate === "function") bgmUpdate();   /* [H11-133] and so does the music */
 }
 /* stopAudio(): hard-stop the current clip AND bump the playback generation so any in-flight
    callback (a chain's onended, a fallback timer, a cancelled TTS onend) becomes a no-op. This is
@@ -5162,7 +5215,8 @@ function _tone(freqs, type, dur, vol){ const c = _ac(); if(!c) return; const t0 
   freqs.forEach((f, i)=>{ const o = c.createOscillator(), g = c.createGain(); o.type = type; o.frequency.value = f;
     const t = t0 + i*(dur/freqs.length); g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(vol, t+0.02);
     g.gain.exponentialRampToValueAtTime(0.0001, t + dur/freqs.length); o.connect(g).connect(c.destination); o.start(t); o.stop(t + dur/freqs.length); }); }
-const sfxTap       = ()=> _tone([520], "sine", 0.09, 0.09);
+/* [H11-133] the tap is a recorded wooden "tok" now (sfx_tap.ogg); the tone stays as the fallback */
+const sfxTap       = ()=> { if(!_sfxFile("sfx_tap")) _tone([520], "sine", 0.09, 0.09); };
 /* [H11-5] REAL RECORDINGS replace the synthesised correct/wrong cues (FLN Animation Kit
    recipe 22). _sfxFile() plays the file and reports whether it could START one; the old tone
    stays as the fallback ONLY for a genuinely missing file, so an asset-pruned dist degrades to
@@ -5176,6 +5230,45 @@ const sfxTap       = ()=> _tone([520], "sine", 0.09, 0.09);
    audioDir() decides from the id's own prefix, in ONE place, so a new sfx_ id lands in SFX
    and a new vo_ id in VO with nothing else to edit and no call site left behind. */
 function audioDir(id){ return String(id).indexOf("sfx_") === 0 ? "assets/SFX/" : "assets/VO/"; }
+/* [H11-133] BACKGROUND MUSIC - a small मेला tune (bgm_mela.ogg, made by _tools/make_audio.py).
+   It is a BED, not a feature, so every rule below keeps it out of the way:
+     - it starts on the शुरू करें tap (the first gesture, so autoplay cannot refuse it)
+     - it sits at BGM_VOL and DUCKS to BGM_DUCK whenever a line is spoken - hooked into
+       setPlaying, the one function every VO start and stop passes through
+     - it also ducks while a poem video is on screen, because those clips carry their own sound
+     - it stops for the celebration, which has its own jingle and its own clip
+     - it pauses when the tab is hidden and follows the mute toggle.
+   A plain <audio> element rather than Web Audio: it loops, and it works from file:// as well. */
+const BGM_VOL = 0.14, BGM_DUCK = 0.04;
+let _bgm = null, _bgmOn = false, _bgmRamp = null;
+function _bgmTarget(){
+  if(!_bgmOn || isMuted) return 0;
+  let vid = false; try{ vid = !!document.querySelector(".story-vid"); }catch(e){}
+  return (isPlaying || vid) ? BGM_DUCK : BGM_VOL;
+}
+function bgmUpdate(){
+  if(!_bgm) return;
+  const to = _bgmTarget();
+  if(to > 0 && _bgm.paused && !document.hidden){ const pr = _bgm.play(); if(pr && pr.catch) pr.catch(()=>{}); }
+  clearInterval(_bgmRamp);
+  const from = _bgm.volume, t0 = Date.now();
+  _bgmRamp = setInterval(()=>{
+    const k = Math.min(1, (Date.now() - t0) / 300);
+    try{ _bgm.volume = Math.max(0, Math.min(1, from + (to - from) * k)); }catch(e){}
+    if(k >= 1){ clearInterval(_bgmRamp); if(to === 0) try{ _bgm.pause(); }catch(e){} }
+  }, 30);
+}
+function bgmStart(){
+  try{
+    if(!_bgm){ _bgm = new Audio(bustAudio("assets/SFX/bgm_mela." + AUDIO_EXT)); _bgm.loop = true; _bgm.volume = 0; }
+    _bgmOn = true; bgmUpdate();
+  }catch(e){}
+}
+function bgmStop(){ _bgmOn = false; bgmUpdate(); }
+document.addEventListener("visibilitychange", ()=>{
+  if(!_bgm) return;
+  if(document.hidden){ try{ _bgm.pause(); }catch(e){} } else bgmUpdate();
+});
 function _sfxFile(name){
   try{ const a = new Audio(bustAudio(audioDir(name) + name + ".ogg")); a.volume = 0.7;
        a.play().catch(()=>{}); return true; }catch(e){ return false; }
@@ -5785,6 +5878,9 @@ function armIdleVo(){
     // slide — measured in-browser, which is the only way this was visible. Slide teardown is what
     // really ends the watch, and after a correct answer the hold simply means nothing more is spoken.
     if(state.locked || state.hintActive || isPlaying || state.revealing || state.demoRunning){ _idleSince = 0; return; }
+    /* [H11-135] a child holding a line mid-drag is not idle - pointerdown only restarts the clock
+       once, and a slow drag used to have the reminder start talking under the child's finger. */
+    if(typeof _linkOwner !== "undefined" && _linkOwner){ _idleSince = 0; return; }
     if(!_idleSince){ _idleSince = Date.now(); return; }
     if(Date.now() - _idleSince < ms) return;
     // [27f] ONE reminder, then done for this slide. Mark spent and stop the ticker BEFORE speaking,
@@ -6962,6 +7058,7 @@ function makeLinkDraggable(tileEl, wrap, onDrop, opts){
   function onDown(e){
     if(used(tileEl)) return;                           /* [H11-55] reads both columns */
     if(state.revealing) return;                        // tray still revealing one-by-one -> no grabs yet
+    if(state.demoRunning) return;                      // [H11-135] the worked example owns the hand and the line
     if(_linkOwner && _linkOwner !== tileEl) return;
     dragging = true; _linkOwner = tileEl;
     tileEl.classList.add("linking");
@@ -7033,6 +7130,10 @@ function makeLinkDraggable(tileEl, wrap, onDrop, opts){
   function decide(e, now){
     const t = e.target && e.target.closest && e.target.closest(SEL);
     if(!t || t.classList.contains("snapped") || t.classList.contains("matched")){ _decision = 0; return 0; }
+    /* [H11-135] G6's connect-the-pairs cards are exempt, same as their CSS lock - see the note on
+       `body.vo-lock .match-line`. They have no speak-on-press of their own, so the trap this gate
+       guards against cannot happen there, and the reveal and the demo block in onDown instead. */
+    if(t.closest(".match-line")){ _decision = 0; return 0; }
     _decidedAt = now;
     /* [31n] BACK TO 4000ms. 31m widened this to 20s reasoning that real clips outlast 4s — true,
        but it misread what this window is FOR. Blocking during a live clip is the CSS lock's job
@@ -7143,7 +7244,11 @@ function celebrateThenAdvance(slide, revealed){
     setTimeout(function(){ completeSlide(!revealed); }, Math.max(0, MIN_HOLD - (Date.now() - t0)));
   };
   if(!revealed){ sfxCorrect(); confettiCannon(); setSwMood("celebrate"); }
-  play(audioFor(slide, revealed ? "reveal" : "correct") || null, go);
+  /* [H11-136] a helped finish on a slide with no reveal line (G6) used to end in SILENCE - the
+     child matched the other pairs themselves and heard nothing. Fall back to the correct line;
+     the quiet settle (no confetti) and completeSlide(false) are unchanged, so telemetry still
+     records that help was given. */
+  play(audioFor(slide, revealed ? "reveal" : "correct") || (revealed ? audioFor(slide, "correct") : null) || null, go);
   setTimeout(go, CAP);
 }
 
@@ -9965,8 +10070,15 @@ const SlideModules = {
       };
       // A8 reveal ceiling: after max consecutive misses, DEMONSTRATE one pair (pulse + auto-settle) so
       // the child is guided forward instead of dead-ending; run counts success=false via `revealed`.
-      const revealOne = ()=>{
-        const zone = [...zoneRow.children].find(z=> !z.classList.contains("filled")); if(!zone) return;
+      /* [H11-136] THE HELP IS FOR THE PAIR THE CHILD WAS TRYING. This used to reveal the FIRST
+         unfilled zone on screen, whatever the child had been holding - so after two misses with
+         मुर्गा the hint named मुर्गा while the glow and the hand went to बैल. `pairId` is the pair
+         of the card in the child's hand; the first unfilled zone is only the fallback. */
+      const revealOne = (pairId)=>{
+        /* .correct, not .filled: a wrong drop marks its zone .filled for 600ms as the red flash,
+           and revealOne runs inside that window - so the held pair's zone looked taken. */
+        const zone = (pairId && [...zoneRow.children].find(z=> !z.classList.contains("correct") && z.dataset.accept === pairId))
+                  || [...zoneRow.children].find(z=> !z.classList.contains("filled")); if(!zone) return;
         const t = [...tileRow.children].find(x=> !x.classList.contains("matched") && x.dataset.pairId === zone.dataset.accept); if(!t) return;
         revealed = true; wrongStreak = 0;
         zone.classList.add("reveal-glow"); t.classList.add("reveal-glow");
@@ -10038,6 +10150,13 @@ const SlideModules = {
           };
           const _runDemo = ()=>{
             if(CARD.slides[state.idx] !== slide){ state.demoRunning = false; return; }
+            /* [H11-136] SHOW FIRST, THEN THE CHILD'S TURN. The flag was raised at MOUNT and its
+               12s fail-safe dropped it at 12s from mount - which on this slide is BEFORE the demo
+               even starts (the names take ~10s, then the demo runs ~2.8s). So the hand was drawing
+               its line on cards the child could already drag. Raised here, where the demo really
+               begins, with its own fail-safe measured from here. */
+            state.demoRunning = true;
+            setTimeout(function(){ if(CARD.slides[state.idx] === slide) state.demoRunning = false; }, 6000);
             _handAt(_dt, null);                                  /* beat on the tile: "start here" */
             setTimeout(function(){
               if(CARD.slides[state.idx] !== slide){ state.demoRunning = false; return; }
@@ -10074,10 +10193,13 @@ const SlideModules = {
              card) nothing would ever call it, so fall back to the original timer. */
           _startMatchDemo = _runDemo;
           if(!state.revealing) setTimeout(_runDemo, 1200);
-          setTimeout(function(){ state.demoRunning = false; }, 12000);   /* FAIL-SAFE */
+          /* FAIL-SAFE. [H11-136] 12s -> 30s: measured from MOUNT, 12s landed inside the demo
+             itself (names ~10-13s, then the demo), cutting it short. The reveal's own net is 22s,
+             so the demo always starts before 23s and ends ~3s later; 30s still frees a stuck slide. */
+          setTimeout(function(){ if(CARD.slides[state.idx] === slide) state.demoRunning = false; }, 30000);
         }
       }
-      const onPair = (zone, t) => {   /* [match-by-line] card stays put; a line is drawn */
+      const onPair = (zone, t, fromZone) => {   /* [match-by-line] card stays put; a line is drawn */
           if(state.locked || zone.classList.contains("filled")) return;
           /* [H11-55] terminal help dims the other TILES so only the revealed pair can be acted
              on. Now that zones are draggable too, that scaffold has a second way round it, so
@@ -10092,6 +10214,15 @@ const SlideModules = {
               pair: t.dataset.pairId, attempts: state.attempts
             });
             clearHold(tileRow);   /* [31o] same leak as SEQUENCE_DRAG — see the note there */
+            /* [H11-136] AND THE ZONE ROW. revealOne marks the ZONE .reveal-hold too, and onPair
+               refuses every other zone while one carries it - clearing only the tiles left that
+               mark on a zone that was now FILLED, so every remaining pair was refused and the
+               slide stuck after the helped match. */
+            clearHold(zoneRow);
+            [zone, t].forEach(el => el.classList.remove("reveal-glow"));
+            /* the hint ladder is per PAIR: a miss on the next pair starts again at hint 1 rather
+               than jumping straight to hint 2 because an earlier pair used it up. */
+            _dwN = 0;
             settle(zone, t);
           } else {
             zone.classList.add("filled","wrong");
@@ -10101,9 +10232,14 @@ const SlideModules = {
             const wrongLine = drawLink(wrap, t, zone, "wrong");
             setTimeout(()=> wrongLine.remove(), 500);
             t.classList.add("shake-wrong"); setTimeout(()=> t.classList.remove("shake-wrong"), 450);
-            dragWrong(slide, t);   /* [H11-1] pass the tile so its own rung-2 line can be found */
+            /* [H11-136] rung 2 names the card IN THE CHILD'S HAND. Dragged from the right-hand
+               column that is the zone, not `t` - `t` there is the card it was dropped ON, which is
+               why the hint used to describe a different pair from the one being attempted. */
+            const _heldId = fromZone ? zone.dataset.accept : t.dataset.pairId;
+            const _hintTile = [...tileRow.children].find(x => x.dataset.pairId === _heldId) || t;
+            dragWrong(slide, _hintTile);   /* [H11-1] pass the tile so its own rung-2 line can be found */
             GameBus.emit("answer_wrong", { slide_id: slide.id, phase: slide.phase, attempts: state.attempts });
-            if(++wrongStreak >= (CARD.scaffold_rules.max_attempts||2)) revealOne();
+            if(++wrongStreak >= (CARD.scaffold_rules.max_attempts||2)) revealOne(_heldId);
           }
       };
       /* [H11-55] the same handler, reached from either column. Dragging a zone hands back
@@ -10112,7 +10248,7 @@ const SlideModules = {
          because the finished picture should read the same however the child got there. */
       [...tileRow.children].forEach(tile => makeLinkDraggable(tile, wrap, onPair));
       [...zoneRow.children].forEach(zone => makeLinkDraggable(zone, wrap,
-        (t, z) => onPair(z, t), { target: ".dd-tile", from: "left" }));
+        (t, z) => onPair(z, t, true), { target: ".dd-tile", from: "left" }));
     }
   },
 
@@ -11129,6 +11265,10 @@ const SlideModules = {
         `<img class="fw-frame" src="assets/Images/wheel_frame.${IMG_EXT}" alt="">` +
         `<div class="fw-hub" id="fwHub">` +
           `<img class="fw-disc" id="fwDisc" src="assets/Images/wheel_disc.${IMG_EXT}" alt="">` +
+          /* [H11-137] the hub's star, drawn again ON TOP of the painted one so it can light up
+             while the wheel turns - see .fw-star. */
+          `<div class="fw-star" id="fwStar" aria-hidden="true">` +
+            `<img src="assets/Images/wheel_star.${IMG_EXT}" alt=""></div>` +
           SEATS.map((s, i) =>
             /* THE SAME BUCKET PICTURE, TWICE. The second copy is clipped to its front wall and
                sits OVER the rider, so the animal is inside the tub rather than standing on it.
@@ -11184,6 +11324,7 @@ const SlideModules = {
       if(window.ResizeObserver){ const ro = new ResizeObserver(fitNow); ro.observe(fit); state._fwObs = ro; }
 
       const disc  = st.querySelector("#fwDisc");
+      const star  = st.querySelector("#fwStar");
       const seats = [...st.querySelectorAll(".fw-seat")];
       let turn = 0, idx = 0, locked = false;
 
@@ -11203,6 +11344,7 @@ const SlideModules = {
       const place = (fp)=>{
         const p = (fp == null) ? 1 : fp;
         disc.style.transform = `rotate(${-turn * STEP}deg)`;
+        if(star) star.style.transform = `rotate(${-turn * STEP}deg)`;
         seats.forEach((el, i) => {
           const a = (90 + i * STEP - turn * STEP) * Math.PI / 180;
           const x = R * Math.cos(a), y = R * Math.sin(a);
@@ -11224,13 +11366,19 @@ const SlideModules = {
          note on .fw-flat. Wrapped here rather than at each call site so no future caller can
          forget and leave the wheel blurred while it turns. */
       const ride = (to, ms, done)=>{
-        st.classList.add("fw-flat");
+        st.classList.add("fw-flat", "fw-spin");   /* [H11-137] fw-spin lights the centre star */
+        /* [H11-137] THE SOUND OF THE WHEEL TURNING, cut to this ride: the clicks follow the same
+           slow-fast-slow easing the wheel moves with (see _tools/make_audio.py), so each clip
+           belongs to one ride length - one notch between questions, the slower opening notch,
+           and the six-notch final lap. */
+        playSfx(Math.abs(to - turn) > 1.5 ? "sfx_spin_lap" : (ms >= 1400 ? "sfx_spin_slow" : "sfx_spin"));
         const from = turn, t0 = Date.now();
         let over = false;
         const settle = ()=>{
           if(over) return;
           over = true;
           cancelAnimationFrame(state._fwRaf); state._fwRaf = 0;
+          st.classList.remove("fw-spin");
           turn = to; prevIdx = idx; place(1);
           if(idx >= 0) st.classList.remove("fw-flat");   /* focus lands on the bucket at the foot */
           if(done) done();
@@ -11253,7 +11401,7 @@ const SlideModules = {
         const el = document.createElement("span");
         el.innerHTML = rider(who);
         const node = el.firstElementChild; if(!node) return;
-        if(fresh) node.classList.add("fw-new");
+        if(fresh){ node.classList.add("fw-new"); playSfx("sfx_seat"); }   /* [H11-133] boing into the seat */
         /* FACE YOUR NEIGHBOUR. First one in sits on the right of the tub and should look left;
            the second joins on the left and should look right. The card says which way the picture
            is drawn (default right), so only the one pointing the wrong way is mirrored - and the
@@ -11378,6 +11526,7 @@ const SlideModules = {
          never depends on the sfx's length. Ported from HI01H04_L03_S05 (SME, twice: "celebration
          sound me 2 sounds mix ho rhe hain" / "celebration screen pr 2 vo hai"). */
       state.ownsAudio = true;
+      bgmStop();   /* [H11-133] the celebration has its own jingle and clip - the bed steps out */
       /* [34w] ONE-SHOT, WITH A CAP. Sequencing the VO off the sfx is only safe if the sfx is
          GUARANTEED to report an end, and it is not: a silently-queued clip never fires onended, and
          a celebration that never speaks is worse than the overlap this fix removes. So: speak on the
@@ -12167,6 +12316,7 @@ function phaseBlurTransition(cb, toPhase){
   $("stage").classList.add("blurred", "gating");
   document.body.classList.add("gating");
   gate.classList.add("show","hint-glow");
+  playSfx("sfx_whoosh");   /* [H11-133] the screen changes - a soft swish, well before Swifty speaks */
   GameBus.emit("phase_transition", { to: toPhase });
   const closeGate = ()=>{ gate.classList.remove("show"); $("stage").classList.remove("blurred", "gating"); document.body.classList.remove("gating"); };
   /* [2026-08-31 GATE SOFT LOCK — Yasir, "an issue regarding next button"]
@@ -12633,11 +12783,12 @@ function boot(){
     if(!window.__xapiLaunched){ window.__xapiLaunched = true;
       GameBus.emit("activity_launched", { skill_code: CARD.skill_code }); }
 
+    sfxTap(); bgmStart();   /* [H11-133] the first gesture is what lets the music start */
     if(_landingSpeaking){ _tutorialPending = true; return; }   // let it finish — see [2026-09-04 no-cut-landing]
     enterTutorial();
   };
   // tapping आगे clears any pending nav-nudge
-  $("navBtn").addEventListener("click", ()=>{ clearTimeout(state.navNudgeTimer); stopNudge(); });
+  $("navBtn").addEventListener("click", ()=>{ clearTimeout(state.navNudgeTimer); stopNudge(); sfxTap(); });
   // [engine JS] r4 dev jump: ?slide=N skips the loader+gate and mounts slide N directly (QA/capture only)
   (function(){
     const j = parseInt(new URLSearchParams(location.search).get("slide"), 10);

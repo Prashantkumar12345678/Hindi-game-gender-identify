@@ -128,7 +128,7 @@ def measure(slide):
     lines = [[w for w in _TAG.sub("", l).split() if w] for l in cap.split("\n")]
     nar = slide["audio"]["narration"]
     assert isinstance(nar, str), (slide["id"], "a LIST narration would need cues per clip")
-    path = os.path.join(GAME, "assets", "VO", nar + ".ogg")
+    path = os.path.join(GAME, "assets", "VO", nar + ".wav")   # [H11-156] the game ships WAV
     # [H11-139] a clip may open with speech that is not the caption (T1's intro). The card says
     # how many leading phrases to leave out, so the verse is measured from where it is SAID.
     pred, ph, dur = cues_for(lines, path, skip=int(slide["data"].get("caption_skip_phrases", 0)))

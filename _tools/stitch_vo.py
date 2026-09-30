@@ -44,7 +44,7 @@ def pcm(path):
 
 
 def piece(src, a, b):
-    x = pcm(os.path.join(VO, src + ".ogg"))
+    x = pcm(os.path.join(VO, src + ".wav"))
     y = x[max(0, int((a - PAD) * SR)):int((b + PAD) * SR)].copy()
     n = int(FADE * SR); r = np.linspace(0, 1, n)
     y[:n] *= r; y[-n:] *= r[::-1]
@@ -67,5 +67,5 @@ for out, parts in RECIPES.items():
     y = np.concatenate(segs)
     pcm16 = (np.clip(y, -1, 1) * 32767).astype("<i2").tobytes()
     subprocess.run([FF, "-v", "error", "-y", "-f", "s16le", "-ar", str(SR), "-ac", "1", "-i", "-",
-                    "-c:a", "libopus", "-b:a", "32k", os.path.join(VO, out + ".ogg")], input=pcm16, check=True)
+                    "-ar", "22050", "-c:a", "pcm_s16le", os.path.join(VO, out + ".wav")]   # [H11-156] WAV, input=pcm16, check=True)
     print("%-22s %.2fs  <- %s" % (out, len(y) / SR, " + ".join("%s[%.2f-%.2f]" % p for p in parts)))

@@ -92,7 +92,7 @@ def save(name, x):
     # seconds (the BGM came out as a 0-second file), so WAV goes through ffmpeg instead.
     wav = os.path.join(tempfile.gettempdir(), name + ".wav")
     sf.write(wav, x.astype(np.float32), SR, subtype="PCM_16")
-    subprocess.run([FFMPEG, "-y", "-loglevel", "error", "-i", wav, "-c:a", "libvorbis", "-q:a", "4",
+    subprocess.run([FFMPEG, "-y", "-loglevel", "error", "-i", wav, "-ac", "1", "-ar", "22050", "-c:a", "pcm_s16le",   # [H11-156] WAV
                     os.path.join(OUT, name)], check=True)
     os.remove(wav)
     print("%-16s %.2fs" % (name, len(x) / SR))
@@ -126,12 +126,12 @@ for k in range(64):                                                  # shaker on
 n = int(total * SR)
 loop = buf[:n].copy(); loop[:len(buf) - n] += buf[n:]                # fold the tail onto the start
 loop = norm(loop, 0.6)
-save("bgm_mela.ogg", loop)
+save("bgm_mela.wav", loop)
 
 # ---- tap: a hollow wooden tok ---------------------------------------------------------------
 t = t_(0.12)
 tap = np.sin(2 * np.pi * (900 * np.exp(-t / 0.03) + 500) * t) * env(len(t), 0.001, 0.03)
-save("sfx_tap.ogg", fade(norm(tap, 0.5)))
+save("sfx_tap.wav", fade(norm(tap, 0.5)))
 
 # ---- whoosh: band-passed noise sweeping up then down ------------------------------------------
 n = int(0.7 * SR); x = rng.standard_normal(n)
@@ -139,14 +139,14 @@ spec = np.fft.rfft(x); fr = np.fft.rfftfreq(n, 1 / SR)
 spec *= np.exp(-((fr - 1200) / 900) ** 2)
 x = np.fft.irfft(spec, n)
 shape = np.sin(np.linspace(0, np.pi, n)) ** 2
-save("sfx_whoosh.ogg", fade(norm(x * shape, 0.35)))
+save("sfx_whoosh.wav", fade(norm(x * shape, 0.35)))
 
 # ---- seat: a springy boing (pitch wobble falling into place) -----------------------------------
 t = t_(0.45)
 f = 330 + 160 * np.exp(-t / 0.08) * np.cos(2 * np.pi * 14 * t)
 ph = 2 * np.pi * np.cumsum(f) / SR
 boing = (np.sin(ph) + 0.3 * np.sin(2 * ph)) * env(len(t), 0.004, 0.16)
-save("sfx_seat.ogg", fade(norm(boing, 0.5)))
+save("sfx_seat.wav", fade(norm(boing, 0.5)))
 
 # ---- wheel: six soft ratchet ticks then a small bell --------------------------------------------
 w = np.zeros(int(1.3 * SR))
@@ -156,7 +156,7 @@ for k in range(6):
 tb = t_(0.8)
 bell = sum(a * np.sin(2 * np.pi * 1318.5 * m * tb) for a, m in ((1, 1), (.4, 2.76), (.2, 5.4)))
 mix_into(w, bell * env(len(tb), 0.002, 0.3) * 0.5, 0.8)
-save("sfx_wheel.ogg", fade(norm(w, 0.45)))
+save("sfx_wheel.wav", fade(norm(w, 0.45)))
 
 
 # ---- spin: ticks + rumble that follow ride()'s easing -------------------------------------------
@@ -185,6 +185,6 @@ def spin(ms, notches, name, bell=True):
         mix_into(out, b * env(len(tb), 0.002, 0.28) * 0.28, T - 0.02)
     save(name, fade(norm(out, 0.5), 0.004, 0.08))
 
-spin(1150, 1, "sfx_spin.ogg")
-spin(1500, 1, "sfx_spin_slow.ogg")
-spin(2600, 6, "sfx_spin_lap.ogg")
+spin(1150, 1, "sfx_spin.wav")
+spin(1500, 1, "sfx_spin_slow.wav")
+spin(2600, 6, "sfx_spin_lap.wav")

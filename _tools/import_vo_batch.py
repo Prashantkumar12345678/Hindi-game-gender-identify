@@ -74,7 +74,7 @@ def main():
                 wavs.append((WORDS_NFC.get(stem, stem), os.path.join(d, f), stem))
     unknown = [s for i, _, s in wavs if not i.startswith("vo_")]
     assert not unknown, "no id for: %s" % unknown
-    ret_vo = os.path.join(GAME, "_backup", "VO_retired_" + DATE)
+    ret_vo = os.path.join(ROOT, "_backup", "VO_retired_" + DATE)   # project-root _backup: the game folder ships as-is
     ret_m = os.path.join(MASTERS, "retired_" + DATE)
     for d in (ret_vo, ret_m):
         if not dry: os.makedirs(d, exist_ok=True)
@@ -82,18 +82,18 @@ def main():
         x = pcm(src)
         rms = speech_rms_db(x); peak = 20 * np.log10(np.abs(x).max() + 1e-9)
         gain = min(TARGET_RMS - rms, PEAK_CAP - peak)
-        old = os.path.join(VO, vid + ".ogg")
+        old = os.path.join(VO, vid + ".wav")   # [H11-156] the game ships WAV
         tag = "replace" if os.path.exists(old) else "NEW    "
         print("%s %-24s %-8s rms %6.1f -> %6.1f  (gain %+5.1f dB)" % (tag, vid, stem if stem != vid else "", rms, rms + gain, gain))
         if dry: continue
         if os.path.exists(old):
-            shutil.move(old, os.path.join(ret_vo, vid + ".ogg"))
+            shutil.move(old, os.path.join(ret_vo, vid + ".wav"))
         om = os.path.join(MASTERS, vid + ".wav")
         if os.path.exists(om):
             shutil.move(om, os.path.join(ret_m, vid + ".wav"))
         shutil.copy2(src, om)
         subprocess.run([FF, "-v", "error", "-y", "-i", src, "-af", "volume=%.2fdB" % gain,
-                        "-ac", "1", "-ar", "48000", "-c:a", "libopus", "-b:a", "32k", old], check=True)
+                        "-ac", "1", "-ar", "22050", "-c:a", "pcm_s16le", old], check=True)
     shutil.rmtree(tmp, ignore_errors=True)
     print("\n%d clips. Retired copies: %s" % (len(wavs), "(dry run)" if dry else ret_vo))
 

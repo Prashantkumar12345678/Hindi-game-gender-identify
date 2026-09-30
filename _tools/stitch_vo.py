@@ -32,6 +32,8 @@ RECIPES = {
     "vo_q_sentence_bandar": [("vo_q_sentence", 0.46, 2.84)],
     "vo_c_sentence_sherni": [("vo_c_sentence", 0.32, 2.47), ("vo_h2_sentence_sherni", 2.26, 4.42)],
     "vo_c_sentence_bandar": [("vo_c_sentence", 0.32, 2.47), ("vo_h2_sentence_bandar", 2.00, 3.85)],
+    # the झूला's praise when a rider sits: just the word, so the wheel can move on straight after
+    "vo_shabash":           [("vo_correct_pair", 0.24, 1.19)],
 }
 
 

@@ -550,7 +550,7 @@
   "type": "WHEEL_PAIRS",
   "prompt_hi": "सही जोड़ी को चुनिए और झूले पर बैठाइए।",
   "audio": {
-   "prompt": "vo_wheel_intro", "hint1": "vo_h1_pair"
+   "prompt": "vo_wheel_intro", "hint1": "vo_h1_pair", "correct": "vo_shabash"
   },
   "data": { "earned_hand": true,
    "option_audio": {"मोर": "vo_name_mor", "मुर्गी": "vo_name_murgi", "घोड़ा": "vo_name_ghoda", "बकरी": "vo_name_bakri", "घोड़ी": "vo_name_ghodi", "शेरनी": "vo_name_sherni", "गाय": "vo_name_gaay", "मुर्गा": "vo_name_murga", "बिल्ली": "vo_name_billi", "भेड़": "vo_name_bhed", "हथिनी": "vo_name_hathini", "चूहा": "vo_name_chuha", "खरगोश": "vo_name_khargosh", "घोड़नी": "vo_name_ghodni", "तोता": "vo_name_tota"}, "seats": [
@@ -847,7 +847,8 @@
    "vo_opt_jata": "assets/VO/vo_opt_jata.ogg",
    "vo_opt_jati": "assets/VO/vo_opt_jati.ogg",
    "vo_opt_chadhta": "assets/VO/vo_opt_chadhta.ogg",
-   "vo_opt_chadhti": "assets/VO/vo_opt_chadhti.ogg"
+   "vo_opt_chadhti": "assets/VO/vo_opt_chadhti.ogg",
+   "vo_shabash": "assets/VO/vo_shabash.ogg"
   },
   "audio_text": {
    "vo_bridge_lost": "ये कविता सुनकर मुझे तो बहुत मज़ा आया, लेकिन मेले में भीड़ की वजह से सभी जोड़ियाँ बिछड़ गईं। आइए साथ मिलकर ढूँढ़ते हैं। चलिए, साथ में करें!",
@@ -967,7 +968,8 @@
    "vo_opt_jata": "जाता है।",
    "vo_opt_jati": "जाती है।",
    "vo_opt_chadhta": "चढ़ता है।",
-   "vo_opt_chadhti": "चढ़ती है।"
+   "vo_opt_chadhti": "चढ़ती है।",
+   "vo_shabash": "शाबाश!"
   },
   "image": {
    "pic_bail": "assets/Images/pic_bail.webp",

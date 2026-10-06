@@ -15,7 +15,7 @@
  "skill_description_hi": "लिंग-सूचक शब्द-रूप बदलाव को पहचानता है — जैसे शेर से शेरनी, मोर से मोरनी।",
  "dt_fallback": null,
  "landing_hero": {"kind": "concept_strip", "cells": [{"type": "image", "src": "assets/Images/mor_title.webp", "label": "मोर"}, {"type": "image", "src": "assets/Images/title.webp", "label": "आइए जोड़ी मिलाएँ"}, {"type": "image", "src": "assets/Images/morni_title.webp", "label": "मोरनी"}]},
- "phase_gate_vo": {"guided": "vo_bridge_lost"}, "phase_gate_caption": {"tutorial": {"text": "चलिए, शुरू करें!", "at_ms": 3210}, "guided": {"text": "चलिए, साथ में करें!", "at_ms": 9640}, "practice": {"text": "वाह! अब आपकी बारी।", "at_ms": 250}}, "phase_gate_at": {"practice": "P5"}, "landing_nudge": false, "landing_vo_on_tap": true,
+ "phase_gate_vo": {"guided": "vo_bridge_lost"}, "phase_gate_caption": {"tutorial": {"text": "चलिए, शुरू करें!", "at_ms": 3210}, "guided": {"text": "चलिए, साथ में करें!", "at_ms": 9640}, "practice": {"text": "वाह! अब आपकी बारी।", "at_ms": 250}}, "phase_gate_at": {"practice": "P5"}, "landing_nudge": false, "landing_vo_on_tap": false,
  "audio_chip_on_mascot_foot": true,
  "phase_distribution": {
   "tutorial": 9,
@@ -430,12 +430,12 @@
     "prompt": "vo_q_sentence",
     "hint1": "vo_h1_sentence",
     "hint2": "vo_h2_sentence",
-    "hint": ["vo_h2_sentence", "vo_h3_sentence"],
+    "hint": "vo_h2_sentence",
     "reveal": "vo_h3_sentence",
     "correct": "vo_c_sentence",
     "word_name": "vo_name_bakra"
    },
-   "data": {
+   "data": { "max_attempts": 3, "earned_hand": true,
     "noun": {
      "word_hi": "बकरा घास खा…",
      "emoji": "🐐",
@@ -473,12 +473,12 @@
     "prompt": "vo_stem_sherni",
     "hint1": "vo_h1_sentence_sherni",
     "hint2": "vo_h2_sentence_sherni",
-    "hint": ["vo_h2_sentence_sherni", "vo_h3_sentence_sherni"],
+    "hint": "vo_h2_sentence_sherni",
     "reveal": "vo_h3_sentence_sherni",
     "correct": "vo_c_sentence_sherni",
     "word_name": "vo_name_sherni"
    },
-   "data": {
+   "data": { "max_attempts": 3, "earned_hand": true,
     "noun": {
      "word_hi": "शेरनी मेले में…",
      "emoji": "🦁",
@@ -513,12 +513,12 @@
     "prompt": "vo_stem_bandar",
     "hint1": "vo_h1_sentence_bandar",
     "hint2": "vo_h2_sentence_bandar",
-    "hint": ["vo_h2_sentence_bandar", "vo_h3_sentence_bandar"],
+    "hint": "vo_h2_sentence_bandar",
     "reveal": "vo_h3_sentence_bandar",
     "correct": "vo_c_sentence_bandar",
     "word_name": "vo_name_bandar"
    },
-   "data": {
+   "data": { "max_attempts": 3, "earned_hand": true,
     "noun": {
      "word_hi": "बंदर पेड़ पर…",
      "emoji": "🐒",
@@ -550,9 +550,9 @@
   "type": "WHEEL_PAIRS",
   "prompt_hi": "सही जोड़ी को चुनिए और झूले पर बैठाइए।",
   "audio": {
-   "prompt": "vo_wheel_intro", "hint1": "vo_h1_pair", "correct": "vo_shabash"
+   "prompt": "vo_wheel_intro", "hint1": "vo_h1_pair", "correct": "vo_wheel_shabash"
   },
-  "data": { "earned_hand": true,
+  "data": { "layout": "side-left", "earned_hand": true,
    "option_audio": {"मोर": "vo_name_mor", "मुर्गी": "vo_name_murgi", "घोड़ा": "vo_name_ghoda", "बकरी": "vo_name_bakri", "घोड़ी": "vo_name_ghodi", "शेरनी": "vo_name_sherni", "गाय": "vo_name_gaay", "मुर्गा": "vo_name_murga", "बिल्ली": "vo_name_billi", "भेड़": "vo_name_bhed", "हथिनी": "vo_name_hathini", "चूहा": "vo_name_chuha", "खरगोश": "vo_name_khargosh", "घोड़नी": "vo_name_ghodni", "तोता": "vo_name_tota"}, "seats": [
     {
      "seated": {
@@ -566,7 +566,7 @@
       "word_hi": "मोर",
       "img": "pic_mor",
       "emoji": "🦚",
-      "faces": "left",
+      "faces": "right",
       "sit": 0.801
      },
      "options": [
@@ -711,7 +711,7 @@
    "type": "CELEBRATION",
    "prompt_hi": "",
    "audio": {
-    "prompt": "vo_well_done",
+    "prompt": "vo_shabash",
     "sfx": "sfx_celebrate"
    },
    "data": {},
@@ -814,7 +814,8 @@
    "vo_opt_jati": "assets/VO/vo_opt_jati.wav",
    "vo_opt_chadhta": "assets/VO/vo_opt_chadhta.wav",
    "vo_opt_chadhti": "assets/VO/vo_opt_chadhti.wav",
-   "vo_shabash": "assets/VO/vo_shabash.wav"
+   "vo_shabash": "assets/VO/vo_shabash.wav",
+   "vo_wheel_shabash": "assets/VO/vo_wheel_shabash.wav"
   },
   "audio_text": {
    "vo_bridge_lost": "ये कविता सुनकर मुझे तो बहुत मज़ा आया, लेकिन मेले में भीड़ की वजह से सभी जोड़ियाँ बिछड़ गईं। आइए साथ मिलकर ढूँढ़ते हैं। चलिए, साथ में करें!",
@@ -901,7 +902,8 @@
    "vo_opt_jati": "जाती है।",
    "vo_opt_chadhta": "चढ़ता है।",
    "vo_opt_chadhti": "चढ़ती है।",
-   "vo_shabash": "शाबाश!"
+   "vo_shabash": "शाबाश! आज तो कमाल कर दिया!",
+   "vo_wheel_shabash": "शाबाश!"
   },
   "image": {
    "pic_bail": "assets/Images/pic_bail.webp",

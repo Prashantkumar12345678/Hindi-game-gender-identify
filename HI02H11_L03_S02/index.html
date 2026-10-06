@@ -844,7 +844,7 @@ html.no-anim .opt-cell.opt-walk{animation:none !important;}
 .start-gate{position:absolute;inset:0;z-index:80;display:flex;align-items:center;justify-content:center;background:transparent;cursor:default;}   /* [20a landing] transparent — the fixed .start-bg is the ground; [21c flag#1] cursor:default — hand-pointer belongs on .sg-btn/.sg-vo only, gate is not tap-anywhere */
 .start-gate.hidden{display:none;}
 /* inner white tile is the provided image (border + faint rays baked in) */
-.sg-card{position:relative;width:1114px;height:456px;background:url("assets/UI/start_card.webp?v=20260930173753") center/100% 100% no-repeat;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;}
+.sg-card{position:relative;width:1114px;height:456px;background:url("assets/UI/start_card.webp?v=20261006142110") center/100% 100% no-repeat;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;}
 /* full-body standing mascot (feet included): size by HEIGHT so the whole body incl. feet shows;
    the art frame is square with side padding, so it's constrained to the card height, not width. */
 .sg-mascot{position:absolute;left:-24px;bottom:-12px;width:208px;height:auto;z-index:3;object-fit:contain;filter:drop-shadow(0 10px 18px rgba(0,47,118,.18));animation:none;}   /* [25d] CORRECTED. My 25c change to left:8/bottom:6 was WRONG: I copied strilling's BASE rule (its line 611) instead of its WINNING late override (line 1104 = left:-24/bottom:-12/width:208 !important) — which is what the engine already had. Moving her right by 32px is also what threw .sg-vo out of line, since left:96px is tuned to this position. "Hovering" = the sgFloat bob: strilling kills it at its line 5600 `animation:none !important`, so it must be OFF here too (I previously said strilling bobs as well — that was reading line 611 and missing 5600). */
@@ -1027,7 +1027,7 @@ body.loaded .sg-acell{animation-play-state:running;}
    .wg-, .nh-, .ol-), NOT on a guessed prefix: keying on `sg-` alone is what dropped the
    entire drifting sky the first time round. */
 /* ===== FLN ANIMATION KIT: sky-drift BEGIN ===== */
-.start-bg{background-image:url("assets/UI/startnew_bg_plain.webp?v=20260930173753");}   /* mandatory */
+.start-bg{background-image:url("assets/UI/startnew_bg_plain.webp?v=20261006142110");}   /* mandatory */
 
 .sg-glow,.sg-sky{position:fixed;inset:0;pointer-events:none;display:none;z-index:1;}
 body.is-start .sg-glow,body.is-start .sg-sky,
@@ -1069,9 +1069,9 @@ body.is-end .sg-sky{
   margin:calc(var(--s) / -2) 0 0 calc(var(--s) / -2);
   background:center/contain no-repeat;opacity:0;
   animation:sgFly var(--t) linear infinite;animation-delay:var(--d);}
-.sg-sky .s1{background-image:url("assets/UI/bgdeco_star.svg?v=20260930173753");}
-.sg-sky .s2{background-image:url("assets/UI/bgdeco_star_o.svg?v=20260930173753");}
-.sg-sky .s3{background-image:url("assets/UI/bgdeco_spark.svg?v=20260930173753");}
+.sg-sky .s1{background-image:url("assets/UI/bgdeco_star.svg?v=20261006142110");}
+.sg-sky .s2{background-image:url("assets/UI/bgdeco_star_o.svg?v=20261006142110");}
+.sg-sky .s3{background-image:url("assets/UI/bgdeco_spark.svg?v=20261006142110");}
 .sg-sky .s4{border-radius:50%;border:.22vmax solid rgba(255,255,255,.92);}
 .sg-sky .s5{border-radius:50%;background:rgba(255,255,255,.92);}
 
@@ -1488,7 +1488,7 @@ html.no-anim .ol-alpha,html.no-anim .ol-band{animation:none !important;}
    startnew_bg_plain.webp is the same artwork with the decorations stripped.
    `body .start-bg` because the engine declares .start-bg AFTER this block; matching its
    specificity and relying on order is precisely what R11 forbids. */
-body .start-bg{background-image:url("assets/UI/startnew_bg_plain.webp?v=20260930173753");}
+body .start-bg{background-image:url("assets/UI/startnew_bg_plain.webp?v=20261006142110");}
 
 /* ---- the white centre box, more opaque ------------------------------------------
    start_card.webp is white at alpha 166/255 (65%), which is why the background rays read
@@ -1497,9 +1497,9 @@ body .start-bg{background-image:url("assets/UI/startnew_bg_plain.webp?v=20260930
    art's rounded corners are alpha - a background-color would square them off.
    Drop one layer for ~88% if this is too solid. */
 body .sg-card{background:
-   url("assets/UI/start_card.webp?v=20260930173753") center/100% 100% no-repeat,
-   url("assets/UI/start_card.webp?v=20260930173753") center/100% 100% no-repeat,
-   url("assets/UI/start_card.webp?v=20260930173753") center/100% 100% no-repeat;}
+   url("assets/UI/start_card.webp?v=20261006142110") center/100% 100% no-repeat,
+   url("assets/UI/start_card.webp?v=20261006142110") center/100% 100% no-repeat,
+   url("assets/UI/start_card.webp?v=20261006142110") center/100% 100% no-repeat;}
 
    which is why the first attempt at this changed almost nothing. Here it is constant.
    The kit's objection to filters on these elements (recipe 1, Deviations) is to ANIMATING
@@ -1538,7 +1538,7 @@ body .opt-cell.wg-wrong{animation:wgNo var(--wgT) ease-in-out both;}
 /* ===== END / CELEBRATION ===== */
 .end-screen{position:absolute;inset:0;z-index:90;display:none;flex-direction:column;align-items:center;justify-content:center;gap:22px;background:transparent;overflow:hidden;}
 /* r4: immersive celebration (adopted from Shruti's build — end_screen.webp sunburst + centred mascot + subtitle) */
-.end-bg{position:fixed;inset:0;background:#FDE9A8 url("assets/UI/end_screen.webp?v=20260930173753") center/cover no-repeat;display:none;pointer-events:none;z-index:0;}
+.end-bg{position:fixed;inset:0;background:#FDE9A8 url("assets/UI/end_screen.webp?v=20261006142110") center/cover no-repeat;display:none;pointer-events:none;z-index:0;}
 body.is-end .end-bg{display:block;}
 body.is-end{background:#FDE9A8 !important;}
 body.is-end .stage{background:transparent !important;}
@@ -1958,7 +1958,7 @@ body.gating .stage.gating .start-gate{filter:none;}
 
 /* [20a landing] fixed full-viewport ground so #47BCFD + art reach the true edges (kills the #7FC8F4 letterbox band);
    start-gate goes transparent (above) so this single image is seamless; in-lesson chrome hidden while landing shows. */
-.start-bg{position:fixed;inset:0;background:#47BCFD url("assets/UI/startnew_bg.webp?v=20260930173753") center/cover no-repeat;display:none;pointer-events:none;z-index:0;}
+.start-bg{position:fixed;inset:0;background:#47BCFD url("assets/UI/startnew_bg.webp?v=20261006142110") center/cover no-repeat;display:none;pointer-events:none;z-index:0;}
 body.is-start .start-bg{display:block;}
 body.is-start .stage-inner{visibility:hidden !important;}
 body.is-start .stage{background:transparent !important;}
@@ -2775,8 +2775,8 @@ body.is-start .phase-gate{
    it sat before - otherwise every one of these buttons would quietly rise 14px up the screen. */
 .nav-btn{width:198px !important;height:90px !important;min-width:0 !important;bottom:18px !important;
   padding:0 !important;border:0 !important;box-shadow:none !important;
-  background:transparent url("assets/swiftpal_buttons/btn-next-disabled.svg?v=20260930173753") center/198px 90px no-repeat !important;}
-.nav-btn.active{background-image:url("assets/swiftpal_buttons/btn-next.svg?v=20260930173753") !important;
+  background:transparent url("assets/swiftpal_buttons/btn-next-disabled.svg?v=20261006142110") center/198px 90px no-repeat !important;}
+.nav-btn.active{background-image:url("assets/swiftpal_buttons/btn-next.svg?v=20261006142110") !important;
   box-shadow:none !important;}
 .nav-btn.active:active{box-shadow:none !important;}
 .nav-btn .nav-arrow{display:none !important;}
@@ -2842,7 +2842,7 @@ body.is-start .phase-gate{
    paints it ONCE, so the blue .start-bg tints through and the card reads as a blue-white
    gradient with a white ring. This build stacked the SAME file 3x, which made it opaque
    flat white. Back to a single paint = src. (Sky sparkles deliberately NOT ported.) */
-body .sg-card{background:url("assets/UI/start_card.webp?v=20260930173753") center/100% 100% no-repeat !important;}
+body .sg-card{background:url("assets/UI/start_card.webp?v=20261006142110") center/100% 100% no-repeat !important;}
 .sg-mascot{left:-24px !important;bottom:-12px !important;width:208px !important;}
 .sg-vo{left:89px !important;bottom:-6px !important;width:58px !important;height:58px !important;}  /* <- src .sg-audio */
 .sg-content{width:100% !important;height:100% !important;max-width:none !important;
@@ -2891,7 +2891,7 @@ body .sg-card{background:url("assets/UI/start_card.webp?v=20260930173753") cente
 .sg-btn{bottom:30px !important;width:140px !important;height:140px !important;min-width:0 !important;
         padding:0 !important;border:0 !important;border-radius:50% !important;
         box-shadow:none !important;
-        background:transparent url("assets/swiftpal_buttons/btn-play-round.svg?v=20260930173753") center/140px 140px no-repeat !important;
+        background:transparent url("assets/swiftpal_buttons/btn-play-round.svg?v=20261006142110") center/140px 140px no-repeat !important;
         animation:sgBtnPulse 1.4s ease-in-out infinite !important;}
 .sg-btn:active{animation:none !important;}
 /* [H11-149] once pressed it stops breathing - the invitation has been taken */
@@ -2938,9 +2938,15 @@ body .sg-card{background:url("assets/UI/start_card.webp?v=20260930173753") cente
    kept at _backup/swiftpal_buttons/btn-play-waiting.svg.gold-flat.
    The ?v= matters here more than usual: the FILE changed while its name did not, so without a
    fresh token a browser that has been on this page today keeps showing the gold one. */
-.sg-btn.sg-waiting{background-image:url("assets/swiftpal_buttons/btn-play-round-waiting.svg?v=20260930173753") !important;
+/* [H11-173] speaker held while the greeting plays */
+.sg-vo.sg-vo-off{pointer-events:none !important;opacity:.55;filter:grayscale(.6);}
+.sg-btn.sg-waiting{background-image:url("assets/swiftpal_buttons/btn-play-round-waiting.svg?v=20261006142110") !important;
                    cursor:default !important;animation:none !important;
                    pointer-events:none !important;}   /* see setStartBtnReady - NOT disabled */
+/* [H11-180] THE BUTTON STAYS ON SCREEN, GREY, WHILE SHE SPEAKS. [H11-178] hid it during the greeting
+   (checklist: "Play button tabhi aaye jab VO khatam ho"); seen on the real page that read as the
+   button having vanished, and the ask came back: always there, grey and unpressable during the
+   VO, gold and breathing after it. So .sg-waiting is the grey art again and nothing hides it. */
 
 /* [H11-93] SWIFTY ARRIVES. The landing used to have him already standing there when the screen
    came up; now he runs in from the left, overshoots a step, lands with a squash and settles.
@@ -3021,6 +3027,9 @@ html.no-anim body.is-start .sg-vo{animation:none !important;transform:none !impo
   display:flex;align-items:center;justify-content:center;}
 .fw-listen:active{transform:translateY(3px);box-shadow:0 1px 0 #1560BC;}
 .fw-listen svg{width:32px;height:32px;fill:#fff;}
+/* [H11-164] the speaker comes OFF the wheel screen, asked for. The question is still repeated by
+   the idle replay (7s of quiet), so hiding the button does not leave a child unable to hear it. */
+.fw-listen{display:none !important;}
 .fw-fit{position:absolute;inset:0;overflow:hidden;}
 .fw-stage{position:absolute;left:0;top:0;width:1920px;height:1080px;transform-origin:0 0;}
 .fw-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;}
@@ -3217,6 +3226,15 @@ html.no-anim .fw-opt.fw-hint{animation:none !important;box-shadow:0 0 0 8px rgba
 .fw-hand.show{display:block;animation:fwHandTap 1s ease-in-out infinite;}
 @keyframes fwHandTap{0%,100%{transform:translateY(0);}50%{transform:translateY(-16px);}}
 html.no-anim .fw-hand.show{animation:none !important;}
+/* [H11-165] side layout: the hand lies on its side, finger pointing left at the pill */
+.fw-hand.fw-hand-l{transform-origin:50% 50%;}
+.fw-hand.fw-hand-l.show{animation:fwHandTapL 1s ease-in-out infinite;}
+@keyframes fwHandTapL{0%,100%{transform:rotate(-90deg) translateY(0);}50%{transform:rotate(-90deg) translateY(-16px);}}
+html.no-anim .fw-hand.fw-hand-l.show{animation:none !important;transform:rotate(-90deg);}
+.fw-hand.fw-hand-r{transform-origin:50% 50%;}
+.fw-hand.fw-hand-r.show{animation:fwHandTapR 1s ease-in-out infinite;}
+@keyframes fwHandTapR{0%,100%{transform:rotate(90deg) translateY(0);}50%{transform:rotate(90deg) translateY(-16px);}}
+html.no-anim .fw-hand.fw-hand-r.show{animation:none !important;transform:rotate(90deg);}
 /* [H11-142] rung 2 on the wheel: the button being named swells while it speaks */
 /* [H11-144] ".fw-ask" in front: .fw-opt.fw-no (the wrong-tap wiggle) is declared further down with
    the same weight, so on any button the child had already got wrong the wiggle won and the button
@@ -3262,12 +3280,50 @@ html.no-anim .fw-disc,html.no-anim .fw-frame{transition:none !important;}
   transition:opacity .5s ease, transform .5s cubic-bezier(.2,1.3,.5,1);}
 .fw-ask.fw-in{opacity:1;transform:none;}
 html.no-anim .fw-ask{transition:none !important;}
+/* [H11-165] SIDE LAYOUT (opt-in: P5 data.layout = "side"). The ride moves 260px to the right and
+   the three word pills stand in a column on the left, vertically centred on the wheel's hub
+   height. Everything else - geometry, focus, hint walk, hand - is unchanged, because the wheel
+   moves as a whole (frame + hub carry every seat) and the pills keep their own size.
+   The bottom-row layout above is the default and stays untouched: remove data.layout to get it back. */
+.fw-stage.fw-side .fw-frame{left:911px;}
+.fw-stage.fw-side .fw-hub{left:1229.5px;}
+.fw-stage.fw-side .fw-ask{left:110px;right:auto;top:200px;bottom:auto;width:424px;height:680px;
+  flex-direction:column;gap:56px;transform:translateX(-26px);}
+.fw-stage.fw-side .fw-ask.fw-in{transform:none;}
+/* [H11-166] SIDE-LEFT (data.layout = "side-left"): the mirror - the ride 260px to the LEFT, the
+   pills in a column on the right. Same rules as side, opposite sides. */
+.fw-stage.fw-side.fw-sl .fw-frame{left:391px;}
+.fw-stage.fw-side.fw-sl .fw-hub{left:709.5px;}
+.fw-stage.fw-side.fw-sl .fw-ask{left:1386px;transform:translateX(26px);}
+.fw-stage.fw-side.fw-sl .fw-ask.fw-in{transform:none;}
+/* [H11-167] side-left: the ride a little BIGGER (x1.12) and a little LOWER (+85px - at +30 and +60 the x1.12 growth still clipped the top bucket on a real screen), asked for.
+   Frame and hub scale about the SAME point - the axle's x on the frame's foot line (709.5, 837) -
+   so every bucket grows with the wheel and the legs stay planted; each transform-origin is that
+   point in the element's own box (the hub is a 0x0 box at 709.5,370.5). */
+.fw-stage.fw-side.fw-sl .fw-frame{transform-origin:318.5px 456px;transform:translateY(85px) scale(1.12);}
+.fw-stage.fw-side.fw-sl .fw-hub{transform-origin:0 466.5px;transform:translateY(85px) scale(1.12);}
 .fw-opt{font-family:var(--font-hi);font-weight:800;font-size:48px;color:var(--navy);
   width:424px;height:95px;padding:0;display:flex;align-items:center;justify-content:center;
   background:#F8F4E9;border:0;border-radius:46px;
   cursor:pointer;box-shadow:0 6px 0 rgba(11,42,90,.13), 0 10px 22px rgba(0,0,0,.20);
   transition:transform .12s ease;}
 .fw-opt:active{transform:translateY(3px);box-shadow:0 2px 0 rgba(11,42,90,.13), 0 6px 14px rgba(0,0,0,.20);}
+/* [H11-170] THE PILLS WEAR THE RIDE'S COLOURS. They were plain cream ovals that read as a form
+   control parked next to a fairground. Now they are made like the bucket's own nameplate: a cream
+   face with a gold rim, sitting on a darker-gold ledge so they look raised and pressable (the ledge
+   was the bucket's red at first - taken out, asked for: no red on the options),
+   with a soft gloss on top. Pressing pushes the face down onto the ledge. Sizes are unchanged, so
+   the layouts and the hint walk/glow/hand all land exactly where they did. */
+.fw-opt{background:linear-gradient(180deg,#FFFDF6 0%,#FFF4D9 55%,#F7E3B4 100%);
+  /* [H11-172] the gold rim stays (it was right); only the LEDGE under it changes - orange (asked for;
+     it was purple, and red / green / yellow before that) - and thinner (4px, was 7+2) */
+  border:5px solid #F5B82A;
+  box-shadow:inset 0 3px 0 rgba(255,255,255,.85), inset 0 -4px 0 rgba(214,150,30,.25),
+             0 4px 0 #F07A1A, 0 10px 18px rgba(0,0,0,.28);
+  text-shadow:0 1px 0 #fff;}
+.fw-opt:active{transform:translateY(3px);
+  box-shadow:inset 0 3px 0 rgba(255,255,255,.85), inset 0 -4px 0 rgba(214,150,30,.25),
+             0 1px 0 #F07A1A, 0 5px 10px rgba(0,0,0,.25);}
 .fw-opt.fw-no{animation:buzzShake .4s;}        /* wrong: it wiggles, it does not go red */
 .fw-opt.fw-done{pointer-events:none;opacity:.45;}
 html.no-anim .fw-disc,html.no-anim .fw-seat{transition:none !important;}
@@ -3285,7 +3341,7 @@ html.no-anim .fw-opt.fw-no,html.no-anim .fw-disc.fw-run{animation:none !importan
    the control keeps an accessible name instead of announcing as a bare "button". */
 .end-btn{width:163px !important;height:117px !important;min-width:0 !important;padding:0 !important;
          border:0 !important;border-radius:0 !important;box-shadow:none !important;font-size:0 !important;
-         background:transparent url("assets/swiftpal_buttons/btn-finish.svg?v=20260930173753") center/163px 117px no-repeat !important;}
+         background:transparent url("assets/swiftpal_buttons/btn-finish.svg?v=20261006142110") center/163px 117px no-repeat !important;}
 .end-btn:active{box-shadow:none !important;}
 
 /* ---- 6. FEEDBACK OVERLAY ------------------------------------------------------------------- */
@@ -3307,16 +3363,24 @@ html.no-anim .fw-opt.fw-no,html.no-anim .fw-disc.fw-run{animation:none !importan
 
 /* ---- 7. PHASE GATE ------------------------------------------------------------------------- */
 .phase-gate{align-items:center !important;}
-.pg-title{left:50% !important;top:50% !important;transform:translate(-50%,-50%) !important;
-          width:max-content !important;max-width:86vw !important;white-space:normal !important;
-          font-size:clamp(40px,7.5vw,88px) !important;line-height:1.14 !important;
-          -webkit-text-stroke:8px #FFFFFF !important;}
+/* [H11-181] GATE SPEC (asked for, value for value): the title is 96px magenta #CD0FD5 with a 10px
+   white outline, 271px from the top of the screen, centred - no longer the vertical-centre /
+   clamp(40,7.5vw,88) / 8px-stroke this block used to impose. It may still wrap on a screen
+   narrower than itself rather than run off the edge. */
+.pg-title{left:50% !important;top:271px !important;transform:translateX(-50%) !important;
+          width:max-content !important;max-width:94vw !important;white-space:normal !important;
+          font-size:96px !important;line-height:1.14 !important;color:#CD0FD5 !important;
+          -webkit-text-stroke:10px #FFFFFF !important;paint-order:stroke fill !important;}
 .phase-gate #phaseGateImg{position:fixed !important;left:50% !important;bottom:0 !important;
           /* 172px min is THIS game's own tuned value, not src's 120px: engine note [30d]
              records the bird height being measured against the 73-frame peek art and signed
              off. Identical to src at normal window sizes (26vh wins); it only matters on a
              short window, where 172 keeps the bird legible. Say the word to use src's 120. */
-          height:clamp(172px,26vh,250px) !important;width:auto !important;
+          /* [H11-181] GATE SPEC: 52.8% of the window height, never under 360px or over 624px,
+             square (the art is 900x900), bottom-anchored so the ledge sits on the screen edge.
+             1920x918 -> 485px, 1333x750 -> 396px. Replaces clamp(172px,26vh,250px). */
+          height:clamp(360px,52.8vh,624px) !important;width:clamp(360px,52.8vh,624px) !important;
+          object-fit:contain !important;
           transform:translateX(-50%);
           /* NO CSS RISE - and this is deliberate, not an omission.
              peeking.webp is a 73-frame / 3.03s peek-a-boo and the bird ALREADY rises in it: the
@@ -3457,6 +3521,8 @@ html.no-anim .fw-opt.fw-no,html.no-anim .fw-disc.fw-run{animation:none !importan
           width:100px !important;height:100px !important;}
 .dd-tile.pic-tile .zone-emoji,.dd-tile.pic-tile:not(.snapped) .zone-emoji{font-size:76px !important;}
 .dd-tile.pic-tile .zone-lbl{font-size:18px !important;}
+/* [H11-175] G6: the names were too small to read (18/20) - asked for bigger. Both columns. */
+.match-line .dd-zone .zone-lbl,.match-line .dd-tile .zone-lbl{font-size:28px !important;line-height:1.15 !important;}
 
 
 /* ---- 12b. MATCH-BY-LINE  <- src .link-line / .match-tile::after / .match-zone::before -------- */
@@ -3669,7 +3735,7 @@ html.no-anim .nav-btn.nav-call{animation:none !important;}
           box-shadow:0 3px 10px rgba(11,42,90,.18) !important;
           /* no white plate behind it - the scene fills the panel edge to edge */
           background:transparent !important;}
-.story-q-stim-label{font-size:24px !important;}
+.story-q-stim-label{font-size:32px !important;}   /* [H11-176] 24 -> 32, asked for */
 /* [H11-11] NO OUTER PLATE AROUND A PICTURE STIMULUS. The scene panel already has its own
    rounded frame + shadow, so the .story-q-stim card behind it just double-framed the picture -
    a box inside a box. Scoped with :has(> .story-q-thumb) so it only applies where there IS a
@@ -3685,7 +3751,7 @@ html.no-anim .nav-btn.nav-call{animation:none !important;}
                      /* <- src .stimulus-pic .lbl */
 .story-q-opt-img{width:200px !important;height:200px !important;}   /* <- src .opt-cell .pick-img */
 .story-q-opt-emoji{font-size:84px !important;}                      /* <- src .pick-emoji */
-.story-q-opt-label{font-size:26px !important;}                      /* <- src .pick-lbl */
+.story-q-opt-label{font-size:34px !important;}                      /* <- src .pick-lbl; [H11-176] 26 -> 34, asked for */
 /* [H11-131] A WORD-ONLY OPTION IS A WORD, NOT A CAPTION. These cells are built to hold a 200px
    picture with a caption under it; with the picture gone the word was left floating in the
    middle of an empty 264px box at caption size. It comes down to the height a word needs and up
@@ -3772,7 +3838,7 @@ html.no-anim .nav-btn.nav-call{animation:none !important;}
      two banner boxes coincide. ONE scale for both axes, so nothing is stretched.
      The odd size/position below existed to fit the old 1667x943 art into a 16:9 box; the new
      file IS 16:9 (1672x941), so it simply fills. */
-  background:url("assets/Images/gate_bg.webp?v=20260930173753") no-repeat;
+  background:url("assets/Images/gate_bg.webp?v=20261006142110") no-repeat;
   background-size:100% 100%;background-position:0 0;}
 .sort-stage.sort-gates .sort-bins .sort-bin,
 .sort-stage.sort-gates .sort-bins.many .sort-bin{
@@ -3885,10 +3951,10 @@ html.no-anim .sort-stage.sort-gates .sort-item.snapped{
   transform-origin:50% 60%;}
 .sort-stage.sort-gates .gate-glow.gm{
   left:15.300%;top:20.403%;width:25.499%;height:15.740%;   /* [H11-74] the new board's own ratio */
-  background-image:url("assets/Images/gate_m.webp?v=20260930173753");}
+  background-image:url("assets/Images/gate_m.webp?v=20261006142110");}
 .sort-stage.sort-gates .gate-glow.gf{
   left:58.780%;top:20.248%;width:26.025%;height:16.182%;   /* [H11-74] */
-  background-image:url("assets/Images/gate_f.webp?v=20260930173753");}
+  background-image:url("assets/Images/gate_f.webp?v=20261006142110");}
 .sort-stage.sort-gates .sort-bins.lit-m .gate-glow.gm,
 .sort-stage.sort-gates .sort-bins.lit-f .gate-glow.gf{animation:gatePulse 1.1s ease-in-out;}
 @keyframes gatePulse{
@@ -3939,7 +4005,7 @@ html.no-anim .sort-stage.sort-gates .sort-bins.lit-f::after{animation:none;filte
 <!-- [H11-155] the landing and the first transition, fetched before the engine even parses. The two
      links this replaced named another game's pictures (sit_namaste_teacher, sit_dhanyawad_pencil)
      and 404ed on every load since the first commit. -->
-<link rel="preload" as="image" fetchpriority="high" href="assets/UI/startnew_bg_plain.webp?v=20260930173753"><link rel="preload" as="image" fetchpriority="high" href="assets/UI/start_card.webp?v=20260930173753"><link rel="preload" as="image" fetchpriority="high" href="assets/Images/mor_title.webp?v=20260930173753"><link rel="preload" as="image" fetchpriority="high" href="assets/Images/title.webp?v=20260930173753"><link rel="preload" as="image" fetchpriority="high" href="assets/Images/morni_title.webp?v=20260930173753"><link rel="preload" as="image" fetchpriority="high" href="assets/swiftpal_buttons/btn-play-round.svg?v=20260930173753"><link rel="preload" as="image" fetchpriority="high" href="assets/UI/new_landing_swiftee_anim.webp?v=20260930173753"><link rel="preload" as="image" fetchpriority="high" href="assets/peeking_talk_up.webp?v=20260930173753"></head>
+<link rel="preload" as="image" fetchpriority="high" href="assets/UI/startnew_bg_plain.webp?v=20261006142110"><link rel="preload" as="image" fetchpriority="high" href="assets/UI/start_card.webp?v=20261006142110"><link rel="preload" as="image" fetchpriority="high" href="assets/Images/mor_title.webp?v=20261006142110"><link rel="preload" as="image" fetchpriority="high" href="assets/Images/title.webp?v=20261006142110"><link rel="preload" as="image" fetchpriority="high" href="assets/Images/morni_title.webp?v=20261006142110"><link rel="preload" as="image" fetchpriority="high" href="assets/swiftpal_buttons/btn-play-round.svg?v=20261006142110"><link rel="preload" as="image" fetchpriority="high" href="assets/UI/new_landing_swiftee_anim.webp?v=20261006142110"><link rel="preload" as="image" fetchpriority="high" href="assets/peeking_talk_up.webp?v=20261006142110"></head>
 <body class="is-start">
 <div class="start-bg" aria-hidden="true"></div>
 <div class="sg-glow" aria-hidden="true"></div>
@@ -4020,11 +4086,11 @@ html.no-anim .sort-stage.sort-gates .sort-bins.lit-f::after{animation:none;filte
              ordering task (no words); a new game just declares its cells in card.json. -->
         <div class="sg-art" id="sgHero"></div>
       </div>
-      <button class="sg-vo" id="sgVo" type="button" aria-label="सुनो"><svg viewBox="0 0 62 60" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Audio"><g filter="url(#sgChipShadow)"><rect x="8" y="4" width="46" height="44" rx="22" fill="url(#sgChipGrad)"/><rect x="6" y="2" width="50" height="48" rx="24" stroke="white" stroke-width="4"/><path d="M29.8466 19.0574C29.8804 19.0524 29.9145 19.0496 29.9487 19.0488C30.6094 19.0317 31.0021 19.5124 31.0015 20.1414C31.0008 20.9661 31.0003 21.7911 31.0005 22.6158L31.001 27.7212L31.0009 30.5591C31.0009 31.0364 31.0122 31.5472 30.9863 32.0228C30.9662 32.2709 30.902 32.4608 30.7251 32.643C30.3831 32.9952 29.8337 33.0842 29.4386 32.7671C29.0784 32.4781 28.7473 32.1159 28.4181 31.7862L26.4414 29.8087C26.1771 29.5426 25.9071 29.2636 25.6339 29.0081C25.0227 28.9649 24.3645 29.017 23.7487 28.9979C23.445 28.9885 23.1625 29.0211 22.8589 28.9606C22.3751 28.8616 22.0618 28.4823 22.0642 27.9824C22.0706 26.5937 22.0287 25.1949 22.0828 23.8081C22.0884 23.6626 22.2302 23.4334 22.3309 23.3252C22.454 23.1907 22.6146 23.0963 22.792 23.0543C23.0567 22.9904 23.5328 23.016 23.8224 23.0128C24.4143 23.0063 25.0171 23.0277 25.609 23.0073C25.6794 22.9529 25.8505 22.7743 25.919 22.706L26.5305 22.0945L28.5396 20.0838C28.9157 19.7059 29.3217 19.1749 29.8466 19.0574Z" fill="white"/><path class="wv wv2" d="M36.2367 18.6905C36.8783 18.6449 37.3041 19.231 37.6725 19.6829C38.7675 21.0046 39.4982 22.5894 39.7923 24.2804C40.2503 26.8763 39.6548 29.5478 38.1378 31.7035C37.8393 32.1274 37.508 32.5324 37.149 32.9063C36.9404 33.1236 36.7646 33.2558 36.4622 33.3081C36.2013 33.3412 35.9378 33.2717 35.7272 33.1144C35.5185 32.9615 35.3816 32.7298 35.3483 32.4733C35.2786 31.9235 35.5696 31.6821 35.8914 31.3297C36.0448 31.1639 36.1901 30.9908 36.3269 30.811C38.3669 28.136 38.4986 24.4654 36.6555 21.6511C36.4826 21.3899 36.2966 21.1376 36.0984 20.8951C35.8252 20.5652 35.3947 20.2691 35.3472 19.8184C35.2845 19.2225 35.6439 18.768 36.2367 18.6905Z" fill="white"/><path class="wv wv1" d="M33.3868 21.5044C33.9769 21.4549 34.2563 21.7845 34.5981 22.1981C35.1982 22.924 35.6149 23.7691 35.8211 24.6886C36.171 26.2384 35.8867 27.8637 35.0314 29.2026C34.7421 29.6568 34.2333 30.3745 33.6937 30.4946C33.1633 30.5437 32.6759 30.2927 32.5495 29.7376C32.3921 29.0462 32.9849 28.6956 33.3274 28.1763C34.2088 26.833 34.1932 25.0908 33.288 23.7635C33.0747 23.4522 32.6159 23.0564 32.5518 22.7133C32.4377 22.1027 32.7745 21.619 33.3868 21.5044Z" fill="white"/></g><defs><filter id="sgChipShadow" x="0" y="0" width="62" height="60" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/><feOffset dy="4"/><feGaussianBlur stdDeviation="2"/><feComposite in2="hardAlpha" operator="out"/><feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/><feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/><feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/></filter><linearGradient id="sgChipGrad" x1="8" y1="26" x2="54" y2="26" gradientUnits="userSpaceOnUse"><stop stop-color="#1987FC"/><stop offset="1" stop-color="#1565F4"/></linearGradient></defs></svg></button>
+      <button class="sg-vo sg-vo-off" id="sgVo" type="button" aria-label="सुनो" aria-disabled="true"><svg viewBox="0 0 62 60" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Audio"><g filter="url(#sgChipShadow)"><rect x="8" y="4" width="46" height="44" rx="22" fill="url(#sgChipGrad)"/><rect x="6" y="2" width="50" height="48" rx="24" stroke="white" stroke-width="4"/><path d="M29.8466 19.0574C29.8804 19.0524 29.9145 19.0496 29.9487 19.0488C30.6094 19.0317 31.0021 19.5124 31.0015 20.1414C31.0008 20.9661 31.0003 21.7911 31.0005 22.6158L31.001 27.7212L31.0009 30.5591C31.0009 31.0364 31.0122 31.5472 30.9863 32.0228C30.9662 32.2709 30.902 32.4608 30.7251 32.643C30.3831 32.9952 29.8337 33.0842 29.4386 32.7671C29.0784 32.4781 28.7473 32.1159 28.4181 31.7862L26.4414 29.8087C26.1771 29.5426 25.9071 29.2636 25.6339 29.0081C25.0227 28.9649 24.3645 29.017 23.7487 28.9979C23.445 28.9885 23.1625 29.0211 22.8589 28.9606C22.3751 28.8616 22.0618 28.4823 22.0642 27.9824C22.0706 26.5937 22.0287 25.1949 22.0828 23.8081C22.0884 23.6626 22.2302 23.4334 22.3309 23.3252C22.454 23.1907 22.6146 23.0963 22.792 23.0543C23.0567 22.9904 23.5328 23.016 23.8224 23.0128C24.4143 23.0063 25.0171 23.0277 25.609 23.0073C25.6794 22.9529 25.8505 22.7743 25.919 22.706L26.5305 22.0945L28.5396 20.0838C28.9157 19.7059 29.3217 19.1749 29.8466 19.0574Z" fill="white"/><path class="wv wv2" d="M36.2367 18.6905C36.8783 18.6449 37.3041 19.231 37.6725 19.6829C38.7675 21.0046 39.4982 22.5894 39.7923 24.2804C40.2503 26.8763 39.6548 29.5478 38.1378 31.7035C37.8393 32.1274 37.508 32.5324 37.149 32.9063C36.9404 33.1236 36.7646 33.2558 36.4622 33.3081C36.2013 33.3412 35.9378 33.2717 35.7272 33.1144C35.5185 32.9615 35.3816 32.7298 35.3483 32.4733C35.2786 31.9235 35.5696 31.6821 35.8914 31.3297C36.0448 31.1639 36.1901 30.9908 36.3269 30.811C38.3669 28.136 38.4986 24.4654 36.6555 21.6511C36.4826 21.3899 36.2966 21.1376 36.0984 20.8951C35.8252 20.5652 35.3947 20.2691 35.3472 19.8184C35.2845 19.2225 35.6439 18.768 36.2367 18.6905Z" fill="white"/><path class="wv wv1" d="M33.3868 21.5044C33.9769 21.4549 34.2563 21.7845 34.5981 22.1981C35.1982 22.924 35.6149 23.7691 35.8211 24.6886C36.171 26.2384 35.8867 27.8637 35.0314 29.2026C34.7421 29.6568 34.2333 30.3745 33.6937 30.4946C33.1633 30.5437 32.6759 30.2927 32.5495 29.7376C32.3921 29.0462 32.9849 28.6956 33.3274 28.1763C34.2088 26.833 34.1932 25.0908 33.288 23.7635C33.0747 23.4522 32.6159 23.0564 32.5518 22.7133C32.4377 22.1027 32.7745 21.619 33.3868 21.5044Z" fill="white"/></g><defs><filter id="sgChipShadow" x="0" y="0" width="62" height="60" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/><feOffset dy="4"/><feGaussianBlur stdDeviation="2"/><feComposite in2="hardAlpha" operator="out"/><feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/><feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/><feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/></filter><linearGradient id="sgChipGrad" x1="8" y1="26" x2="54" y2="26" gradientUnits="userSpaceOnUse"><stop stop-color="#1987FC"/><stop offset="1" stop-color="#1565F4"/></linearGradient></defs></svg></button>
       <!-- [H11-36] the word is gone and the play triangle carries it, so the button needs an
            aria-label: an <svg> gives a control no accessible name and it would announce as a
            bare "button". Same reasoning as the aage button. -->
-      <button class="sg-btn" id="sgBtn" aria-label="शुरू करें">
+      <button class="sg-btn sg-waiting" id="sgBtn" aria-label="शुरू करें" aria-disabled="true">
         <svg class="sg-play" viewBox="0 0 34 34" aria-hidden="true" focusable="false">
           <path d="M11 8 L27 17 L11 26 Z"/>
         </svg>
@@ -4044,7 +4110,7 @@ html.no-anim .sort-stage.sort-gates .sort-bins.lit-f::after{animation:none;filte
          Shipped as WebP because GIF alpha is one all-or-nothing index and this art has soft
          edges, which cut hard would fringe against the sunburst behind it.
          See _tools/dekey_last_page.py. -->
-    <img class="end-mascot" src="assets/Images/last_page_swifty.webp?v=20260930173753" alt="Swiftee"
+    <img class="end-mascot" src="assets/Images/last_swifty_still.webp?v=20261006142110" alt="Swiftee"
          onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'end-mascot',textContent:'🎉'}))">
     <button class="end-btn" id="endBtn" aria-label="आगे बढ़ें"></button>   <!-- [H11-66] the artwork carries the arrow -->
   </div>
@@ -4065,7 +4131,7 @@ html.no-anim .sort-stage.sort-gates .sort-bins.lit-f::after{animation:none;filte
 
 <!-- ============ CARD DATA (embedded; in prod the compiler does this) ============ -->
 <script type="application/json" id="cardData">
-{"version": "0.2", "skill_code": "HI02H11_L03_S02", "lo_code": "HI02H11_L03", "grade": "G2", "attribute": "H11", "skill_type": "CORE", "part_label": "", "theme": "toybox", "title": {"hi": "आइए जोड़ी मिलाएँ", "en": "Match the gender pairs (पुल्लिंग / स्त्रीलिंग)"}, "subtitle_hi": "", "skill_description_hi": "लिंग-सूचक शब्द-रूप बदलाव को पहचानता है — जैसे शेर से शेरनी, मोर से मोरनी।", "dt_fallback": null, "landing_hero": {"kind": "concept_strip", "cells": [{"type": "image", "src": "assets/Images/mor_title.webp", "label": "मोर"}, {"type": "image", "src": "assets/Images/title.webp", "label": "आइए जोड़ी मिलाएँ"}, {"type": "image", "src": "assets/Images/morni_title.webp", "label": "मोरनी"}]}, "phase_gate_vo": {"guided": "vo_bridge_lost"}, "phase_gate_caption": {"tutorial": {"text": "चलिए, शुरू करें!", "at_ms": 3210}, "guided": {"text": "चलिए, साथ में करें!", "at_ms": 9640}, "practice": {"text": "वाह! अब आपकी बारी।", "at_ms": 250}}, "phase_gate_at": {"practice": "P5"}, "landing_nudge": false, "landing_vo_on_tap": true, "audio_chip_on_mascot_foot": true, "phase_distribution": {"tutorial": 9, "guided": 6, "practice": 5}, "scaffold_rules": {"nudge_timeout_ms": {"guided": 5000, "practice": 8000}, "max_attempts": 2}, "signals_expected": ["slide_entered", "slide_completed", "phase_transition_shown", "story_question_first_try", "gender_match_first_try", "gender_sort_item", "gender_sort_correct", "gender_pair_match", "answer_wrong", "answer_revealed", "lesson_completed"], "_emoji_fallback": {"pic_sher": "🦁", "pic_sherni": "🦁", "pic_mor": "🦚", "pic_morni": "🦚", "pic_ghoda": "🐎", "pic_ghodi": "🐴", "pic_bakra": "🐐", "pic_bakri": "🐐", "pic_murga": "🐓", "pic_murgi": "🐔", "pic_bandar": "🐒", "pic_bandariya": "🐒", "pic_bail": "🐂", "pic_gaay": "🐄", "pic_sherni_alone": "🦁", "pic_mor_alone": "🦚", "pic_bail_alone": "🐂", "pic_bakra_grass": "🐐"}, "slides": [{"id": "T1", "phase": "tutorial", "eis": "iconic", "type": "STORY_SCENE", "prompt_hi": "", "audio": {"narration": "vo_poem_01"}, "data": { "caption_cues_ms": [4630, 5242, 5520, 5854, 6262, 6980, 8005, 8295], "caption_skip_phrases": 2, "caption_hi": "जंगल में एक मेला आया,\nरंग-बिरंगा खूब सजाया।", "image_id": "sc_mela_01", "emoji": "🎪", "alt_hi": "आइए आज हम एक कविता सुनते हैं— जंगल का मेला। जंगल में एक मेला आया, रंग-बिरंगा खूब सजाया।"}, "signals": {"on_complete": []}}, {"id": "T2", "phase": "tutorial", "eis": "iconic", "type": "STORY_SCENE", "prompt_hi": "", "audio": {"narration": "vo_poem_02"}, "data": { "caption_cues_ms": [320, 760, 1455, 2132, 3050, 3457, 3660, 4410, 4880],"caption_hi": "<span class=\"gw\">शेर</span> आया, <span class=\"gw\">शेरनी</span> आई,\nदोनों ने मिलकर धूम मचाई।", "image_id": "sc_mela_02", "emoji": "🎪", "alt_hi": "शेर आया, शेरनी आई, दोनों ने मिलकर धूम मचाई।", "video_id": "sc_mela_02"}, "signals": {"on_complete": []}}, {"id": "T3", "phase": "tutorial", "eis": "iconic", "type": "STORY_SCENE", "prompt_hi": "", "audio": {"narration": "vo_poem_03"}, "data": { "caption_cues_ms": [300, 775, 1105, 1820, 2740, 3355, 3670, 4075],"caption_hi": "<span class=\"gw\">मोर</span> पंख रंगीन फैलाए,\n<span class=\"gw\">मोरनी</span> संग ठुमके लगाए।", "image_id": "sc_mela_03", "emoji": "🎪", "alt_hi": "मोर पंख रंगीन फैलाए, मोरनी संग ठुमके लगाए।", "video_id": "sc_mela_03"}, "signals": {"on_complete": []}}, {"id": "T4", "phase": "tutorial", "eis": "iconic", "type": "STORY_SCENE", "prompt_hi": "", "audio": {"narration": "vo_poem_04"}, "data": { "caption_cues_ms": [280, 727, 1173, 1550, 2660, 3220, 3560, 3990],"caption_hi": "<span class=\"gw\">घोड़ा</span> आया धूल उड़ाए,\n<span class=\"gw\">घोड़ी</span> पीछे दौड़ी आए।", "image_id": "sc_mela_04", "emoji": "🎪", "alt_hi": "घोड़ा आया धूल उड़ाए, घोड़ी पीछे दौड़ी आए।", "video_id": "sc_mela_04"}, "signals": {"on_complete": []}}, {"id": "T5", "phase": "tutorial", "eis": "iconic", "type": "STORY_SCENE", "prompt_hi": "", "audio": {"narration": "vo_poem_05"}, "data": { "caption_cues_ms": [270, 1485, 2125, 3970, 4540, 4995, 5525], "caption_hi": "<span class=\"gw\">बकरा</span> बोला, “में-में-में”\n<span class=\"gw\">बकरी</span> बोली, “साथ चले।”", "image_id": "sc_mela_05", "emoji": "🎪", "alt_hi": "बकरा बोला, “में-में-में” बकरी बोली, “साथ चले।”", "video_id": "sc_mela_05"}, "signals": {"on_complete": []}}, {"id": "T6", "phase": "tutorial", "eis": "iconic", "type": "STORY_SCENE", "prompt_hi": "", "audio": {"narration": "vo_poem_06"}, "data": { "caption_cues_ms": [250, 805, 1130, 1560, 2860, 3545, 4045, 4685], "caption_hi": "<span class=\"gw\">बंदर</span> लाया लाल गुब्बारा,\n<span class=\"gw\">बंदरिया</span> बोली, “कितना प्यारा।”", "image_id": "sc_mela_06", "emoji": "🎪", "alt_hi": "बंदर लाया लाल गुब्बारा, बंदरिया बोली, “कितना प्यारा।”", "video_id": "sc_mela_06"}, "signals": {"on_complete": []}}, {"id": "T7", "phase": "tutorial", "eis": "iconic", "type": "STORY_SCENE", "prompt_hi": "", "audio": {"narration": "vo_poem_07"}, "data": { "caption_cues_ms": [330, 945, 1520, 2750, 3265, 3715, 4130], "caption_hi": "<span class=\"gw\">मुर्गा</span> बोला, “कुकड़ू-कूँ”\n<span class=\"gw\">मुर्गी</span> बोली, “क्या खाऊँ?”", "image_id": "sc_mela_07", "emoji": "🎪", "alt_hi": "मुर्गा बोला, “कुकड़ू-कूँ” मुर्गी बोली, “क्या खाऊँ?”", "video_id": "sc_mela_07"}, "signals": {"on_complete": []}}, {"id": "T8", "phase": "tutorial", "eis": "iconic", "type": "STORY_SCENE", "prompt_hi": "", "audio": {"narration": "vo_poem_08"}, "data": { "caption_cues_ms": [250, 622, 808, 1250, 1575, 2420, 2804, 3035, 3189, 3490],"caption_hi": "<span class=\"gw\">बैल</span> ने जब ढोल बजाया,\n<span class=\"gw\">गाय</span> ने भी नाच दिखाया।", "image_id": "sc_mela_08", "emoji": "🎪", "alt_hi": "बैल ने जब ढोल बजाया, गाय ने भी नाच दिखाया।", "video_id": "sc_mela_08"}, "signals": {"on_complete": []}}, {"id": "T9", "phase": "tutorial", "eis": "iconic", "type": "STORY_SCENE", "prompt_hi": "", "audio": {"narration": "vo_poem_09"}, "data": { "caption_cues_ms": [290, 955, 1545, 2045, 2780, 3260, 3520, 3830, 4210],"caption_hi": "सूरज ढलते शाम हुई,\nमेले भर में धूम हुई।", "image_id": "sc_mela_09", "emoji": "🎪", "alt_hi": "सूरज ढलते शाम हुई, मेले भर में धूम हुई।", "video_id": "sc_mela_09"}, "signals": {"on_complete": []}}, {"id": "G1", "phase": "guided", "eis": "iconic", "type": "STORY_QUESTION", "prompt_hi": "सही जोड़ी चुनिए।", "audio": {"prompt": "vo_q_sherni", "hint1": "vo_h1_sherni", "hint2": "vo_h2_sherni", "hint": "vo_h2_sherni", "reveal": "vo_h3_sherni", "correct": "vo_correct_pair"}, "data": { "shuffle": false, "hint2_cues": [{"word": "बैल", "ms": 290, "end_ms": 790}, {"word": "शेर", "ms": 1580, "end_ms": 2070}, {"word": "घोड़ा", "ms": 3050, "end_ms": 3590}], "max_attempts": 3, "hint2_walk": true,"recall_image_id": "pic_sherni_alone", "stim_word_hi": "शेरनी", "options": [{"img": "pic_bail", "emoji": "🐂", "word_hi": "बैल", "audio": "vo_name_bail", "label_hi": "बैल"}, {"img": "pic_sher", "emoji": "🦁", "word_hi": "शेर", "audio": "vo_name_sher", "label_hi": "शेर", "correct": true}, {"img": "pic_ghoda", "emoji": "🐎", "word_hi": "घोड़ा", "audio": "vo_name_ghoda", "label_hi": "घोड़ा"}], "reveal_seq": true, "signal_name": "gender_match_first_try"}, "signals": {"on_complete": ["gender_match_first_try"]}}, {"id": "G2", "phase": "guided", "eis": "iconic", "type": "STORY_QUESTION", "prompt_hi": "सही जोड़ी चुनिए।", "audio": {"prompt": "vo_q_mor", "hint1": "vo_h1_mor", "hint2": "vo_h2_mor", "hint": "vo_h2_mor", "reveal": "vo_h3_mor", "correct": "vo_correct_pair"}, "data": { "shuffle": false, "hint2_cues": [{"word": "बंदरिया", "ms": 270, "end_ms": 1300}, {"word": "मोरनी", "ms": 1690, "end_ms": 2560}, {"word": "मुर्गी", "ms": 3030, "end_ms": 3740}], "max_attempts": 3, "hint2_walk": true,"recall_image_id": "pic_mor_alone", "stim_word_hi": "मोर", "options": [{"img": "pic_bandariya", "emoji": "🐒", "word_hi": "बंदरिया", "audio": "vo_name_bandariya", "label_hi": "बंदरिया"}, {"img": "pic_morni", "emoji": "🦚", "word_hi": "मोरनी", "audio": "vo_name_morni", "label_hi": "मोरनी", "correct": true}, {"img": "pic_murgi", "emoji": "🐔", "word_hi": "मुर्गी", "audio": "vo_name_murgi", "label_hi": "मुर्गी"}], "reveal_seq": true, "signal_name": "gender_match_first_try"}, "signals": {"on_complete": ["gender_match_first_try"]}}, {"id": "G3", "audio": {"prompt": "vo_q_bakri_new","hint1": "vo_h1_bakri", "hint2": "vo_h2_bakri", "hint": "vo_h2_bakri", "reveal": "vo_h3_bakri", "correct": "vo_correct_pair"}, "phase": "guided", "eis": "iconic", "type": "STORY_QUESTION", "prompt_hi": "सही जोड़ी चुनिए।",  "data": { "shuffle": false, "hint2_cues": [{"word": "बैल", "ms": 280, "end_ms": 900}, {"word": "बकरा", "ms": 1490, "end_ms": 2140}, {"word": "शेरनी", "ms": 2770, "end_ms": 3430}], "max_attempts": 3, "hint2_walk": true,"stim_word_hi": "बकरी", "options": [{"img": "pic_bail", "emoji": "🐂", "word_hi": "बैल", "audio": "vo_name_bail", "label_hi": "बैल"}, {"img": "pic_bakra", "emoji": "🐐", "word_hi": "बकरा", "audio": "vo_name_bakra", "label_hi": "बकरा", "correct": true}, {"img": "pic_sherni", "emoji": "🦁", "word_hi": "शेरनी", "audio": "vo_name_sherni", "label_hi": "शेरनी"}], "reveal_seq": true, "signal_name": "gender_match_first_try"}, "signals": {"on_complete": ["gender_match_first_try"]}}, {"id": "G4", "audio": {"prompt": "vo_q_ghoda_new", "hint1": "vo_h1_ghoda", "hint2": "vo_h2_ghoda", "hint": "vo_h2_ghoda", "reveal": "vo_h3_ghoda", "correct": "vo_correct_pair"}, "phase": "guided", "eis": "iconic", "type": "STORY_QUESTION", "prompt_hi": "सही जोड़ी चुनिए।", "data": { "shuffle": false, "hint2_cues": [{"word": "गाय", "ms": 300, "end_ms": 870}, {"word": "मुर्गी", "ms": 1480, "end_ms": 2050}, {"word": "घोड़ी", "ms": 2650, "end_ms": 3120}], "max_attempts": 3, "hint2_walk": true,"stim_word_hi": "घोड़ा", "options": [{"word_hi": "गाय", "audio": "vo_name_gaay", "label_hi": "गाय"}, {"word_hi": "मुर्गी", "audio": "vo_name_murgi", "label_hi": "मुर्गी"}, {"word_hi": "घोड़ी", "audio": "vo_name_ghodi", "label_hi": "घोड़ी", "correct": true}], "reveal_seq": true, "signal_name": "gender_match_first_try", "recall_image_id": "pic_ghoda", "options_words_only": true}, "signals": {"on_complete": ["gender_match_first_try"]}},  {"id": "G6", "phase": "guided", "eis": "enactive", "type": "MATCH_GENDER_PAIRS", "prompt_hi": "सही जोड़ियाँ मिलाइए।", "audio": {"prompt": "vo_match_pairs","hint1": "vo_h1_pair", "correct": "vo_correct_pairs"}, "data": {"pairs": [{"id": "bandar", "m": {"img": "pic_bandar", "emoji": "🐒", "word_hi": "बंदर", "audio": "vo_name_bandar"}, "f": {"img": "pic_bandariya", "emoji": "🐒", "word_hi": "बंदरिया", "audio": "vo_name_bandariya"}, "hint2": "vo_h2_bandar"}, {"id": "murga", "m": {"img": "pic_murga", "emoji": "🐓", "word_hi": "मुर्गा", "audio": "vo_name_murga"}, "f": {"img": "pic_murgi", "emoji": "🐔", "word_hi": "मुर्गी", "audio": "vo_name_murgi"}, "hint2": "vo_h2_murga"}, {"id": "bail", "m": {"img": "pic_bail", "emoji": "🐂", "word_hi": "बैल", "audio": "vo_name_bail"}, "f": {"img": "pic_gaay", "emoji": "🐄", "word_hi": "गाय", "audio": "vo_name_gaay"}, "hint2": "vo_h2_bail"}], "demo_pair": "bandar"}, "signals": {"on_complete": ["gender_pair_match"]}},  {"id": "P2", "phase": "practice", "eis": "iconic", "type": "TAP_GENDER", "prompt_hi": "वाक्य पूरा कीजिए।", "audio": {"prompt": "vo_q_sentence", "hint1": "vo_h1_sentence", "hint2": "vo_h2_sentence", "hint": ["vo_h2_sentence", "vo_h3_sentence"], "reveal": "vo_h3_sentence", "correct": "vo_c_sentence", "word_name": "vo_name_bakra"}, "data": {"noun": {"word_hi": "बकरा घास खा…", "emoji": "🐐", "img": "pic_bakra_grass"}, "options": [{"label": "रहा है।", "gender": "M", "cue_ms": 5800}, {"label": "रही है।", "gender": "F", "cue_ms": 6810}], "target_gender": "M", "reveal_seq": true, "correct_cues_ms": [3040, 3340, 3930, 4350]}, "signals": {"on_complete": ["gender_match_first_try"]}}, {"id": "P3", "phase": "practice", "eis": "iconic", "type": "TAP_GENDER", "prompt_hi": "वाक्य पूरा कीजिए।", "audio": {"prompt": "vo_stem_sherni", "hint1": "vo_h1_sentence_sherni", "hint2": "vo_h2_sentence_sherni", "hint": ["vo_h2_sentence_sherni", "vo_h3_sentence_sherni"], "reveal": "vo_h3_sentence_sherni", "correct": "vo_c_sentence_sherni", "word_name": "vo_name_sherni"}, "data": {"noun": {"word_hi": "शेरनी मेले में…", "emoji": "🦁", "img": "pic_sherni_mela"}, "options": [{"label": "जाता है।", "audio": "vo_opt_jata", "gender": "M"}, {"label": "जाती है।", "audio": "vo_opt_jati", "gender": "F"}], "target_gender": "F", "reveal_seq": true, "correct_cues_ms": [2800, 3700, 4000, 4340]}, "signals": {"on_complete": ["gender_match_first_try"]}}, {"id": "P4", "phase": "practice", "eis": "iconic", "type": "TAP_GENDER", "prompt_hi": "वाक्य पूरा कीजिए।", "audio": {"prompt": "vo_stem_bandar", "hint1": "vo_h1_sentence_bandar", "hint2": "vo_h2_sentence_bandar", "hint": ["vo_h2_sentence_bandar", "vo_h3_sentence_bandar"], "reveal": "vo_h3_sentence_bandar", "correct": "vo_c_sentence_bandar", "word_name": "vo_name_bandar"}, "data": {"noun": {"word_hi": "बंदर पेड़ पर…", "emoji": "🐒", "img": "pic_bandar_ped"}, "options": [{"label": "चढ़ता है।", "audio": "vo_opt_chadhta", "gender": "M"}, {"label": "चढ़ती है।", "audio": "vo_opt_chadhti", "gender": "F"}], "target_gender": "M", "reveal_seq": true, "correct_cues_ms": [2800, 3480, 3740, 4110]}, "signals": {"on_complete": ["gender_match_first_try"]}}, {"id": "P5", "phase": "practice", "eis": "enactive", "type": "WHEEL_PAIRS", "prompt_hi": "सही जोड़ी को चुनिए और झूले पर बैठाइए।", "audio": {"prompt": "vo_wheel_intro", "hint1": "vo_h1_pair", "correct": "vo_shabash"}, "data": { "earned_hand": true,"option_audio": {"मोर": "vo_name_mor", "मुर्गी": "vo_name_murgi", "घोड़ा": "vo_name_ghoda", "बकरी": "vo_name_bakri", "घोड़ी": "vo_name_ghodi", "शेरनी": "vo_name_sherni", "गाय": "vo_name_gaay", "मुर्गा": "vo_name_murga", "बिल्ली": "vo_name_billi", "भेड़": "vo_name_bhed", "हथिनी": "vo_name_hathini", "चूहा": "vo_name_chuha", "खरगोश": "vo_name_khargosh", "घोड़नी": "vo_name_ghodni", "तोता": "vo_name_tota"}, "seats": [{"seated": {"word_hi": "मोरनी", "img": "pic_morni", "emoji": "🦚", "faces": "left", "sit": 0.761}, "pair": {"word_hi": "मोर", "img": "pic_mor", "emoji": "🦚", "faces": "left", "sit": 0.801}, "options": ["मोर", "मुर्गी", "घोड़ा"], "answer": "मोर", "audio": {"prompt": "vo_wq_morni"}}, {"seated": {"word_hi": "बकरा", "img": "pic_bakra", "emoji": "🐐", "sit": 0.752}, "pair": {"word_hi": "बकरी", "img": "pic_bakri", "emoji": "🐐", "sit": 0.704}, "options": ["बिल्ली", "बकरी", "भेड़"], "answer": "बकरी", "audio": {"prompt": "vo_wq_bakra"}}, {"seated": {"word_hi": "हाथी", "img": "pic_hathi", "emoji": "🐘", "sit": 0.706}, "pair": {"word_hi": "हथिनी", "img": "pic_hathini", "emoji": "🐘", "sit": 0.675}, "options": ["हथिनी", "घोड़ी", "शेरनी"], "answer": "हथिनी", "audio": {"prompt": "vo_wq_hathi"}}, {"seated": {"word_hi": "चुहिया", "img": "pic_chuhiya", "emoji": "🐭", "sit": 0.819}, "pair": {"word_hi": "चूहा", "img": "pic_chuha", "emoji": "🐭", "sit": 0.833}, "options": ["चूहा", "खरगोश", "गाय"], "answer": "चूहा", "audio": {"prompt": "vo_wq_chuhiya"}}, {"seated": {"word_hi": "घोड़ा", "img": "pic_ghoda", "emoji": "🐎", "sit": 0.688}, "pair": {"word_hi": "घोड़ी", "img": "pic_ghodi", "emoji": "🐎", "sit": 0.66}, "options": ["हथिनी", "घोड़ी", "घोड़नी"], "answer": "घोड़ी", "audio": {"prompt": "vo_wq_ghoda"}}, {"seated": {"word_hi": "मुर्गी", "img": "pic_murgi", "emoji": "🐔", "sit": 0.75}, "pair": {"word_hi": "मुर्गा", "img": "pic_murga", "emoji": "🐓", "sit": 0.774}, "options": ["मुर्गा", "मोर", "तोता"], "answer": "मुर्गा", "audio": {"prompt": "vo_wq_murgi"}}]}, "signals": {"on_complete": ["gender_match_first_try"]}},   {"id": "CEL", "phase": "practice", "eis": "enactive", "type": "CELEBRATION", "prompt_hi": "", "audio": {"prompt": "vo_well_done", "sfx": "sfx_celebrate"}, "data": {}, "signals": {"on_complete": ["lesson_completed"]}}], "assets": {"audio_ext": "wav", "img_ext": "webp", "audio": {"vo_bridge_lost": "assets/VO/vo_bridge_lost.wav", "vo_c_sentence": "assets/VO/vo_c_sentence.wav", "vo_correct_pair": "assets/VO/vo_correct_pair.wav", "vo_match_pairs": "assets/VO/vo_match_pairs.wav", "vo_correct_pairs": "assets/VO/vo_correct_pairs.wav", "vo_h1_mor": "assets/VO/vo_h1_mor.wav", "vo_h1_bakri": "assets/VO/vo_h1_bakri.wav", "vo_h1_ghoda": "assets/VO/vo_h1_ghoda.wav", "vo_h1_pair": "assets/VO/vo_h1_pair.wav", "vo_h1_sentence": "assets/VO/vo_h1_sentence.wav", "vo_h1_sherni": "assets/VO/vo_h1_sherni.wav", "vo_h2_bail": "assets/VO/vo_h2_bail.wav", "vo_h2_bakri": "assets/VO/vo_h2_bakri.wav", "vo_h2_bandar": "assets/VO/vo_h2_bandar.wav", "vo_h2_ghoda": "assets/VO/vo_h2_ghoda.wav", "vo_h2_mor": "assets/VO/vo_h2_mor.wav", "vo_h2_murga": "assets/VO/vo_h2_murga.wav", "vo_h2_sherni": "assets/VO/vo_h2_sherni.wav", "vo_landing": "assets/VO/vo_landing.wav", "vo_name_bail": "assets/VO/vo_name_bail.wav", "vo_name_bakra": "assets/VO/vo_name_bakra.wav", "vo_name_bakri": "assets/VO/vo_name_bakri.wav", "vo_name_bandar": "assets/VO/vo_name_bandar.wav", "vo_name_bandariya": "assets/VO/vo_name_bandariya.wav", "vo_name_gaay": "assets/VO/vo_name_gaay.wav", "vo_name_ghoda": "assets/VO/vo_name_ghoda.wav", "vo_name_ghodi": "assets/VO/vo_name_ghodi.wav", "vo_name_mor": "assets/VO/vo_name_mor.wav", "vo_name_morni": "assets/VO/vo_name_morni.wav", "vo_name_murga": "assets/VO/vo_name_murga.wav", "vo_name_murgi": "assets/VO/vo_name_murgi.wav", "vo_name_sher": "assets/VO/vo_name_sher.wav", "vo_name_sherni": "assets/VO/vo_name_sherni.wav", "vo_poem_01": "assets/VO/vo_poem_01.wav", "vo_poem_02": "assets/VO/vo_poem_02.wav", "vo_poem_03": "assets/VO/vo_poem_03.wav", "vo_poem_04": "assets/VO/vo_poem_04.wav", "vo_poem_05": "assets/VO/vo_poem_05.wav", "vo_poem_06": "assets/VO/vo_poem_06.wav", "vo_poem_07": "assets/VO/vo_poem_07.wav", "vo_poem_08": "assets/VO/vo_poem_08.wav", "vo_poem_09": "assets/VO/vo_poem_09.wav", "vo_pt_guided": "assets/VO/vo_pt_guided.wav", "vo_pt_practice": "assets/VO/vo_pt_practice.wav", "vo_pt_tutorial": "assets/VO/vo_pt_tutorial.wav", "vo_q_bakri_new": "assets/VO/vo_q_bakri_new.wav", "vo_q_ghoda_new": "assets/VO/vo_q_ghoda_new.wav", "vo_q_mor": "assets/VO/vo_q_mor.wav", "vo_q_sentence": "assets/VO/vo_q_sentence.wav", "vo_q_sherni": "assets/VO/vo_q_sherni.wav", "vo_well_done": "assets/VO/vo_well_done.wav", "sfx_correct": "assets/SFX/sfx_correct.wav", "sfx_wrong": "assets/SFX/sfx_wrong.wav", "sfx_burst": "assets/SFX/sfx_burst.wav", "sfx_celebrate": "assets/SFX/sfx_celebrate.wav", "vo_h1_sentence_bandar": "assets/VO/vo_h1_sentence_bandar.wav", "vo_h1_sentence_sherni": "assets/VO/vo_h1_sentence_sherni.wav", "vo_h2_sentence": "assets/VO/vo_h2_sentence.wav", "vo_h2_sentence_bandar": "assets/VO/vo_h2_sentence_bandar.wav", "vo_h2_sentence_sherni": "assets/VO/vo_h2_sentence_sherni.wav", "vo_h3_bakri": "assets/VO/vo_h3_bakri.wav", "vo_h3_ghoda": "assets/VO/vo_h3_ghoda.wav", "vo_h3_mor": "assets/VO/vo_h3_mor.wav", "vo_h3_sentence": "assets/VO/vo_h3_sentence.wav", "vo_h3_sentence_bandar": "assets/VO/vo_h3_sentence_bandar.wav", "vo_h3_sentence_sherni": "assets/VO/vo_h3_sentence_sherni.wav", "vo_h3_sherni": "assets/VO/vo_h3_sherni.wav", "vo_wq_bakra": "assets/VO/vo_wq_bakra.wav", "vo_wq_chuhiya": "assets/VO/vo_wq_chuhiya.wav", "vo_wq_ghoda": "assets/VO/vo_wq_ghoda.wav", "vo_wq_hathi": "assets/VO/vo_wq_hathi.wav", "vo_wq_morni": "assets/VO/vo_wq_morni.wav", "vo_wq_murgi": "assets/VO/vo_wq_murgi.wav", "vo_name_khargosh": "assets/VO/vo_name_khargosh.wav", "vo_name_ghodni": "assets/VO/vo_name_ghodni.wav", "vo_name_chuha": "assets/VO/vo_name_chuha.wav", "vo_name_tota": "assets/VO/vo_name_tota.wav", "vo_name_billi": "assets/VO/vo_name_billi.wav", "vo_name_bhed": "assets/VO/vo_name_bhed.wav", "vo_name_hathini": "assets/VO/vo_name_hathini.wav", "vo_c_sentence_sherni": "assets/VO/vo_c_sentence_sherni.wav", "vo_c_sentence_bandar": "assets/VO/vo_c_sentence_bandar.wav", "vo_stem_sherni": "assets/VO/vo_stem_sherni.wav", "vo_stem_bandar": "assets/VO/vo_stem_bandar.wav", "vo_opt_jata": "assets/VO/vo_opt_jata.wav", "vo_opt_jati": "assets/VO/vo_opt_jati.wav", "vo_opt_chadhta": "assets/VO/vo_opt_chadhta.wav", "vo_opt_chadhti": "assets/VO/vo_opt_chadhti.wav", "vo_shabash": "assets/VO/vo_shabash.wav"}, "audio_text": {"vo_bridge_lost": "ये कविता सुनकर मुझे तो बहुत मज़ा आया, लेकिन मेले में भीड़ की वजह से सभी जोड़ियाँ बिछड़ गईं। आइए साथ मिलकर ढूँढ़ते हैं। चलिए, साथ में करें!", "vo_c_sentence": "शाबाश! सही वाक्य है— बकरा घास खा रहा है।", "vo_correct_pair": "शाबाश! आपने सही जोड़ी मिला दी।", "vo_match_pairs": "हर जानवर को उसकी सही जोड़ी से मिलाइए।", "vo_correct_pairs": "शाबाश! आपने सभी सही जोड़ियाँ मिला दीं।", "vo_h1_mor": "सोचिए, मोर मेले में किसके साथ आया था?", "vo_h1_bakri": "सोचिए, बकरी मेले में किसके साथ आई थी?", "vo_h1_ghoda": "सोचिए, घोड़ा मेले में किसके साथ आया था?", "vo_h1_pair": "फिर से कोशिश कीजिए, सही जोड़ी पहचानिए।", "vo_h1_sentence": "सोचिए, वाक्य में रहा है आएगा या रही है आएगा?", "vo_h1_sherni": "सोचिए, शेरनी मेले में किसके साथ आई थी?", "vo_h2_bail": "यह बैल है, इसे गाय से मिलाएंगे। गाय के चित्र पर टैप कीजिए।", "vo_h2_bakri": "बैल, बकरा, शेरनी", "vo_h2_bandar": "यह बंदर है, इसे बंदरिया से मिलाएंगे। बंदरिया के चित्र पर टैप कीजिए।", "vo_h2_ghoda": "गाय, मुर्गी, घोड़ी", "vo_h2_mor": "बंदरिया, मोरनी, मुर्गी", "vo_h2_murga": "यह मुर्गा है, इसे मुर्गी से मिलाएंगे। मुर्गी के चित्र पर टैप कीजिए।", "vo_h2_sherni": "बैल, शेर, घोड़ा", "vo_landing": "नमस्ते दोस्त, मैं हूँ swiftee, आज हम शब्दों की जोड़ियाँ मिलाएंगे।", "vo_name_bail": "बैल", "vo_name_bakra": "बकरा", "vo_name_bakri": "बकरी", "vo_name_bandar": "बंदर", "vo_name_bandariya": "बंदरिया", "vo_name_gaay": "गाय", "vo_name_ghoda": "घोड़ा", "vo_name_ghodi": "घोड़ी", "vo_name_mor": "मोर", "vo_name_morni": "मोरनी", "vo_name_murga": "मुर्गा", "vo_name_murgi": "मुर्गी", "vo_name_sher": "शेर", "vo_name_sherni": "शेरनी", "vo_poem_01": "पहले हम एक कविता पढ़ेंगे - जंगल का मेला। जंगल में एक मेला आया, रंग-बिरंगा खूब सजाया।", "vo_poem_02": "शेर आया, शेरनी आई, दोनों ने मिलकर धूम मचाई।", "vo_poem_03": "मोर पंख रंगीन फैलाए, मोरनी संग ठुमके लगाए।", "vo_poem_04": "घोड़ा आया धूल उड़ाए, घोड़ी पीछे दौड़ी आए।", "vo_poem_05": "बकरा बोला, “में-में-में” बकरी बोली, “साथ चले।”", "vo_poem_06": "बंदर लाया लाल गुब्बारा, बंदरिया बोली, “कितना प्यारा।”", "vo_poem_07": "मुर्गा बोला, “कुकड़ू-कूँ” मुर्गी बोली, “क्या खाऊँ?”", "vo_poem_08": "बैल ने जब ढोल बजाया, गाय ने भी नाच दिखाया।", "vo_poem_09": "सूरज ढलते शाम हुई, मेले भर में धूम हुई।", "vo_pt_guided": "बहुत बढ़िया! अब हम साथ मिलकर शुरू करते हैं। चलिए, साथ में करें!", "vo_pt_practice": "वाह! अब आपकी बारी।", "vo_pt_tutorial": "ध्यान से देखिए और मेरे साथ जानिए। चलिए, शुरू करें!", "vo_q_bakri_new": "बकरी मेले में किसके साथ आई थी?", "vo_q_ghoda_new": "घोड़ा मेले में किसके साथ आया था?", "vo_q_mor": "मोर मेले में किसके साथ आया था?", "vo_q_sentence": "सही शब्द चुनकर वाक्य पूरा कीजिए। बकरा घास खा… रहा है या रही है?", "vo_q_sherni": "शेरनी मेले में किसके साथ आई थी?", "vo_well_done": "शाबाश! आपने सभी सही जोड़ियाँ पहचान लीं।", "vo_h1_sentence_bandar": "सोचिए, वाक्य में चढ़ता है आएगा या चढ़ती है आएगा?", "vo_h1_sentence_sherni": "सोचिए, वाक्य में जाता है आएगा या जाती है आएगा?", "vo_h2_sentence": "हम वाक्य में बोलते हैं, बकरा घास खा रहा है।", "vo_h2_sentence_bandar": "हम वाक्य में बोलते हैं, बंदर पेड़ पर चढ़ता है।", "vo_h2_sentence_sherni": "हम वाक्य में बोलते हैं, शेरनी मेले में जाती है।", "vo_h3_bakri": "यह बकरा है, यह सही उत्तर है, इसपर टैप कीजिए।", "vo_h3_ghoda": "यह घोड़ी शब्द है, यह सही उत्तर है, इसपर टैप कीजिए।", "vo_h3_mor": "यह मोरनी है, यह सही उत्तर है, इसपर टैप कीजिए।", "vo_h3_sentence": "रहा है पर टैप कीजिए और वाक्य पूरा कीजिए।", "vo_h3_sentence_bandar": "चढ़ता है पर टैप कीजिए और वाक्य पूरा कीजिए।", "vo_h3_sentence_sherni": "जाती है पर टैप कीजिए और वाक्य पूरा कीजिए।", "vo_h3_sherni": "यह शेर है, यह सही उत्तर है, इसपर टैप कीजिए।", "vo_wq_bakra": "बकरे की जोड़ी को चुनिए और उसके साथ झूले पर बैठाइए।", "vo_wq_chuhiya": "चुहिया की जोड़ी को चुनिए और उसके साथ झूले पर बैठाइए।", "vo_wq_ghoda": "घोड़े की जोड़ी को चुनिए और उसके साथ झूले पर बैठाइए।", "vo_wq_hathi": "हाथी की जोड़ी को चुनिए और उसके साथ झूले पर बैठाइए।", "vo_wq_morni": "मोरनी की जोड़ी को चुनिए और उसके साथ झूले पर बैठाइए।", "vo_wq_murgi": "मुर्गी की जोड़ी को चुनिए और उसके साथ झूले पर बैठाइए।", "vo_name_khargosh": "खरगोश", "vo_name_ghodni": "घोड़नी", "vo_name_chuha": "चूहा", "vo_name_tota": "तोता", "vo_name_billi": "बिल्ली", "vo_name_bhed": "भेड़", "vo_name_hathini": "हथिनी", "vo_c_sentence_sherni": "शाबाश! सही वाक्य है— शेरनी मेले में जाती है।", "vo_c_sentence_bandar": "शाबाश! सही वाक्य है— बंदर पेड़ पर चढ़ता है।", "vo_stem_sherni": "शेरनी मेले में…", "vo_stem_bandar": "बंदर पेड़ पर…", "vo_opt_jata": "जाता है।", "vo_opt_jati": "जाती है।", "vo_opt_chadhta": "चढ़ता है।", "vo_opt_chadhti": "चढ़ती है।", "vo_shabash": "शाबाश!"}, "image": {"pic_bail": "assets/Images/pic_bail.webp", "pic_bail_alone": "assets/Images/pic_bail_alone.webp", "pic_bakra": "assets/Images/pic_bakra.webp", "pic_bakra_grass": "assets/Images/pic_bakra_grass.webp", "pic_bakri": "assets/Images/pic_bakri.webp", "pic_bandar": "assets/Images/pic_bandar.webp", "pic_bandariya": "assets/Images/pic_bandariya.webp", "pic_gaay": "assets/Images/pic_gaay.webp", "pic_ghoda": "assets/Images/pic_ghoda.webp", "pic_ghodi": "assets/Images/pic_ghodi.webp", "pic_mor": "assets/Images/pic_mor.webp", "pic_mor_alone": "assets/Images/pic_mor_alone.webp", "pic_morni": "assets/Images/pic_morni.webp", "pic_murga": "assets/Images/pic_murga.webp", "pic_murgi": "assets/Images/pic_murgi.webp", "pic_sher": "assets/Images/pic_sher.webp", "pic_sherni": "assets/Images/pic_sherni.webp", "pic_sherni_alone": "assets/Images/pic_sherni_alone.webp", "sc_mela_01": "assets/Images/sc_mela_01.webp", "sc_mela_02": "assets/Images/sc_mela_02.webp", "sc_mela_03": "assets/Images/sc_mela_03.webp", "sc_mela_04": "assets/Images/sc_mela_04.webp", "sc_mela_05": "assets/Images/sc_mela_05.webp", "sc_mela_06": "assets/Images/sc_mela_06.webp", "sc_mela_07": "assets/Images/sc_mela_07.webp", "sc_mela_08": "assets/Images/sc_mela_08.webp", "sc_mela_09": "assets/Images/sc_mela_09.webp", "pic_mor_anim": "assets/Images/pic_mor.webp", "pic_morni_anim": "assets/Images/pic_morni.webp"}, "video": {"sc_mela_02": "assets/video/sc_mela_02.webm", "sc_mela_03": "assets/video/sc_mela_03.webm", "sc_mela_04": "assets/video/sc_mela_04.webm", "sc_mela_05": "assets/video/sc_mela_05.webm", "sc_mela_06": "assets/video/sc_mela_06.webm", "sc_mela_07": "assets/video/sc_mela_07.webm", "sc_mela_08": "assets/video/sc_mela_08.webm", "sc_mela_09": "assets/video/sc_mela_09.webm"}}}
+{"version": "0.2", "skill_code": "HI02H11_L03_S02", "lo_code": "HI02H11_L03", "grade": "G2", "attribute": "H11", "skill_type": "CORE", "part_label": "", "theme": "toybox", "title": {"hi": "आइए जोड़ी मिलाएँ", "en": "Match the gender pairs (पुल्लिंग / स्त्रीलिंग)"}, "subtitle_hi": "", "skill_description_hi": "लिंग-सूचक शब्द-रूप बदलाव को पहचानता है — जैसे शेर से शेरनी, मोर से मोरनी।", "dt_fallback": null, "landing_hero": {"kind": "concept_strip", "cells": [{"type": "image", "src": "assets/Images/mor_title.webp", "label": "मोर"}, {"type": "image", "src": "assets/Images/title.webp", "label": "आइए जोड़ी मिलाएँ"}, {"type": "image", "src": "assets/Images/morni_title.webp", "label": "मोरनी"}]}, "phase_gate_vo": {"guided": "vo_bridge_lost"}, "phase_gate_caption": {"tutorial": {"text": "चलिए, शुरू करें!", "at_ms": 3210}, "guided": {"text": "चलिए, साथ में करें!", "at_ms": 9640}, "practice": {"text": "वाह! अब आपकी बारी।", "at_ms": 250}}, "phase_gate_at": {"practice": "P5"}, "landing_nudge": false, "landing_vo_on_tap": false, "audio_chip_on_mascot_foot": true, "phase_distribution": {"tutorial": 9, "guided": 6, "practice": 5}, "scaffold_rules": {"nudge_timeout_ms": {"guided": 5000, "practice": 8000}, "max_attempts": 2}, "signals_expected": ["slide_entered", "slide_completed", "phase_transition_shown", "story_question_first_try", "gender_match_first_try", "gender_sort_item", "gender_sort_correct", "gender_pair_match", "answer_wrong", "answer_revealed", "lesson_completed"], "_emoji_fallback": {"pic_sher": "🦁", "pic_sherni": "🦁", "pic_mor": "🦚", "pic_morni": "🦚", "pic_ghoda": "🐎", "pic_ghodi": "🐴", "pic_bakra": "🐐", "pic_bakri": "🐐", "pic_murga": "🐓", "pic_murgi": "🐔", "pic_bandar": "🐒", "pic_bandariya": "🐒", "pic_bail": "🐂", "pic_gaay": "🐄", "pic_sherni_alone": "🦁", "pic_mor_alone": "🦚", "pic_bail_alone": "🐂", "pic_bakra_grass": "🐐"}, "slides": [{"id": "T1", "phase": "tutorial", "eis": "iconic", "type": "STORY_SCENE", "prompt_hi": "", "audio": {"narration": "vo_poem_01"}, "data": { "caption_cues_ms": [4630, 5242, 5520, 5854, 6262, 6980, 8005, 8295], "caption_skip_phrases": 2, "caption_hi": "जंगल में एक मेला आया,\nरंग-बिरंगा खूब सजाया।", "image_id": "sc_mela_01", "emoji": "🎪", "alt_hi": "आइए आज हम एक कविता सुनते हैं— जंगल का मेला। जंगल में एक मेला आया, रंग-बिरंगा खूब सजाया।"}, "signals": {"on_complete": []}}, {"id": "T2", "phase": "tutorial", "eis": "iconic", "type": "STORY_SCENE", "prompt_hi": "", "audio": {"narration": "vo_poem_02"}, "data": { "caption_cues_ms": [320, 760, 1455, 2132, 3050, 3457, 3660, 4410, 4880],"caption_hi": "<span class=\"gw\">शेर</span> आया, <span class=\"gw\">शेरनी</span> आई,\nदोनों ने मिलकर धूम मचाई।", "image_id": "sc_mela_02", "emoji": "🎪", "alt_hi": "शेर आया, शेरनी आई, दोनों ने मिलकर धूम मचाई।", "video_id": "sc_mela_02"}, "signals": {"on_complete": []}}, {"id": "T3", "phase": "tutorial", "eis": "iconic", "type": "STORY_SCENE", "prompt_hi": "", "audio": {"narration": "vo_poem_03"}, "data": { "caption_cues_ms": [300, 775, 1105, 1820, 2740, 3355, 3670, 4075],"caption_hi": "<span class=\"gw\">मोर</span> पंख रंगीन फैलाए,\n<span class=\"gw\">मोरनी</span> संग ठुमके लगाए।", "image_id": "sc_mela_03", "emoji": "🎪", "alt_hi": "मोर पंख रंगीन फैलाए, मोरनी संग ठुमके लगाए।", "video_id": "sc_mela_03"}, "signals": {"on_complete": []}}, {"id": "T4", "phase": "tutorial", "eis": "iconic", "type": "STORY_SCENE", "prompt_hi": "", "audio": {"narration": "vo_poem_04"}, "data": { "caption_cues_ms": [280, 727, 1173, 1550, 2660, 3220, 3560, 3990],"caption_hi": "<span class=\"gw\">घोड़ा</span> आया धूल उड़ाए,\n<span class=\"gw\">घोड़ी</span> पीछे दौड़ी आए।", "image_id": "sc_mela_04", "emoji": "🎪", "alt_hi": "घोड़ा आया धूल उड़ाए, घोड़ी पीछे दौड़ी आए।", "video_id": "sc_mela_04"}, "signals": {"on_complete": []}}, {"id": "T5", "phase": "tutorial", "eis": "iconic", "type": "STORY_SCENE", "prompt_hi": "", "audio": {"narration": "vo_poem_05"}, "data": { "caption_cues_ms": [270, 1485, 2125, 3970, 4540, 4995, 5525], "caption_hi": "<span class=\"gw\">बकरा</span> बोला, “में-में-में”\n<span class=\"gw\">बकरी</span> बोली, “साथ चले।”", "image_id": "sc_mela_05", "emoji": "🎪", "alt_hi": "बकरा बोला, “में-में-में” बकरी बोली, “साथ चले।”", "video_id": "sc_mela_05"}, "signals": {"on_complete": []}}, {"id": "T6", "phase": "tutorial", "eis": "iconic", "type": "STORY_SCENE", "prompt_hi": "", "audio": {"narration": "vo_poem_06"}, "data": { "caption_cues_ms": [250, 805, 1130, 1560, 2860, 3545, 4045, 4685], "caption_hi": "<span class=\"gw\">बंदर</span> लाया लाल गुब्बारा,\n<span class=\"gw\">बंदरिया</span> बोली, “कितना प्यारा।”", "image_id": "sc_mela_06", "emoji": "🎪", "alt_hi": "बंदर लाया लाल गुब्बारा, बंदरिया बोली, “कितना प्यारा।”", "video_id": "sc_mela_06"}, "signals": {"on_complete": []}}, {"id": "T7", "phase": "tutorial", "eis": "iconic", "type": "STORY_SCENE", "prompt_hi": "", "audio": {"narration": "vo_poem_07"}, "data": { "caption_cues_ms": [330, 945, 1520, 2750, 3265, 3715, 4130], "caption_hi": "<span class=\"gw\">मुर्गा</span> बोला, “कुकड़ू-कूँ”\n<span class=\"gw\">मुर्गी</span> बोली, “क्या खाऊँ?”", "image_id": "sc_mela_07", "emoji": "🎪", "alt_hi": "मुर्गा बोला, “कुकड़ू-कूँ” मुर्गी बोली, “क्या खाऊँ?”", "video_id": "sc_mela_07"}, "signals": {"on_complete": []}}, {"id": "T8", "phase": "tutorial", "eis": "iconic", "type": "STORY_SCENE", "prompt_hi": "", "audio": {"narration": "vo_poem_08"}, "data": { "caption_cues_ms": [250, 622, 808, 1250, 1575, 2420, 2804, 3035, 3189, 3490],"caption_hi": "<span class=\"gw\">बैल</span> ने जब ढोल बजाया,\n<span class=\"gw\">गाय</span> ने भी नाच दिखाया।", "image_id": "sc_mela_08", "emoji": "🎪", "alt_hi": "बैल ने जब ढोल बजाया, गाय ने भी नाच दिखाया।", "video_id": "sc_mela_08"}, "signals": {"on_complete": []}}, {"id": "T9", "phase": "tutorial", "eis": "iconic", "type": "STORY_SCENE", "prompt_hi": "", "audio": {"narration": "vo_poem_09"}, "data": { "caption_cues_ms": [290, 955, 1545, 2045, 2780, 3260, 3520, 3830, 4210],"caption_hi": "सूरज ढलते शाम हुई,\nमेले भर में धूम हुई।", "image_id": "sc_mela_09", "emoji": "🎪", "alt_hi": "सूरज ढलते शाम हुई, मेले भर में धूम हुई।", "video_id": "sc_mela_09"}, "signals": {"on_complete": []}}, {"id": "G1", "phase": "guided", "eis": "iconic", "type": "STORY_QUESTION", "prompt_hi": "सही जोड़ी चुनिए।", "audio": {"prompt": "vo_q_sherni", "hint1": "vo_h1_sherni", "hint2": "vo_h2_sherni", "hint": "vo_h2_sherni", "reveal": "vo_h3_sherni", "correct": "vo_correct_pair"}, "data": { "shuffle": false, "hint2_cues": [{"word": "बैल", "ms": 290, "end_ms": 790}, {"word": "शेर", "ms": 1580, "end_ms": 2070}, {"word": "घोड़ा", "ms": 3050, "end_ms": 3590}], "max_attempts": 3, "hint2_walk": true,"recall_image_id": "pic_sherni_alone", "stim_word_hi": "शेरनी", "options": [{"img": "pic_bail", "emoji": "🐂", "word_hi": "बैल", "audio": "vo_name_bail", "label_hi": "बैल"}, {"img": "pic_sher", "emoji": "🦁", "word_hi": "शेर", "audio": "vo_name_sher", "label_hi": "शेर", "correct": true}, {"img": "pic_ghoda", "emoji": "🐎", "word_hi": "घोड़ा", "audio": "vo_name_ghoda", "label_hi": "घोड़ा"}], "reveal_seq": true, "signal_name": "gender_match_first_try"}, "signals": {"on_complete": ["gender_match_first_try"]}}, {"id": "G2", "phase": "guided", "eis": "iconic", "type": "STORY_QUESTION", "prompt_hi": "सही जोड़ी चुनिए।", "audio": {"prompt": "vo_q_mor", "hint1": "vo_h1_mor", "hint2": "vo_h2_mor", "hint": "vo_h2_mor", "reveal": "vo_h3_mor", "correct": "vo_correct_pair"}, "data": { "shuffle": false, "hint2_cues": [{"word": "बंदरिया", "ms": 270, "end_ms": 1300}, {"word": "मोरनी", "ms": 1690, "end_ms": 2560}, {"word": "मुर्गी", "ms": 3030, "end_ms": 3740}], "max_attempts": 3, "hint2_walk": true,"recall_image_id": "pic_mor_alone", "stim_word_hi": "मोर", "options": [{"img": "pic_bandariya", "emoji": "🐒", "word_hi": "बंदरिया", "audio": "vo_name_bandariya", "label_hi": "बंदरिया"}, {"img": "pic_morni", "emoji": "🦚", "word_hi": "मोरनी", "audio": "vo_name_morni", "label_hi": "मोरनी", "correct": true}, {"img": "pic_murgi", "emoji": "🐔", "word_hi": "मुर्गी", "audio": "vo_name_murgi", "label_hi": "मुर्गी"}], "reveal_seq": true, "signal_name": "gender_match_first_try"}, "signals": {"on_complete": ["gender_match_first_try"]}}, {"id": "G3", "audio": {"prompt": "vo_q_bakri_new","hint1": "vo_h1_bakri", "hint2": "vo_h2_bakri", "hint": "vo_h2_bakri", "reveal": "vo_h3_bakri", "correct": "vo_correct_pair"}, "phase": "guided", "eis": "iconic", "type": "STORY_QUESTION", "prompt_hi": "सही जोड़ी चुनिए।",  "data": { "shuffle": false, "hint2_cues": [{"word": "बैल", "ms": 280, "end_ms": 900}, {"word": "बकरा", "ms": 1490, "end_ms": 2140}, {"word": "शेरनी", "ms": 2770, "end_ms": 3430}], "max_attempts": 3, "hint2_walk": true,"stim_word_hi": "बकरी", "options": [{"img": "pic_bail", "emoji": "🐂", "word_hi": "बैल", "audio": "vo_name_bail", "label_hi": "बैल"}, {"img": "pic_bakra", "emoji": "🐐", "word_hi": "बकरा", "audio": "vo_name_bakra", "label_hi": "बकरा", "correct": true}, {"img": "pic_sherni", "emoji": "🦁", "word_hi": "शेरनी", "audio": "vo_name_sherni", "label_hi": "शेरनी"}], "reveal_seq": true, "signal_name": "gender_match_first_try"}, "signals": {"on_complete": ["gender_match_first_try"]}}, {"id": "G4", "audio": {"prompt": "vo_q_ghoda_new", "hint1": "vo_h1_ghoda", "hint2": "vo_h2_ghoda", "hint": "vo_h2_ghoda", "reveal": "vo_h3_ghoda", "correct": "vo_correct_pair"}, "phase": "guided", "eis": "iconic", "type": "STORY_QUESTION", "prompt_hi": "सही जोड़ी चुनिए।", "data": { "shuffle": false, "hint2_cues": [{"word": "गाय", "ms": 300, "end_ms": 870}, {"word": "मुर्गी", "ms": 1480, "end_ms": 2050}, {"word": "घोड़ी", "ms": 2650, "end_ms": 3120}], "max_attempts": 3, "hint2_walk": true,"stim_word_hi": "घोड़ा", "options": [{"word_hi": "गाय", "audio": "vo_name_gaay", "label_hi": "गाय"}, {"word_hi": "मुर्गी", "audio": "vo_name_murgi", "label_hi": "मुर्गी"}, {"word_hi": "घोड़ी", "audio": "vo_name_ghodi", "label_hi": "घोड़ी", "correct": true}], "reveal_seq": true, "signal_name": "gender_match_first_try", "recall_image_id": "pic_ghoda", "options_words_only": true}, "signals": {"on_complete": ["gender_match_first_try"]}},  {"id": "G6", "phase": "guided", "eis": "enactive", "type": "MATCH_GENDER_PAIRS", "prompt_hi": "सही जोड़ियाँ मिलाइए।", "audio": {"prompt": "vo_match_pairs","hint1": "vo_h1_pair", "correct": "vo_correct_pairs"}, "data": {"pairs": [{"id": "bandar", "m": {"img": "pic_bandar", "emoji": "🐒", "word_hi": "बंदर", "audio": "vo_name_bandar"}, "f": {"img": "pic_bandariya", "emoji": "🐒", "word_hi": "बंदरिया", "audio": "vo_name_bandariya"}, "hint2": "vo_h2_bandar"}, {"id": "murga", "m": {"img": "pic_murga", "emoji": "🐓", "word_hi": "मुर्गा", "audio": "vo_name_murga"}, "f": {"img": "pic_murgi", "emoji": "🐔", "word_hi": "मुर्गी", "audio": "vo_name_murgi"}, "hint2": "vo_h2_murga"}, {"id": "bail", "m": {"img": "pic_bail", "emoji": "🐂", "word_hi": "बैल", "audio": "vo_name_bail"}, "f": {"img": "pic_gaay", "emoji": "🐄", "word_hi": "गाय", "audio": "vo_name_gaay"}, "hint2": "vo_h2_bail"}], "demo_pair": "bandar"}, "signals": {"on_complete": ["gender_pair_match"]}},  {"id": "P2", "phase": "practice", "eis": "iconic", "type": "TAP_GENDER", "prompt_hi": "वाक्य पूरा कीजिए।", "audio": {"prompt": "vo_q_sentence", "hint1": "vo_h1_sentence", "hint2": "vo_h2_sentence", "hint": "vo_h2_sentence", "reveal": "vo_h3_sentence", "correct": "vo_c_sentence", "word_name": "vo_name_bakra"}, "data": { "max_attempts": 3, "earned_hand": true,"noun": {"word_hi": "बकरा घास खा…", "emoji": "🐐", "img": "pic_bakra_grass"}, "options": [{"label": "रहा है।", "gender": "M", "cue_ms": 5800}, {"label": "रही है।", "gender": "F", "cue_ms": 6810}], "target_gender": "M", "reveal_seq": true, "correct_cues_ms": [3040, 3340, 3930, 4350]}, "signals": {"on_complete": ["gender_match_first_try"]}}, {"id": "P3", "phase": "practice", "eis": "iconic", "type": "TAP_GENDER", "prompt_hi": "वाक्य पूरा कीजिए।", "audio": {"prompt": "vo_stem_sherni", "hint1": "vo_h1_sentence_sherni", "hint2": "vo_h2_sentence_sherni", "hint": "vo_h2_sentence_sherni", "reveal": "vo_h3_sentence_sherni", "correct": "vo_c_sentence_sherni", "word_name": "vo_name_sherni"}, "data": { "max_attempts": 3, "earned_hand": true,"noun": {"word_hi": "शेरनी मेले में…", "emoji": "🦁", "img": "pic_sherni_mela"}, "options": [{"label": "जाता है।", "audio": "vo_opt_jata", "gender": "M"}, {"label": "जाती है।", "audio": "vo_opt_jati", "gender": "F"}], "target_gender": "F", "reveal_seq": true, "correct_cues_ms": [2800, 3700, 4000, 4340]}, "signals": {"on_complete": ["gender_match_first_try"]}}, {"id": "P4", "phase": "practice", "eis": "iconic", "type": "TAP_GENDER", "prompt_hi": "वाक्य पूरा कीजिए।", "audio": {"prompt": "vo_stem_bandar", "hint1": "vo_h1_sentence_bandar", "hint2": "vo_h2_sentence_bandar", "hint": "vo_h2_sentence_bandar", "reveal": "vo_h3_sentence_bandar", "correct": "vo_c_sentence_bandar", "word_name": "vo_name_bandar"}, "data": { "max_attempts": 3, "earned_hand": true,"noun": {"word_hi": "बंदर पेड़ पर…", "emoji": "🐒", "img": "pic_bandar_ped"}, "options": [{"label": "चढ़ता है।", "audio": "vo_opt_chadhta", "gender": "M"}, {"label": "चढ़ती है।", "audio": "vo_opt_chadhti", "gender": "F"}], "target_gender": "M", "reveal_seq": true, "correct_cues_ms": [2800, 3480, 3740, 4110]}, "signals": {"on_complete": ["gender_match_first_try"]}}, {"id": "P5", "phase": "practice", "eis": "enactive", "type": "WHEEL_PAIRS", "prompt_hi": "सही जोड़ी को चुनिए और झूले पर बैठाइए।", "audio": {"prompt": "vo_wheel_intro", "hint1": "vo_h1_pair", "correct": "vo_wheel_shabash"}, "data": { "layout": "side-left", "earned_hand": true,"option_audio": {"मोर": "vo_name_mor", "मुर्गी": "vo_name_murgi", "घोड़ा": "vo_name_ghoda", "बकरी": "vo_name_bakri", "घोड़ी": "vo_name_ghodi", "शेरनी": "vo_name_sherni", "गाय": "vo_name_gaay", "मुर्गा": "vo_name_murga", "बिल्ली": "vo_name_billi", "भेड़": "vo_name_bhed", "हथिनी": "vo_name_hathini", "चूहा": "vo_name_chuha", "खरगोश": "vo_name_khargosh", "घोड़नी": "vo_name_ghodni", "तोता": "vo_name_tota"}, "seats": [{"seated": {"word_hi": "मोरनी", "img": "pic_morni", "emoji": "🦚", "faces": "left", "sit": 0.761}, "pair": {"word_hi": "मोर", "img": "pic_mor", "emoji": "🦚", "faces": "right", "sit": 0.801}, "options": ["मोर", "मुर्गी", "घोड़ा"], "answer": "मोर", "audio": {"prompt": "vo_wq_morni"}}, {"seated": {"word_hi": "बकरा", "img": "pic_bakra", "emoji": "🐐", "sit": 0.752}, "pair": {"word_hi": "बकरी", "img": "pic_bakri", "emoji": "🐐", "sit": 0.704}, "options": ["बिल्ली", "बकरी", "भेड़"], "answer": "बकरी", "audio": {"prompt": "vo_wq_bakra"}}, {"seated": {"word_hi": "हाथी", "img": "pic_hathi", "emoji": "🐘", "sit": 0.706}, "pair": {"word_hi": "हथिनी", "img": "pic_hathini", "emoji": "🐘", "sit": 0.675}, "options": ["हथिनी", "घोड़ी", "शेरनी"], "answer": "हथिनी", "audio": {"prompt": "vo_wq_hathi"}}, {"seated": {"word_hi": "चुहिया", "img": "pic_chuhiya", "emoji": "🐭", "sit": 0.819}, "pair": {"word_hi": "चूहा", "img": "pic_chuha", "emoji": "🐭", "sit": 0.833}, "options": ["चूहा", "खरगोश", "गाय"], "answer": "चूहा", "audio": {"prompt": "vo_wq_chuhiya"}}, {"seated": {"word_hi": "घोड़ा", "img": "pic_ghoda", "emoji": "🐎", "sit": 0.688}, "pair": {"word_hi": "घोड़ी", "img": "pic_ghodi", "emoji": "🐎", "sit": 0.66}, "options": ["हथिनी", "घोड़ी", "घोड़नी"], "answer": "घोड़ी", "audio": {"prompt": "vo_wq_ghoda"}}, {"seated": {"word_hi": "मुर्गी", "img": "pic_murgi", "emoji": "🐔", "sit": 0.75}, "pair": {"word_hi": "मुर्गा", "img": "pic_murga", "emoji": "🐓", "sit": 0.774}, "options": ["मुर्गा", "मोर", "तोता"], "answer": "मुर्गा", "audio": {"prompt": "vo_wq_murgi"}}]}, "signals": {"on_complete": ["gender_match_first_try"]}},   {"id": "CEL", "phase": "practice", "eis": "enactive", "type": "CELEBRATION", "prompt_hi": "", "audio": {"prompt": "vo_shabash", "sfx": "sfx_celebrate"}, "data": {}, "signals": {"on_complete": ["lesson_completed"]}}], "assets": {"audio_ext": "wav", "img_ext": "webp", "audio": {"vo_bridge_lost": "assets/VO/vo_bridge_lost.wav", "vo_c_sentence": "assets/VO/vo_c_sentence.wav", "vo_correct_pair": "assets/VO/vo_correct_pair.wav", "vo_match_pairs": "assets/VO/vo_match_pairs.wav", "vo_correct_pairs": "assets/VO/vo_correct_pairs.wav", "vo_h1_mor": "assets/VO/vo_h1_mor.wav", "vo_h1_bakri": "assets/VO/vo_h1_bakri.wav", "vo_h1_ghoda": "assets/VO/vo_h1_ghoda.wav", "vo_h1_pair": "assets/VO/vo_h1_pair.wav", "vo_h1_sentence": "assets/VO/vo_h1_sentence.wav", "vo_h1_sherni": "assets/VO/vo_h1_sherni.wav", "vo_h2_bail": "assets/VO/vo_h2_bail.wav", "vo_h2_bakri": "assets/VO/vo_h2_bakri.wav", "vo_h2_bandar": "assets/VO/vo_h2_bandar.wav", "vo_h2_ghoda": "assets/VO/vo_h2_ghoda.wav", "vo_h2_mor": "assets/VO/vo_h2_mor.wav", "vo_h2_murga": "assets/VO/vo_h2_murga.wav", "vo_h2_sherni": "assets/VO/vo_h2_sherni.wav", "vo_landing": "assets/VO/vo_landing.wav", "vo_name_bail": "assets/VO/vo_name_bail.wav", "vo_name_bakra": "assets/VO/vo_name_bakra.wav", "vo_name_bakri": "assets/VO/vo_name_bakri.wav", "vo_name_bandar": "assets/VO/vo_name_bandar.wav", "vo_name_bandariya": "assets/VO/vo_name_bandariya.wav", "vo_name_gaay": "assets/VO/vo_name_gaay.wav", "vo_name_ghoda": "assets/VO/vo_name_ghoda.wav", "vo_name_ghodi": "assets/VO/vo_name_ghodi.wav", "vo_name_mor": "assets/VO/vo_name_mor.wav", "vo_name_morni": "assets/VO/vo_name_morni.wav", "vo_name_murga": "assets/VO/vo_name_murga.wav", "vo_name_murgi": "assets/VO/vo_name_murgi.wav", "vo_name_sher": "assets/VO/vo_name_sher.wav", "vo_name_sherni": "assets/VO/vo_name_sherni.wav", "vo_poem_01": "assets/VO/vo_poem_01.wav", "vo_poem_02": "assets/VO/vo_poem_02.wav", "vo_poem_03": "assets/VO/vo_poem_03.wav", "vo_poem_04": "assets/VO/vo_poem_04.wav", "vo_poem_05": "assets/VO/vo_poem_05.wav", "vo_poem_06": "assets/VO/vo_poem_06.wav", "vo_poem_07": "assets/VO/vo_poem_07.wav", "vo_poem_08": "assets/VO/vo_poem_08.wav", "vo_poem_09": "assets/VO/vo_poem_09.wav", "vo_pt_guided": "assets/VO/vo_pt_guided.wav", "vo_pt_practice": "assets/VO/vo_pt_practice.wav", "vo_pt_tutorial": "assets/VO/vo_pt_tutorial.wav", "vo_q_bakri_new": "assets/VO/vo_q_bakri_new.wav", "vo_q_ghoda_new": "assets/VO/vo_q_ghoda_new.wav", "vo_q_mor": "assets/VO/vo_q_mor.wav", "vo_q_sentence": "assets/VO/vo_q_sentence.wav", "vo_q_sherni": "assets/VO/vo_q_sherni.wav", "vo_well_done": "assets/VO/vo_well_done.wav", "sfx_correct": "assets/SFX/sfx_correct.wav", "sfx_wrong": "assets/SFX/sfx_wrong.wav", "sfx_burst": "assets/SFX/sfx_burst.wav", "sfx_celebrate": "assets/SFX/sfx_celebrate.wav", "vo_h1_sentence_bandar": "assets/VO/vo_h1_sentence_bandar.wav", "vo_h1_sentence_sherni": "assets/VO/vo_h1_sentence_sherni.wav", "vo_h2_sentence": "assets/VO/vo_h2_sentence.wav", "vo_h2_sentence_bandar": "assets/VO/vo_h2_sentence_bandar.wav", "vo_h2_sentence_sherni": "assets/VO/vo_h2_sentence_sherni.wav", "vo_h3_bakri": "assets/VO/vo_h3_bakri.wav", "vo_h3_ghoda": "assets/VO/vo_h3_ghoda.wav", "vo_h3_mor": "assets/VO/vo_h3_mor.wav", "vo_h3_sentence": "assets/VO/vo_h3_sentence.wav", "vo_h3_sentence_bandar": "assets/VO/vo_h3_sentence_bandar.wav", "vo_h3_sentence_sherni": "assets/VO/vo_h3_sentence_sherni.wav", "vo_h3_sherni": "assets/VO/vo_h3_sherni.wav", "vo_wq_bakra": "assets/VO/vo_wq_bakra.wav", "vo_wq_chuhiya": "assets/VO/vo_wq_chuhiya.wav", "vo_wq_ghoda": "assets/VO/vo_wq_ghoda.wav", "vo_wq_hathi": "assets/VO/vo_wq_hathi.wav", "vo_wq_morni": "assets/VO/vo_wq_morni.wav", "vo_wq_murgi": "assets/VO/vo_wq_murgi.wav", "vo_name_khargosh": "assets/VO/vo_name_khargosh.wav", "vo_name_ghodni": "assets/VO/vo_name_ghodni.wav", "vo_name_chuha": "assets/VO/vo_name_chuha.wav", "vo_name_tota": "assets/VO/vo_name_tota.wav", "vo_name_billi": "assets/VO/vo_name_billi.wav", "vo_name_bhed": "assets/VO/vo_name_bhed.wav", "vo_name_hathini": "assets/VO/vo_name_hathini.wav", "vo_c_sentence_sherni": "assets/VO/vo_c_sentence_sherni.wav", "vo_c_sentence_bandar": "assets/VO/vo_c_sentence_bandar.wav", "vo_stem_sherni": "assets/VO/vo_stem_sherni.wav", "vo_stem_bandar": "assets/VO/vo_stem_bandar.wav", "vo_opt_jata": "assets/VO/vo_opt_jata.wav", "vo_opt_jati": "assets/VO/vo_opt_jati.wav", "vo_opt_chadhta": "assets/VO/vo_opt_chadhta.wav", "vo_opt_chadhti": "assets/VO/vo_opt_chadhti.wav", "vo_shabash": "assets/VO/vo_shabash.wav", "vo_wheel_shabash": "assets/VO/vo_wheel_shabash.wav"}, "audio_text": {"vo_bridge_lost": "ये कविता सुनकर मुझे तो बहुत मज़ा आया, लेकिन मेले में भीड़ की वजह से सभी जोड़ियाँ बिछड़ गईं। आइए साथ मिलकर ढूँढ़ते हैं। चलिए, साथ में करें!", "vo_c_sentence": "शाबाश! सही वाक्य है— बकरा घास खा रहा है।", "vo_correct_pair": "शाबाश! आपने सही जोड़ी मिला दी।", "vo_match_pairs": "हर जानवर को उसकी सही जोड़ी से मिलाइए।", "vo_correct_pairs": "शाबाश! आपने सभी सही जोड़ियाँ मिला दीं।", "vo_h1_mor": "सोचिए, मोर मेले में किसके साथ आया था?", "vo_h1_bakri": "सोचिए, बकरी मेले में किसके साथ आई थी?", "vo_h1_ghoda": "सोचिए, घोड़ा मेले में किसके साथ आया था?", "vo_h1_pair": "फिर से कोशिश कीजिए, सही जोड़ी पहचानिए।", "vo_h1_sentence": "सोचिए, वाक्य में रहा है आएगा या रही है आएगा?", "vo_h1_sherni": "सोचिए, शेरनी मेले में किसके साथ आई थी?", "vo_h2_bail": "यह बैल है, इसे गाय से मिलाएंगे। गाय के चित्र पर टैप कीजिए।", "vo_h2_bakri": "बैल, बकरा, शेरनी", "vo_h2_bandar": "यह बंदर है, इसे बंदरिया से मिलाएंगे। बंदरिया के चित्र पर टैप कीजिए।", "vo_h2_ghoda": "गाय, मुर्गी, घोड़ी", "vo_h2_mor": "बंदरिया, मोरनी, मुर्गी", "vo_h2_murga": "यह मुर्गा है, इसे मुर्गी से मिलाएंगे। मुर्गी के चित्र पर टैप कीजिए।", "vo_h2_sherni": "बैल, शेर, घोड़ा", "vo_landing": "नमस्ते दोस्त, मैं हूँ swiftee, आज हम शब्दों की जोड़ियाँ मिलाएंगे।", "vo_name_bail": "बैल", "vo_name_bakra": "बकरा", "vo_name_bakri": "बकरी", "vo_name_bandar": "बंदर", "vo_name_bandariya": "बंदरिया", "vo_name_gaay": "गाय", "vo_name_ghoda": "घोड़ा", "vo_name_ghodi": "घोड़ी", "vo_name_mor": "मोर", "vo_name_morni": "मोरनी", "vo_name_murga": "मुर्गा", "vo_name_murgi": "मुर्गी", "vo_name_sher": "शेर", "vo_name_sherni": "शेरनी", "vo_poem_01": "पहले हम एक कविता पढ़ेंगे - जंगल का मेला। जंगल में एक मेला आया, रंग-बिरंगा खूब सजाया।", "vo_poem_02": "शेर आया, शेरनी आई, दोनों ने मिलकर धूम मचाई।", "vo_poem_03": "मोर पंख रंगीन फैलाए, मोरनी संग ठुमके लगाए।", "vo_poem_04": "घोड़ा आया धूल उड़ाए, घोड़ी पीछे दौड़ी आए।", "vo_poem_05": "बकरा बोला, “में-में-में” बकरी बोली, “साथ चले।”", "vo_poem_06": "बंदर लाया लाल गुब्बारा, बंदरिया बोली, “कितना प्यारा।”", "vo_poem_07": "मुर्गा बोला, “कुकड़ू-कूँ” मुर्गी बोली, “क्या खाऊँ?”", "vo_poem_08": "बैल ने जब ढोल बजाया, गाय ने भी नाच दिखाया।", "vo_poem_09": "सूरज ढलते शाम हुई, मेले भर में धूम हुई।", "vo_pt_guided": "बहुत बढ़िया! अब हम साथ मिलकर शुरू करते हैं। चलिए, साथ में करें!", "vo_pt_practice": "वाह! अब आपकी बारी।", "vo_pt_tutorial": "ध्यान से देखिए और मेरे साथ जानिए। चलिए, शुरू करें!", "vo_q_bakri_new": "बकरी मेले में किसके साथ आई थी?", "vo_q_ghoda_new": "घोड़ा मेले में किसके साथ आया था?", "vo_q_mor": "मोर मेले में किसके साथ आया था?", "vo_q_sentence": "सही शब्द चुनकर वाक्य पूरा कीजिए। बकरा घास खा… रहा है या रही है?", "vo_q_sherni": "शेरनी मेले में किसके साथ आई थी?", "vo_well_done": "शाबाश! आपने सभी सही जोड़ियाँ पहचान लीं।", "vo_h1_sentence_bandar": "सोचिए, वाक्य में चढ़ता है आएगा या चढ़ती है आएगा?", "vo_h1_sentence_sherni": "सोचिए, वाक्य में जाता है आएगा या जाती है आएगा?", "vo_h2_sentence": "हम वाक्य में बोलते हैं, बकरा घास खा रहा है।", "vo_h2_sentence_bandar": "हम वाक्य में बोलते हैं, बंदर पेड़ पर चढ़ता है।", "vo_h2_sentence_sherni": "हम वाक्य में बोलते हैं, शेरनी मेले में जाती है।", "vo_h3_bakri": "यह बकरा है, यह सही उत्तर है, इसपर टैप कीजिए।", "vo_h3_ghoda": "यह घोड़ी शब्द है, यह सही उत्तर है, इसपर टैप कीजिए।", "vo_h3_mor": "यह मोरनी है, यह सही उत्तर है, इसपर टैप कीजिए।", "vo_h3_sentence": "रहा है पर टैप कीजिए और वाक्य पूरा कीजिए।", "vo_h3_sentence_bandar": "चढ़ता है पर टैप कीजिए और वाक्य पूरा कीजिए।", "vo_h3_sentence_sherni": "जाती है पर टैप कीजिए और वाक्य पूरा कीजिए।", "vo_h3_sherni": "यह शेर है, यह सही उत्तर है, इसपर टैप कीजिए।", "vo_wq_bakra": "बकरे की जोड़ी को चुनिए और उसके साथ झूले पर बैठाइए।", "vo_wq_chuhiya": "चुहिया की जोड़ी को चुनिए और उसके साथ झूले पर बैठाइए।", "vo_wq_ghoda": "घोड़े की जोड़ी को चुनिए और उसके साथ झूले पर बैठाइए।", "vo_wq_hathi": "हाथी की जोड़ी को चुनिए और उसके साथ झूले पर बैठाइए।", "vo_wq_morni": "मोरनी की जोड़ी को चुनिए और उसके साथ झूले पर बैठाइए।", "vo_wq_murgi": "मुर्गी की जोड़ी को चुनिए और उसके साथ झूले पर बैठाइए।", "vo_name_khargosh": "खरगोश", "vo_name_ghodni": "घोड़नी", "vo_name_chuha": "चूहा", "vo_name_tota": "तोता", "vo_name_billi": "बिल्ली", "vo_name_bhed": "भेड़", "vo_name_hathini": "हथिनी", "vo_c_sentence_sherni": "शाबाश! सही वाक्य है— शेरनी मेले में जाती है।", "vo_c_sentence_bandar": "शाबाश! सही वाक्य है— बंदर पेड़ पर चढ़ता है।", "vo_stem_sherni": "शेरनी मेले में…", "vo_stem_bandar": "बंदर पेड़ पर…", "vo_opt_jata": "जाता है।", "vo_opt_jati": "जाती है।", "vo_opt_chadhta": "चढ़ता है।", "vo_opt_chadhti": "चढ़ती है।", "vo_shabash": "शाबाश! आज तो कमाल कर दिया!", "vo_wheel_shabash": "शाबाश!"}, "image": {"pic_bail": "assets/Images/pic_bail.webp", "pic_bail_alone": "assets/Images/pic_bail_alone.webp", "pic_bakra": "assets/Images/pic_bakra.webp", "pic_bakra_grass": "assets/Images/pic_bakra_grass.webp", "pic_bakri": "assets/Images/pic_bakri.webp", "pic_bandar": "assets/Images/pic_bandar.webp", "pic_bandariya": "assets/Images/pic_bandariya.webp", "pic_gaay": "assets/Images/pic_gaay.webp", "pic_ghoda": "assets/Images/pic_ghoda.webp", "pic_ghodi": "assets/Images/pic_ghodi.webp", "pic_mor": "assets/Images/pic_mor.webp", "pic_mor_alone": "assets/Images/pic_mor_alone.webp", "pic_morni": "assets/Images/pic_morni.webp", "pic_murga": "assets/Images/pic_murga.webp", "pic_murgi": "assets/Images/pic_murgi.webp", "pic_sher": "assets/Images/pic_sher.webp", "pic_sherni": "assets/Images/pic_sherni.webp", "pic_sherni_alone": "assets/Images/pic_sherni_alone.webp", "sc_mela_01": "assets/Images/sc_mela_01.webp", "sc_mela_02": "assets/Images/sc_mela_02.webp", "sc_mela_03": "assets/Images/sc_mela_03.webp", "sc_mela_04": "assets/Images/sc_mela_04.webp", "sc_mela_05": "assets/Images/sc_mela_05.webp", "sc_mela_06": "assets/Images/sc_mela_06.webp", "sc_mela_07": "assets/Images/sc_mela_07.webp", "sc_mela_08": "assets/Images/sc_mela_08.webp", "sc_mela_09": "assets/Images/sc_mela_09.webp", "pic_mor_anim": "assets/Images/pic_mor.webp", "pic_morni_anim": "assets/Images/pic_morni.webp"}, "video": {"sc_mela_02": "assets/video/sc_mela_02.webm", "sc_mela_03": "assets/video/sc_mela_03.webm", "sc_mela_04": "assets/video/sc_mela_04.webm", "sc_mela_05": "assets/video/sc_mela_05.webm", "sc_mela_06": "assets/video/sc_mela_06.webm", "sc_mela_07": "assets/video/sc_mela_07.webm", "sc_mela_08": "assets/video/sc_mela_08.webm", "sc_mela_09": "assets/video/sc_mela_09.webm"}}}
 </script>
 
 <!-- ============ ENGINE ============ -->
@@ -4977,7 +5043,7 @@ function _resumeVoiceAudio(){
    AUDIO_BUILD changes whenever the game is rebuilt, so every clip URL changes with it and the
    browser has to fetch. It is added in the two places every clip passes through, rather than at
    the ~20 sites that spell out a path, so nothing can be missed. */
-const AUDIO_BUILD = "20260930173753";
+const AUDIO_BUILD = "20261006142110";
 function bustAudio(u){
   return (!u || u.indexOf("data:") === 0 || u.indexOf("?") >= 0) ? u : (u + "?v=" + AUDIO_BUILD);
 }
@@ -6443,7 +6509,9 @@ function mountTapOptions({slide, host, signalName, stimulus, options, isCorrect,
     // speak hint2 (the rung that NAMES the answer), then wait for the child — no auto-advance.
     /* [H11-140] on a walk ladder hint 2 has already been spoken at rung 2, so the terminal rung
        is the REVEAL line (hint 3: "यह शेर है, यह सही उत्तर है, इसपर टैप कीजिए।") under the hand. */
-    const _termKey = (slide.data && slide.data.hint2_walk) ? "reveal" : "hint";
+    /* [H11-174] ...and on any 3-rung slide (data.max_attempts >= 3): rung 2 already spoke hint2, so
+       rung 3 speaks the reveal line (P2-P4: "रहा है पर टैप कीजिए और वाक्य पूरा कीजिए।"). */
+    const _termKey = (slide.data && (slide.data.hint2_walk || slide.data.max_attempts >= 3)) ? "reveal" : "hint";
     playSeq(audioSeqFor(slide, _termKey) || audioSeqFor(slide, "hint") || audioSeqFor(slide, "reveal") || audioSeqFor(slide, "correct") || audioSeqFor(slide, "try_again"), ()=>{});
   }
   /* [2026-09-04 no-cut-feedback] added isPlaying — this button had no guard at all, so a manual हिंट
@@ -11388,10 +11456,25 @@ const SlideModules = {
          puts it - the front one is told apart by being sharp and 1.2x, not by falling further,
          and every extra pixel of fall was a pixel it spent covering the word pills. */
       const CX = 969.5, CY = 370.5, R = 311.2, DROP = 0, STEP = 360 / N;
+      /* [H11-168] WHERE THE BUCKET BEING FILLED STOPS. 90 deg = the foot of the wheel (the default).
+         In the side-left layout it stops at 3 o'clock instead (0 deg) - asked for, next to the word
+         pills, so the bucket the child is filling sits beside the words they choose from. The disc
+         turns by the same -90 so every bucket still hangs from a knob. */
+      const BASE = (slide.data && slide.data.layout === "side-left") ? 0 : 90, DISC_OFF = BASE - 90;
+      /* [H11-169] THE PINS GO ON THE KNOBS, MEASURED. The disc art is not a circle (848x788) and its
+         six knobs are not on one radius: template-matched off wheel_disc they sit 307-316.5 px from
+         the axle, a degree or so off the 60-degree marks. At the foot (the default layout) the
+         reference-fitted circle R=311.2 lands within a few px of them; turned 90 deg for side-left,
+         the same circle missed by 10-15 px - reported as the bucket hanging beside its knob. So in
+         side-left every pin is the knob's own centre, turned with the disc, which also keeps it on
+         the knob all the way through a ride. Order = seat i, i.e. the knob that starts at 90+60i. */
+      const KNOBS = (BASE === 0) ? [[1.5,308.5],[-264.5,159.5],[-260.5,-162.5],[2.5,-316.5],[262.5,-163.5],[264.5,159.5]] : null;
 
       const wrap = document.createElement("div"); wrap.className = "fw-wrap";
       const fit  = document.createElement("div"); fit.className  = "fw-fit";
       const st   = document.createElement("div"); st.className   = "fw-stage";
+      if(slide.data && slide.data.layout === "side") st.classList.add("fw-side");   /* [H11-165] */
+      if(slide.data && slide.data.layout === "side-left") st.classList.add("fw-side", "fw-sl");   /* [H11-166] */
       const rider = (o)=> o ? (o.img
             ? `<img src="assets/Images/${o.img}.${IMG_EXT}" alt="${o.word_hi||''}" `+
               `onerror="var s=document.createElement('span');s.className='fw-emoji';`+
@@ -11453,10 +11536,27 @@ const SlideModules = {
          at the foot it would lift the ride off its ground line and leave the pills floating, so it
          goes at the top instead, where the `cover` background behind the stage is plain night sky
          and the join does not show. */
+      /* [H11-163] RESPONSIVE: SIZED BY WHAT MATTERS, SEATED ON THE FLOOR. Reported: after deploy
+         the ride looked right on one screen and sat low on another. Two causes, both in the line
+         below as it was:
+           - it fitted the WHOLE 1920 width, so on any window squarer than 16:9 (a 4:3 tablet, a
+             laptop with toolbars) the scene shrank to the width and everything got small;
+           - it anchored the stage to the BOTTOM, so all the spare height went above the wheel.
+         Now the scale is set by the part that has to be seen - the wheel and the three word pills
+         span x 150-1765, so 1700 px with a margin - and on a narrow window the bunting at the far
+         edges is what gets cropped (.fw-fit hides the overflow), not the ride. And the spare height
+         is split so the stage's floor line (0.77 of its height, measured off wheel_bg) lands on the
+         floor of the full-window background behind it, which is fitted by HEIGHT on those windows. */
+      /* the part that must stay on screen, in stage x: wheel + bottom pills [110,1810] by default;
+         [80,1650] for the side layout ([H11-165]), whose pills sit at the left. The box's CENTRE is
+         put at the window's centre, so the side layout does not hug the left edge when cropped. */
+      const SAFE = st.classList.contains("fw-sl") ? [220, 1840] : st.classList.contains("fw-side") ? [80, 1650] : [110, 1810], FLOOR = 0.77;
       const fitNow = ()=>{ const w = fit.clientWidth, h = fit.clientHeight;
         if(w < 40 || h < 40) return;
-        const k = Math.min(w / 1920, h / 1080);
-        st.style.transform = `translate(${(w - 1920 * k) / 2}px, ${h - 1080 * k}px) scale(${k})`; };
+        const k = Math.min(w / (SAFE[1] - SAFE[0]), h / 1080);
+        const tx = w / 2 - k * (SAFE[0] + SAFE[1]) / 2;
+        const ty = Math.max(0, FLOOR * (h - 1080 * k));
+        st.style.transform = `translate(${tx}px, ${ty}px) scale(${k})`; };
       /* one rAF is not enough: on the first mount the flex box can still be 0 tall when it
          runs, and then nothing is ever scaled - the stage stays at its raw 1920x1080 and hangs
          out of the card, which is what the first render did. The observer covers the usual case,
@@ -11485,11 +11585,13 @@ const SlideModules = {
       let prevIdx = 0;
       const place = (fp)=>{
         const p = (fp == null) ? 1 : fp;
-        disc.style.transform = `rotate(${-turn * STEP}deg)`;
-        if(star) star.style.transform = `rotate(${-turn * STEP}deg)`;
+        disc.style.transform = `rotate(${DISC_OFF - turn * STEP}deg)`;
+        if(star) star.style.transform = `rotate(${DISC_OFF - turn * STEP}deg)`;
         seats.forEach((el, i) => {
-          const a = (90 + i * STEP - turn * STEP) * Math.PI / 180;
-          const x = R * Math.cos(a), y = R * Math.sin(a);
+          const a = (BASE + i * STEP - turn * STEP) * Math.PI / 180;
+          let x = R * Math.cos(a), y = R * Math.sin(a);
+          if(KNOBS){ const kn = KNOBS[i], ro = (DISC_OFF - turn * STEP) * Math.PI / 180;
+                     x = kn[0] * Math.cos(ro) - kn[1] * Math.sin(ro); y = kn[0] * Math.sin(ro) + kn[1] * Math.cos(ro); }
           const was = (i === prevIdx) ? 1 : 0, now = (i === idx) ? 1 : 0;
           const f = was + (now - was) * p;
           el.classList.toggle("is-focus", (i === idx) && p > .5);
@@ -11674,8 +11776,17 @@ const SlideModules = {
                            hd.src = "assets/UI/nudge_hand_new.svg?v=" + AUDIO_BUILD; st.appendChild(hd); }
                   const k = st.getBoundingClientRect().width / 1920 || 1;
                   const sr = st.getBoundingClientRect(), br = _el.getBoundingClientRect();
+                  if(st.classList.contains("fw-side")){
+                    /* [H11-165] pills in a column: from below, the hand would cover the next pill,
+                       so it stands just right of this one and points at it (rotated, .fw-hand-l) */
+                    const _sl = st.classList.contains("fw-sl");   /* [H11-166] pills on the right: hand on their left */
+                    hd.classList.add(_sl ? "fw-hand-r" : "fw-hand-l");
+                    hd.style.left = (_sl ? ((br.left - sr.left) / k - 116) : ((br.right - sr.left) / k + 6)) + "px";
+                    hd.style.top  = ((br.top - sr.top) / k + br.height / k / 2 - 70) + "px";
+                  } else {
                   hd.style.left = ((br.left - sr.left) / k + br.width / k / 2 - 110 * 0.42) + "px";
                   hd.style.top  = ((br.bottom - sr.top) / k - 34) + "px";
+                  }
                   hd.classList.add("show");
                 }
               }
@@ -11770,27 +11881,25 @@ const SlideModules = {
          line starts he is revealed, his pop runs and his one-shot animation is rewound - so the
          jump and the word land together. (The rewind used to run as the screen opened, which spent
          the jump under the jingle.) */
-      /* [H11-162] ...and he is THERE the whole time, standing still. Asked for: visible from the
-         start in his pose, and the jump happens on the word. So the screen opens on a still of the
-         animation's first frame (last_page_swifty_still.webp, same size and crop), and on "शाबाश"
-         the animated file is put in its place from frame 0 - one jump, then he stays. */
+      /* [H11-177] ONE CLIP THE LENGTH OF THE LINE. vo_shabash ("शाबाश! आज तो कमाल कर दिया!", 3.28 s)
+         and last_swifty_end.webp (3.28 s, plays once) are cut to each other in _tools/sprite_sheets.py:
+         the jump lands on "शाबाश" (0.3-1.3 s) and he talks through "आज तो कमाल कर दिया!". Until the
+         line starts he stands still (last_swifty_still.webp, the clip's first frame); when it ends he
+         holds the clip's last frame - nothing loops. Started at the same moment as the VO, from frame 0
+         (a fresh image: blob: over http, a counter from file://). Replaces [H11-171]'s three clips. */
       const _em = document.querySelector(".end-mascot");
-      const _anim = _em ? (_em.getAttribute("src") || "").replace("last_page_swifty_still", "last_page_swifty") : "";
-      if(_em && _anim){ _em.setAttribute("src", _anim.replace("last_page_swifty.webp", "last_page_swifty_still.webp")); }
-      let _animN = 0;
-      const _revealSwifty = ()=>{ try{
-        if(!_em || !_anim) return;
-        _em.removeAttribute("src"); void _em.offsetWidth;
-        /* over http a new query would be a new download at the very moment of the jump, so the
-           file fetched once at boot (window.__endAnimBlob) is used; from file:// the counter */
-        _em.setAttribute("src", window.__endAnimBlob ? URL.createObjectURL(window.__endAnimBlob)
-                                : _anim + (_anim.indexOf("?") >= 0 ? "&" : "?") + "j=" + (++_animN));
-      }catch(e){} };
+      const _set = (u)=>{ try{ if(!_em) return; _em.removeAttribute("src"); void _em.offsetWidth; _em.setAttribute("src", u); }catch(e){} };
+      _set("assets/Images/last_swifty_still.webp?v=" + AUDIO_BUILD);
+      const _revealSwifty = ()=>{
+        const b = window.__endSwBlob;
+        _set(b ? URL.createObjectURL(b) : ("assets/Images/last_swifty_end.webp?v=" + AUDIO_BUILD + "&n=" + (window.__endSwN = (window.__endSwN || 0) + 1)));
+      };
+      const _lineDone = ()=>{};   /* the clip ends on its own last frame, matched to the line */
       const _speakCel = ()=>{
         if(_celSpoke) return;
         _celSpoke = true;
         _revealSwifty();
-        play(audioFor(slide, "prompt") || null, ()=>{});
+        play(audioFor(slide, "prompt") || null, _lineDone);
       };
       setTimeout(_speakCel, 1800);
       playSfx(slide.audio && slide.audio.sfx ? slide.audio.sfx : "sfx_celebrate", _speakCel);
@@ -12493,11 +12602,11 @@ let _gateToken = 0;
    A NEW URL is a new image with its own clock. Over http it is a blob: URL minted from ONE fetch,
    so the 6.9MB file is downloaded once, not once per gate (the problem [gate-cache] solved). From
    file:// fetch is blocked, so it is a counter in the query instead - a disk read, not a download. */
-const PEEK_SRC = "assets/peeking_talk10s.webp?v=20260930173753";
+const PEEK_SRC = "assets/peeking_talk10s.webp?v=20261006142110";
 /* [H11-154] THE FIRST GATE SKIPS THE RISE. Asked for: on the first transition Swifty is already up
    and talking, not climbing into view first. peeking_talk_up.webp is the same animation from 3.82s
    - the first frame he is at the top - cut by _tools/peek_cut.py; the other two gates keep the rise. */
-const PEEK_UP_SRC = "assets/peeking_talk_up.webp?v=20260930173753";
+const PEEK_UP_SRC = "assets/peeking_talk_up.webp?v=20261006142110";
 const _peekBlobs = {}; let _peekBlobUrl = null, _peekN = 0;
 if(/^https?:$/.test(location.protocol)){
   /* only the cut file: every gate uses it now, and peeking_talk10s.webp left the game folder */
@@ -12510,14 +12619,14 @@ if(/^https?:$/.test(location.protocol)){
    plays through once more while the greeting begins. Restarting an animated image means a NEW
    URL (one clock per URL, see [H11-132]): a blob: URL over http so the file is fetched once, a
    counter in the query from file://. */
-const LAND_ANIM_SRC = "assets/UI/new_landing_swiftee_anim.webp?v=20260930173753";
+const LAND_ANIM_SRC = "assets/UI/new_landing_swiftee_anim.webp?v=20261006142110";
 let _landBlob = null, _landN = 0;
 if(/^https?:$/.test(location.protocol)){
   try{ fetch(LAND_ANIM_SRC).then(r => r.ok ? r.blob() : null).then(b => { _landBlob = b; }).catch(()=>{}); }catch(e){}
 }
-if(/^https?:$/.test(location.protocol)){   /* [H11-162] the celebration jump, fetched once */
-  try{ fetch("assets/Images/last_page_swifty.webp?v=" + (typeof AUDIO_BUILD !== "undefined" ? AUDIO_BUILD : ""))
-         .then(r => r.ok ? r.blob() : null).then(b => { if(b) window.__endAnimBlob = b; }).catch(()=>{}); }catch(e){}
+if(/^https?:$/.test(location.protocol)){   /* [H11-177] the celebration clip, fetched once */
+  try{ fetch("assets/Images/last_swifty_end.webp?v=" + (typeof AUDIO_BUILD !== "undefined" ? AUDIO_BUILD : ""))
+         .then(r => r.ok ? r.blob() : null).then(b => { if(b) window.__endSwBlob = b; }).catch(()=>{}); }catch(e){}
 }
 function replayLandingSwifty(){
   try{
@@ -12836,7 +12945,7 @@ function _cardArtList(){
   });
   ["assets/UI/sw_head_hint_anim.webp","assets/UI/sw_head_celebrate_anim.webp","assets/UI/sw_head_tryagain_anim.webp",
    "assets/UI/sw_lg_hint_anim.webp","assets/UI/hint.webp","assets/UI/hint_active.webp","assets/UI/nudge_hand_new.svg",
-   "assets/Images/last_page_swifty.webp","assets/Images/last_page_swifty_still.webp","assets/UI/end_screen.webp"].forEach(add);
+   "assets/Images/last_swifty_still.webp","assets/Images/last_swifty_end.webp","assets/UI/end_screen.webp"].forEach(add);
   return out;
 }
 function warmCardArt(){
@@ -13002,6 +13111,7 @@ function boot(){
      ends. */
   const LAND_RELEASE_MS = 9000;
   let _landReleaseT = 0;
+  let _landBlocked = false, _landGestured = false, _landRetried = false;   /* [H11-178] see _landingUnlock */
   /* NOT `disabled`, WHICH WAS THE WHOLE BUG. A disabled <button> dispatches no pointer events
      at all in Chrome, and nothing bubbles out of it - so the child tapping the waiting button
      produced NO gesture, the browser's audio stayed locked, and the greeting never started. It
@@ -13009,7 +13119,11 @@ function boot(){
      behind it, which IS the gesture that unlocks audio, and the window listener below then
      starts the greeting. aria-disabled keeps the meaning for assistive tech. */
   const setStartBtnReady = (on)=>{ const b = $("sgBtn"); if(!b) return;
-    b.classList.toggle("sg-waiting", !on); b.setAttribute("aria-disabled", String(!on)); };
+    if(on || _landingSpeaking) b.classList.remove("sg-blocked");
+    b.classList.toggle("sg-waiting", !on); b.setAttribute("aria-disabled", String(!on));
+    /* [H11-173] the speaker goes with it - checklist: "the speaker button remains disabled when
+       the VO is spoken; once the VO is complete it is enabled again" */
+    const v = $("sgVo"); if(v){ v.classList.toggle("sg-vo-off", !on); v.setAttribute("aria-disabled", String(!on)); } };
   /* [H11-148] THE GREETING WAITS FOR THE PLAY BUTTON. Asked for: the button is live and pulsing
      from the first frame, the child presses it, THEN Swifty speaks, and when she is done the
      transition screen follows. This reverses [H11-106] (speak first, button waits) for this card
@@ -13020,7 +13134,7 @@ function boot(){
   const playLanding = ()=>{ if(_voOnTap && !_landStarted){ setStartBtnReady(true); return; }
     if(!$("startGate").classList.contains("hidden")){
     _landingSpeaking = true;
-    if(!_voOnTap) setStartBtnReady(false);   /* [H11-148] pressed play: it stays gold, it was the child's go */
+    if(!_voOnTap){ setStartBtnReady(false); if(typeof replayLandingSwifty === "function") replayLandingSwifty(); }   /* [H11-173] he waves as he speaks */   /* [H11-148] pressed play: it stays gold, it was the child's go */
     /* THE WATCHDOG IS ARMED BY THE FIRST TOUCH, NOT BY THE PAGE OPENING. Armed at load it did
        the exact harm it was meant to prevent: on a browser that refuses autoplay the greeting
        never started, the timer fired anyway nine seconds later, and the button went gold having
@@ -13034,6 +13148,21 @@ function boot(){
     /* [H11-48] The deck gives the landing ONE line and nothing else, so nothing else plays
        here. The peacock calls that used to follow this clip are gone. */
     const _t0 = Date.now();
+    /* [H11-179] THE SILENT REFUSAL. On the normal Web Audio path a browser that will not make sound
+       yet does not say so: the AudioContext stays "suspended", start() is accepted, nothing is heard
+       and the clip never ends. The quick-return check below never sees that, so the button stayed
+       hidden with nothing on screen to press (reported with a screenshot). Watch the context for a
+       few seconds instead: a clip queued on a context that is not running is a refusal too. */
+    clearInterval(window.__landSuspT); let _suspN = 0;
+    window.__landSuspT = setInterval(()=>{
+      if(++_suspN > 16 || !_landingSpeaking){ clearInterval(window.__landSuspT); return; }
+      if(currentVoiceSource && _voiceAC && _voiceAC.state !== "running"){
+        clearInterval(window.__landSuspT);
+        const b = $("sgBtn"); if(b) b.classList.add("sg-blocked");
+        _landBlocked = true;
+        if(_landGestured && !_landRetried){ _landRetried = true; _landBlocked = false; playLanding(); }
+      }
+    }, 250);
     play(landSrc, ()=>{ _landingSpeaking = false;
       /* A BLOCKED AUTOPLAY COMES BACK AT ONCE, and that return is not the greeting ending - it
          is the browser refusing to make sound before anyone has touched the page. Releasing the
@@ -13042,7 +13171,12 @@ function boot(){
          and was cut by the first slide's own voice a moment later. Under half a second is no
          clip, so treat it as a refusal: stay waiting and let the unlock listener replay it. The
          9s watchdog is what stops that decision ever becoming a trap. */
-      if(Date.now() - _t0 < 400) return;
+      if(Date.now() - _t0 < 400){ const b = $("sgBtn"); if(b) b.classList.add("sg-blocked");   /* [H11-178] something to tap */
+        _landBlocked = true;
+        /* refused AFTER a touch already came (the touch beat the refusal back): that touch is spent,
+           so try once more now rather than wait for another one */
+        if(_landGestured && !_landRetried){ _landRetried = true; _landBlocked = false; setTimeout(playLanding, 0); }
+        return; }
       /* [H11-120] THE CALL, AND ONLY THE CALL. The names were being spoken here for a moment -
          and they were the wrong thing, because the greeting ALREADY ends on "जैसे- मोर- मोरनी".
          Saying them again straight afterwards is the same two words twice in four seconds. What
@@ -13099,11 +13233,17 @@ function boot(){
      of them are listened for, and whichever arrives first both unlocks the audio and starts the
      greeting. A stylus, a keyboard, a tap on a tablet and a click each work. They are torn down
      together, so the greeting can never start twice. */
-  ["pointerdown","touchstart","mousedown","keydown"].forEach(function(evt){
-    window.addEventListener(evt, _landingUnlock, { once:true, passive:true }); });
+  /* [H11-178] THE EVENTS THAT CARRY PERMISSION, not the first ones to arrive. A browser grants sound on
+     mousedown, keydown, pointerup/touchend - NOT on touchstart or a finger's pointerdown. On a
+     tablet those two came first, so the greeting was retried while sound was still refused and the
+     only chance was spent. Window CAPTURE, because the landing card's own capture listener stops
+     presses inside the card from travelling any further. */
+  const _LAND_EVTS = ["pointerup","touchend","mousedown","keydown","click"];
+  _LAND_EVTS.forEach(function(evt){
+    window.addEventListener(evt, _landingUnlock, { once:true, passive:true, capture:true }); });
   function _landingUnlock(){
-    ["pointerdown","touchstart","mousedown","keydown"].forEach(function(evt){
-      window.removeEventListener(evt, _landingUnlock); });
+    _LAND_EVTS.forEach(function(evt){
+      window.removeEventListener(evt, _landingUnlock, true); });
     /* [30m] THE LANDING GREETING MUST NOT RESTART ON THE FIRST TAP (Yasir: "the landing VO does not
        seem fine"). This listener exists ONLY as an autoplay-policy fallback: if the browser refused
        the greeting on load, the first real user gesture is our chance to start it. But it fired
@@ -13116,7 +13256,13 @@ function boot(){
     const _a = (typeof currentAudio !== "undefined") ? currentAudio : null;
     const _audible = _a && !_a.paused && !_a.ended && _a.currentTime > 0;
     if(_voOnTap) return;   /* [H11-148] only the play button starts her now */
-    if(!_audible) playLanding();
+    /* [H11-178] REPLAY ONLY A GREETING THE BROWSER REFUSED. _audible above reads currentAudio, which
+       only the HTML-element fallback sets - on the normal Web Audio path it is always null, so this
+       read every greeting as silent: a child who first touched the screen on the Play button (after
+       hearing the whole greeting) got it a second time instead of the lesson. Now it replays only
+       when the greeting actually came back refused (_landBlocked). */
+    _landGestured = true; void _audible;
+    if(_landBlocked){ _landBlocked = false; playLanding(); }
     /* a gesture has now happened, so silence from here is a real fault rather than the browser
        being careful - this is the point at which leaving the button waiting would strand a
        child, and the only point at which releasing it can skip nothing. */

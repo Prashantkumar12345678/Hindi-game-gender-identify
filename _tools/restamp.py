@@ -27,3 +27,7 @@ out = t.encode("utf-8")
 assert out.count(b"\r\n") == crlf and out.count(b"\n") - out.count(b"\r\n") == lf, "line endings बदल गए"
 open(SRC, "wb").write(out)
 print("build %s -> %s   (+%d CSS asset paths)" % (old, new, n))
+
+# the loading bar weighs each file by its real size - refresh that table whenever assets change
+import subprocess
+subprocess.run([sys.executable, os.path.join(os.path.dirname(os.path.abspath(__file__)), "asset_manifest.py")], check=True)

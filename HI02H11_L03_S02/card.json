@@ -550,7 +550,7 @@
   "type": "WHEEL_PAIRS",
   "prompt_hi": "सही जोड़ी को चुनिए और झूले पर बैठाइए।",
   "audio": {
-   "prompt": "vo_wheel_intro", "hint1": "vo_h1_pair", "correct": "vo_wheel_shabash"
+   "hint1": "vo_h1_pair", "correct": "vo_wheel_shabash"
   },
   "data": { "layout": "side-left", "earned_hand": true,
    "option_audio": {"मोर": "vo_name_mor", "मुर्गी": "vo_name_murgi", "घोड़ा": "vo_name_ghoda", "बकरी": "vo_name_bakri", "घोड़ी": "vo_name_ghodi", "शेरनी": "vo_name_sherni", "गाय": "vo_name_gaay", "मुर्गा": "vo_name_murga", "बिल्ली": "vo_name_billi", "भेड़": "vo_name_bhed", "हथिनी": "vo_name_hathini", "चूहा": "vo_name_chuha", "खरगोश": "vo_name_khargosh", "घोड़नी": "vo_name_ghodni", "तोता": "vo_name_tota"}, "seats": [
@@ -627,29 +627,6 @@
     },
     {
      "seated": {
-      "word_hi": "चुहिया",
-      "img": "pic_chuhiya",
-      "emoji": "🐭",
-      "sit": 0.819
-     },
-     "pair": {
-      "word_hi": "चूहा",
-      "img": "pic_chuha",
-      "emoji": "🐭",
-      "sit": 0.833
-     },
-     "options": [
-      "चूहा",
-      "खरगोश",
-      "गाय"
-     ],
-     "answer": "चूहा",
-     "audio": {
-      "prompt": "vo_wq_chuhiya"
-     }
-    },
-    {
-     "seated": {
       "word_hi": "घोड़ा",
       "img": "pic_ghoda",
       "emoji": "🐎",
@@ -692,6 +669,29 @@
      "answer": "मुर्गा",
      "audio": {
       "prompt": "vo_wq_murgi"
+     }
+    },
+    {
+     "seated": {
+      "word_hi": "चुहिया",
+      "img": "pic_chuhiya",
+      "emoji": "🐭",
+      "sit": 0.819
+     },
+     "pair": {
+      "word_hi": "चूहा",
+      "img": "pic_chuha",
+      "emoji": "🐭",
+      "sit": 0.833
+     },
+     "options": [
+      "चूहा",
+      "खरगोश",
+      "गाय"
+     ],
+     "answer": "चूहा",
+     "audio": {
+      "prompt": "vo_wq_chuhiya"
      }
     }
    ]
@@ -776,7 +776,6 @@
    "vo_q_mor": "assets/VO/vo_q_mor.wav",
    "vo_q_sentence": "assets/VO/vo_q_sentence.wav",
    "vo_q_sherni": "assets/VO/vo_q_sherni.wav",
-   "vo_well_done": "assets/VO/vo_well_done.wav",
    "sfx_correct": "assets/SFX/sfx_correct.wav",
    "sfx_wrong": "assets/SFX/sfx_wrong.wav",
    "sfx_burst": "assets/SFX/sfx_burst.wav",
@@ -868,7 +867,6 @@
    "vo_q_mor": "मोर मेले में किसके साथ आया था?",
    "vo_q_sentence": "सही शब्द चुनकर वाक्य पूरा कीजिए। बकरा घास खा… रहा है या रही है?",
    "vo_q_sherni": "शेरनी मेले में किसके साथ आई थी?",
-   "vo_well_done": "शाबाश! आपने सभी सही जोड़ियाँ पहचान लीं।",
    "vo_h1_sentence_bandar": "सोचिए, वाक्य में चढ़ता है आएगा या चढ़ती है आएगा?",
    "vo_h1_sentence_sherni": "सोचिए, वाक्य में जाता है आएगा या जाती है आएगा?",
    "vo_h2_sentence": "हम वाक्य में बोलते हैं, बकरा घास खा रहा है।",

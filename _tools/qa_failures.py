@@ -3,8 +3,8 @@
 
     python _tools/qa_failures.py
 
-  A  NETWORK  two assets aborted, one 404, one that never answers: the bar must still reach 100%
-              (the stalled one is given up after the 10s stall timeout), Play must appear.
+  A  NETWORK  two assets aborted, one 404, one that never answers: Play must appear, and the preload
+              must still complete (the stalled one is given up after the 10s stall timeout).
   B  SILENT   every voice line accepted but never heard and never "ended" (Web Audio start() and
               <audio>.play() both swallowed): the teaching slide's Next button and the question's
               voice lock must still release - the watchdogs, not the media events, do it.
@@ -68,8 +68,12 @@ with sync_playwright() as p:
     page.route("**/pic_bail.webp*", lambda r: None)            # never answered: a stalled transfer
     page.goto(BASE, wait_until="commit")
     took, pct = wait_play(page, 40)
-    check(took is not None and pct == 100, "bar reached %s%% and Play appeared %s" % (pct, "after %.1fs" % took if took else "NEVER"))
+    # [H11-202] Play no longer waits for the (hidden) bar - it follows the greeting; the preload
+    # finishes behind it, the stalled file after its 10s stall timeout
+    check(took is not None, "Play appeared %s with failing files in the preload" % ("after %.1fs" % took if took else "NEVER"))
+    page.wait_for_function("() => AssetLoader.isReady", timeout=30000)
     st = page.evaluate("() => AssetLoader.stats()")
+    check(st["shown"] == 100, "the preload still completed (100%%) despite the failures")
     check(st["finished"] == st["files"] and st["local"] == st["files"] - 4, "all %d files settled, %d local, 4 left on their ordinary URL" % (st["finished"], st["local"]))
     check(page.evaluate("() => AssetLoader.resolve('assets/Images/pic_mor.webp') === null"), "an aborted file keeps its ordinary URL")
     check(not errs, "no JS errors %s" % errs[:3]); ctx.close()

@@ -96,7 +96,7 @@ with sync_playwright() as p:
             if s["pct"] != last:
                 samples.append((round(time.time() - t0, 1), s["pct"], s["barShown"], s["btn"])); last = s["pct"]
             if s["btn"] and s["barShown"]: problems.append("landing: Play button and loading bar visible together")
-            if s["btn"] and s["pct"] < 100 and s["pct"] >= 0: problems.append("landing: Play visible at %s%%" % s["pct"])
+            # [H11-202] Play no longer waits for 100% - the bar is gone, the preload runs behind
             if s["btn"]: seen_btn = round(time.time() - t0, 1); break
             time.sleep(0.1)
         pcts = [x[1] for x in samples]

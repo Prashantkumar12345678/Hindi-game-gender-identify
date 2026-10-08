@@ -440,7 +440,7 @@ html.no-anim .opt-cell.opt-walk{animation:none !important;}
 .start-gate{position:absolute;inset:0;z-index:80;display:flex;align-items:center;justify-content:center;background:transparent;cursor:default;}   /* [20a landing] transparent — the fixed .start-bg is the ground; [21c flag#1] cursor:default — hand-pointer belongs on .sg-btn/.sg-vo only, gate is not tap-anywhere */
 .start-gate.hidden{display:none;}
 /* inner white tile is the provided image (border + faint rays baked in) */
-.sg-card{position:relative;width:1114px;height:456px;background:url("assets/UI/start_card.webp?v=20261007133731") center/100% 100% no-repeat;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;}
+.sg-card{position:relative;width:1114px;height:456px;background:url("assets/UI/start_card.webp?v=20261008150039") center/100% 100% no-repeat;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;}
 /* full-body standing mascot (feet included): size by HEIGHT so the whole body incl. feet shows;
    the art frame is square with side padding, so it's constrained to the card height, not width. */
 .sg-mascot{position:absolute;left:-24px;bottom:-12px;width:208px;height:auto;z-index:3;object-fit:contain;filter:drop-shadow(0 10px 18px rgba(0,47,118,.18));animation:none;}   /* [25d] CORRECTED. My 25c change to left:8/bottom:6 was WRONG: I copied strilling's BASE rule (its line 611) instead of its WINNING late override (line 1104 = left:-24/bottom:-12/width:208 !important) — which is what the engine already had. Moving her right by 32px is also what threw .sg-vo out of line, since left:96px is tuned to this position. "Hovering" = the sgFloat bob: strilling kills it at its line 5600 `animation:none !important`, so it must be OFF here too (I previously said strilling bobs as well — that was reading line 611 and missing 5600). */
@@ -610,7 +610,7 @@ body.loaded .sg-acell{animation-play-state:running;}
    .wg-, .nh-, .ol-), NOT on a guessed prefix: keying on `sg-` alone is what dropped the
    entire drifting sky the first time round. */
 /* ===== FLN ANIMATION KIT: sky-drift BEGIN ===== */
-.start-bg{background-image:url("assets/UI/startnew_bg_plain.webp?v=20261007133731");}   /* mandatory */
+.start-bg{background-image:url("assets/UI/startnew_bg_plain.webp?v=20261008150039");}   /* mandatory */
 
 .sg-glow,.sg-sky{position:fixed;inset:0;pointer-events:none;display:none;z-index:1;}
 body.is-start .sg-glow,body.is-start .sg-sky,
@@ -652,9 +652,9 @@ body.is-end .sg-sky{
   margin:calc(var(--s) / -2) 0 0 calc(var(--s) / -2);
   background:center/contain no-repeat;opacity:0;
   animation:sgFly var(--t) linear infinite;animation-delay:var(--d);}
-.sg-sky .s1{background-image:url("assets/UI/bgdeco_star.svg?v=20261007133731");}
-.sg-sky .s2{background-image:url("assets/UI/bgdeco_star_o.svg?v=20261007133731");}
-.sg-sky .s3{background-image:url("assets/UI/bgdeco_spark.svg?v=20261007133731");}
+.sg-sky .s1{background-image:url("assets/UI/bgdeco_star.svg?v=20261008150039");}
+.sg-sky .s2{background-image:url("assets/UI/bgdeco_star_o.svg?v=20261008150039");}
+.sg-sky .s3{background-image:url("assets/UI/bgdeco_spark.svg?v=20261008150039");}
 .sg-sky .s4{border-radius:50%;border:.22vmax solid rgba(255,255,255,.92);}
 .sg-sky .s5{border-radius:50%;background:rgba(255,255,255,.92);}
 
@@ -998,7 +998,7 @@ html.no-anim .wg-out{opacity:.72;filter:saturate(.3);}
    startnew_bg_plain.webp is the same artwork with the decorations stripped.
    `body .start-bg` because the engine declares .start-bg AFTER this block; matching its
    specificity and relying on order is precisely what R11 forbids. */
-body .start-bg{background-image:url("assets/UI/startnew_bg_plain.webp?v=20261007133731");}
+body .start-bg{background-image:url("assets/UI/startnew_bg_plain.webp?v=20261008150039");}
 
 /* ---- the white centre box, more opaque ------------------------------------------
    start_card.webp is white at alpha 166/255 (65%), which is why the background rays read
@@ -1007,9 +1007,9 @@ body .start-bg{background-image:url("assets/UI/startnew_bg_plain.webp?v=20261007
    art's rounded corners are alpha - a background-color would square them off.
    Drop one layer for ~88% if this is too solid. */
 body .sg-card{background:
-   url("assets/UI/start_card.webp?v=20261007133731") center/100% 100% no-repeat,
-   url("assets/UI/start_card.webp?v=20261007133731") center/100% 100% no-repeat,
-   url("assets/UI/start_card.webp?v=20261007133731") center/100% 100% no-repeat;}
+   url("assets/UI/start_card.webp?v=20261008150039") center/100% 100% no-repeat,
+   url("assets/UI/start_card.webp?v=20261008150039") center/100% 100% no-repeat,
+   url("assets/UI/start_card.webp?v=20261008150039") center/100% 100% no-repeat;}
 
    which is why the first attempt at this changed almost nothing. Here it is constant.
    The kit"[bad string]
@@ -1050,7 +1050,7 @@ body .opt-cell.wg-wrong{animation:wgNo var(--wgT) ease-in-out both;}
 /* ===== END / CELEBRATION ===== */
 .end-screen{position:absolute;inset:0;z-index:90;display:none;flex-direction:column;align-items:center;justify-content:center;gap:22px;background:transparent;overflow:hidden;}
 /* r4: immersive celebration (adopted from Shruti's build — end_screen.webp sunburst + centred mascot + subtitle) */
-.end-bg{position:fixed;inset:0;background:#FDE9A8 url("assets/UI/end_screen.webp?v=20261007133731") center/cover no-repeat;display:none;pointer-events:none;z-index:0;}
+.end-bg{position:fixed;inset:0;background:#FDE9A8 url("assets/UI/end_screen.webp?v=20261008150039") center/cover no-repeat;display:none;pointer-events:none;z-index:0;}
 body.is-end .end-bg{display:block;}
 body.is-end{background:#FDE9A8 !important;}
 body.is-end .stage{background:transparent !important;}
@@ -1352,7 +1352,7 @@ body.gating .stage.gating .start-gate{filter:none;}
 
 /* [20a landing] fixed full-viewport ground so #47BCFD + art reach the true edges (kills the #7FC8F4 letterbox band);
    start-gate goes transparent (above) so this single image is seamless; in-lesson chrome hidden while landing shows. */
-.start-bg{position:fixed;inset:0;background:#47BCFD url("assets/UI/startnew_bg.webp?v=20261007133731") center/cover no-repeat;display:none;pointer-events:none;z-index:0;}
+.start-bg{position:fixed;inset:0;background:#47BCFD url("assets/UI/startnew_bg.webp?v=20261008150039") center/cover no-repeat;display:none;pointer-events:none;z-index:0;}
 body.is-start .start-bg{display:block;}
 body.is-start .stage-inner{visibility:hidden !important;}
 body.is-start .stage{background:transparent !important;}
@@ -1979,8 +1979,8 @@ body.is-start .phase-gate{
    it sat before - otherwise every one of these buttons would quietly rise 14px up the screen. */
 .nav-btn{width:198px !important;height:90px !important;min-width:0 !important;bottom:18px !important;
   padding:0 !important;border:0 !important;box-shadow:none !important;
-  background:transparent url("assets/swiftpal_buttons/btn-next-disabled.svg?v=20261007133731") center/198px 90px no-repeat !important;}
-.nav-btn.active{background-image:url("assets/swiftpal_buttons/btn-next.svg?v=20261007133731") !important;
+  background:transparent url("assets/swiftpal_buttons/btn-next-disabled.svg?v=20261008150039") center/198px 90px no-repeat !important;}
+.nav-btn.active{background-image:url("assets/swiftpal_buttons/btn-next.svg?v=20261008150039") !important;
   box-shadow:none !important;}
 .nav-btn.active:active{box-shadow:none !important;}
 .nav-btn .nav-arrow{display:none !important;}
@@ -2046,9 +2046,11 @@ body.is-start .phase-gate{
    paints it ONCE, so the blue .start-bg tints through and the card reads as a blue-white
    gradient with a white ring. This build stacked the SAME file 3x, which made it opaque
    flat white. Back to a single paint = src. (Sky sparkles deliberately NOT ported.) */
-body .sg-card{background:url("assets/UI/start_card.webp?v=20261007133731") center/100% 100% no-repeat !important;}
+body .sg-card{background:url("assets/UI/start_card.webp?v=20261008150039") center/100% 100% no-repeat !important;}
 .sg-mascot{left:-24px !important;bottom:-12px !important;width:208px !important;}
-.sg-vo{left:89px !important;bottom:-6px !important;width:58px !important;height:58px !important;}  /* <- src .sg-audio */
+.sg-vo{left:89px !important;bottom:-6px !important;width:58px !important;height:58px !important;}
+/* [H11-215] title-screen speaker a little bigger (asked): 58 -> 70px, same centre - 6px left and down */
+.sg-vo{left:83px !important;bottom:-12px !important;width:70px !important;height:70px !important;}  /* <- src .sg-audio */
 .sg-content{width:100% !important;height:100% !important;max-width:none !important;
             gap:0 !important;padding:56px 0 118px !important;margin-bottom:0 !important;}
 .sg-content.has-hero{margin-bottom:0 !important;}
@@ -2095,7 +2097,7 @@ body .sg-card{background:url("assets/UI/start_card.webp?v=20261007133731") cente
 .sg-btn{bottom:30px !important;width:140px !important;height:140px !important;min-width:0 !important;
         padding:0 !important;border:0 !important;border-radius:50% !important;
         box-shadow:none !important;
-        background:transparent url("assets/swiftpal_buttons/btn-play-round.svg?v=20261007133731") center/140px 140px no-repeat !important;
+        background:transparent url("assets/swiftpal_buttons/btn-play-round.svg?v=20261008150039") center/140px 140px no-repeat !important;
         animation:sgBtnPulse 1.4s ease-in-out infinite !important;}
 .sg-btn:active{animation:none !important;}
 /* [H11-149] once pressed it stops breathing - the invitation has been taken */
@@ -2157,7 +2159,7 @@ body .sg-card{background:url("assets/UI/start_card.webp?v=20261007133731") cente
    stuck at .5 after the line ended (headless Chrome); a straight swap cannot. */
 body.vo-lock .audio-chip,body.vo-lock .tut-audio{pointer-events:none !important;opacity:.5 !important;
                  filter:grayscale(1) brightness(1.2) !important;}
-.sg-btn.sg-waiting{background-image:url("assets/swiftpal_buttons/btn-play-round-waiting.svg?v=20261007133731") !important;
+.sg-btn.sg-waiting{background-image:url("assets/swiftpal_buttons/btn-play-round-waiting.svg?v=20261008150039") !important;
                    cursor:default !important;animation:none !important;
                    pointer-events:none !important;}   /* see setStartBtnReady - NOT disabled */
 /* [H11-182] THE BUTTON IS NOT THERE WHILE SHE SPEAKS - checklist, asked for again: "Play button
@@ -2612,7 +2614,7 @@ html.no-anim .fw-opt.fw-no{animation:none !important;}
    the control keeps an accessible name instead of announcing as a bare "button". */
 .end-btn{width:163px !important;height:117px !important;min-width:0 !important;padding:0 !important;
          border:0 !important;border-radius:0 !important;box-shadow:none !important;font-size:0 !important;
-         background:transparent url("assets/swiftpal_buttons/btn-finish.svg?v=20261007133731") center/163px 117px no-repeat !important;}
+         background:transparent url("assets/swiftpal_buttons/btn-finish.svg?v=20261008150039") center/163px 117px no-repeat !important;}
 .end-btn:active{box-shadow:none !important;}
 
 /* ---- 6. FEEDBACK OVERLAY ------------------------------------------------------------------- */
@@ -3067,7 +3069,95 @@ html.no-anim .nav-btn.nav-call{animation:none !important;}
 <!-- [H11-155] the landing and the first transition, fetched before the engine even parses. The two
      links this replaced named another game's pictures (sit_namaste_teacher, sit_dhanyawad_pencil)
      and 404ed on every load since the first commit. -->
-<link rel="preload" as="image" fetchpriority="high" href="assets/UI/startnew_bg_plain.webp?v=20261007133731"><link rel="preload" as="image" fetchpriority="high" href="assets/UI/start_card.webp?v=20261007133731"><link rel="preload" as="image" fetchpriority="high" href="assets/Images/mor_title.webp?v=20261007133731"><link rel="preload" as="image" fetchpriority="high" href="assets/Images/title.webp?v=20261007133731"><link rel="preload" as="image" fetchpriority="high" href="assets/Images/morni_title.webp?v=20261007133731"><link rel="preload" as="image" fetchpriority="high" href="assets/swiftpal_buttons/btn-play-round.svg?v=20261007133731"><link rel="preload" as="image" fetchpriority="high" href="assets/UI/new_landing_swiftee_anim.webp?v=20261007133731"><link rel="preload" as="image" fetchpriority="high" href="assets/peeking_talk_up.webp?v=20261007133731"></head>
+<link rel="preload" as="image" fetchpriority="high" href="assets/UI/startnew_bg_plain.webp?v=20261008150039"><link rel="preload" as="image" fetchpriority="high" href="assets/UI/start_card.webp?v=20261008150039"><link rel="preload" as="image" fetchpriority="high" href="assets/Images/mor_title.webp?v=20261008150039"><link rel="preload" as="image" fetchpriority="high" href="assets/Images/title.webp?v=20261008150039"><link rel="preload" as="image" fetchpriority="high" href="assets/Images/morni_title.webp?v=20261008150039"><link rel="preload" as="image" fetchpriority="high" href="assets/swiftpal_buttons/btn-play-round.svg?v=20261008150039"><link rel="preload" as="image" fetchpriority="high" href="assets/UI/new_landing_swiftee_anim.webp?v=20261008150039"><link rel="preload" as="image" fetchpriority="high" href="assets/peeking_talk_up.webp?v=20261008150039"><style id="fln-confetti-kit">
+/* FLN confetti - exact copy of the game build (MTG2A04_L02_S01 style.css). */
+
+/* ===== FLN ANIMATION KIT: confetti BEGIN ===== */
+.fx-confetti{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:60;}
+.fx-confetti .p{position:absolute;top:0;left:var(--x);
+  animation:cfFall var(--fall) linear var(--delay) both;}
+/* Sway shares the rock's PERIOD and lags it by a quarter cycle. A fluttering plate
+   slides in the direction it is tilted - the swing and the rock are one motion, not
+   two independent ones. The negative delay is what creates the quarter-cycle lag. */
+.fx-confetti .w{display:block;perspective:600px;
+  animation:cfGlide var(--rockT) linear var(--delay) infinite both;}
+.fx-confetti .f{display:block;position:relative;transform-style:preserve-3d;
+  width:calc(var(--w) * var(--z));height:calc(var(--h) * var(--z));
+  opacity:var(--dim,1);
+  animation:cfRock var(--rockT) linear var(--delay) infinite both;}
+/* the minority that actually goes end-over-end */
+.fx-confetti .f.tum{animation:cfTumble var(--rockT) linear var(--delay) infinite both;}
+/* two real faces: front bright, back the same hue darkened */
+.fx-confetti .f::before,.fx-confetti .f::after{content:"";position:absolute;inset:0;
+  border-radius:inherit;backface-visibility:hidden;-webkit-backface-visibility:hidden;}
+.fx-confetti .f::before{background:var(--c);}
+.fx-confetti .f::after{background:var(--c2);transform:rotateY(180deg);}
+/* Shape mix. Sizes are deliberately far apart - at 7-11px a rectangle and a square are
+   indistinguishable while tumbling, which makes the whole field read as "all squares". */
+.fx-confetti .sq{--w:8px;  --h:8px;  border-radius:1px;}   /* square    1:1   */
+.fx-confetti .rc{--w:6px;  --h:13px; border-radius:1px;}   /* rectangle 1:2.2 */
+.fx-confetti .ln{--w:2.5px;--h:16px; border-radius:2px;}   /* line      1:6.4 */
+.fx-confetti .st{--w:11px; --h:11px;}                      /* star - needs a few
+                                 more px than the rest for its points to read */
+/* clip-path goes on the FACES, not on .f - clip-path on .f would force
+   transform-style to flat and kill the two-sided tumble */
+.fx-confetti .st::before,.fx-confetti .st::after{
+  clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,
+                    50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);}
+
+/* LINEAR - terminal velocity. `both` is load-bearing: without it delayed pieces
+   sit in a visible row on the top edge until their delay elapses.
+   --drift gives each piece a gentle lean, as if in a faint air current. */
+@keyframes cfFall{
+  0%{transform:translate(0,-40px);opacity:0;}
+  5%{opacity:1;}
+  86%{opacity:1;}
+  100%{transform:translate(var(--drift,0px),var(--dist,820px));opacity:0;}
+}
+/* GLIDE + BOB. Real flutter is NOT sinusoidal: the plate glides at near-constant
+   attitude, then turns sharply. Long glide, quick reversal, linear timing - the
+   keyframe percentages do the shaping.
+   The Y term is vertical speed modulation: the plate falls SLOWER broadside during
+   the glide (max drag) and quicker through the flip (edge-on, min drag). That
+   hesitate-then-drop is what the eye reads as paper. */
+@keyframes cfGlide{
+  0%  {transform:translate(calc(var(--sway) * -1), 0);}
+  45% {transform:translate(var(--sway), calc(var(--bob) * -1));}
+  50% {transform:translate(var(--sway), 0);}
+  95% {transform:translate(calc(var(--sway) * -1), calc(var(--bob) * -1));}
+  100%{transform:translate(calc(var(--sway) * -1), 0);}
+}
+/* FLUTTER - the default, ~78% of pieces. Rocks about ONE axis, capped well short of
+   edge-on, so the face stays toward the viewer. ease-in-out because a turning point
+   is a turning point: it decelerates at max tilt, like any pendulum. */
+/* FLIP. Holds attitude through the glide, then snaps over in 5% of the cycle.
+   Phase-locked to cfGlide by construction - both start at the beginning of a glide,
+   so no offset delay: the flip lands exactly on the direction reversal. */
+@keyframes cfRock{
+  0%  {transform:rotateZ(var(--tilt)) rotateY(var(--yaw)) rotateX(var(--amp));}
+  45% {transform:rotateZ(var(--tilt)) rotateY(var(--yaw)) rotateX(calc(var(--amp) * 0.86));}
+  50% {transform:rotateZ(var(--tilt)) rotateY(var(--yaw)) rotateX(calc(var(--amp) * -1));}
+  95% {transform:rotateZ(var(--tilt)) rotateY(var(--yaw)) rotateX(calc(var(--amp) * -0.86));}
+  100%{transform:rotateZ(var(--tilt)) rotateY(var(--yaw)) rotateX(var(--amp));}
+}
+/* TUMBLE - the other ~22%. One half revolution, face to face. The keyframes dwell
+   near the faces and sweep through edge-on in 16% of the cycle, because a real plate
+   hangs broadside where drag is highest and flips fast through the low-drag edge. */
+@keyframes cfTumble{
+  0%  {transform:rotateZ(var(--tilt)) rotateY(var(--yaw)) rotateX(0deg);}
+  42% {transform:rotateZ(var(--tilt)) rotateY(var(--yaw)) rotateX(72deg);}
+  58% {transform:rotateZ(var(--tilt)) rotateY(var(--yaw)) rotateX(108deg);}
+  100%{transform:rotateZ(var(--tilt)) rotateY(var(--yaw)) rotateX(180deg);}
+}
+/* ===== FLN ANIMATION KIT: confetti END ===== */
+
+/* ---- game level (MTG2A04_L02_S01): the layer covers the whole window; every piece is sized with the stage
+   (--scale = min(window width / 1333, window height / 750) - set by confetti.js) at 1.5x the kit size ---- */
+.fx-layer{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:5000;--fx-size:1.5;}
+.fx-layer .fx-confetti .f{width:calc(var(--w) * var(--z) * var(--scale, 1) * var(--fx-size, 1));
+  height:calc(var(--h) * var(--z) * var(--scale, 1) * var(--fx-size, 1));}
+</style>
+</head>
 <body class="is-start">
 <div class="start-bg" aria-hidden="true"></div>
 <div class="sg-glow" aria-hidden="true"></div>
@@ -3076,7 +3166,7 @@ html.no-anim .nav-btn.nav-call{animation:none !important;}
 
 <!-- BOOT LOADER — [template] r4/P2: white boot screen, no-tap auto-dismiss (see boot()) -->
 <div class="boot-loader" id="bootLoader">
-  <img src="assets/UI/loader.webp?v=20261007133731" alt="">
+  <img src="assets/UI/loader.webp?v=20261008150039" alt="">
 </div>
 
 
@@ -3105,12 +3195,12 @@ html.no-anim .nav-btn.nav-call{animation:none !important;}
     <div class="slide-stage">
       <div class="slide-host" id="slideHost"></div>
       <div class="nudge-hand" id="nudgeHand">
-        <img src="assets/UI/nudge_hand_new.svg?v=20261007133731" alt="">
+        <img src="assets/UI/nudge_hand_new.svg?v=20261008150039" alt="">
       </div>
     </div>
 
     <!-- Swiftie buddy: persistent, reacting character (replaces the static header photo + feedback popup) -->
-    <div class="mascot-wrap" id="swBuddy"><div class="mascot-circle"><img class="mascot-img" id="swBuddyImg" src="assets/UI/sw_head_talking.webp?v=20261007133731" alt=""></div></div>
+    <div class="mascot-wrap" id="swBuddy"><div class="mascot-circle"><img class="mascot-img" id="swBuddyImg" src="assets/UI/sw_head_talking.webp?v=20261008150039" alt=""></div></div>
 
     <!-- Nav button — kit-style pill, floats bottom-right -->
     <!-- [H11-22] the word is gone and the arrow carries the meaning, so the button needs an
@@ -3126,7 +3216,7 @@ html.no-anim .nav-btn.nav-call{animation:none !important;}
   <!-- FEEDBACK OVERLAY — kit-style card + clean Swiftee large -->
   <div class="hint-overlay" id="hintOverlay">
     <div class="hint-box" id="hintBox">
-      <img class="hint-mascot" id="hintMascot" src="assets/UI/sw_anim_rest.webp?v=20261007133731" alt=""
+      <img class="hint-mascot" id="hintMascot" src="assets/UI/sw_anim_rest.webp?v=20261008150039" alt=""
            onerror="this.style.display='none'">
       <div class="hint-body">
         <div class="hint-text" id="hintText"></div>
@@ -3137,7 +3227,7 @@ html.no-anim .nav-btn.nav-call{animation:none !important;}
   <!-- TAP-TO-START — uses provided title-screen art -->
   <div class="start-gate" id="startGate">
     <div class="sg-card">
-      <img class="sg-mascot" src="assets/UI/new_landing_swiftee_anim.webp?v=20261007133731" alt="Swiftee"
+      <img class="sg-mascot" src="assets/UI/new_landing_swiftee_anim.webp?v=20261008150039" alt="Swiftee"
            onerror="this.style.display='none'">
       <div class="sg-content">
         <div class="sg-title" id="sgTitle">अच्छे व्यवहार के शब्द</div>
@@ -3176,7 +3266,7 @@ html.no-anim .nav-btn.nav-call{animation:none !important;}
          Shipped as WebP because GIF alpha is one all-or-nothing index and this art has soft
          edges, which cut hard would fringe against the sunburst behind it.
          See _tools/dekey_last_page.py. -->
-    <img class="end-mascot" src="assets/Images/last_swifty_still.webp?v=20261007133731" alt="Swiftee"
+    <img class="end-mascot" src="assets/Images/last_swifty_still.webp?v=20261008150039" alt="Swiftee"
          onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'end-mascot',textContent:'🎉'}))">
     <button class="end-btn" id="endBtn" aria-label="आगे बढ़ें"></button>   <!-- [H11-66] the artwork carries the arrow -->
   </div>
@@ -4109,7 +4199,7 @@ function _resumeVoiceAudio(){
    AUDIO_BUILD changes whenever the game is rebuilt, so every clip URL changes with it and the
    browser has to fetch. It is added in the two places every clip passes through, rather than at
    the ~20 sites that spell out a path, so nothing can be missed. */
-const AUDIO_BUILD = "20261007133731";
+const AUDIO_BUILD = "20261008150039";
 /* [H11-187] ASSET PRELOADER - every file the game uses is fetched ONCE, behind the loading bar,
    before the Play button can appear.
    - ONE DOWNLOAD PER FILE. The bar, the voice decoder, the picture warm-up and the gate / landing /
@@ -4629,30 +4719,16 @@ function setSwMood(m){ swMood = m;
    animation:confettiFall}` in style.css remains DEAD CSS from the pre-r4 implementation: nothing
    creates those <i> elements. Left alone deliberately rather than deleted in the same bump. */
 function confettiCannon(){
-  /* [KIT 7] replaces the engine's own burst for EVERY caller, so no call site changes.
-     COUNT IS 80 - the value fln-animation-toolkit ships (index.html:1711,
-     `confettiNew(document.getElementById("confStage"), 80)`) and the value recipe 7's own
-     defaults declare. It had been dropped to 26, which is why the field read as sparse.
-     Everything else in this effect - the 18 .fx-confetti rules, cfFall/cfGlide/cfRock/cfTumble
-     and confettiNew() itself - was already byte-identical to the toolkit; verified rule by rule,
-     including `drift = flutter ? rnd(-12,12) : rnd(-45,45)`, which the pasted recipe text renders
-     as +/-drift/2.5. The toolkit is the source of truth, so that stays as it is. */
-  try{ if(window.FLNKit){ var h=document.querySelector('.slide-stage')||document.body;
-       FLNKit.confetti(h, 80); return; } }catch(e){}
-  const VW = window.innerWidth || 1200, VH = window.innerHeight || 800;
-  const host = document.body;
-  const cols = ["#F9695E","#FDC23C","#4EBE6A","#4EA3F0","#9B7BE8","#FF8FB1"];
-  for(let i=0;i<48;i++){ const c = document.createElement("i"); c.className = "conf-shot";
-    c.style.background = cols[i % cols.length];
-    c.style.position = "fixed";
-    c.style.left = ((i + 0.5) * (VW / 48) + (Math.random()*16 - 8)).toFixed(0) + "px";
-    c.style.top = "-14px";                                        /* just above the page's top edge */
-    c.style.bottom = "auto";
-    c.style.zIndex = "100001";                                    /* above the end-screen overlay */
-    c.style.setProperty("--tx", ((Math.random()*140 - 70)).toFixed(0) + "px");   /* gentle drift */
-    c.style.setProperty("--ty", (VH + 40).toFixed(0) + "px");      /* fall the WHOLE page height */
-    c.style.animationDelay = (Math.random()*420).toFixed(0) + "ms";
-    host.appendChild(c); setTimeout(()=> c.remove(), 2600); } }
+  /* [H11-214] THE STANDARD FLN CONFETTI (the MTG2A04_L02_S01 build, inlined at the end of this file as
+     "FLN confetti kit"): one burst of 100 pieces over the whole window, sized with the stage at 1.5x.
+     Replaces FLNKit.confetti on .slide-stage (80 pieces, stage only). No sound here - the callers
+     already play their own. */
+  if(!document.getElementById("fxLayer")){
+    const l = document.createElement("div"); l.className = "fx-layer"; l.id = "fxLayer"; l.setAttribute("aria-hidden", "true");
+    document.body.appendChild(l);
+  }
+  try{ FLNMotion.confetti.burst({ host: "#fxLayer", phases: [], count: 100, fall: [1.6, 2.6] }); }catch(e){}
+}
 /* slide audio path: per slide, we look at slide.audio.prompt / .phoneme / etc.
    In this v0.1 the embedded card holds short ids; the compiler would replace
    them with base64 data URIs. We resolve to assets/VO/{id}.ogg with fallback. */
@@ -7783,11 +7859,11 @@ let _gateToken = 0;
    A NEW URL is a new image with its own clock. Over http it is a blob: URL minted from ONE fetch,
    so the 6.9MB file is downloaded once, not once per gate (the problem [gate-cache] solved). From
    file:// fetch is blocked, so it is a counter in the query instead - a disk read, not a download. */
-const PEEK_SRC = "assets/peeking_talk10s.webp?v=20261007133731";
+const PEEK_SRC = "assets/peeking_talk10s.webp?v=20261008150039";
 /* [H11-154] THE FIRST GATE SKIPS THE RISE. Asked for: on the first transition Swifty is already up
    and talking, not climbing into view first. peeking_talk_up.webp is the same animation from 3.82s
    - the first frame he is at the top - cut by _tools/peek_cut.py; the other two gates keep the rise. */
-const PEEK_UP_SRC = "assets/peeking_talk_up.webp?v=20261007133731";
+const PEEK_UP_SRC = "assets/peeking_talk_up.webp?v=20261008150039";
 const _peekBlobs = {}; let _peekBlobUrl = null, _peekN = 0;
 if(/^https?:$/.test(location.protocol)){
   /* only the cut file: every gate uses it now, and peeking_talk10s.webp left the game folder */
@@ -7800,7 +7876,7 @@ if(/^https?:$/.test(location.protocol)){
    plays through once more while the greeting begins. Restarting an animated image means a NEW
    URL (one clock per URL, see [H11-132]): a blob: URL over http so the file is fetched once, a
    counter in the query from file://. */
-const LAND_ANIM_SRC = "assets/UI/new_landing_swiftee_anim.webp?v=20261007133731";
+const LAND_ANIM_SRC = "assets/UI/new_landing_swiftee_anim.webp?v=20261008150039";
 let _landBlob = null, _landN = 0;
 if(/^https?:$/.test(location.protocol)){
   try{ AssetLoader.blob(LAND_ANIM_SRC).then(b => { _landBlob = b; }).catch(()=>{}); }catch(e){}   /* [H11-187] on screen now: first in line */
@@ -8603,6 +8679,149 @@ function buildDevNav(){
 boot();
 
 
+</script>
+<!-- FLN confetti kit (exact copy, MTG2A04_L02_S01) - the game sets --scale itself -->
+<script>window.FLN_OWN_SCALE = true;</script>
+<script>
+/* FLN confetti - standalone, exact copy of the game build (MTG2A04_L02_S01 app.js). No sound.
+   Usage: include confetti.css and this file, then call confettiCannon() - one burst over the whole window.
+   It adds <div class="fx-layer" id="fxLayer"> to the page itself if there is none. */
+
+/* ---- the two kit-core helpers the confetti uses (verbatim from "FLN ANIMATION KIT: core") ---- */
+(function(){ "use strict";
+  var M = window.FLNMotion = window.FLNMotion || {};
+  M.still = M.still || function(){
+    try{ return document.documentElement.classList.contains("no-anim") ||
+      (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches); }
+    catch(_){ return false; }
+  };
+  M.guard = M.guard || function(fn){
+    try{ fn(); }catch(e){ try{ console.warn("[animation-kit]", e && e.message); }catch(_){} }
+  };
+})();
+
+/* ===== FLN ANIMATION KIT: confetti BEGIN ===== */
+(function(){ "use strict";
+  var M = window.FLNMotion;
+  function rnd(a, b){ return a + Math.random() * (b - a); }
+
+  M.confetti = {
+    defaults: {
+      host:".stage-inner", count:80, stagger:0.35,
+      fall:[1.1,1.8], drift:45, sway:[10,34], bob:[3,7],
+      rockT:[0.6,1.2], tumbleT:[0.75,1.5], tumbleShare:0.22,
+      amp:[28,52], yaw:30, depth:[0.75,1.15], tilt:25,
+      /* weighted: star 40%, rectangle 20%, line 20%, square 20%.
+         Repeat an entry to weight it - the array is sampled uniformly. */
+      shapes:["st","st","st","st","rc","rc","ln","ln","sq","sq"],
+      /* VIBGYOR. Front/back pairs - the back is the SAME hue darkened, never a
+         different hue, or it reads as two pieces flickering instead of one turning. */
+      colors:[["#8B2FC9","#5E1C8C"],   /* violet */
+              ["#3F51B5","#27358A"],   /* indigo */
+              ["#1E88E5","#135FA6"],   /* blue   */
+              ["#22B24C","#157A34"],   /* green  */
+              ["#FFD21E","#D9A800"],   /* yellow */
+              ["#FF8A1E","#C75F00"],   /* orange */
+              ["#E5322D","#A81F1B"]],  /* red    */
+      phases:["guided","practice","mastery"]   /* [] disables phase gating */
+    },
+    burst: function(opts){
+      var o = Object.assign({}, this.defaults, opts || {});
+      M.guard(function(){
+        if(M.still()) return;
+        /* confetti ONLY on activity phases - never tutorials, demos, landing, transitions */
+        if(o.phases.length && o.phase && o.phases.indexOf(o.phase) < 0) return;
+        var host = document.querySelector(o.host); if(!host) return;
+
+        var dist = host.clientHeight + 60, maxLife = 0;
+        var wrap = document.createElement("div");
+        wrap.className = "fx-confetti";
+
+        for(var i = 0; i < o.count; i++){
+          var z     = rnd(o.depth[0], o.depth[1]);        /* depth */
+          var fall  = rnd(o.fall[0], o.fall[1]) / z;      /* nearer = bigger = faster */
+          var delay = rnd(0, o.stagger);
+          if(fall + delay > maxLife) maxLife = fall + delay;
+          var pair = o.colors[i % o.colors.length];
+          /* most pieces flutter (face stays visible); a minority go end-over-end */
+          /* Two regimes, and a real plate moves DIFFERENTLY in each:
+             flutter = zigzags hard, almost no net sideways drift;
+             tumble  = autorotation gives a steady lateral force, so it barely
+                       zigzags but drifts consistently to one side. */
+          var flutter = Math.random() > o.tumbleShare;
+          var rockT   = flutter ? rnd(o.rockT[0], o.rockT[1])
+                                : rnd(o.tumbleT[0], o.tumbleT[1]);
+          var sway    = flutter ? rnd(o.sway[0], o.sway[1]) : rnd(2, 8);
+          var drift   = flutter ? rnd(-o.drift/2.5, o.drift/2.5) : rnd(-o.drift, o.drift);
+          var bob     = flutter ? rnd(o.bob[0], o.bob[1]) : rnd(2, 4);
+
+          /* set every property once - they inherit down to .w and .f */
+          var p = document.createElement("i"); p.className = "p";
+          p.style.cssText =
+            "--x:"     + rnd(-2, 98).toFixed(1) + "%;" +
+            "--dist:"  + dist + "px;" +
+            "--fall:"  + fall.toFixed(2) + "s;" +
+            "--delay:" + delay.toFixed(2) + "s;" +
+            "--drift:" + drift.toFixed(0) + "px;" +
+            "--sway:"  + sway.toFixed(0) + "px;" +
+            "--bob:"   + bob.toFixed(1) + "px;" +
+            "--rockT:" + rockT.toFixed(2) + "s;" +
+            /* capped short of 90deg: even at max tilt the face still reads */
+            "--amp:"   + Math.round(rnd(o.amp[0], o.amp[1])) + "deg;" +
+            "--yaw:"   + Math.round(rnd(-o.yaw, o.yaw)) + "deg;" +
+            "--tilt:"  + Math.round(rnd(-o.tilt, o.tilt)) + "deg;" +
+            "--z:"     + z.toFixed(2) + ";" +
+            "--dim:"   + (0.72 + (z - o.depth[0]) /
+                          (o.depth[1] - o.depth[0]) * 0.28).toFixed(2) + ";" +
+            /* shapes stay legible by ASPECT RATIO, not size - see the shape table */
+            "--c:"     + pair[0] + ";--c2:" + pair[1] + ";";
+
+          var w = document.createElement("i"); w.className = "w";
+          var f = document.createElement("i");
+          f.className = "f " + o.shapes[Math.floor(Math.random() * o.shapes.length)] +
+                        (flutter ? "" : " tum");
+          w.appendChild(f); p.appendChild(w); wrap.appendChild(p);
+        }
+        host.appendChild(wrap);
+        /* lifetime is computed, not hard-coded - a longer fall cannot be cut off */
+        setTimeout(function(){ wrap.remove(); }, (maxLife + 0.3) * 1000);
+      });
+    },
+    /* stops a slide advancing mid-celebration. 8s safety cap. */
+    after: function(fn){
+      var started = Date.now();
+      (function check(){
+        if(!document.querySelector(".fx-confetti") || Date.now() - started > 8000){ fn(); return; }
+        setTimeout(check, 200);
+      })();
+    }
+  };
+})();
+/* ===== FLN ANIMATION KIT: confetti END ===== */
+
+/* ---- the stage scale the pieces are sized with (the game's fit(): its 1333 x 750 stage contain-fitted to the
+   window). Skip it (window.FLN_OWN_SCALE = true before this file) if your page already sets --scale. ---- */
+(function(){
+  if(window.FLN_OWN_SCALE) return;
+  function fit(){
+    var vw = (window.visualViewport ? window.visualViewport.width  : document.documentElement.clientWidth)  || window.innerWidth;
+    var vh = (window.visualViewport ? window.visualViewport.height : document.documentElement.clientHeight) || window.innerHeight;
+    document.documentElement.style.setProperty("--scale", Math.min(vw / 1333, vh / 750));
+  }
+  fit(); window.addEventListener("resize", fit);
+  if(window.visualViewport) window.visualViewport.addEventListener("resize", fit);
+})();
+
+/* ---- the game's call (app.js confettiCannon), without its sound ---- */
+function confettiCannon(){
+  if(!document.getElementById("fxLayer")){
+    var l = document.createElement("div"); l.className = "fx-layer"; l.id = "fxLayer"; l.setAttribute("aria-hidden", "true");
+    document.body.appendChild(l);
+  }
+  FLNMotion.confetti.burst({
+    host: "#fxLayer", phases: [], count: 100, fall: [1.6, 2.6]
+  });
+}
 </script>
 </body>
 </html>

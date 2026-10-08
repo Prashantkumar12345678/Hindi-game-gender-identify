@@ -440,7 +440,7 @@ html.no-anim .opt-cell.opt-walk{animation:none !important;}
 .start-gate{position:absolute;inset:0;z-index:80;display:flex;align-items:center;justify-content:center;background:transparent;cursor:default;}   /* [20a landing] transparent — the fixed .start-bg is the ground; [21c flag#1] cursor:default — hand-pointer belongs on .sg-btn/.sg-vo only, gate is not tap-anywhere */
 .start-gate.hidden{display:none;}
 /* inner white tile is the provided image (border + faint rays baked in) */
-.sg-card{position:relative;width:1114px;height:456px;background:url("assets/UI/start_card.webp?v=20261008150039") center/100% 100% no-repeat;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;}
+.sg-card{position:relative;width:1114px;height:456px;background:url("assets/UI/start_card.webp?v=20261008161409") center/100% 100% no-repeat;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;}
 /* full-body standing mascot (feet included): size by HEIGHT so the whole body incl. feet shows;
    the art frame is square with side padding, so it's constrained to the card height, not width. */
 .sg-mascot{position:absolute;left:-24px;bottom:-12px;width:208px;height:auto;z-index:3;object-fit:contain;filter:drop-shadow(0 10px 18px rgba(0,47,118,.18));animation:none;}   /* [25d] CORRECTED. My 25c change to left:8/bottom:6 was WRONG: I copied strilling's BASE rule (its line 611) instead of its WINNING late override (line 1104 = left:-24/bottom:-12/width:208 !important) — which is what the engine already had. Moving her right by 32px is also what threw .sg-vo out of line, since left:96px is tuned to this position. "Hovering" = the sgFloat bob: strilling kills it at its line 5600 `animation:none !important`, so it must be OFF here too (I previously said strilling bobs as well — that was reading line 611 and missing 5600). */
@@ -610,7 +610,7 @@ body.loaded .sg-acell{animation-play-state:running;}
    .wg-, .nh-, .ol-), NOT on a guessed prefix: keying on `sg-` alone is what dropped the
    entire drifting sky the first time round. */
 /* ===== FLN ANIMATION KIT: sky-drift BEGIN ===== */
-.start-bg{background-image:url("assets/UI/startnew_bg_plain.webp?v=20261008150039");}   /* mandatory */
+.start-bg{background-image:url("assets/UI/startnew_bg_plain.webp?v=20261008161409");}   /* mandatory */
 
 .sg-glow,.sg-sky{position:fixed;inset:0;pointer-events:none;display:none;z-index:1;}
 body.is-start .sg-glow,body.is-start .sg-sky,
@@ -652,9 +652,9 @@ body.is-end .sg-sky{
   margin:calc(var(--s) / -2) 0 0 calc(var(--s) / -2);
   background:center/contain no-repeat;opacity:0;
   animation:sgFly var(--t) linear infinite;animation-delay:var(--d);}
-.sg-sky .s1{background-image:url("assets/UI/bgdeco_star.svg?v=20261008150039");}
-.sg-sky .s2{background-image:url("assets/UI/bgdeco_star_o.svg?v=20261008150039");}
-.sg-sky .s3{background-image:url("assets/UI/bgdeco_spark.svg?v=20261008150039");}
+.sg-sky .s1{background-image:url("assets/UI/bgdeco_star.svg?v=20261008161409");}
+.sg-sky .s2{background-image:url("assets/UI/bgdeco_star_o.svg?v=20261008161409");}
+.sg-sky .s3{background-image:url("assets/UI/bgdeco_spark.svg?v=20261008161409");}
 .sg-sky .s4{border-radius:50%;border:.22vmax solid rgba(255,255,255,.92);}
 .sg-sky .s5{border-radius:50%;background:rgba(255,255,255,.92);}
 
@@ -998,7 +998,7 @@ html.no-anim .wg-out{opacity:.72;filter:saturate(.3);}
    startnew_bg_plain.webp is the same artwork with the decorations stripped.
    `body .start-bg` because the engine declares .start-bg AFTER this block; matching its
    specificity and relying on order is precisely what R11 forbids. */
-body .start-bg{background-image:url("assets/UI/startnew_bg_plain.webp?v=20261008150039");}
+body .start-bg{background-image:url("assets/UI/startnew_bg_plain.webp?v=20261008161409");}
 
 /* ---- the white centre box, more opaque ------------------------------------------
    start_card.webp is white at alpha 166/255 (65%), which is why the background rays read
@@ -1007,9 +1007,9 @@ body .start-bg{background-image:url("assets/UI/startnew_bg_plain.webp?v=20261008
    art's rounded corners are alpha - a background-color would square them off.
    Drop one layer for ~88% if this is too solid. */
 body .sg-card{background:
-   url("assets/UI/start_card.webp?v=20261008150039") center/100% 100% no-repeat,
-   url("assets/UI/start_card.webp?v=20261008150039") center/100% 100% no-repeat,
-   url("assets/UI/start_card.webp?v=20261008150039") center/100% 100% no-repeat;}
+   url("assets/UI/start_card.webp?v=20261008161409") center/100% 100% no-repeat,
+   url("assets/UI/start_card.webp?v=20261008161409") center/100% 100% no-repeat,
+   url("assets/UI/start_card.webp?v=20261008161409") center/100% 100% no-repeat;}
 
    which is why the first attempt at this changed almost nothing. Here it is constant.
    The kit"[bad string]
@@ -1050,7 +1050,7 @@ body .opt-cell.wg-wrong{animation:wgNo var(--wgT) ease-in-out both;}
 /* ===== END / CELEBRATION ===== */
 .end-screen{position:absolute;inset:0;z-index:90;display:none;flex-direction:column;align-items:center;justify-content:center;gap:22px;background:transparent;overflow:hidden;}
 /* r4: immersive celebration (adopted from Shruti's build — end_screen.webp sunburst + centred mascot + subtitle) */
-.end-bg{position:fixed;inset:0;background:#FDE9A8 url("assets/UI/end_screen.webp?v=20261008150039") center/cover no-repeat;display:none;pointer-events:none;z-index:0;}
+.end-bg{position:fixed;inset:0;background:#FDE9A8 url("assets/UI/end_screen.webp?v=20261008161409") center/cover no-repeat;display:none;pointer-events:none;z-index:0;}
 body.is-end .end-bg{display:block;}
 body.is-end{background:#FDE9A8 !important;}
 body.is-end .stage{background:transparent !important;}
@@ -1352,7 +1352,7 @@ body.gating .stage.gating .start-gate{filter:none;}
 
 /* [20a landing] fixed full-viewport ground so #47BCFD + art reach the true edges (kills the #7FC8F4 letterbox band);
    start-gate goes transparent (above) so this single image is seamless; in-lesson chrome hidden while landing shows. */
-.start-bg{position:fixed;inset:0;background:#47BCFD url("assets/UI/startnew_bg.webp?v=20261008150039") center/cover no-repeat;display:none;pointer-events:none;z-index:0;}
+.start-bg{position:fixed;inset:0;background:#47BCFD url("assets/UI/startnew_bg.webp?v=20261008161409") center/cover no-repeat;display:none;pointer-events:none;z-index:0;}
 body.is-start .start-bg{display:block;}
 body.is-start .stage-inner{visibility:hidden !important;}
 body.is-start .stage{background:transparent !important;}
@@ -1979,8 +1979,8 @@ body.is-start .phase-gate{
    it sat before - otherwise every one of these buttons would quietly rise 14px up the screen. */
 .nav-btn{width:198px !important;height:90px !important;min-width:0 !important;bottom:18px !important;
   padding:0 !important;border:0 !important;box-shadow:none !important;
-  background:transparent url("assets/swiftpal_buttons/btn-next-disabled.svg?v=20261008150039") center/198px 90px no-repeat !important;}
-.nav-btn.active{background-image:url("assets/swiftpal_buttons/btn-next.svg?v=20261008150039") !important;
+  background:transparent url("assets/swiftpal_buttons/btn-next-disabled.svg?v=20261008161409") center/198px 90px no-repeat !important;}
+.nav-btn.active{background-image:url("assets/swiftpal_buttons/btn-next.svg?v=20261008161409") !important;
   box-shadow:none !important;}
 .nav-btn.active:active{box-shadow:none !important;}
 .nav-btn .nav-arrow{display:none !important;}
@@ -2046,7 +2046,7 @@ body.is-start .phase-gate{
    paints it ONCE, so the blue .start-bg tints through and the card reads as a blue-white
    gradient with a white ring. This build stacked the SAME file 3x, which made it opaque
    flat white. Back to a single paint = src. (Sky sparkles deliberately NOT ported.) */
-body .sg-card{background:url("assets/UI/start_card.webp?v=20261008150039") center/100% 100% no-repeat !important;}
+body .sg-card{background:url("assets/UI/start_card.webp?v=20261008161409") center/100% 100% no-repeat !important;}
 .sg-mascot{left:-24px !important;bottom:-12px !important;width:208px !important;}
 .sg-vo{left:89px !important;bottom:-6px !important;width:58px !important;height:58px !important;}
 /* [H11-215] title-screen speaker a little bigger (asked): 58 -> 70px, same centre - 6px left and down */
@@ -2097,7 +2097,7 @@ body .sg-card{background:url("assets/UI/start_card.webp?v=20261008150039") cente
 .sg-btn{bottom:30px !important;width:140px !important;height:140px !important;min-width:0 !important;
         padding:0 !important;border:0 !important;border-radius:50% !important;
         box-shadow:none !important;
-        background:transparent url("assets/swiftpal_buttons/btn-play-round.svg?v=20261008150039") center/140px 140px no-repeat !important;
+        background:transparent url("assets/swiftpal_buttons/btn-play-round.svg?v=20261008161409") center/140px 140px no-repeat !important;
         animation:sgBtnPulse 1.4s ease-in-out infinite !important;}
 .sg-btn:active{animation:none !important;}
 /* [H11-149] once pressed it stops breathing - the invitation has been taken */
@@ -2159,7 +2159,7 @@ body .sg-card{background:url("assets/UI/start_card.webp?v=20261008150039") cente
    stuck at .5 after the line ended (headless Chrome); a straight swap cannot. */
 body.vo-lock .audio-chip,body.vo-lock .tut-audio{pointer-events:none !important;opacity:.5 !important;
                  filter:grayscale(1) brightness(1.2) !important;}
-.sg-btn.sg-waiting{background-image:url("assets/swiftpal_buttons/btn-play-round-waiting.svg?v=20261008150039") !important;
+.sg-btn.sg-waiting{background-image:url("assets/swiftpal_buttons/btn-play-round-waiting.svg?v=20261008161409") !important;
                    cursor:default !important;animation:none !important;
                    pointer-events:none !important;}   /* see setStartBtnReady - NOT disabled */
 /* [H11-182] THE BUTTON IS NOT THERE WHILE SHE SPEAKS - checklist, asked for again: "Play button
@@ -2614,7 +2614,7 @@ html.no-anim .fw-opt.fw-no{animation:none !important;}
    the control keeps an accessible name instead of announcing as a bare "button". */
 .end-btn{width:163px !important;height:117px !important;min-width:0 !important;padding:0 !important;
          border:0 !important;border-radius:0 !important;box-shadow:none !important;font-size:0 !important;
-         background:transparent url("assets/swiftpal_buttons/btn-finish.svg?v=20261008150039") center/163px 117px no-repeat !important;}
+         background:transparent url("assets/swiftpal_buttons/btn-finish.svg?v=20261008161409") center/163px 117px no-repeat !important;}
 .end-btn:active{box-shadow:none !important;}
 
 /* ---- 6. FEEDBACK OVERLAY ------------------------------------------------------------------- */
@@ -3069,7 +3069,7 @@ html.no-anim .nav-btn.nav-call{animation:none !important;}
 <!-- [H11-155] the landing and the first transition, fetched before the engine even parses. The two
      links this replaced named another game's pictures (sit_namaste_teacher, sit_dhanyawad_pencil)
      and 404ed on every load since the first commit. -->
-<link rel="preload" as="image" fetchpriority="high" href="assets/UI/startnew_bg_plain.webp?v=20261008150039"><link rel="preload" as="image" fetchpriority="high" href="assets/UI/start_card.webp?v=20261008150039"><link rel="preload" as="image" fetchpriority="high" href="assets/Images/mor_title.webp?v=20261008150039"><link rel="preload" as="image" fetchpriority="high" href="assets/Images/title.webp?v=20261008150039"><link rel="preload" as="image" fetchpriority="high" href="assets/Images/morni_title.webp?v=20261008150039"><link rel="preload" as="image" fetchpriority="high" href="assets/swiftpal_buttons/btn-play-round.svg?v=20261008150039"><link rel="preload" as="image" fetchpriority="high" href="assets/UI/new_landing_swiftee_anim.webp?v=20261008150039"><link rel="preload" as="image" fetchpriority="high" href="assets/peeking_talk_up.webp?v=20261008150039"><style id="fln-confetti-kit">
+<link rel="preload" as="image" fetchpriority="high" href="assets/UI/startnew_bg_plain.webp?v=20261008161409"><link rel="preload" as="image" fetchpriority="high" href="assets/UI/start_card.webp?v=20261008161409"><link rel="preload" as="image" fetchpriority="high" href="assets/Images/mor_title.webp?v=20261008161409"><link rel="preload" as="image" fetchpriority="high" href="assets/Images/title.webp?v=20261008161409"><link rel="preload" as="image" fetchpriority="high" href="assets/Images/morni_title.webp?v=20261008161409"><link rel="preload" as="image" fetchpriority="high" href="assets/swiftpal_buttons/btn-play-round.svg?v=20261008161409"><link rel="preload" as="image" fetchpriority="high" href="assets/UI/new_landing_swiftee_anim.webp?v=20261008161409"><link rel="preload" as="image" fetchpriority="high" href="assets/peeking_talk_up.webp?v=20261008161409"><style id="fln-confetti-kit">
 /* FLN confetti - exact copy of the game build (MTG2A04_L02_S01 style.css). */
 
 /* ===== FLN ANIMATION KIT: confetti BEGIN ===== */
@@ -3166,7 +3166,7 @@ html.no-anim .nav-btn.nav-call{animation:none !important;}
 
 <!-- BOOT LOADER — [template] r4/P2: white boot screen, no-tap auto-dismiss (see boot()) -->
 <div class="boot-loader" id="bootLoader">
-  <img src="assets/UI/loader.webp?v=20261008150039" alt="">
+  <img src="assets/UI/loader.webp?v=20261008161409" alt="">
 </div>
 
 
@@ -3195,12 +3195,12 @@ html.no-anim .nav-btn.nav-call{animation:none !important;}
     <div class="slide-stage">
       <div class="slide-host" id="slideHost"></div>
       <div class="nudge-hand" id="nudgeHand">
-        <img src="assets/UI/nudge_hand_new.svg?v=20261008150039" alt="">
+        <img src="assets/UI/nudge_hand_new.svg?v=20261008161409" alt="">
       </div>
     </div>
 
     <!-- Swiftie buddy: persistent, reacting character (replaces the static header photo + feedback popup) -->
-    <div class="mascot-wrap" id="swBuddy"><div class="mascot-circle"><img class="mascot-img" id="swBuddyImg" src="assets/UI/sw_head_talking.webp?v=20261008150039" alt=""></div></div>
+    <div class="mascot-wrap" id="swBuddy"><div class="mascot-circle"><img class="mascot-img" id="swBuddyImg" src="assets/UI/sw_head_talking.webp?v=20261008161409" alt=""></div></div>
 
     <!-- Nav button — kit-style pill, floats bottom-right -->
     <!-- [H11-22] the word is gone and the arrow carries the meaning, so the button needs an
@@ -3216,7 +3216,7 @@ html.no-anim .nav-btn.nav-call{animation:none !important;}
   <!-- FEEDBACK OVERLAY — kit-style card + clean Swiftee large -->
   <div class="hint-overlay" id="hintOverlay">
     <div class="hint-box" id="hintBox">
-      <img class="hint-mascot" id="hintMascot" src="assets/UI/sw_anim_rest.webp?v=20261008150039" alt=""
+      <img class="hint-mascot" id="hintMascot" src="assets/UI/sw_anim_rest.webp?v=20261008161409" alt=""
            onerror="this.style.display='none'">
       <div class="hint-body">
         <div class="hint-text" id="hintText"></div>
@@ -3227,7 +3227,7 @@ html.no-anim .nav-btn.nav-call{animation:none !important;}
   <!-- TAP-TO-START — uses provided title-screen art -->
   <div class="start-gate" id="startGate">
     <div class="sg-card">
-      <img class="sg-mascot" src="assets/UI/new_landing_swiftee_anim.webp?v=20261008150039" alt="Swiftee"
+      <img class="sg-mascot" src="assets/UI/new_landing_swiftee_anim.webp?v=20261008161409" alt="Swiftee"
            onerror="this.style.display='none'">
       <div class="sg-content">
         <div class="sg-title" id="sgTitle">अच्छे व्यवहार के शब्द</div>
@@ -3266,7 +3266,7 @@ html.no-anim .nav-btn.nav-call{animation:none !important;}
          Shipped as WebP because GIF alpha is one all-or-nothing index and this art has soft
          edges, which cut hard would fringe against the sunburst behind it.
          See _tools/dekey_last_page.py. -->
-    <img class="end-mascot" src="assets/Images/last_swifty_still.webp?v=20261008150039" alt="Swiftee"
+    <img class="end-mascot" src="assets/Images/last_swifty_still.webp?v=20261008161409" alt="Swiftee"
          onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'end-mascot',textContent:'🎉'}))">
     <button class="end-btn" id="endBtn" aria-label="आगे बढ़ें"></button>   <!-- [H11-66] the artwork carries the arrow -->
   </div>
@@ -4199,7 +4199,7 @@ function _resumeVoiceAudio(){
    AUDIO_BUILD changes whenever the game is rebuilt, so every clip URL changes with it and the
    browser has to fetch. It is added in the two places every clip passes through, rather than at
    the ~20 sites that spell out a path, so nothing can be missed. */
-const AUDIO_BUILD = "20261008150039";
+const AUDIO_BUILD = "20261008161409";
 /* [H11-187] ASSET PRELOADER - every file the game uses is fetched ONCE, behind the loading bar,
    before the Play button can appear.
    - ONE DOWNLOAD PER FILE. The bar, the voice decoder, the picture warm-up and the gate / landing /
@@ -4230,7 +4230,7 @@ var AssetLoader = (function(){
     return s;
   };
   const urlOf = p => p + "?v=" + AUDIO_BUILD;        // the exact URL every other request for it uses
-  const expect = new Map(), got = new Map(), jobs = new Map(), blobUrl = new Map(), origOf = new Map(), blobs = new Map(), freshUrl = new Map();
+  const expect = new Map(), got = new Map(), jobs = new Map(), blobUrl = new Map(), origOf = new Map(), blobs = new Map(), freshUrl = new Map(), ctls = new Map();
   const listeners = [];
   let total = 0, recv = 0, finished = 0, shown = -1, readyRes = null;
   MANIFEST.forEach(r => { expect.set(r[0], r[1]); got.set(r[0], 0); total += r[1]; });
@@ -4252,6 +4252,7 @@ var AssetLoader = (function(){
   async function download(p){
     if(!HTTP) return null;
     const ctl = window.AbortController ? new AbortController() : null;
+    if(ctl) ctls.set(p, ctl);
     let stall = 0;
     const arm = () => { clearTimeout(stall); if(ctl) stall = setTimeout(() => ctl.abort(), STALL_MS); };
     const hard = ctl ? setTimeout(() => ctl.abort(), HARD_MS) : 0;
@@ -4285,14 +4286,51 @@ var AssetLoader = (function(){
     }));
     return jobs.get(p);
   }
+  /* [H11-216] ON A TABLET THE PICTURE ON SCREEN COMES FIRST. Reported: assets rendering very late on a
+     tablet. Measured at 5 Mbps / 4x CPU: the poem clips started 1-4s after their slide, because the
+     queue went smallest-file-first (so every video sat at the very end) and five background downloads
+     shared the line with whatever the slide was loading right then - sometimes the same file twice.
+     Now: (1) the queue is ordered by FIRST USE - prioritize() with the game's own order at boot and
+     the current + next two slides' files at every mount; (2) a file the slide is loading itself is
+     released - the preloader drops it, or aborts it if it is mid-download - so it arrives once;
+     (3) while a slide's own pictures/clip are still loading, the background waits (foreground(),
+     6s cap per element) so they get the whole line. */
+  const queue = MANIFEST.map(r => r[0]);
+  let fg = 0;
+  const sleep = ms => new Promise(r => setTimeout(r, ms));
   function start(){
-    let i = 0;
-    const queue = MANIFEST.map(r => r[0]);
-    const worker = async () => { while(i < queue.length){ await blob(queue[i++]); } };
+    const worker = async () => {
+      for(;;){
+        let waited = 0;
+        while(fg > 0 && waited < 6000){ await sleep(150); waited += 150; }
+        const p = queue.shift();
+        if(p === undefined) return;
+        if(jobs.has(p)) continue;
+        await blob(p);
+      }
+    };
     for(let w = 0; w < WORKERS; w++) worker();
     emit();
     return ready;
   }
+  api.prioritize = urls => {
+    const want = []; (urls || []).forEach(u => { const k = key(u); if(k && !jobs.has(k) && want.indexOf(k) < 0 && queue.indexOf(k) >= 0) want.push(k); });
+    if(!want.length) return;
+    for(let n = queue.length - 1; n >= 0; n--) if(want.indexOf(queue[n]) >= 0) queue.splice(n, 1);
+    queue.unshift.apply(queue, want);
+  };
+  api.release = u => {
+    const k = key(u); if(!k || blobUrl.has(k)) return;
+    const qi = queue.indexOf(k); if(qi >= 0) queue.splice(qi, 1);
+    if(!jobs.has(k)){ jobs.set(k, Promise.resolve(null)); settle(k); }
+    else { const c = ctls.get(k); if(c) try{ c.abort(); }catch(e){} }
+  };
+  api.foreground = (el, events) => {
+    if(!el) return; fg++; let done = false;
+    const end = () => { if(done) return; done = true; fg = Math.max(0, fg - 1); };
+    (events || ["load", "error"]).forEach(ev => el.addEventListener(ev, end, { once: true }));
+    setTimeout(end, 6000);
+  };
   api.isReady = false;
   api.ready = ready;
   api.key = key;
@@ -4703,7 +4741,25 @@ function setSwMood(m){ swMood = m;
      the preloaded copy restarts it from memory; the ?r= form stays only if the copy is not in. */
   const _fresh = (animated && expr === "celebrate") ? AssetLoader.fresh(_p) : null;
   img.src = _fresh || ((animated && expr === "celebrate") ? (_p + "?r=" + (state.slideStart || 1)) : bustAudio(_p));
-  if(w) w.dataset.expr = expr; }
+  if(w) w.dataset.expr = expr;
+  /* [H11-217] BUG_06: THE SAD FACE DOES NOT STAY. After a wrong answer Swifty was left in the try-again
+     (sad) face until the next correct answer. Now the sad face lasts exactly as long as the wrong-answer
+     feedback: once no voice/feedback clip has been playing for 0.4s (and at least 0.8s has passed),
+     he goes back to his resting, smiling face. Anything that changes his mood in the meantime (a hint,
+     the correct-answer cheer) wins - the reset only applies while he is still sad. 12s at most. */
+  clearInterval(setSwMood._sadT);
+  if(m === "tryagain"){
+    const t0 = Date.now(); let quietSince = 0;
+    setSwMood._sadT = setInterval(()=>{
+      if(swMood !== "tryagain"){ clearInterval(setSwMood._sadT); return; }
+      const busy = isPlaying || (typeof state !== "undefined" && state.hintActive);
+      if(busy){ quietSince = 0; }
+      else if(!quietSince){ quietSince = Date.now(); }
+      if((!busy && quietSince && Date.now() - quietSince >= 400 && Date.now() - t0 >= 800) || Date.now() - t0 > 12000){
+        clearInterval(setSwMood._sadT); setSwMood("point");
+      }
+    }, 100);
+  } }
 /* [28u] CONFETTI FALLS FROM THE TOP OF THE PAGE — the correct-answer celebration (replaces the popup).
    Yasir 2026-07-29, stated final: "confetti is supposed to come from top of the screen and not from the
    sides", then the follow-up "it should drop from the top of the entire page". This REPLACES the two
@@ -5141,12 +5197,16 @@ function armIdleVo(){
     // _enableAll() that clears it). Treating it as terminal killed the ticker 0.6s into every guided
     // slide — measured in-browser, which is the only way this was visible. Slide teardown is what
     // really ends the watch, and after a correct answer the hold simply means nothing more is spoken.
-    if(state.locked || state.hintActive || isPlaying || state.revealing || state.demoRunning){ _idleSince = 0; return; }
+    /* [H11-218] BUG_05: THE REMINDER COMES 7s AFTER THE LAST SOUND, NOT 10. Sound and help restart the
+       clock; a SILENT demo or reveal does not - it only holds the reminder back until it is over. G6's
+       demo hand runs ~3s after its last word in silence, and used to restart the clock: 3 + 7 = 10s. */
+    if(state.hintActive || isPlaying){ _idleSince = 0; return; }
     /* [H11-135] a child holding a line mid-drag is not idle - pointerdown only restarts the clock
        once, and a slow drag used to have the reminder start talking under the child's finger. */
     if(typeof _linkOwner !== "undefined" && _linkOwner){ _idleSince = 0; return; }
     if(!_idleSince){ _idleSince = Date.now(); return; }
     if(Date.now() - _idleSince < ms) return;
+    if(state.locked || state.revealing || state.demoRunning) return;   /* due - but a silent demo finishes first */
     // [27f] ONE reminder, then done for this slide. Mark spent and stop the ticker BEFORE speaking,
     // so a pointerdown arriving during the replay cannot re-arm it.
     /* [H11-117] a backgrounded tab says nothing. This is the guard that replaces [27f]'s cap:
@@ -6773,6 +6833,9 @@ const SlideModules = {
           if(_c){ const _g = _c.createGain(); _g.gain.value = isPlaying ? VO_DUCK : 1;
                   _c.createMediaElementSource(_vid).connect(_g).connect(_c.destination); _vid._gain = _g; } }catch(e){}
         _vid.src = (typeof bustAudio === "function") ? bustAudio(_vsrc) : _vsrc;   /* [H11-155] same URL the preloader cached */
+        /* [H11-216] not local yet: the clip streams straight from the network and the preloader lets go of it
+           (and waits) - one download, at full speed, instead of two sharing the line */
+        if(!/^blob:/.test(_vid.src)){ try{ AssetLoader.release(_vsrc); AssetLoader.foreground(_vid, ["canplay", "error"]); }catch(e){} }
         const _fr = wrap.querySelector(".story-frame"); if(_fr) _fr.appendChild(_vid);
       }
       host.appendChild(wrap);
@@ -7770,6 +7833,11 @@ function mountSlide(idx){
        const _nb = $("navBtn"); if(_nb) _nb.classList.remove("nav-call"); }catch(e){}
   mod.mount(mountHost, slide);
   bustArt(mountHost);   /* [H11-79] every slide writes fresh <img>; stamp them so a replaced picture arrives */
+  try{   /* [H11-216] */
+    mountHost.querySelectorAll("img").forEach(im => { const s = im.getAttribute("src") || "";
+      if(s && !/^(blob|data):/.test(s) && !im.complete){ AssetLoader.release(s); AssetLoader.foreground(im); } });
+    AssetLoader.prioritize([].concat(_slideAssetUrls(state.idx), _slideAssetUrls(state.idx + 1), _slideAssetUrls(state.idx + 2)));
+  }catch(e){}
   // game-feel: animate the slide content in on every mount
   { const _sh = $("slideHost"); _sh.classList.remove("slide-in"); void _sh.offsetWidth; _sh.classList.add("slide-in"); }
 
@@ -7859,11 +7927,11 @@ let _gateToken = 0;
    A NEW URL is a new image with its own clock. Over http it is a blob: URL minted from ONE fetch,
    so the 6.9MB file is downloaded once, not once per gate (the problem [gate-cache] solved). From
    file:// fetch is blocked, so it is a counter in the query instead - a disk read, not a download. */
-const PEEK_SRC = "assets/peeking_talk10s.webp?v=20261008150039";
+const PEEK_SRC = "assets/peeking_talk10s.webp?v=20261008161409";
 /* [H11-154] THE FIRST GATE SKIPS THE RISE. Asked for: on the first transition Swifty is already up
    and talking, not climbing into view first. peeking_talk_up.webp is the same animation from 3.82s
    - the first frame he is at the top - cut by _tools/peek_cut.py; the other two gates keep the rise. */
-const PEEK_UP_SRC = "assets/peeking_talk_up.webp?v=20261008150039";
+const PEEK_UP_SRC = "assets/peeking_talk_up.webp?v=20261008161409";
 const _peekBlobs = {}; let _peekBlobUrl = null, _peekN = 0;
 if(/^https?:$/.test(location.protocol)){
   /* only the cut file: every gate uses it now, and peeking_talk10s.webp left the game folder */
@@ -7876,7 +7944,7 @@ if(/^https?:$/.test(location.protocol)){
    plays through once more while the greeting begins. Restarting an animated image means a NEW
    URL (one clock per URL, see [H11-132]): a blob: URL over http so the file is fetched once, a
    counter in the query from file://. */
-const LAND_ANIM_SRC = "assets/UI/new_landing_swiftee_anim.webp?v=20261008150039";
+const LAND_ANIM_SRC = "assets/UI/new_landing_swiftee_anim.webp?v=20261008161409";
 let _landBlob = null, _landN = 0;
 if(/^https?:$/.test(location.protocol)){
   try{ AssetLoader.blob(LAND_ANIM_SRC).then(b => { _landBlob = b; }).catch(()=>{}); }catch(e){}   /* [H11-187] on screen now: first in line */
@@ -8237,6 +8305,26 @@ function _cardArtList(){
    "assets/Images/last_swifty_still.webp","assets/Images/last_swifty_end.webp","assets/UI/end_screen.webp"].forEach(add);
   return out;
 }
+/* [H11-216] every file a slide uses, in the order it needs them: pictures, its clip, its voice lines */
+function _slideAssetUrls(i){
+  const s = CARD.slides && CARD.slides[i]; if(!s) return [];
+  const imgExt = (CARD.assets && CARD.assets.img_ext) || "webp", map = (CARD.assets && CARD.assets.image) || {};
+  const out = [], add = u => { if(u && out.indexOf(u) < 0) out.push(u); };
+  const walk = o => {
+    if(!o) return;
+    if(Array.isArray(o)){ o.forEach(walk); return; }
+    if(typeof o !== "object") return;
+    for(const k in o){ const v = o[k];
+      if(typeof v === "string" && /^(img|image_id|recall_image_id)$/.test(k) && /^[A-Za-z0-9_]+$/.test(v)) add(map[v] || ("assets/Images/" + v + "." + imgExt));
+      else if(typeof v === "string" && k === "video_id") add(pickVideoSrc((CARD.assets && CARD.assets.video && CARD.assets.video[v]) || ("assets/video/" + v + ".webm")));
+      else walk(v); }
+  };
+  walk(s.data);
+  if(s.type === "WHEEL_PAIRS") ["wheel_bg","wheel_frame","wheel_disc","wheel_bucket","wheel_bucket_front","wheel_plate","wheel_star"]
+    .forEach(n => add("assets/Images/" + n + "." + imgExt));
+  const ids = new Set(); _collectAudioIds(s, ids); ids.forEach(id => add(audioDir(id) + id + "." + AUDIO_EXT));
+  return out;
+}
 function warmCardArt(){
   try{
     const list = _cardArtList().map(u => (typeof bustAudio === "function") ? bustAudio(u) : u);   /* blob: once loaded */
@@ -8329,7 +8417,14 @@ function warmCardAudio(){
 function boot(){
   // god-mode visual theme (opt-in via CARD.theme) — warms the whole stage; scoped CSS under .thm-*
   if(CARD.theme) $("stage").classList.add("thm-" + CARD.theme);
-  AssetLoader.start();  // [H11-187] every file, smallest first, behind the landing's loading bar
+  try{ const _ord = ["assets/peeking_talk_up.webp"];                // [H11-216] first-use order: the gate, then slide by slide
+       (CARD.slides || []).forEach((_, i) => _slideAssetUrls(i).forEach(u => _ord.push(u)));
+       AssetLoader.prioritize(_ord); }catch(e){}
+  /* [H11-216] the greeting and the peacock's call come first, alone: on a tablet they were queued behind the
+     1.5MB gate clip and the greeting began ~2.5s late. The background waits for them (5s at most). */
+  { const _first = ["assets/VO/vo_landing." + AUDIO_EXT, "assets/SFX/sfx_mor_call." + AUDIO_EXT].map(u => AssetLoader.blob(u));
+    Promise.race([Promise.all(_first), new Promise(r => setTimeout(r, 5000))]).then(() => AssetLoader.start()); }
+  // [H11-187] every file, behind the landing - [H11-216] in the order the game uses them
   warmCardAudio();      // [31x] DECODE every clip: the landing's own now, the rest once the bar is full
   AssetLoader.ready.then(warmCardArt);   // [H11-155] and decode every picture - from local copies
   // banner title = skill name only (strip "(भाग…)" and the ": letters" list)

@@ -411,7 +411,7 @@
       "hint2": "vo_h2_bail"
      }
     ],
-    "demo_pair": "bandar"
+    "demo_pair": "bandar", "max_attempts": 3
    },
    "signals": {
     "on_complete": [
@@ -432,8 +432,7 @@
     "hint2": "vo_h2_sentence",
     "hint": "vo_h2_sentence",
     "reveal": "vo_h3_sentence",
-    "correct": "vo_c_sentence",
-    "word_name": "vo_name_bakra"
+    "correct": "vo_c_sentence"
    },
    "data": { "max_attempts": 3, "earned_hand": true,
     "noun": {
@@ -475,8 +474,7 @@
     "hint2": "vo_h2_sentence_sherni",
     "hint": "vo_h2_sentence_sherni",
     "reveal": "vo_h3_sentence_sherni",
-    "correct": "vo_c_sentence_sherni",
-    "word_name": "vo_name_sherni"
+    "correct": "vo_c_sentence_sherni"
    },
    "data": { "max_attempts": 3, "earned_hand": true,
     "noun": {
@@ -515,8 +513,7 @@
     "hint2": "vo_h2_sentence_bandar",
     "hint": "vo_h2_sentence_bandar",
     "reveal": "vo_h3_sentence_bandar",
-    "correct": "vo_c_sentence_bandar",
-    "word_name": "vo_name_bandar"
+    "correct": "vo_c_sentence_bandar"
    },
    "data": { "max_attempts": 3, "earned_hand": true,
     "noun": {

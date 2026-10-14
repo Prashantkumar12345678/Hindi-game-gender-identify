@@ -5271,7 +5271,9 @@ const IDLE_VO_PHASES = new Set(["guided", "independent", "practice", "mastery"])
 // and he asked for EXACTLY 7s). Cost is 10 boolean checks/sec on test slides only.
 const IDLE_VO_TICK = 100;
 let _idleVoTimer = null, _idleSince = 0, _idleVoFired = false;
-function stopIdleVo(){ clearInterval(_idleVoTimer); _idleVoTimer = null; _idleSince = 0; }
+/* [H11-231] true while the reminder's OWN line is playing - see the ticker */
+let _idleReplaying = false, _idleQuietAt = 0;
+function stopIdleVo(){ clearInterval(_idleVoTimer); _idleVoTimer = null; _idleSince = 0; _idleReplaying = false; }
 /* Called by mountSlide so the ONE allowed reminder is per SLIDE, not per lesson. Kept separate from
    stopIdleVo() on purpose: stopIdleVo is also called for transient reasons (wrong phase, teardown)
    and must NOT hand a slide a second reminder. */
@@ -5289,6 +5291,7 @@ function resetIdleVo(){ stopIdleVo(); _idleVoFired = false; }
    (state.locked) and the teardown still clears it. */
 function armIdleVo(){
   _idleSince = 0;                                // any (re)arm restarts the silence clock
+  _idleReplaying = false;                        // [H11-231] a touch ends the reminder's own count
   const slide = CARD.slides[state.idx];
   if(!slide || slide.type === "CELEBRATION" || !IDLE_VO_PHASES.has(slide.phase)){ stopIdleVo(); return; }
   if(_idleVoTimer) return;                       // ticker already running for this slide
@@ -5304,20 +5307,36 @@ function armIdleVo(){
     /* [H11-218] BUG_05: THE REMINDER COMES 7s AFTER THE LAST SOUND, NOT 10. Sound and help restart the
        clock; a SILENT demo or reveal does not - it only holds the reminder back until it is over. G6's
        demo hand runs ~3s after its last word in silence, and used to restart the clock: 3 + 7 = 10s. */
-    if(state.hintActive || isPlaying){ _idleSince = 0; return; }
+    /* [H11-231] BUG_05, QA round 2: "time difference > 7s comparing the timestamps in the console".
+       QA reads the gap between one [signal] idle_vo_replay and the next - reminder START to START.
+       The reminder's own line used to restart the clock like any other sound, so that gap was
+       7s + the line (G1: 3s line -> 10s). Now the line a reminder plays does not count: the clock
+       keeps running from the moment it fired, so the next one fires 7s after it. The first
+       reminder still waits for 7s of real quiet after the slide's own lines; any touch, hint or
+       other sound still restarts the count; and a reminder is never cut - one whose line is
+       longer than 7s (P2, ~9s) is followed as soon as it ends. "Ended" is 0.6s of quiet, so the
+       short breaths inside one line (P3/P4: stem, then each option) are not mistaken for its end. */
+    if(_idleReplaying){
+      if(isPlaying) _idleQuietAt = 0;
+      else if(!_idleQuietAt) _idleQuietAt = Date.now();
+      else if(Date.now() - _idleQuietAt >= 600) _idleReplaying = false;
+    }
+    if(state.hintActive || (isPlaying && !_idleReplaying)){ _idleSince = 0; return; }
     /* [H11-135] a child holding a line mid-drag is not idle - pointerdown only restarts the clock
        once, and a slow drag used to have the reminder start talking under the child's finger. */
     if(typeof _linkOwner !== "undefined" && _linkOwner){ _idleSince = 0; return; }
     if(!_idleSince){ _idleSince = Date.now(); return; }
     if(Date.now() - _idleSince < ms) return;
     if(state.locked || state.revealing || state.demoRunning) return;   /* due - but a silent demo finishes first */
+    if(isPlaying) return;                        /* [H11-231] due - but the last reminder's line is not cut */
     // [27f] ONE reminder, then done for this slide. Mark spent and stop the ticker BEFORE speaking,
     // so a pointerdown arriving during the replay cannot re-arm it.
     /* [H11-117] a backgrounded tab says nothing. This is the guard that replaces [27f]'s cap:
        it silences the exact case that cap was introduced for, without silencing the child who
        is sitting in front of the screen waiting to be asked again. */
     if(document.hidden){ _idleSince = Date.now(); return; }
-    _idleSince = Date.now();                     // restart the silence clock for the NEXT reminder
+    _idleSince = Date.now();                     // the NEXT reminder counts from this one's start
+    _idleReplaying = true; _idleQuietAt = 0;     // [H11-231] its line does not restart the count
     GameBus.emit("idle_vo_replay", { slide_id: s.id, phase: s.phase });
     if(state.replayAudio) state.replayAudio(); else autoPlayChain(s);
   }, IDLE_VO_TICK);
@@ -6602,8 +6621,11 @@ const SlideModules = {
            when no help had been used - so a child saw it on one slide and not on the next and it
            read as random. Now every pair gets it, as every right tap does on the tap slides; the
            last one too, even after help (celebrateThenAdvance only bursts for an unhelped finish). */
+        /* [H11-230] ...and on the LAST pair the confetti waits for "शाबाश!". It burst at the drop
+           after help, ~3s before the praise (the pair's two names come first), so the two read as
+           separate events. It now goes off with the praise line - see _after below; an unhelped
+           finish already got it there, from celebrateThenAdvance. */
         if(filled < need){ sfxCorrect(); confettiCannon(); }
-        else if(revealed) confettiCannon();
         /* [H11-56] SAY THE PAIR OUT LOUD. SME review: "जोड़ी मिलाने के बाद मिलाई गई जोड़ी का नाम
            बोलना चाहिए। जैसे- मुर्गा-मुर्गी". Both name clips are already in the card - the
            one-by-one reveal speaks them on entry - so this needs no new recording, and hearing
@@ -6620,7 +6642,11 @@ const SlideModules = {
         if(filled < need){ _held = true; state.revealing = true;
           _heldT = setTimeout(()=>{ if(_held){ _held = false; state.revealing = false; } }, 7000); }
         const _after = (filled === need)
-          ? ()=> setTimeout(()=> celebrateThenAdvance(slide, revealed), 250)
+          /* [H11-232] BUG_13, QA round 2: "confetti comes WITH SOUND for Q1 and Q2 but not in the
+             final question" (every pair answered wrong first). A helped finish took
+             celebrateThenAdvance's quiet path - no chime, no burst - so the last pair alone was
+             silent. It gets the same chime + confetti as the other pairs now, with the praise. */
+          ? ()=> setTimeout(()=>{ if(revealed){ sfxCorrect(); confettiCannon(); } celebrateThenAdvance(slide, revealed); }, 250)
           : ()=>{ if(_held){ _held = false; clearTimeout(_heldT); state.revealing = false; } };
         /* Every step carries its own escape hatch, the same one the reveal above uses. play()'s
            end-callback is not guaranteed to arrive - a blocked, stalled or missing clip can

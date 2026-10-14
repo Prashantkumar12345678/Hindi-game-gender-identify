@@ -546,7 +546,7 @@
   "type": "WHEEL_PAIRS",
   "prompt_hi": "सही जोड़ी को चुनिए और झूले पर बैठाइए।",
   "audio": {
-   "intro": "vo_game", "hint1": "vo_h1_pair", "correct": "vo_wheel_shabash"
+   "intro": "vo_game", "hint1": "vo_h1_pair", "hint3": "vo_tap", "correct": "vo_wheel_shabash"
   },
   "data": { "layout": "side-left", "earned_hand": true,
    "option_audio": {"मोर": "vo_name_mor", "मुर्गी": "vo_name_murgi", "घोड़ा": "vo_name_ghoda", "बकरी": "vo_name_bakri", "घोड़ी": "vo_name_ghodi", "शेरनी": "vo_name_sherni", "गाय": "vo_name_gaay", "मुर्गा": "vo_name_murga", "बिल्ली": "vo_name_billi", "भेड़": "vo_name_bhed", "हथिनी": "vo_name_hathini", "चूहा": "vo_name_chuha", "खरगोश": "vo_name_khargosh", "घोड़नी": "vo_name_ghodni", "तोता": "vo_name_tota"}, "seats": [

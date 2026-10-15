@@ -3083,10 +3083,13 @@ html.no-anim .nav-btn.nav-call{animation:none !important;}
 
 /* ======================= END LAYOUT + SIZE PORT ============================================= */
 </style>
+<!-- [H11-238] the Play button and the peeking Swifty are PREFETCHED, not preloaded: they are
+     first drawn seconds later (after the greeting / after Play), and a preload that is not used
+     at once puts a warning in the console on every load. A prefetch still has them in cache. -->
 <!-- [H11-155] the landing and the first transition, fetched before the engine even parses. The two
      links this replaced named another game's pictures (sit_namaste_teacher, sit_dhanyawad_pencil)
      and 404ed on every load since the first commit. -->
-<link rel="preload" as="image" fetchpriority="high" href="assets/UI/startnew_bg_plain.webp?v=20261015111240"><link rel="preload" as="image" fetchpriority="high" href="assets/UI/start_card.webp?v=20261015111240"><link rel="preload" as="image" fetchpriority="high" href="assets/Images/mor_title.webp?v=20261015111240"><link rel="preload" as="image" fetchpriority="high" href="assets/Images/title.webp?v=20261015111240"><link rel="preload" as="image" fetchpriority="high" href="assets/Images/morni_title.webp?v=20261015111240"><link rel="preload" as="image" fetchpriority="high" href="assets/swiftpal_buttons/btn-play-round.svg?v=20261015111240"><link rel="preload" as="image" fetchpriority="high" href="assets/UI/new_landing_swiftee_anim.webp?v=20261015111240"><link rel="preload" as="image" fetchpriority="high" href="assets/peeking_talk_up.webp?v=20261015111240"><style id="fln-confetti-kit">
+<link rel="preload" as="image" fetchpriority="high" href="assets/UI/startnew_bg_plain.webp?v=20261015111240"><link rel="preload" as="image" fetchpriority="high" href="assets/UI/start_card.webp?v=20261015111240"><link rel="preload" as="image" fetchpriority="high" href="assets/Images/mor_title.webp?v=20261015111240"><link rel="preload" as="image" fetchpriority="high" href="assets/Images/title.webp?v=20261015111240"><link rel="preload" as="image" fetchpriority="high" href="assets/Images/morni_title.webp?v=20261015111240"><link rel="prefetch" as="image" href="assets/swiftpal_buttons/btn-play-round.svg?v=20261015111240"><link rel="preload" as="image" fetchpriority="high" href="assets/UI/new_landing_swiftee_anim.webp?v=20261015111240"><link rel="prefetch" as="image" href="assets/peeking_talk_up.webp?v=20261015111240"><style id="fln-confetti-kit">
 /* FLN confetti - exact copy of the game build (MTG2A04_L02_S01 style.css). */
 
 /* ===== FLN ANIMATION KIT: confetti BEGIN ===== */

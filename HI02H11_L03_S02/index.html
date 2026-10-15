@@ -7487,6 +7487,7 @@ const SlideModules = {
            carry their position in the same property it now means "go to the axle", and all six
            would pile up on the hub. Clearing the focus index and replacing it is the whole job. */
         idx = -1;
+        state.locked = true;   /* [H11-239] the round is over: the idle reminder holds (it checks state.locked) */
         st.classList.add("fw-flat");                 /* the whole ride sharp for its lap */
         /* the wheel is allowed one full, unhurried turn before the slide goes - the deck asks for
            it ("झूला चल पड़ेगा और game खत्म हो जाएगा") and it is the only reward for finishing.
@@ -7743,7 +7744,12 @@ const SlideModules = {
         }, 700);
       };
 
+      /* [H11-239] "Uncaught TypeError: Cannot read properties of undefined (reading 'audio')" -
+         reported from the live game. finish() sets idx to -1 for the closing lap, so a reminder or
+         a speaker tap in those last 2.6s found no question and threw. There is nothing to replay
+         then; say nothing. */
       state.replayAudio = ()=>{ const q = SEATS[idx];
+        if(!q || !live()) return;
         play((q.audio && q.audio.prompt) ? ("assets/VO/" + q.audio.prompt + "." + AUDIO_EXT) : null, ()=>{}); };
       state.ownsAudio = true;
       try{ const _stg = document.querySelector(".stage"); if(_stg) _stg.classList.add("fw-mode"); }catch(e){}
